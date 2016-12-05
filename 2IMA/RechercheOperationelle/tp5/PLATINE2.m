@@ -1,3 +1,6 @@
+clear all;
+close all;
+
 %% Programme PLATINE : script de dialogue
 %
 % permet de :
