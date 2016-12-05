@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<petrinet:PetriNet
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:petrinet="http://petrinet"
+    name="PetriNet KO Arc Negatif">
+  <node xsi:type="petrinet:Transition"
+      name="tr1"/>
+  <node xsi:type="petrinet:Place"
+      name="pl1"/>
+  <arc source="//@node.0"
+      target="//@node.1"
+      poids="-1"/>
+</petrinet:PetriNet>

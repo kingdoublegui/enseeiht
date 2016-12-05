@@ -1,0 +1,192 @@
+// Time-stamp: <11 Aug 2002 11:30 queinnec@enseeiht.fr>
+
+/* Copyright 2002 ENSEEIHT. */
+
+package Synchro;
+
+import java.util.Random;
+
+/** Simulateur temporel, avec possibilité de suspendre l'écoulement du temps,
+ * de varier la vitesse du temps, et d'interrompre un sommeil.
+ *
+ * @author Philippe Quéinnec
+ */
+public class Simulateur implements Runnable {
+
+    // Utilisée pour bloquer un processus
+    private class Proc {
+        public int duree_sommeil;
+        public boolean do_wakeup;
+    };
+
+    private Proc procs[];
+
+    private int nbprocs;
+
+    static private Random random = new Random();
+        
+    // one system tick = 5ms
+    // one simulated tick = (1000/timespeed) system tick
+    // sleep(n) = Dormir n simulated ticks.
+
+    private int timespeed= 1;
+    private int system_ticks = 1;
+
+    // Le temps s'écoule-t-il ou pas ?
+    private boolean running = true;
+
+    // private en fait
+    public void run ()
+    {
+        while (true) {
+            try {
+                Thread.sleep (1);
+            } catch (InterruptedException e) { }
+            synchronized (this) {
+                if (running) {
+                    if (system_ticks == 0) {
+                        //System.err.println (".");
+                        /* Décrémenter et réveiller les processus concernés, */
+                        for (int i = 0; i < nbprocs; i++) {
+                            synchronized (procs[i]) {
+                                if (procs[i].duree_sommeil == 0) {
+                                    //System.out.println ("wakeup "+i);
+                                    procs[i].do_wakeup = true;
+                                    procs[i].notify();
+                                }
+                                //System.out.println (i+"->"+procs[i].duree_sommeil);
+                                procs[i].duree_sommeil--;
+                            }
+                        }
+                        system_ticks = 1000 / timespeed;
+                    } else {
+                        system_ticks--;
+                    }
+                } else { // not running
+                    try {
+                        this.wait();
+                    } catch (InterruptedException e) { // nop
+                    }
+                }
+            } // sync
+        } // while
+    } // run
+
+    /** Initialise le simulateur de temps pour <code>nbproc</code> processus. */
+    public Simulateur (int nbprocs)
+    {
+        this.nbprocs = nbprocs;
+        procs = new Proc[nbprocs];
+        for (int i = 0; i < nbprocs; i++) {
+            procs[i] = new Proc();
+            procs[i].duree_sommeil = -1;
+        }
+        (new Thread (this)).start();
+    }
+
+    /** Suspend l'exécution du processus appelant, qui s'identifie par
+     * <code>noproc</code>, pour la durée spécifiée. */
+    public void sleep (int noproc, int duree)
+    {
+        synchronized (procs[noproc]) {
+            procs[noproc].duree_sommeil = duree;
+            procs[noproc].do_wakeup = false;
+            while (! procs[noproc].do_wakeup) {
+                try {
+                    procs[noproc].wait();
+                } catch (InterruptedException e) {}
+            }
+        }
+    }
+
+    /** Suspend l'exécution du processus appelant, qui s'identifie par
+     * <code>no</code>, pour une durée aléatoire comprise entre
+       <code>bi</code> et <code>bs</code>. */
+    public void sleep (int no, int bi, int bs)
+    {
+        if (bi <= bs)
+          sleep (no, random.nextInt(bs - bi + 1) + bi);
+    }
+
+    /** Interrompt le sommeil du processus <code>noproc</code>. Sans effet si
+     * le processus ne dort pas. */
+    public void wakeup (int noproc)
+    {
+        synchronized (procs[noproc]) {
+            procs[noproc].do_wakeup = true;
+            procs[noproc].notify();
+        }
+    }
+
+    /** Renvoie la situation courante d'écoulement du temps. */
+    public boolean getRunning ()
+    {
+        synchronized (this) {
+            return running;
+        }
+    }
+
+    /** Décide de l'écoulement du temps. */
+    public void setRunning (boolean _running)
+    {
+        synchronized (this) {
+            running = _running;
+            if (running)
+              this.notify();
+        }
+    }
+
+    /** Inverse la situation courante d'écoulement du temps. */
+    public void swapRunning ()
+    {
+        synchronized (this) {
+            running = !running;
+            if (running)
+              this.notify();
+        }
+    }
+
+    /** Positionne la vitesse d'écoulement du temps. */
+    public void setTimespeed (int _timespeed)
+    {
+        synchronized (this) {
+            timespeed = _timespeed;
+            system_ticks = 1000 / timespeed;
+            //System.out.println("Timespeed: "+timespeed);
+        }
+    }
+
+    /** Obtention de la vitesse d'écoulement du temps. */
+    public int getTimespeed ()
+    {
+        synchronized (this) {
+            return timespeed;
+        }
+    }
+
+    private boolean previous_running;
+
+    /** Suspend l'écoulement du temps en sauvegardant la situation courante.
+     * Plusieurs appels successifs à <code>suspendTime</code> sans
+       alternance de <code>resumeTime</code> produisent un
+       comportement non spécifié. */
+    public void suspendTime ()
+    {
+        synchronized (this) {
+            previous_running = running;
+            running = false;
+        }
+    }
+
+    /** Restaure la situation de l'écoulement du temps avant le précédent
+     * <code>suspendTime</code>. */
+    public void resumeTime ()
+    {
+        synchronized (this) {
+            running = previous_running;
+            if (running)
+              this.notify();
+        }
+    }
+
+}

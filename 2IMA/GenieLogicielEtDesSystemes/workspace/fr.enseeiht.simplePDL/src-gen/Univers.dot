@@ -1,0 +1,19 @@
+digraph Univers {
+	{
+		node [shape=circle]
+		Dieu_started [label=0]
+		Dieu_ready [label=1]
+		Dieu_finished [label=0]
+		Dieu_running [label=0]
+	}
+	{
+		node [shape=box]
+		Dieu_start
+		Dieu_finish
+	}
+	Dieu_ready -> Dieu_start [arrowhead=vee label=1]
+	Dieu_start -> Dieu_running [arrowhead=vee label=1]
+	Dieu_finish -> Dieu_finished [arrowhead=vee label=1]
+	Dieu_start -> Dieu_started [arrowhead=vee label=1]
+	Dieu_running -> Dieu_finish [arrowhead=vee label=1]
+}

@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- NewPage -->
+<html lang="de">
+<head>
+
+<title>org.eclipse.emf.cdo.session (CDO Model Repository Documentation)</title>
+<meta name="date" content="">
+<link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
+<script type="text/javascript" src="../../../../../script.js"></script>
+</head>
+<body>
+<script type="text/javascript"><!--
+    try {
+        if (location.href.indexOf('is-external=true') == -1) {
+            parent.document.title="org.eclipse.emf.cdo.session (CDO Model Repository Documentation)";
+        }
+    }
+    catch(err) {
+    }
+//-->
+</script>
+<noscript>
+<div>JavaScript is disabled on your browser.</div>
+</noscript>
+<!-- ========= START OF TOP NAVBAR ======= -->
+<div class="topNav"><a name="navbar.top">
+<!--   -->
+</a>
+<div class="skipNav"><a href="#skip.navbar.top" title="Skip navigation links">Skip navigation links</a></div>
+<a name="navbar.top.firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../overview-summary.html">Overview</a></li>
+<li class="navBarCell1Rev">Package</li>
+<li>Class</li>
+<li><a href="package-use.html">Use</a></li>
+<li><a href="../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li><a href="../../../../../org/eclipse/emf/cdo/server/spi/security/package-summary.html">Prev&nbsp;Package</a></li>
+<li><a href="../../../../../org/eclipse/emf/cdo/session/remote/package-summary.html">Next&nbsp;Package</a></li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../index.html?org/eclipse/emf/cdo/session/package-summary.html" target="_top">Frames</a></li>
+<li><a href="package-summary.html" target="_top">No&nbsp;Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_top">
+<li><a href="../../../../../allclasses-noframe.html">All&nbsp;Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_top");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<a name="skip.navbar.top">
+<!--   -->
+</a></div>
+<!-- ========= END OF TOP NAVBAR ========= -->
+<div class="header">
+<h1 title="Package" class="title">Package&nbsp;org.eclipse.emf.cdo.session</h1>
+<div class="docSummary">
+<div class="block">Client concepts for dealing with sessions to CDO repositories.</div>
+</div>
+<p>See:&nbsp;<a href="#package.description">Description</a></p>
+</div>
+<div class="contentContainer">
+<ul class="blockList">
+<li class="blockList">
+<table class="typeSummary" border="0" cellpadding="3" cellspacing="0" summary="Interface Summary table, listing interfaces, and an explanation">
+<caption><span>Interface Summary</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Interface</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOCollectionLoadingPolicy.html" title="interface in org.eclipse.emf.cdo.session">CDOCollectionLoadingPolicy</a></td>
+<td class="colLast">
+<div class="block">A strategy that specifies which list elememts must be present (loaded) in a <a href="../../../../../org/eclipse/emf/cdo/common/id/CDOID.html" title="interface in org.eclipse.emf.cdo.common.id"><code>CDOID</code></a> list of a
+ <a href="../../../../../org/eclipse/emf/cdo/common/revision/CDORevision.html" title="interface in org.eclipse.emf.cdo.common.revision"><code>revision</code></a> when a certain list index is accessed.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDORepositoryInfo.html" title="interface in org.eclipse.emf.cdo.session">CDORepositoryInfo</a></td>
+<td class="colLast">
+<div class="block">Describes a model repository a <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.html" title="interface in org.eclipse.emf.cdo.session"><code>session</code></a> is connected to.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.html" title="interface in org.eclipse.emf.cdo.session">CDOSession</a></td>
+<td class="colLast">
+<div class="block">Represents and controls the connection to a model repository in addition to the inherited <a href="../../../../../org/eclipse/emf/cdo/view/CDOView.html" title="interface in org.eclipse.emf.cdo.view"><code>view</code></a>
+ management functions.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.ExceptionHandler.html" title="interface in org.eclipse.emf.cdo.session">CDOSession.ExceptionHandler</a></td>
+<td class="colLast">
+<div class="block">Handles <a href="../../../../../org/eclipse/emf/spi/cdo/CDOSessionProtocol.html" title="interface in org.eclipse.emf.spi.cdo"><code>protocol</code></a> exceptions if
+ <a href="../../../../../org/eclipse/emf/cdo/session/CDOSessionConfiguration.html#setExceptionHandler-org.eclipse.emf.cdo.session.CDOSession.ExceptionHandler-"><code>configured</code></a> before the session has
+ been opened.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.Options.html" title="interface in org.eclipse.emf.cdo.session">CDOSession.Options</a></td>
+<td class="colLast">
+<div class="block">Encapsulates a set of notifying <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.html" title="interface in org.eclipse.emf.cdo.session"><code>session</code></a> configuration options.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.Options.CollectionLoadingPolicyEvent.html" title="interface in org.eclipse.emf.cdo.session">CDOSession.Options.CollectionLoadingPolicyEvent</a></td>
+<td class="colLast">
+<div class="block">An <a href="../../../../../../../org.eclipse.net4j.util.doc/javadoc/org/eclipse/net4j/util/options/IOptionsEvent.html?is-external=true" title="class or interface in org.eclipse.net4j.util.options"><code>options event</code></a> fired when the
+ <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.Options.html#setCollectionLoadingPolicy-org.eclipse.emf.cdo.session.CDOCollectionLoadingPolicy-"><code>collection loading policy</code></a> option of a
+ <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.html" title="interface in org.eclipse.emf.cdo.session"><code>session</code></a> has changed.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.Options.DelegableViewLockEvent.html" title="interface in org.eclipse.emf.cdo.session">CDOSession.Options.DelegableViewLockEvent</a></td>
+<td class="colLast">
+<div class="block">An <a href="../../../../../../../org.eclipse.net4j.util.doc/javadoc/org/eclipse/net4j/util/options/IOptionsEvent.html?is-external=true" title="class or interface in org.eclipse.net4j.util.options"><code>options event</code></a> fired when the <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.Options.html#setDelegableViewLockEnabled-boolean-"><code>delegable view lock enabled</code></a>
+ option of a <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.html" title="interface in org.eclipse.emf.cdo.session"><code>session</code></a> has changed.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.Options.GeneratedPackageEmulationEvent.html" title="interface in org.eclipse.emf.cdo.session">CDOSession.Options.GeneratedPackageEmulationEvent</a></td>
+<td class="colLast">
+<div class="block">An <a href="../../../../../../../org.eclipse.net4j.util.doc/javadoc/org/eclipse/net4j/util/options/IOptionsEvent.html?is-external=true" title="class or interface in org.eclipse.net4j.util.options"><code>options event</code></a> fired when the
+ <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.Options.html#setGeneratedPackageEmulationEnabled-boolean-"><code>generated package emulation enabled</code></a> option of a
+ <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.html" title="interface in org.eclipse.emf.cdo.session"><code>session</code></a> has changed.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.Options.LobCacheEvent.html" title="interface in org.eclipse.emf.cdo.session">CDOSession.Options.LobCacheEvent</a></td>
+<td class="colLast">
+<div class="block">An <a href="../../../../../../../org.eclipse.net4j.util.doc/javadoc/org/eclipse/net4j/util/options/IOptionsEvent.html?is-external=true" title="class or interface in org.eclipse.net4j.util.options"><code>options event</code></a> fired when the <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.Options.html#setLobCache-org.eclipse.emf.cdo.common.lob.CDOLobStore-"><code>large object cache</code></a>
+ option of a <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.html" title="interface in org.eclipse.emf.cdo.session"><code>session</code></a> has changed.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.Options.PermissionUpdaterEvent.html" title="interface in org.eclipse.emf.cdo.session">CDOSession.Options.PermissionUpdaterEvent</a></td>
+<td class="colLast">
+<div class="block">An <a href="../../../../../../../org.eclipse.net4j.util.doc/javadoc/org/eclipse/net4j/util/options/IOptionsEvent.html?is-external=true" title="class or interface in org.eclipse.net4j.util.options"><code>options event</code></a> fired when the <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.Options.html#setPermissionUpdater-org.eclipse.emf.spi.cdo.CDOPermissionUpdater-"><code>permission updater</code></a>
+ option of a <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.html" title="interface in org.eclipse.emf.cdo.session"><code>session</code></a> has changed.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSessionConfiguration.html" title="interface in org.eclipse.emf.cdo.session">CDOSessionConfiguration</a></td>
+<td class="colLast">
+<div class="block">Configures and opens new <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.html" title="interface in org.eclipse.emf.cdo.session"><code>sessions</code></a>.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSessionConfiguration.SessionOpenedEvent.html" title="interface in org.eclipse.emf.cdo.session">CDOSessionConfiguration.SessionOpenedEvent</a></td>
+<td class="colLast">
+<div class="block">Fired from a <a href="../../../../../org/eclipse/emf/cdo/session/CDOSessionConfiguration.html" title="interface in org.eclipse.emf.cdo.session"><code>session configuration</code></a> after a new <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.html" title="interface in org.eclipse.emf.cdo.session"><code>session</code></a> has been
+ opened.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSessionConfigurationFactory.html" title="interface in org.eclipse.emf.cdo.session">CDOSessionConfigurationFactory</a></td>
+<td class="colLast">
+<div class="block">Creates <a href="../../../../../org/eclipse/emf/cdo/session/CDOSessionConfiguration.html" title="interface in org.eclipse.emf.cdo.session"><code>session configuration</code></a> instances.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSessionEvent.html" title="interface in org.eclipse.emf.cdo.session">CDOSessionEvent</a></td>
+<td class="colLast">
+<div class="block">A generic <a href="../../../../../../../org.eclipse.net4j.util.doc/javadoc/org/eclipse/net4j/util/event/IEvent.html?is-external=true" title="class or interface in org.eclipse.net4j.util.event"><code>event</code></a> fired from a <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.html" title="interface in org.eclipse.emf.cdo.session"><code>session</code></a>.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSessionInvalidationEvent.html" title="interface in org.eclipse.emf.cdo.session">CDOSessionInvalidationEvent</a></td>
+<td class="colLast">
+<div class="block">A <a href="../../../../../org/eclipse/emf/cdo/session/CDOSessionEvent.html" title="interface in org.eclipse.emf.cdo.session"><code>session event</code></a> fired when passive updates (commit notifications) are being received from a
+ remote repository.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSessionLocksChangedEvent.html" title="interface in org.eclipse.emf.cdo.session">CDOSessionLocksChangedEvent</a></td>
+<td class="colLast">
+<div class="block">A <a href="../../../../../org/eclipse/emf/cdo/session/CDOSessionEvent.html" title="interface in org.eclipse.emf.cdo.session"><code>session event</code></a> fired when lock-change notifications are received from a remote repository.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDOSessionProvider.html" title="interface in org.eclipse.emf.cdo.session">CDOSessionProvider</a></td>
+<td class="colLast">
+<div class="block">Provides consumers with <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.html" title="interface in org.eclipse.emf.cdo.session"><code>session</code></a> instances.</div>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li class="blockList">
+<table class="typeSummary" border="0" cellpadding="3" cellspacing="0" summary="Class Summary table, listing classes, and an explanation">
+<caption><span>Class Summary</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Class</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../org/eclipse/emf/cdo/session/CDORetryExceptionHandler.html" title="class in org.eclipse.emf.cdo.session">CDORetryExceptionHandler</a></td>
+<td class="colLast">
+<div class="block">A <a href="../../../../../org/eclipse/emf/cdo/session/CDOSession.ExceptionHandler.html" title="interface in org.eclipse.emf.cdo.session"><code>session exection handler</code></a> that retries the failed protocol operation a configurable number
+ of times.</div>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<a name="package.description">
+<!--   -->
+</a>
+<h2 title="Package org.eclipse.emf.cdo.session Description">Package org.eclipse.emf.cdo.session Description</h2>
+<div class="block">Client concepts for dealing with sessions to CDO repositories.</div>
+</div>
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<div class="bottomNav"><a name="navbar.bottom">
+<!--   -->
+</a>
+<div class="skipNav"><a href="#skip.navbar.bottom" title="Skip navigation links">Skip navigation links</a></div>
+<a name="navbar.bottom.firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../overview-summary.html">Overview</a></li>
+<li class="navBarCell1Rev">Package</li>
+<li>Class</li>
+<li><a href="package-use.html">Use</a></li>
+<li><a href="../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li><a href="../../../../../org/eclipse/emf/cdo/server/spi/security/package-summary.html">Prev&nbsp;Package</a></li>
+<li><a href="../../../../../org/eclipse/emf/cdo/session/remote/package-summary.html">Next&nbsp;Package</a></li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../index.html?org/eclipse/emf/cdo/session/package-summary.html" target="_top">Frames</a></li>
+<li><a href="package-summary.html" target="_top">No&nbsp;Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_bottom">
+<li><a href="../../../../../allclasses-noframe.html">All&nbsp;Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_bottom");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<a name="skip.navbar.bottom">
+<!--   -->
+</a></div>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+<p class="legalCopy"><small><i>Copyright (c) 2011-2015 Eike Stepper (Berlin, Germany) and others.</i></small></p>
+</body>
+</html>

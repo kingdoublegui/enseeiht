@@ -1,0 +1,6 @@
+pl G2_ressource (1)
+
+tr G2_Cl1_reset Cl1_G2_release -> G2_ressource 
+tr G2_Cl2_reset Cl2_G2_release -> G2_ressource 
+tr G2_Cl1_accept G2_ressource Cl1_G2_req -> G2_Cl1_ack
+tr G2_Cl2_accept G2_ressource Cl2_G2_req -> G2_Cl2_ack

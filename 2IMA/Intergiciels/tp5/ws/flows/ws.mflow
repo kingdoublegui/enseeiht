@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="ws">
+    <flow SubFlow="false" name="wsFlow1" entity-id="118fa5db-3bb6-4b75-aa49-a0c7edda8f2b">
+        <lane hadOnlyOneElement="false" entity-id="f21059f4-aeb4-44d0-b1ca-d931035eba93">
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="File" type="http://www.mulesoft.org/schema/mule/file/endpoint" entity-id="cfc7654d-470f-48b0-8508-cb89af0b41f9">
+                <properties>
+                    <property name="reverseOrder" value="false"/>
+                    <property name="moveToPattern" value=""/>
+                    <property name="pollingFrequency" value="1000"/>
+                    <property name="comparator" value=""/>
+                    <property name="disableTransportTransformer" value="false"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="ref" value=""/>
+                    <property name="transformer-refs" value=""/>
+                    <property name="moveToDirectory" value=""/>
+                    <property name="address" value=""/>
+                    <property name="fileAge" value="500"/>
+                    <property name="path" value="/tmp/in"/>
+                    <property name="encoding" value=""/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="mimeType" value=""/>
+                    <property name="connector-ref" value=""/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <pattern name="XML to Object" type="http://www.mulesoft.org/schema/mule/xml/xml-to-object-transformer" entity-id="949224e3-33ea-4344-acf4-b6fe3242ec40"/>
+            <pattern name="Java" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="30b7cd67-bdd7-4266-aacc-901a34304ea2">
+                <properties>
+                    <property name="ref" value=""/>
+                    <property name="class" value="Filter"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;1143494884">
+                        <property name="ref" value=""/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Generic" type="http://www.mulesoft.org/schema/mule/core/endpoint" entity-id="c63062f0-d1e7-4c32-9269-813ae536cfa0">
+                <properties>
+                    <property name="ref" value=""/>
+                    <property name="transformer-refs" value=""/>
+                    <property name="address" value="wsdl-cxf:http://localhost:8080/WS/services/AccountManager?wsdl&amp;method=createAccount"/>
+                    <property name="encoding" value=""/>
+                    <property name="disableTransportTransformer" value="false"/>
+                    <property name="mimeType" value=""/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="connector-ref" value=""/>
+                </properties>
+                <description></description>
+            </endpoint>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

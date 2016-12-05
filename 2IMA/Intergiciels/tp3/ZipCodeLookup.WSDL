@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://malaikaconsultants.com/ZipCodeWebService/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://malaikaconsultants.com/ZipCodeWebService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://malaikaconsultants.com/ZipCodeWebService/">
+      <s:element name="GetZIPCodeInformation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZIPCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetZIPCodeInformationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetZIPCodeInformationResult" type="tns:ArrayOfZIPCode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfZIPCode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZIPCode" nillable="true" type="tns:ZIPCode" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZIPCode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ZipCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="County" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AreaCodes" type="tns:ArrayOfAreaCode" />
+          <s:element minOccurs="0" maxOccurs="1" name="CityType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Latitude" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Longitude" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Elevation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TimeZone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DayLightSavings" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Classification" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MultiCountyFlag" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfAreaCode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AreaCode" nillable="true" type="tns:AreaCode" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AreaCode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetZIPCodeForCityState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetZIPCodeForCityStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetZIPCodeForCityStateResult" type="tns:ArrayOfZIPCode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllZIPCodesForState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllZIPCodesForStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllZIPCodesForStateResult" type="tns:ArrayOfZIPCode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetZIPCodeForLatitudeLongitude">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Latitude" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Longitude" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetZIPCodeForLatitudeLongitudeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetZIPCodeForLatitudeLongitudeResult" type="tns:ArrayOfZIPCode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllAreaCodesForZIPCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZIPCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllAreaCodesForZIPCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllAreaCodesForZIPCodeResult" type="tns:ZIPCode" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetZIPCodeInformationSoapIn">
+    <wsdl:part name="parameters" element="tns:GetZIPCodeInformation" />
+  </wsdl:message>
+  <wsdl:message name="GetZIPCodeInformationSoapOut">
+    <wsdl:part name="parameters" element="tns:GetZIPCodeInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetZIPCodeForCityStateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetZIPCodeForCityState" />
+  </wsdl:message>
+  <wsdl:message name="GetZIPCodeForCityStateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetZIPCodeForCityStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllZIPCodesForStateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllZIPCodesForState" />
+  </wsdl:message>
+  <wsdl:message name="GetAllZIPCodesForStateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllZIPCodesForStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetZIPCodeForLatitudeLongitudeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetZIPCodeForLatitudeLongitude" />
+  </wsdl:message>
+  <wsdl:message name="GetZIPCodeForLatitudeLongitudeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetZIPCodeForLatitudeLongitudeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllAreaCodesForZIPCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllAreaCodesForZIPCode" />
+  </wsdl:message>
+  <wsdl:message name="GetAllAreaCodesForZIPCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllAreaCodesForZIPCodeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ZipCodeLookupSoap">
+    <wsdl:operation name="GetZIPCodeInformation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the information related to the ZIP code : ZIPCode, City, State,County, City Type, Latitude, Longitude, Time Zone, Elevation, Day Light Savings flag, Classification code and Multiple county flag.</wsdl:documentation>
+      <wsdl:input message="tns:GetZIPCodeInformationSoapIn" />
+      <wsdl:output message="tns:GetZIPCodeInformationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetZIPCodeForCityState">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the information related to all the ZIP codes for a city and state : ZIPCode, City, State,County, City Type, Latitude, Longitude, Time Zone, Elevation, Day Light Savings flag, Classification code and Multiple county flag.</wsdl:documentation>
+      <wsdl:input message="tns:GetZIPCodeForCityStateSoapIn" />
+      <wsdl:output message="tns:GetZIPCodeForCityStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllZIPCodesForState">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the information related to all the ZIP codes in a state : ZIPCode, City, State,County, City Type, Latitude, Longitude, Time Zone, Elevation, Day Light Savings flag, Classification code and Multiple county flag.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllZIPCodesForStateSoapIn" />
+      <wsdl:output message="tns:GetAllZIPCodesForStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetZIPCodeForLatitudeLongitude">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the information related to the ZIP code for a latitude and longitude position : ZIPCode, City, State,County, City Type, Latitude, Longitude, Time Zone, Elevation, Day Light Savings flag, Classification code and Multiple county flag.</wsdl:documentation>
+      <wsdl:input message="tns:GetZIPCodeForLatitudeLongitudeSoapIn" />
+      <wsdl:output message="tns:GetZIPCodeForLatitudeLongitudeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAreaCodesForZIPCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns all the area codes associated with a ZIP code.</wsdl:documentation>
+      <wsdl:input message="tns:GetAllAreaCodesForZIPCodeSoapIn" />
+      <wsdl:output message="tns:GetAllAreaCodesForZIPCodeSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ZipCodeLookupSoap" type="tns:ZipCodeLookupSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetZIPCodeInformation">
+      <soap:operation soapAction="http://malaikaconsultants.com/ZipCodeWebService/GetZIPCodeInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetZIPCodeForCityState">
+      <soap:operation soapAction="http://malaikaconsultants.com/ZipCodeWebService/GetZIPCodeForCityState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllZIPCodesForState">
+      <soap:operation soapAction="http://malaikaconsultants.com/ZipCodeWebService/GetAllZIPCodesForState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetZIPCodeForLatitudeLongitude">
+      <soap:operation soapAction="http://malaikaconsultants.com/ZipCodeWebService/GetZIPCodeForLatitudeLongitude" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAreaCodesForZIPCode">
+      <soap:operation soapAction="http://malaikaconsultants.com/ZipCodeWebService/GetAllAreaCodesForZIPCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ZipCodeLookupSoap12" type="tns:ZipCodeLookupSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetZIPCodeInformation">
+      <soap12:operation soapAction="http://malaikaconsultants.com/ZipCodeWebService/GetZIPCodeInformation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetZIPCodeForCityState">
+      <soap12:operation soapAction="http://malaikaconsultants.com/ZipCodeWebService/GetZIPCodeForCityState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllZIPCodesForState">
+      <soap12:operation soapAction="http://malaikaconsultants.com/ZipCodeWebService/GetAllZIPCodesForState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetZIPCodeForLatitudeLongitude">
+      <soap12:operation soapAction="http://malaikaconsultants.com/ZipCodeWebService/GetZIPCodeForLatitudeLongitude" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAreaCodesForZIPCode">
+      <soap12:operation soapAction="http://malaikaconsultants.com/ZipCodeWebService/GetAllAreaCodesForZIPCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ZipCodeLookup">
+    <wsdl:port name="ZipCodeLookupSoap" binding="tns:ZipCodeLookupSoap">
+      <soap:address location="http://www.malaikaconsultants.com/Malaika-Consultants/ZipCodeLookup.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ZipCodeLookupSoap12" binding="tns:ZipCodeLookupSoap12">
+      <soap12:address location="http://www.malaikaconsultants.com/Malaika-Consultants/ZipCodeLookup.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,68 @@
+import ecore : 'http://www.eclipse.org/emf/2002/Ecore' ;
+
+package simplepdl : simplepdl = 'http://simplepdl'
+{
+	enum WorkSequenceType { serializable }
+	{
+		literal startToStart;
+		literal finishToStart = 1;
+		literal startToFinish = 2;
+		literal finishToFinish = 3;
+	}
+	class Process
+	{
+		attribute name : String[1];
+		property processElements : ProcessElement[*|1] { ordered composes };
+		invariant nameForbidden: name <> 'Process';
+		invariant differentNames: self.processElements
+										-> select(pe|pe.oclIsTypeOf(WorkDefinition))
+										-> collect(pe|pe.oclAsType(WorkDefinition))
+										-> forAll(a,b|a <> b implies a.name <> b.name);
+	}
+	abstract class ProcessElement
+	{
+		property process : Process[1] { derived readonly transient volatile !resolve }
+		{
+			initial: Process.allInstances()
+					->select(p | p.processElements->includes(self))
+					->asSequence()->first();
+		}
+	}
+	class WorkDefinition extends ProcessElement
+	{
+		property linksToPredecessors#successor : WorkSequence[*|1] { ordered };
+		property linksToSuccessors#predecessor : WorkSequence[*|1] { ordered };
+		attribute name : String[1];
+		property ressourcesequence#workdefinition : RessourceSequence[*|1];
+		invariant nameNotEmpty: self.name.size() > 0;
+	}
+	class WorkSequence extends ProcessElement
+	{
+		attribute linkType : WorkSequenceType[1];
+		property predecessor#linksToSuccessors : WorkDefinition[1];
+		property successor#linksToPredecessors : WorkDefinition[1];
+		invariant previousWDinSameProcess: self.process = self.predecessor.process;
+		invariant nextWDinSameProcess: self.process = self.successor.process;
+		invariant notReflexive: self.predecessor <> self.successor;
+	}
+	class Guidance extends ProcessElement
+	{
+		property element : ProcessElement[*|1] { ordered };
+		attribute text : String[1];
+	}
+	class Ressource extends ProcessElement
+	{
+		attribute quantity : ecore::EInt[1];
+		attribute name : String[1];
+		invariant nameNotEmpty: self.name.size() > 0;
+		invariant quantityPositive: self.quantity > 0;
+	}
+	class RessourceSequence extends ProcessElement
+	{
+		attribute quantity : ecore::EInt[1];
+		property ressource : Ressource[1];
+		property workdefinition#ressourcesequence : WorkDefinition[1];
+		invariant quantityPositive: self.quantity > 0;
+		invariant quantityAvailable: self.quantity <= self.ressource.quantity;
+	}
+}

@@ -1,0 +1,93 @@
+V "GNAT Lib v4.9"
+P ZX
+
+RN
+RV NO_DELAY
+RV NO_DIRECT_BOOLEAN_OPERATORS
+RV NO_FIXED_POINT
+RV NO_IMPLICIT_LOOPS
+RV NO_RELATIVE_DELAY
+RV NO_DEFAULT_INITIALIZATION
+RV NO_ELABORATION_CODE
+RV SPARK_05
+
+U lr.simu%b		lr-simu.adb		75b9746d OO PK IU
+W ada.calendar.delays%s	a-caldel.adb		a-caldel.ali
+W interfaces%s		interfac.ads		interfac.ali
+W lr%s			lr.ads			lr.ali
+W lr.tasks%s		lr-tasks.adb		lr-tasks.ali
+
+U lr.simu%s		lr-simu.ads		a848d720 EE NE OO PK IU
+W lr%s			lr.ads			lr.ali
+W lr.tasks%s		lr-tasks.adb		lr-tasks.ali
+
+D ada.ads		20070406091342 3ffc8e18
+D a-calend.ads		20120515092648 d86d6c8c
+D a-caldel.ads		20140120152337 9f20b83d
+D a-except.ads		20140129161953 f86a4103
+D a-reatim.ads		20090409150019 63f07669
+D a-unccon.ads		20070406091342 f9eb8f06
+D interfac.ads		20140225151838 69adb1b9
+D i-c.ads		20110801143639 5421119b
+D lr.ads		20141028181748 400998c9
+D lr-simu.ads		20121002073810 af6ee446
+D lr-simu.adb		20121023084038 9df83b84
+D lr-tasks.ads		20121001133740 472fabaf
+D system.ads		20141119215827 90249111
+D s-atacco.ads		20120515093410 4c36d12f
+D s-exctab.ads		20140225151139 54135002
+D s-linux.ads		20140409145429 5b2f79a5
+D s-multip.ads		20101011073009 38ac9f73
+D s-oscons.ads		20141119215827 a445b120
+D s-osinte.ads		20140409145429 59011f13
+D s-parame.ads		20140225151139 ab8cb46a
+D s-soflin.ads		20140225151139 aa763b52
+D s-stache.ads		20140225151139 a37c21ec
+D s-stausa.ads		20110804134155 017a0a05
+D s-stalib.ads		20140225151139 a891183f
+D s-stoele.ads		20140225151139 2dc34a04
+D s-stoele.adb		20140225151139 ed88f8fb
+D s-tasinf.ads		20120730151500 21316953
+D s-taspri.ads		20110927094500 15f617a8
+D s-taprop.ads		20111212143339 1dd2e1b6
+D s-taskin.ads		20140131154341 3f821f32
+D s-tassta.ads		20121029110946 70812003
+D s-traent.ads		20140225151139 b5116092
+D s-unstyp.ads		20140225151139 510692af
+X 9 lr.ads
+1K9*LR 2e7 10|3r6 7r9 13r24 16r25 40r5 11|3r6 3r20 5r14 81r5
+X 10 lr-simu.ads
+7K12*Simu 9|1k9 10|40l8 40e12 11|5b17 81l8 81t12
+10U14*Init 10>19 11|20b14 24l8 24t12
+10i19 Nbproc{positive} 11|20b19 22r19
+13U14*Sleep 13>20 13>42 11|26b14 36l8 36t13
+13i20 Id{12|8I12} 11|26b20 28r18 29r18 30r29 30r57 32r24 32r48
+13i42 Duree{positive} 11|26b33 28r31
+16U14*Wakeup 16>21 11|38b14 41l8 41t14
+16i21 Id{12|8I12} 11|38b21 40r18
+19V13*Get_Running{boolean} 11|43b13 46l8 46t19
+22U14*Set_Running 22>26 11|48b14 51l8 51t19
+22b26 B{boolean} 11|48b26 50r21
+25U14*Swap_Running 11|53b14 56l8 56t20
+28U14*Set_Timespeed 28>28 11|58b14 61l8 61t21
+28i28 Ts{integer} 11|58b28 60r20
+31V13*Get_Timespeed{integer} 11|63b13 66l8 66t21
+35U14*Suspend_Time 11|70b14 74l8 74t20
+38U14*Resume_Time 11|76b14 79l8 79t19
+X 11 lr-simu.adb
+7b4 Is_Running{boolean} 31r14 45r14 50m7 55m7 55r25 72r27 73m7 78m7
+8i4 Nb_Procs{positive} 22m7
+9i4 Timespeed{positive} 23m7 34r35 60m7 65r14
+10i4 Basefreq{positive} 28r39 34r23
+12R9 Proc_Sleep_Record 16e17 18r35
+14i10*Duree{natural} 28m22 30r61 32m28 32r52
+15b10*Wakeup{boolean} 29m22 30r33 40m22
+18a4 Infos_Proc(12R9) 28m7 29m7 30r18 30r46 32m13 32r37 40m7
+68b4 Previous_Running{boolean} 72m7 78r21
+X 12 lr-tasks.ads
+4K12*Tasks 10|3w9 13r27 16r28 11|3w9 3r23 12|21e13
+8I12*Proc_Id{positive} 10|13r33 16r34 11|18r23 26r24 38r25
+X 23 s-stausa.ads
+203U14*Initialize 204i<c,__gnat_stack_usage_initialize>22
+268U14*Output_Results 272i<c,__gnat_stack_usage_output_results>22
+

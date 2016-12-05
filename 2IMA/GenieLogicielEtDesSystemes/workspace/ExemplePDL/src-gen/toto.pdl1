@@ -1,0 +1,5 @@
+process toto {
+	wd a1
+	wd a2
+	ws a1 s2f a2
+}

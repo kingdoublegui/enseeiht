@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="CONTENT-TYPE" content="text/html;
+      charset=windows-1252">
+    <title></title>
+    <meta name="GENERATOR" content="OpenOffice.org 1.1.4 (Win32)">
+    <meta name="CREATED" content="20051026;11210625">
+    <meta name="CHANGEDBY" content="Daniel Hagimont">
+    <meta name="CHANGED" content="20051112;3545775">
+    <meta name="ProgId" content="Word.Document">
+    <meta name="Originator" content="Microsoft Word 10">
+    <meta name="Template" content="C:\PROGRAM FILES\MICROSOFT
+      OFFICE\OFFICE\html.dot">
+    <style>
+	<!--
+		P { color: #000000 }
+		P.msonormal { margin-bottom: 0cm; font-family: "Times New Roman" }
+		A:link { color: #0000ff }
+		A:visited { color: #800080 }
+	-->
+	</style>
+  </head>
+  <body dir="ltr" lang="fr-FR" link="#0000ff" text="#000000"
+    vlink="#800080">
+    <p align="center"><br>
+      <br>
+    </p>
+    <p style="margin-bottom: 0cm;" align="center"><font
+        style="font-size: 20pt;" size="5"><b>Cours
+          Systèmes Communicants</b></font></p>
+    <p align="center"><font style="font-size: 20pt;" size="5"><b>ENSEEIHT
+          –
+          Département Informatique – 2ième année</b></font></p>
+    <p align="center"><font style="font-size: 20pt;" size="5"><b>TP
+          objets dupliqués<br>
+        </b></font></p>
+    <p style="margin-bottom: 0cm;" align="center"><font size="3">Daniel
+        Hagimont</font></p>
+    <p style="margin-bottom: 0cm;" align="center"><font size="3">Daniel.Hagimont@enseeiht.fr</font></p>
+    <p class="msonormal" style="margin-left: 5.08cm; margin-bottom:
+      0.5cm;"><br>
+    </p>
+    <p class="msonormal" style="margin-left: 1.27cm; margin-bottom:
+      0.5cm;"><a name="_Toc432321016"></a>
+      <font face="Arial"><font style="font-size: 13pt;" size="3"><b>1.&nbsp;&nbsp;&nbsp;&nbsp;
+            Objectif</b></font></font></p>
+    <p style="margin-left: 1.27cm;">
+      <meta http-equiv="CONTENT-TYPE" content="text/html;
+        charset=windows-1252">
+    </p>
+    <p style="margin-left: 1.27cm;">
+      <title></title>
+      <meta name="GENERATOR" content="LibreOffice 3.5 (Linux)">
+      <style type="text/css">
+	<!--
+		@page { margin: 0.79in }
+		PRE { font-family: "Courier New", monospace }
+		P { margin-bottom: 0.08in }
+	-->
+	</style>
+      <p style="text-align: justify"><big><font face="Times New Roman,
+            serif"><font size="3"><big>Dans ce tp, on gère des données
+                répliquées en utilisant de la diffusion de messages (<i>write
+                  update</i>).</big></font></font>
+          <font face="Times New Roman, serif"><font size="3"><big><br>
+                Dans une première étape (dup.zip), les clients se
+                connaissent et s'envoient les mises à jours (<i>write
+                  update</i>) simplement en s'envoyant des messages UDP.
+                Le système est composé des classes suivantes&nbsp;:</big></font></font>
+          <br>
+        </big></p>
+    </p>
+    <blockquote>
+      <blockquote>
+        <ul>
+          <li><big><font face="Times New Roman, serif"><font size="3"><big>Launcher/launcherImpl
+                    est le serveur qui reçoit les abonnements des
+                    clients (par RMI). Un client qui s'abonne donne son
+                    nom de machine et son numéro de port, ainsi qu'une
+                    référence RMI pour être rappelé. Le serveur accumule
+                    les abonnements dans un objet <i>group</i>
+                    (Group/GroupImpl), puis rappelle les clients pour
+                    leur donner une copie de cet objet <i>group</i>.</big></font></font>
+            </big></li>
+          <li><big><font face="Times New Roman, serif"><font size="3"><big>Client/ClientImpl
+                    est le programme exécuté par un client. Il s'abonne
+                    auprès du serveur et peut être rappelé par RMI par
+                    le serveur pour recevoir l'objet group. Il crée 2
+                    threads : <i>Appli</i> qui implante le code de
+                    l'application (mettre à jour des valeurs dans la
+                    copie locale des données partagées par réplication),
+                    et <i>Daemon</i> qui reçoit les mises à jour et les
+                    répercute dans la copie locale des données
+                    partagées.</big></font></font>
+            </big></li>
+          <li><big><font face="Times New Roman, serif"><font size="3"><big>Group/GroupImpl
+                    est la classe qui permet d'envoyer des messages au
+                    groupe des clients. Son état inclus les destinations
+                    des clients (nom de machine / numéro de port) pour
+                    envoyer des messages aux clients.</big></font></font>
+            </big></li>
+          <li><big><font face="Times New Roman, serif"><font size="3"><big>Target
+                    est juste une classe définissant les destinations
+                    (nom de machine / numéro de port).</big></font></font>
+              <font face="Times New Roman, serif"><font size="3"><big>-
+                    Update est la classe définissant le format des
+                    messages échangés (des messages de mise à jour des
+                    données).</big></font></font></big></li>
+        </ul>
+      </blockquote>
+    </blockquote>
+    <p style="margin-left: 1.27cm;">
+    </p>
+    <p class="msonormal" style="margin-left: 1.27cm; margin-bottom:
+      0.5cm;">
+      <font face="Arial"><font style="font-size: 13pt;" size="3"><b>2.&nbsp;&nbsp;&nbsp;&nbsp;
+            Etape 1<br>
+          </b></font></font></p>
+    <meta http-equiv="CONTENT-TYPE" content="text/html;
+      charset=windows-1252">
+    <blockquote>
+      <p style="text-align: justify"><big><font face="Times New Roman,
+            serif"><font size="3"><big>La première étape du TP est
+                d'exécuter ce code :</big></font></font><br>
+        </big></p>
+      <ul>
+        <ul>
+          <li><big><font face="Times New Roman, serif"><font size="3"><big><i>java
+                      LauncherImpl</i> : permet de lancer le serveur</big></font></font></big></li>
+          <li><big><font face="Times New Roman, serif"><font size="3"><big><i>java
+                      ClientImpl &lt;numero de port du client&gt;</i> :
+                    permet de lancer un client. Il faut juste avoir la
+                    variable <i>registryHost</i> mise à jour dans
+                    ClientImpl.java pour indiquer la machine où se
+                    trouve le serveur.</big></font></font></big><big> </big></li>
+        </ul>
+      </ul>
+      <p style="text-align: justify"><big><font face="Times New Roman,
+            serif"><font size="3"><big>On peut tester en local ou en
+                réparti.</big></font></font>
+          <font face="Times New Roman, serif"><font size="3"><big><i><br>
+                  Launcher</i> ouvre une fenêtre avec 2 boutons : <i>Go</i>
+                lance l'exécution et <i>Print</i> affiche en console
+                l'état des données.</big></font></font>
+          <font face="Times New Roman, serif"><font size="3"><big><b><br>
+                  Vous devez observer que les données peuvent devenir
+                  incohérentes.</b></big></font></font>
+          <br>
+          <font face="Times New Roman, serif"><font size="3"><big>Pour
+                cela, il faudra si nécessaire lancer l'application en
+                réparti.<br>
+              </big></font></font></big></p>
+      <p style="text-align: justify"><br>
+        <font face="Arial"><font style="font-size: 13pt;" size="3"><b>3.&nbsp;&nbsp;&nbsp;&nbsp;
+              Etape 2<br>
+            </b></font></font></p>
+      <p style="text-align: justify">
+        <meta http-equiv="CONTENT-TYPE" content="text/html;
+          charset=windows-1252">
+      </p>
+      <p style="text-align: justify">
+        <title></title>
+        <meta name="GENERATOR" content="LibreOffice 3.5 (Linux)">
+        <style type="text/css">
+	<!--
+		@page { margin: 0.79in }
+		PRE { font-family: "Courier New", monospace }
+		P { margin-bottom: 0.08in }
+	-->
+	</style>
+        <p style="text-align: justify"><big><font face="Times New Roman,
+              serif"><font size="3"><big>Dans la deuxième étape, on
+                  demande d'implanter un séquenceur pour garantir la
+                  cohérence des données partagées par réplication.</big></font></font>
+            <font face="Times New Roman, serif"><font size="3"><big><br>
+                  Ceci consiste simplement à :</big></font></font> <font
+              face="Times New Roman, serif"><font size="3"><big><br>
+                </big></font></font></big></p>
+      </p>
+      <ul>
+        <ul>
+          <li><big><font face="Times New Roman, serif"><font size="3"><big>rajouter
+                    une méthode <i>getTicket</i> dans <i>Launcher</i>
+                    pour que les clients puissent demander un ticket
+                    (numéro de séquence).</big></font></font></big></li>
+          <li><big><font face="Times New Roman, serif"><font size="3"><big>modifier
+                    <i>Appli</i> pour qu'elle demande un numéro de
+                    séquence avant une écriture et qu'elle n'applique
+                    une écriture que si elle est à jour dans
+                    l'application des modifications (l'application
+                    mémorise le numéro de la dernière modification
+                    effectuée), sinon elle doit attendre.</big></font></font></big></li>
+          <li><big><font face="Times New Roman, serif"><font size="3"><big>modifier
+                    <i>Daemon</i> pour que lorsqu'on reçoit une
+                    modification, si c'est la prochaine, on l'applique
+                    et on essaie d'appliquer celles qui étaient en
+                    attente, sinon on la met en attente. Et on réveille
+                    l'application si elle est à jour des modifications.</big></font></font></big><big>
+            </big></li>
+        </ul>
+      </ul>
+      <p style="text-align: justify">
+        <p style="text-align: justify"><big><font face="Times New Roman,
+              serif"><font size="3"><big>On peut alors vérifier qu'on a
+                  une gestion cohérente des données.</big></font></font></big></p>
+      </p>
+    </blockquote>
+    <title></title>
+    <meta name="GENERATOR" content="LibreOffice 3.5 (Linux)">
+    <style type="text/css"><big><big>
+	<!--
+		@page { margin: 0.79in }
+		PRE { font-family: "Courier New", monospace }
+		P { margin-bottom: 0.08in }
+	-->
+	</big></big></style>
+    <p style="margin-left: 1.27cm;">
+      <br>
+    </p>
+  </body>
+</html>

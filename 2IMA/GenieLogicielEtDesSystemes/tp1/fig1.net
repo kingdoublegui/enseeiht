@@ -1,0 +1,5 @@
+pl x (4) 
+pl y (2) 
+tr t0 x*5 -> x*2 y*3
+tr t1 x*2 y -> y*3 
+tr t2 y*5 -> x*5

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<petrinet:PetriNet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:petrinet="http://petrinet" name="Univers">
+  <node xsi:type="petrinet:Place" name="Dieu_started"/>
+  <node xsi:type="petrinet:Transition" name="Dieu_start"/>
+  <node xsi:type="petrinet:Place" name="Dieu_ready" nbJetons="1"/>
+  <node xsi:type="petrinet:Place" name="Dieu_finished"/>
+  <node xsi:type="petrinet:Transition" name="Dieu_finish"/>
+  <node xsi:type="petrinet:Place" name="Dieu_running"/>
+  <arc source="//@node.2" target="//@node.1" poids="1"/>
+  <arc source="//@node.1" target="//@node.5" poids="1"/>
+  <arc source="//@node.4" target="//@node.3" poids="1"/>
+  <arc source="//@node.1" target="//@node.0" poids="1"/>
+  <arc source="//@node.5" target="//@node.4" poids="1"/>
+</petrinet:PetriNet>

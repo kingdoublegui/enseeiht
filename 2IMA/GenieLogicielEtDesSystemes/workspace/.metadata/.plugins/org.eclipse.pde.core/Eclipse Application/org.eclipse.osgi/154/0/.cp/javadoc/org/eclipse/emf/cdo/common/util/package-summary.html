@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- NewPage -->
+<html lang="de">
+<head>
+
+<title>org.eclipse.emf.cdo.common.util (CDO Model Repository Documentation)</title>
+<meta name="date" content="">
+<link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
+<script type="text/javascript" src="../../../../../../script.js"></script>
+</head>
+<body>
+<script type="text/javascript"><!--
+    try {
+        if (location.href.indexOf('is-external=true') == -1) {
+            parent.document.title="org.eclipse.emf.cdo.common.util (CDO Model Repository Documentation)";
+        }
+    }
+    catch(err) {
+    }
+//-->
+</script>
+<noscript>
+<div>JavaScript is disabled on your browser.</div>
+</noscript>
+<!-- ========= START OF TOP NAVBAR ======= -->
+<div class="topNav"><a name="navbar.top">
+<!--   -->
+</a>
+<div class="skipNav"><a href="#skip.navbar.top" title="Skip navigation links">Skip navigation links</a></div>
+<a name="navbar.top.firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../../overview-summary.html">Overview</a></li>
+<li class="navBarCell1Rev">Package</li>
+<li>Class</li>
+<li><a href="package-use.html">Use</a></li>
+<li><a href="../../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li><a href="../../../../../../org/eclipse/emf/cdo/common/security/package-summary.html">Prev&nbsp;Package</a></li>
+<li><a href="../../../../../../org/eclipse/emf/cdo/compare/package-summary.html">Next&nbsp;Package</a></li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../../index.html?org/eclipse/emf/cdo/common/util/package-summary.html" target="_top">Frames</a></li>
+<li><a href="package-summary.html" target="_top">No&nbsp;Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_top">
+<li><a href="../../../../../../allclasses-noframe.html">All&nbsp;Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_top");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<a name="skip.navbar.top">
+<!--   -->
+</a></div>
+<!-- ========= END OF TOP NAVBAR ========= -->
+<div class="header">
+<h1 title="Package" class="title">Package&nbsp;org.eclipse.emf.cdo.common.util</h1>
+<div class="docSummary">
+<div class="block">Common utility classes, some common interfaces and exceptions.</div>
+</div>
+<p>See:&nbsp;<a href="#package.description">Description</a></p>
+</div>
+<div class="contentContainer">
+<ul class="blockList">
+<li class="blockList">
+<table class="typeSummary" border="0" cellpadding="3" cellspacing="0" summary="Interface Summary table, listing interfaces, and an explanation">
+<caption><span>Interface Summary</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Interface</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/BlockingCloseableIterator.html" title="interface in org.eclipse.emf.cdo.common.util">BlockingCloseableIterator</a>&lt;T&gt;</td>
+<td class="colLast">
+<div class="block">A closeable iterator that blocks on <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Iterator.html?is-external=true#hasNext--" title="class or interface in java.util"><code>Iterator.hasNext()</code></a> until the next element is available or the end of the
+ iteration is reached.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/CDONameProvider.html" title="interface in org.eclipse.emf.cdo.common.util">CDONameProvider</a></td>
+<td class="colLast">
+<div class="block">Has a name.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/CDOQueryInfo.html" title="interface in org.eclipse.emf.cdo.common.util">CDOQueryInfo</a></td>
+<td class="colLast">
+<div class="block">Encapsulates all the transferrable information that fully specifies a query from a <a href="../../../../../../org/eclipse/emf/cdo/common/CDOCommonView.html" title="interface in org.eclipse.emf.cdo.common"><code>view</code></a> to a
+ <a href="../../../../../../org/eclipse/emf/cdo/common/CDOCommonRepository.html" title="interface in org.eclipse.emf.cdo.common"><code>repository</code></a>.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/CDORenameContext.html" title="interface in org.eclipse.emf.cdo.common.util">CDORenameContext</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/CDOTimeProvider.html" title="interface in org.eclipse.emf.cdo.common.util">CDOTimeProvider</a></td>
+<td class="colLast">
+<div class="block">Provides the consumer with a long-valued time stamp.</div>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li class="blockList">
+<table class="typeSummary" border="0" cellpadding="3" cellspacing="0" summary="Class Summary table, listing classes, and an explanation">
+<caption><span>Class Summary</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Class</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/CDOCommonEventAdapter.html" title="class in org.eclipse.emf.cdo.common.util">CDOCommonEventAdapter</a></td>
+<td class="colLast">
+<div class="block">A convenience adapter for common CDO <a href="../../../../../../../../org.eclipse.net4j.util.doc/javadoc/org/eclipse/net4j/util/event/IEvent.html?is-external=true" title="class or interface in org.eclipse.net4j.util.event"><code>events</code></a>.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/CDOCommonUtil.html" title="class in org.eclipse.emf.cdo.common.util">CDOCommonUtil</a></td>
+<td class="colLast">
+<div class="block">Various static methods that may help with I/O and time stamps.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/CDOFetchRule.html" title="class in org.eclipse.emf.cdo.common.util">CDOFetchRule</a></td>
+<td class="colLast">
+<div class="block">Represents a subset of the <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/EStructuralFeature.html?is-external=true" title="class or interface in org.eclipse.emf.ecore"><code>features</code></a> of a <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/EClass.html?is-external=true" title="class or interface in org.eclipse.emf.ecore"><code>class</code></a>.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/CDOQueryQueue.html" title="class in org.eclipse.emf.cdo.common.util">CDOQueryQueue</a>&lt;E&gt;</td>
+<td class="colLast">
+<div class="block">The <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Queue.html?is-external=true" title="class or interface in java.util"><code>queue</code></a> that represents the result of a CDOQuery.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/RepositoryStateChangedEvent.html" title="class in org.eclipse.emf.cdo.common.util">RepositoryStateChangedEvent</a></td>
+<td class="colLast">
+<div class="block">An <a href="../../../../../../../../org.eclipse.net4j.util.doc/javadoc/org/eclipse/net4j/util/event/IEvent.html?is-external=true" title="class or interface in org.eclipse.net4j.util.event"><code>event</code></a> fired when the <a href="../../../../../../org/eclipse/emf/cdo/common/CDOCommonRepository.State.html" title="enum in org.eclipse.emf.cdo.common"><code>state</code></a> of a
+ repository has changed.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/RepositoryTypeChangedEvent.html" title="class in org.eclipse.emf.cdo.common.util">RepositoryTypeChangedEvent</a></td>
+<td class="colLast">
+<div class="block">An <a href="../../../../../../../../org.eclipse.net4j.util.doc/javadoc/org/eclipse/net4j/util/event/IEvent.html?is-external=true" title="class or interface in org.eclipse.net4j.util.event"><code>event</code></a> fired when the <a href="../../../../../../org/eclipse/emf/cdo/common/CDOCommonRepository.Type.html" title="enum in org.eclipse.emf.cdo.common"><code>type</code></a> of a
+ repository has changed.</div>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li class="blockList">
+<table class="typeSummary" border="0" cellpadding="3" cellspacing="0" summary="Exception Summary table, listing exceptions, and an explanation">
+<caption><span>Exception Summary</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Exception</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/CDOClassNotFoundException.html" title="class in org.eclipse.emf.cdo.common.util">CDOClassNotFoundException</a></td>
+<td class="colLast">
+<div class="block">A <a href="../../../../../../org/eclipse/emf/cdo/common/util/CDOException.html" title="class in org.eclipse.emf.cdo.common.util"><code>CDOException</code></a> to indicate that an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/EClass.html?is-external=true" title="class or interface in org.eclipse.emf.ecore"><code>EClass</code></a> is not available for an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/EPackage.html?is-external=true" title="class or interface in org.eclipse.emf.ecore"><code>EPackage</code></a> in the current <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/EPackage.Registry.html?is-external=true" title="class or interface in org.eclipse.emf.ecore"><code>EPackage.Registry</code></a>.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/CDOException.html" title="class in org.eclipse.emf.cdo.common.util">CDOException</a></td>
+<td class="colLast">
+<div class="block">An unchecked exception for general CDO purposes.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/CDOPackageNotFoundException.html" title="class in org.eclipse.emf.cdo.common.util">CDOPackageNotFoundException</a></td>
+<td class="colLast">
+<div class="block">A <a href="../../../../../../org/eclipse/emf/cdo/common/util/CDOException.html" title="class in org.eclipse.emf.cdo.common.util"><code>CDOException</code></a> to indicate that an <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/EPackage.html?is-external=true" title="class or interface in org.eclipse.emf.ecore"><code>EPackage</code></a> is not available in the current <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.11/org/eclipse/emf/ecore/EPackage.Registry.html?is-external=true" title="class or interface in org.eclipse.emf.ecore"><code>EPackage.Registry</code></a>.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/NotAuthenticatedException.html" title="class in org.eclipse.emf.cdo.common.util">NotAuthenticatedException</a></td>
+<td class="colLast">Deprecated
+<div class="block"><span class="deprecationComment">As of 4.3 use <a href="../../../../../../../../org.eclipse.net4j.util.doc/javadoc/org/eclipse/net4j/util/security/NotAuthenticatedException.html?is-external=true" title="class or interface in org.eclipse.net4j.util.security"><code>NotAuthenticatedException</code></a>, instead.</span></div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/PartialCollectionLoadingNotSupportedException.html" title="class in org.eclipse.emf.cdo.common.util">PartialCollectionLoadingNotSupportedException</a></td>
+<td class="colLast">
+<div class="block">An unchecked exception that indicates that <a href="../../../../../../org/eclipse/emf/cdo/common/revision/CDOElementProxy.html" title="interface in org.eclipse.emf.cdo.common.revision"><code>list element proxies</code></a> have been encountered but
+ cannot be handled.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../org/eclipse/emf/cdo/common/util/TransportException.html" title="class in org.eclipse.emf.cdo.common.util">TransportException</a></td>
+<td class="colLast">
+<div class="block">An unchecked exception that indicates transport-level problems.</div>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<a name="package.description">
+<!--   -->
+</a>
+<h2 title="Package org.eclipse.emf.cdo.common.util Description">Package org.eclipse.emf.cdo.common.util Description</h2>
+<div class="block">Common utility classes, some common interfaces and exceptions.</div>
+</div>
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<div class="bottomNav"><a name="navbar.bottom">
+<!--   -->
+</a>
+<div class="skipNav"><a href="#skip.navbar.bottom" title="Skip navigation links">Skip navigation links</a></div>
+<a name="navbar.bottom.firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../../overview-summary.html">Overview</a></li>
+<li class="navBarCell1Rev">Package</li>
+<li>Class</li>
+<li><a href="package-use.html">Use</a></li>
+<li><a href="../../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li><a href="../../../../../../org/eclipse/emf/cdo/common/security/package-summary.html">Prev&nbsp;Package</a></li>
+<li><a href="../../../../../../org/eclipse/emf/cdo/compare/package-summary.html">Next&nbsp;Package</a></li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../../index.html?org/eclipse/emf/cdo/common/util/package-summary.html" target="_top">Frames</a></li>
+<li><a href="package-summary.html" target="_top">No&nbsp;Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_bottom">
+<li><a href="../../../../../../allclasses-noframe.html">All&nbsp;Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_bottom");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<a name="skip.navbar.bottom">
+<!--   -->
+</a></div>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+<p class="legalCopy"><small><i>Copyright (c) 2011-2015 Eike Stepper (Berlin, Germany) and others.</i></small></p>
+</body>
+</html>

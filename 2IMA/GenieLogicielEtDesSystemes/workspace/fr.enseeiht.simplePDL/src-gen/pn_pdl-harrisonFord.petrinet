@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<petrinet:PetriNet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:petrinet="http://petrinet" name="Harrison Ford">
+  <node xsi:type="petrinet:Transition" name="Star Wars_finish"/>
+  <node xsi:type="petrinet:Place" name="Star Wars_ready" nbJetons="1"/>
+  <node xsi:type="petrinet:Place" name="Star Wars_finished"/>
+  <node xsi:type="petrinet:Place" name="Star Wars_running"/>
+  <node xsi:type="petrinet:Place" name="Star Wars_started"/>
+  <node xsi:type="petrinet:Transition" name="Star Wars_start"/>
+  <node xsi:type="petrinet:Transition" name="Indiana Jones_finish"/>
+  <node xsi:type="petrinet:Place" name="Indiana Jones_running"/>
+  <node xsi:type="petrinet:Place" name="Indiana Jones_ready" nbJetons="1"/>
+  <node xsi:type="petrinet:Transition" name="Indiana Jones_start"/>
+  <node xsi:type="petrinet:Place" name="Indiana Jones_finished"/>
+  <node xsi:type="petrinet:Place" name="Indiana Jones_started"/>
+  <node xsi:type="petrinet:Place" name="ressource_Harrison Ford" nbJetons="1"/>
+  <arc source="//@node.3" target="//@node.0" poids="1"/>
+  <arc source="//@node.1" target="//@node.5" poids="1"/>
+  <arc source="//@node.5" target="//@node.3" poids="1"/>
+  <arc source="//@node.5" target="//@node.4" poids="1"/>
+  <arc source="//@node.0" target="//@node.2" poids="1"/>
+  <arc source="//@node.6" target="//@node.10" poids="1"/>
+  <arc source="//@node.9" target="//@node.11" poids="1"/>
+  <arc source="//@node.7" target="//@node.6" poids="1"/>
+  <arc source="//@node.9" target="//@node.7" poids="1"/>
+  <arc source="//@node.8" target="//@node.9" poids="1"/>
+  <arc source="//@node.0" target="//@node.12" poids="1"/>
+  <arc source="//@node.12" target="//@node.5" poids="1"/>
+  <arc source="//@node.12" target="//@node.9" poids="1"/>
+  <arc source="//@node.6" target="//@node.12" poids="1"/>
+</petrinet:PetriNet>

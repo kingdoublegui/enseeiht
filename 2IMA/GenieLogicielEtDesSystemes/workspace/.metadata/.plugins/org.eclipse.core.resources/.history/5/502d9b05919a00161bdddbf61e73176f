@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description" xmi:id="_7qBSMJREEeaWI-r4LowsvA" selectedViews="_t28HYJRFEeaWI-r4LowsvA" version="11.0.1.201608181000">
+  <semanticResources>developpement.simplepdl</semanticResources>
+  <semanticResources>environment:/viewpoint</semanticResources>
+  <semanticResources>http://simplepdl</semanticResources>
+  <semanticResources>My.odesign.back</semanticResources>
+  <semanticResources>http://www.eclipse.org/emf/2002/Ecore</semanticResources>
+  <ownedViews xmi:type="viewpoint:DView" xmi:id="_t28HYJRFEeaWI-r4LowsvA">
+    <viewpoint xmi:type="description:Viewpoint" href="My.odesign#//@ownedViewpoints[name='simplePDLViewpoint']"/>
+  </ownedViews>
+</viewpoint:DAnalysis>

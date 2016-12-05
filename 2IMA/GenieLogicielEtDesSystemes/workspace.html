@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <title>Workspace Eclipse GLS</title>
+ <style type="text/css">
+  <!-- 
+  BODY { font-family : ariel, monospace, sans-serif; }
+  P { font-weight: normal; font-family : ariel, monospace, sans-serif; color: black; background-color: transparent;}
+  .NORM  { color: black;  background-color: transparent;}
+  .EXEC  { color: red;  background-color: transparent;}
+  -->
+ </style>
+</head>
+<body>
+	<h1>Workspace Eclipse GLS</h1><p>
+	<a class="NORM">/</a><br>
+	└── <a class="DIR">workspace-gls-neon</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.petrinet.m2t.dot</a> [transformation Acceleo PetriNet>Dot]<br>
+	&nbsp;&nbsp;&nbsp; │   └── <a class="DIR">src</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; └── <a class="DIR">fr.enseeiht.petrinet.m2t.dot.main</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a class="NORM">petrinetToDot.java</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── <a class="EXEC">petrinetToDot.mtl</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.petrinet.m2t.dot.ui</a> [launcher transformation Acceleo]<br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.petrinet.m2t.tina</a> [transformation Acceleo PetriNet>TINA]<br>
+	&nbsp;&nbsp;&nbsp; │   └── <a class="DIR">src</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; └── <a class="DIR">fr.enseeiht.simplepdl.m2t.tina.main</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a class="NORM">PetriNetToTINA.java</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── <a class="EXEC">petriNetToTINA.mtl</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.petrinet.m2t.tina.ui</a> [launcher transformation Acceleo]<br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.petrinet</a> [métamodèle PetriNet]<br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a class="NORM">PetriNet.aird</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a class="EXEC">PetriNet.ecore</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a class="NORM">PetriNet.genmodel</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a class="EXEC">PetriNet.png</a> [métamodèle en syntaxe diagramme, i.e. image exportée depuis l'éditeur graphique]<br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a class="EXEC">PetriNet.txt</a> [métamodèle en syntaxe texte, i.e. contenu de l'éditeur OCLinEcore]<br>
+	&nbsp;&nbsp;&nbsp; │   └── <a class="DIR">src</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.petrinet.models</a> [instances du métamodèle PetriNet, et sorties des transformations]<br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a class="DIR">models</a><br>
+	&nbsp;&nbsp;&nbsp; │   │   ├── <a class="EXEC">pn-ko-*.xmi</a> [instances de PetriNet qui ne respectent pas toutes les contraintes OCL]<br>
+	&nbsp;&nbsp;&nbsp; │   │   └── <a class="EXEC">pn-*.xmi</a> [instances correctes de PetriNet]<br>
+	&nbsp;&nbsp;&nbsp; │   └── <a class="DIR">src-gen</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; ├── <a class="EXEC">pn-*.dot</a> [résultats de la transformation PetriNet>Dot]<br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; ├── <a class="EXEC">pn-*.net</a> [résultats de la transformation PetriNet>TINA]<br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; └── <a class="EXEC">pn-*.pdf</a> [exports PDF des fichiers Dot]<br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.petrinet.text</a> [éditeur texte pour PetriNet]<br>
+	&nbsp;&nbsp;&nbsp; │   └── <a class="DIR">src</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; └── <a class="DIR">fr.enseeiht.petrinet</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a class="NORM">GeneratePetriNetDsl.mwe2</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── <a class="EXEC">PetriNet.xtext</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.simplepdl.edit</a> [API d'édition de SimplePDL]<br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.simplepdl.editor</a> [éditeur arbre pour SimplePDL]<br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.simplepdl.emf</a> [projet Java utilisant l'API EMF]<br>
+	&nbsp;&nbsp;&nbsp; │   └── <a class="DIR">src</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; └── <a class="DIR">simplepdl.utils</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a class="EXEC">SimplePDL2PetriNet.java</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a class="NORM">SimplePDLCreator.java</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── <a class="NORM">SimplePDLManipulator.java</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.simplepdl.m2m.petrinet</a> [transformation ATL SimplePDL>PetriNet]<br>
+	&nbsp;&nbsp;&nbsp; │   └── <a class="EXEC">SimplePDL2PetriNet.atl</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.simplepdl.m2t.dot</a> [transformation Acceleo SimplePDL>Dot]<br>
+	&nbsp;&nbsp;&nbsp; │   └── <a class="DIR">src</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; └── <a class="DIR">fr.enseeiht.simplepdl.m2t.dot.main</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a class="NORM">SimplePDLToDot.java</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── <a class="EXEC">simplePDLToDot.mtl</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.simplepdl.m2t.dot.ui</a> [launcher transformation Acceleo]<br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.simplepdl.m2t.pdl1</a> [transformation Acceleo SimplePDL>PDL1]<br>
+	&nbsp;&nbsp;&nbsp; │   └── <a class="DIR">src</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; └── <a class="DIR">fr.enseeiht.simplepdl.m2t.pdl1.main</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a class="NORM">SimplePDLToPDL1.java</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── <a class="EXEC">simplePDLToPDL1.mtl</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.simplepdl.m2t.pdl1.ui</a> [launcher transformation Acceleo]<br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.simplepdl.m2t.pdl2</a> [transformation Acceleo SimplePDL>PDL2]<br>
+	&nbsp;&nbsp;&nbsp; │   └── <a class="DIR">src</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; └── <a class="DIR">fr.enseeiht.simplepdl.m2t.pdl2.main</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a class="NORM">SimplePDLToPDL2.java</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── <a class="EXEC">simplePDLToPDL2.mtl</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.simplepdl.m2t.pdl2.ui</a> [launcher transformation Acceleo]<br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.simplepdl</a> [métamodèle SimplePDL]<br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a class="NORM">SimplePDL.aird</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a class="EXEC">SimplePDL.ecore</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a class="NORM">SimplePDL.genmodel</a><br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a class="EXEC">SimplePDL.png</a> [métamodèle en syntaxe diagramme, i.e. image exportée depuis l'éditeur graphique]<br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a class="EXEC">SimplePDL.txt</a> [métamodèle en syntaxe texte, i.e. contenu de l'éditeur OCLinEcore]<br>
+	&nbsp;&nbsp;&nbsp; │   └── <a class="DIR">src</a><br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.simplepdl.models</a> [instances du métamodèle SimplePDL, et sorties des transformations]<br>
+	&nbsp;&nbsp;&nbsp; │   ├── <a class="DIR">models</a><br>
+	&nbsp;&nbsp;&nbsp; │   │   ├── <a class="EXEC">pdl-ko-*.xmi</a> [instances de SimplePDL qui ne respectent pas toutes les contraintes OCL]<br>
+	&nbsp;&nbsp;&nbsp; │   │   ├── <a class="EXEC">pdl-*.pdlt</a> [instances correctes de SimplePDL]<br>
+	&nbsp;&nbsp;&nbsp; │   │   └── <a class="EXEC">pdl-*.xmi</a> [instances correctes de SimplePDL]<br>
+	&nbsp;&nbsp;&nbsp; │   └── <a class="DIR">src-gen</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; ├── <a class="EXEC">pdl-*.dot</a> [résultats de la transformation SimplePDL>Dot]<br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; ├── <a class="EXEC">pdl-*.pdf</a> [exports PDF des fichiers Dot]<br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; ├── <a class="EXEC">pdl-*.pdl1</a> [résultats de la transformation SimplePDL>PDL1]<br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; ├── <a class="EXEC">pdl-*.pdl2</a> [résultats de la transformation SimplePDL>PDL2]<br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; ├── <a class="EXEC">pdl-*.png</a> [captures d'écran depuis l'éditeur graphique pour SimplePDL]<br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; └── <a class="EXEC">pn_pdl-*.xmi</a> [résultats de la transformation SimplePDL>PetriNet]<br>
+	&nbsp;&nbsp;&nbsp; ├── <a class="DIR">fr.enseeiht.simplepdl.sirius</a> [éditeur diagramme pour SimplePDL]<br>
+	&nbsp;&nbsp;&nbsp; │   └── <a class="DIR">description</a><br>
+	&nbsp;&nbsp;&nbsp; │   &nbsp;&nbsp;&nbsp; └── <a class="EXEC">simplePDL.odesign</a><br>
+	&nbsp;&nbsp;&nbsp; └── <a class="DIR">fr.enseeiht.simplepdl.text</a> [éditeur texte pour SimplePDL]<br>
+	&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── <a class="DIR">src</a><br>
+	&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── <a class="DIR">fr.enseeiht.simplepdl</a><br>
+	&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; ├── <a class="NORM">GenerateSimplePDLDsl.mwe2</a><br>
+	&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; └── <a class="EXEC">SimplePDL.xtext</a><br>
+</body>
+</html>

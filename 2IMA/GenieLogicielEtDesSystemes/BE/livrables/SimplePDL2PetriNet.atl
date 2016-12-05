@@ -1,0 +1,172 @@
+module SimplePDL2PetriNet;
+create OUT: petrinet from  IN: simplepdl;
+
+-- Obtenir le processus qui contient ce process element.
+helper context simplepdl!ProcessElement
+def: getProcess(): simplepdl!Process =
+	simplepdl!Process.allInstances()
+		->select(p | p.processElements->includes(self))
+		->asSequence()->first();
+
+-- Obtenier les WorkDefinition d'un Process
+helper context simplepdl!Process
+def: getWorkDefinition(): OrderedSet(simplepdl!WorkDefinition) = 
+	self.processElements -> select(pe|pe.oclIsTypeOf(simplepdl!WorkDefinition));
+
+-- Obtenier les WorkSequence d'un Process
+helper context simplepdl!Process
+def: getWorkSequence(): OrderedSet(simplepdl!WorkSequence) = 
+	self.processElements -> select(pe|pe.oclIsTypeOf(simplepdl!WorkSequence));
+
+-- Obtenier les Ressources d'un Process
+helper context simplepdl!Process
+def: getRessource(): OrderedSet(simplepdl!Ressource) = 
+	self.processElements -> select(pe|pe.oclIsTypeOf(simplepdl!Ressource));
+
+-- Obtenier les RessourcesSequences d'un Process
+helper context simplepdl!Process
+def: getRessourceSequence(): OrderedSet(simplepdl!RessourceSequence) = 
+	self.processElements -> select(pe|pe.oclIsTypeOf(simplepdl!RessourceSequence));
+
+-- Traduire un Process en un PetriNet de meme nom
+rule Process2PetriNet {
+	from p: simplepdl!Process
+	to pn: petrinet!PetriNet (name <- p.name, 
+		node <- p.getWorkDefinition() 
+					-- Noeuds issus d'une WordDefinition
+	            	-> collect(wd| Set{thisModule.resolveTemp(wd, 'p_ready'),	
+							           thisModule.resolveTemp(wd, 'p_running'),
+							           thisModule.resolveTemp(wd, 'p_started'),
+							           thisModule.resolveTemp(wd, 'p_finished'),
+							           thisModule.resolveTemp(wd, 't_start'),
+							           thisModule.resolveTemp(wd, 't_finish')})
+					->flatten()
+				-- Noeuds issus d'une Ressource
+			   ->append(p.getRessource() -> collect(re|thisModule.resolveTemp(re, 'ressource'))),
+			   	-- Arcs issus d'une WordDefinition
+		arc <- p.getWorkDefinition() -> collect(wd| Set{thisModule.resolveTemp(wd, 'arc1'),
+														thisModule.resolveTemp(wd, 'arc2'),
+														thisModule.resolveTemp(wd, 'arc3'),
+														thisModule.resolveTemp(wd, 'arc4'),
+														thisModule.resolveTemp(wd, 'arc5')})
+				-- Arcs issus d'une WordSequence
+			   ->append(p.getWorkSequence() -> collect(ws|thisModule.resolveTemp(ws, 'arc')))	
+			   -- Arcs issus d'une RessourceSequence
+			   ->append(p.getRessourceSequence() -> collect(rs|Set{thisModule.resolveTemp(rs, 'consommation'),
+																   thisModule.resolveTemp(rs, 'restitution')}))
+			)
+}
+
+-- Traduire une WorkDefinition en un motif sur le reseau de Petri
+rule WorkDefinition2PetriNet {
+	from wd: simplepdl!WorkDefinition
+	to
+		-- PLACES d'une WorkDefinition
+		p_ready: petrinet!Place(
+				name <- wd.name + '_ready',
+				nbJetons <- 1),
+		p_running: petrinet!Place(
+				name <- wd.name + '_running',
+				nbJetons <- 0),
+		p_started: petrinet!Place(
+				name <- wd.name + '_started',
+				nbJetons <- 0),
+		p_finished: petrinet!Place(
+				name <- wd.name + '_finished',
+				nbJetons <- 0),
+				
+		-- TRANSITIONS d'une WorkDefinition
+		t_start: petrinet!Transition(
+				name <- wd.name + '_start'),
+		t_finish: petrinet!Transition(
+				name <- wd.name + '_finish'),
+				
+		-- ARCS d'une WorkDefinition
+		arc1:petrinet!Arc(
+				source <- p_ready,
+				target <- t_start,
+				readArc <- false,
+				poids <- 1),
+		arc2:petrinet!Arc(
+				source <- t_start,
+				target <- p_running,
+				readArc <- false,
+				poids <- 1),
+		arc3:petrinet!Arc(
+				source <- t_start,
+				target <- p_started,
+				readArc <- false,
+				poids <- 1),
+		arc4:petrinet!Arc(
+				source <- p_running,
+				target <- t_finish,
+				readArc <- false,
+				poids <- 1),
+		arc5:petrinet!Arc(
+				source <- t_finish,
+				target <- p_finished,
+				readArc <- false,
+				poids <- 1)
+}
+
+-- Traduire une WorkSequence en un arc sur le reseau de Petri
+rule WorkSequence2PetriNet {
+	from ws: simplepdl!WorkSequence
+	to
+		arc:petrinet!Arc(
+			readArc <- true,
+			poids <- 1,
+			
+			source <- if (ws.linkType = #FINISH_TO_FINISH) then
+				thisModule.resolveTemp(ws.predecessor, 'p_finished')
+			else if (ws.linkType = #FINISH_TO_START) then
+				thisModule.resolveTemp(ws.predecessor, 'p_finished' )
+			else if (ws.linkType = #START_TO_FINISH) then
+				thisModule.resolveTemp(ws.predecessor, 'p_started')
+			else
+				thisModule.resolveTemp(ws.predecessor, 'p_started')
+			endif
+			endif
+			endif,
+			
+			target <- if (ws.linkType = #FINISH_TO_FINISH) then
+				thisModule.resolveTemp(ws.successor, 't_finish')
+			else if (ws.linkType = #FINISH_TO_START) then
+				thisModule.resolveTemp(ws.successor,'t_start' )
+			else if (ws.linkType = #START_TO_FINISH) then
+				thisModule.resolveTemp(ws.successor,'t_finish' )
+			else
+				thisModule.resolveTemp(ws.successor, 't_start')
+			endif
+			endif
+			endif
+			)
+}
+
+-- Traduire une Ressource en une place sur le reseau de Petri
+rule Ressource2PetriNet {
+	from ress: simplepdl!Ressource
+	to
+		-- PLACE d'une Ressource
+		ressource: petrinet!Place(
+				name <- 'ressource_' + ress.name,
+				nbJetons <- ress.quantity)
+}
+
+-- Traduire une RessourceSequence en deux arcs sur le reseau de Petri
+rule RessourceSequence2PetriNet {
+	from rseq: simplepdl!RessourceSequence
+	to
+		-- ARC d'une RessourceSequence
+		consommation: petrinet!Arc(
+				source <- thisModule.resolveTemp(rseq.ressource, 'ressource'),
+				target <- thisModule.resolveTemp(rseq.workdefinition, 't_start'),
+				readArc <- false,
+				poids <- 1),
+		restitution: petrinet!Arc(
+				source <- thisModule.resolveTemp(rseq.workdefinition, 't_finish'),
+				target <- thisModule.resolveTemp(rseq.ressource, 'ressource'),
+				readArc <- false,
+				poids <- 1)
+			
+}

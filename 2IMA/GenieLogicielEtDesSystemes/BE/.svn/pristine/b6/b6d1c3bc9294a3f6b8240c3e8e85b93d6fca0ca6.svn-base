@@ -1,0 +1,11 @@
+op finished = Dieu_ready /\ Dieu_running /\ Dieu_started /\ Dieu_finished;
+[] (finished => dead);
+[] <> dead;
+[] (dead => finished);
+- <> finished;
+[] Dieu_ready + Dieu_running + Dieu_finished = 1;
+
+[] Dieu_ready = 1 => Dieu_running + Dieu_started + Dieu_finished = 0;
+
+[] Dieu_ready = 0 => Dieu_running + Dieu_started + Dieu_finished = 2;
+

@@ -1,0 +1,371 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- NewPage -->
+<html lang="de">
+<head>
+
+<title>CDOLockState (CDO Model Repository Documentation)</title>
+<meta name="date" content="">
+<link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
+<script type="text/javascript" src="../../../../../../script.js"></script>
+</head>
+<body>
+<script type="text/javascript"><!--
+    try {
+        if (location.href.indexOf('is-external=true') == -1) {
+            parent.document.title="CDOLockState (CDO Model Repository Documentation)";
+        }
+    }
+    catch(err) {
+    }
+//-->
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var altColor = "altColor";
+var rowColor = "rowColor";
+var tableTab = "tableTab";
+var activeTableTab = "activeTableTab";
+</script>
+<noscript>
+<div>JavaScript is disabled on your browser.</div>
+</noscript>
+<!-- ========= START OF TOP NAVBAR ======= -->
+<div class="topNav"><a name="navbar.top">
+<!--   -->
+</a>
+<div class="skipNav"><a href="#skip.navbar.top" title="Skip navigation links">Skip navigation links</a></div>
+<a name="navbar.top.firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/CDOLockState.html">Use</a></li>
+<li><a href="../../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockOwner.html" title="interface in org.eclipse.emf.cdo.common.lock"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockUtil.html" title="class in org.eclipse.emf.cdo.common.lock"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../../index.html?org/eclipse/emf/cdo/common/lock/CDOLockState.html" target="_top">Frames</a></li>
+<li><a href="CDOLockState.html" target="_top">No&nbsp;Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_top">
+<li><a href="../../../../../../allclasses-noframe.html">All&nbsp;Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_top");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<div>
+<ul class="subNavList">
+<li>Summary:&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.summary">Method</a></li>
+</ul>
+<ul class="subNavList">
+<li>Detail:&nbsp;</li>
+<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.detail">Method</a></li>
+</ul>
+</div>
+<a name="skip.navbar.top">
+<!--   -->
+</a></div>
+<!-- ========= END OF TOP NAVBAR ========= -->
+<!-- ======== START OF CLASS DATA ======== -->
+<div class="header">
+<div class="subTitle">org.eclipse.emf.cdo.common.lock</div>
+<h2 title="Interface CDOLockState" class="title">Interface CDOLockState</h2>
+</div>
+<div class="contentContainer">
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<dl>
+<dt>All Known Subinterfaces:</dt>
+<dd><a href="../../../../../../org/eclipse/emf/cdo/spi/common/lock/InternalCDOLockState.html" title="interface in org.eclipse.emf.cdo.spi.common.lock">InternalCDOLockState</a></dd>
+</dl>
+<hr>
+<br>
+<pre>public interface <span class="typeNameLabel">CDOLockState</span></pre>
+<div class="block">A client-side representation of <i>all</i> the locks on a single CDOObject.
+ <p>
+ As an individual lock is always owned by view, which in turn is owned by a session, the methods on this interface
+ return instances of <a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockOwner.html" title="interface in org.eclipse.emf.cdo.common.lock"><code>CDOLockOwner</code></a> which carry that information.
+ <p></div>
+<dl>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>4.1</dd>
+<dt><span class="simpleTagLabel">No Implement</span></dt>
+<dd>This interface is not intended to be implemented by clients.</dd>
+<dt><span class="simpleTagLabel">No Extend</span></dt>
+<dd>This interface is not intended to be extended by clients.</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- =========== FIELD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field.summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockState.html#DEPTH_INFINITE">DEPTH_INFINITE</a></span></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockState.html#DEPTH_NONE">DEPTH_NONE</a></span></code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockState.html#getLockedObject--">getLockedObject</a></span>()</code>
+<div class="block">Gets a unique identifier for the object that is locked; typically a <a href="../../../../../../org/eclipse/emf/cdo/common/id/CDOID.html" title="interface in org.eclipse.emf.cdo.common.id"><code>CDOID</code></a> or a <a href="../../../../../../org/eclipse/emf/cdo/common/revision/CDOIDAndBranch.html" title="interface in org.eclipse.emf.cdo.common.revision"><code>CDOIDAndBranch</code></a>,
+ depending on whether branching support is enabled or not</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</a>&lt;<a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockOwner.html" title="interface in org.eclipse.emf.cdo.common.lock">CDOLockOwner</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockState.html#getReadLockOwners--">getReadLockOwners</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockOwner.html" title="interface in org.eclipse.emf.cdo.common.lock">CDOLockOwner</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockState.html#getWriteLockOwner--">getWriteLockOwner</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockOwner.html" title="interface in org.eclipse.emf.cdo.common.lock">CDOLockOwner</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockState.html#getWriteOptionOwner--">getWriteOptionOwner</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockState.html#isLocked-org.eclipse.net4j.util.concurrent.IRWLockManager.LockType-org.eclipse.emf.cdo.common.lock.CDOLockOwner-boolean-">isLocked</a></span>(<a href="../../../../../../../../org.eclipse.net4j.util.doc/javadoc/org/eclipse/net4j/util/concurrent/IRWLockManager.LockType.html?is-external=true" title="class or interface in org.eclipse.net4j.util.concurrent">IRWLockManager.LockType</a>&nbsp;lockType,
+        <a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockOwner.html" title="interface in org.eclipse.emf.cdo.common.lock">CDOLockOwner</a>&nbsp;lockOwner,
+        boolean&nbsp;others)</code>
+<div class="block">If the 'others' argument is <code>false</code>, this method returns <code>true</code> if this lock is currently
+ held by the <i>requesting</i> CDOView, <code>false</code> otherwise.</div>
+</td>
+</tr>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ============ FIELD DETAIL =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field.detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="DEPTH_NONE">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>DEPTH_NONE</h4>
+<pre>static final&nbsp;int DEPTH_NONE</pre>
+<dl>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>4.4</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../../constant-values.html#org.eclipse.emf.cdo.common.lock.CDOLockState.DEPTH_NONE">Constant Field Values</a></dd>
+</dl>
+</li>
+</ul>
+<a name="DEPTH_INFINITE">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>DEPTH_INFINITE</h4>
+<pre>static final&nbsp;int DEPTH_INFINITE</pre>
+<dl>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>4.4</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../../constant-values.html#org.eclipse.emf.cdo.common.lock.CDOLockState.DEPTH_INFINITE">Constant Field Values</a></dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getLockedObject--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getLockedObject</h4>
+<pre><a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;getLockedObject()</pre>
+<div class="block">Gets a unique identifier for the object that is locked; typically a <a href="../../../../../../org/eclipse/emf/cdo/common/id/CDOID.html" title="interface in org.eclipse.emf.cdo.common.id"><code>CDOID</code></a> or a <a href="../../../../../../org/eclipse/emf/cdo/common/revision/CDOIDAndBranch.html" title="interface in org.eclipse.emf.cdo.common.revision"><code>CDOIDAndBranch</code></a>,
+ depending on whether branching support is enabled or not</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the identifier</dd>
+</dl>
+</li>
+</ul>
+<a name="isLocked-org.eclipse.net4j.util.concurrent.IRWLockManager.LockType-org.eclipse.emf.cdo.common.lock.CDOLockOwner-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isLocked</h4>
+<pre>boolean&nbsp;isLocked(<a href="../../../../../../../../org.eclipse.net4j.util.doc/javadoc/org/eclipse/net4j/util/concurrent/IRWLockManager.LockType.html?is-external=true" title="class or interface in org.eclipse.net4j.util.concurrent">IRWLockManager.LockType</a>&nbsp;lockType,
+                 <a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockOwner.html" title="interface in org.eclipse.emf.cdo.common.lock">CDOLockOwner</a>&nbsp;lockOwner,
+                 boolean&nbsp;others)</pre>
+<div class="block">If the 'others' argument is <code>false</code>, this method returns <code>true</code> if this lock is currently
+ held by the <i>requesting</i> CDOView, <code>false</code> otherwise.
+ <p>
+ If the 'others' argument is <code>true</code>, this method returns <code>true</code> if this lock is currently held
+ by <i>another</i> view (i.e. any view different from the requesting one), <code>false</code> otherwise.</div>
+</li>
+</ul>
+<a name="getReadLockOwners--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getReadLockOwners</h4>
+<pre><a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</a>&lt;<a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockOwner.html" title="interface in org.eclipse.emf.cdo.common.lock">CDOLockOwner</a>&gt;&nbsp;getReadLockOwners()</pre>
+</li>
+</ul>
+<a name="getWriteLockOwner--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getWriteLockOwner</h4>
+<pre><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockOwner.html" title="interface in org.eclipse.emf.cdo.common.lock">CDOLockOwner</a>&nbsp;getWriteLockOwner()</pre>
+</li>
+</ul>
+<a name="getWriteOptionOwner--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getWriteOptionOwner</h4>
+<pre><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockOwner.html" title="interface in org.eclipse.emf.cdo.common.lock">CDOLockOwner</a>&nbsp;getWriteOptionOwner()</pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<div class="bottomNav"><a name="navbar.bottom">
+<!--   -->
+</a>
+<div class="skipNav"><a href="#skip.navbar.bottom" title="Skip navigation links">Skip navigation links</a></div>
+<a name="navbar.bottom.firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/CDOLockState.html">Use</a></li>
+<li><a href="../../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockOwner.html" title="interface in org.eclipse.emf.cdo.common.lock"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../../org/eclipse/emf/cdo/common/lock/CDOLockUtil.html" title="class in org.eclipse.emf.cdo.common.lock"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../../index.html?org/eclipse/emf/cdo/common/lock/CDOLockState.html" target="_top">Frames</a></li>
+<li><a href="CDOLockState.html" target="_top">No&nbsp;Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_bottom">
+<li><a href="../../../../../../allclasses-noframe.html">All&nbsp;Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_bottom");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<div>
+<ul class="subNavList">
+<li>Summary:&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.summary">Method</a></li>
+</ul>
+<ul class="subNavList">
+<li>Detail:&nbsp;</li>
+<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.detail">Method</a></li>
+</ul>
+</div>
+<a name="skip.navbar.bottom">
+<!--   -->
+</a></div>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+<p class="legalCopy"><small><i>Copyright (c) 2011-2015 Eike Stepper (Berlin, Germany) and others.</i></small></p>
+</body>
+</html>

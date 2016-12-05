@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ExportRepresentationsAsImagesDialog">
+		<item value="PNG" key="ExportRepresentationsAsImagesDialog.imageFormat"/>
+		<list key="ExportRepresentationsAsImagesDialog.file">
+			<item value="/home/tmeunier/2IMA/GenieLogicielEtDesSystemes/workspace/fr.enseeiht.petrinet"/>
+			<item value="/home/tmeunier/2IMA/GenieLogicielEtDesSystemes/workspace/fr.enseeiht.petrinet/PetriNet.png"/>
+		</list>
+	</section>
+</section>

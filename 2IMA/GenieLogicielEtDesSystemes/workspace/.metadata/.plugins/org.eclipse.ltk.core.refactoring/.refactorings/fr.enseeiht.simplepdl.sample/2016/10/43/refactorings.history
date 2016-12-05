@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;fr.enseeiht.simplepdl.sample/My.odesign&apos; to &apos;My.odesign.back&apos;" description="Rename resource &apos;My.odesign&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="My.odesign" name="My.odesign.back" stamp="1477385700394" updateReferences="true"/>
+</session>

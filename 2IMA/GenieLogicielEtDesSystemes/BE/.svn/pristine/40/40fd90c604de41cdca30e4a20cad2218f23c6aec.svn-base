@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<petrinet:PetriNet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:petrinet="http://petrinet" name="Galette">
+  <node xsi:type="petrinet:Place" name="Toto_started"/>
+  <node xsi:type="petrinet:Place" name="Toto_ready" nbJetons="1"/>
+  <node xsi:type="petrinet:Place" name="Toto_finished"/>
+  <node xsi:type="petrinet:Transition" name="Toto_start"/>
+  <node xsi:type="petrinet:Transition" name="Toto_finish"/>
+  <node xsi:type="petrinet:Place" name="Toto_running"/>
+  <node xsi:type="petrinet:Transition" name="La soeur de Toto_finish"/>
+  <node xsi:type="petrinet:Place" name="La soeur de Toto_started"/>
+  <node xsi:type="petrinet:Place" name="La soeur de Toto_ready" nbJetons="1"/>
+  <node xsi:type="petrinet:Place" name="La soeur de Toto_running"/>
+  <node xsi:type="petrinet:Place" name="La soeur de Toto_finished"/>
+  <node xsi:type="petrinet:Transition" name="La soeur de Toto_start"/>
+  <node xsi:type="petrinet:Transition" name="Le papa de Toto_finish"/>
+  <node xsi:type="petrinet:Place" name="Le papa de Toto_started"/>
+  <node xsi:type="petrinet:Transition" name="Le papa de Toto_start"/>
+  <node xsi:type="petrinet:Place" name="Le papa de Toto_running"/>
+  <node xsi:type="petrinet:Place" name="Le papa de Toto_ready" nbJetons="1"/>
+  <node xsi:type="petrinet:Place" name="Le papa de Toto_finished"/>
+  <node xsi:type="petrinet:Transition" name="La maman de Toto_finish"/>
+  <node xsi:type="petrinet:Place" name="La maman de Toto_started"/>
+  <node xsi:type="petrinet:Transition" name="La maman de Toto_start"/>
+  <node xsi:type="petrinet:Place" name="La maman de Toto_running"/>
+  <node xsi:type="petrinet:Place" name="La maman de Toto_ready" nbJetons="1"/>
+  <node xsi:type="petrinet:Place" name="La maman de Toto_finished"/>
+  <node xsi:type="petrinet:Transition" name="Le copain de Toto_finish"/>
+  <node xsi:type="petrinet:Place" name="Le copain de Toto_ready" nbJetons="1"/>
+  <node xsi:type="petrinet:Place" name="Le copain de Toto_running"/>
+  <node xsi:type="petrinet:Place" name="Le copain de Toto_started"/>
+  <node xsi:type="petrinet:Place" name="Le copain de Toto_finished"/>
+  <node xsi:type="petrinet:Transition" name="Le copain de Toto_start"/>
+  <node xsi:type="petrinet:Place" name="Le chien de Toto_ready" nbJetons="1"/>
+  <node xsi:type="petrinet:Place" name="Le chien de Toto_started"/>
+  <node xsi:type="petrinet:Transition" name="Le chien de Toto_start"/>
+  <node xsi:type="petrinet:Transition" name="Le chien de Toto_finish"/>
+  <node xsi:type="petrinet:Place" name="Le chien de Toto_finished"/>
+  <node xsi:type="petrinet:Place" name="Le chien de Toto_running"/>
+  <node xsi:type="petrinet:Place" name="Roi_finished"/>
+  <node xsi:type="petrinet:Place" name="Roi_ready" nbJetons="1"/>
+  <node xsi:type="petrinet:Transition" name="Roi_start"/>
+  <node xsi:type="petrinet:Place" name="Roi_started"/>
+  <node xsi:type="petrinet:Transition" name="Roi_finish"/>
+  <node xsi:type="petrinet:Place" name="Roi_running"/>
+  <node xsi:type="petrinet:Place" name="ressource_Galette" nbJetons="6"/>
+  <arc source="//@node.3" target="//@node.5" poids="1"/>
+  <arc source="//@node.5" target="//@node.4" poids="1"/>
+  <arc source="//@node.1" target="//@node.3" poids="1"/>
+  <arc source="//@node.3" target="//@node.0" poids="1"/>
+  <arc source="//@node.4" target="//@node.2" poids="1"/>
+  <arc source="//@node.6" target="//@node.10" poids="1"/>
+  <arc source="//@node.8" target="//@node.11" poids="1"/>
+  <arc source="//@node.11" target="//@node.7" poids="1"/>
+  <arc source="//@node.9" target="//@node.6" poids="1"/>
+  <arc source="//@node.11" target="//@node.9" poids="1"/>
+  <arc source="//@node.16" target="//@node.14" poids="1"/>
+  <arc source="//@node.12" target="//@node.17" poids="1"/>
+  <arc source="//@node.14" target="//@node.13" poids="1"/>
+  <arc source="//@node.14" target="//@node.15" poids="1"/>
+  <arc source="//@node.15" target="//@node.12" poids="1"/>
+  <arc source="//@node.18" target="//@node.23" poids="1"/>
+  <arc source="//@node.20" target="//@node.21" poids="1"/>
+  <arc source="//@node.21" target="//@node.18" poids="1"/>
+  <arc source="//@node.22" target="//@node.20" poids="1"/>
+  <arc source="//@node.20" target="//@node.19" poids="1"/>
+  <arc source="//@node.24" target="//@node.28" poids="1"/>
+  <arc source="//@node.26" target="//@node.24" poids="1"/>
+  <arc source="//@node.25" target="//@node.29" poids="1"/>
+  <arc source="//@node.29" target="//@node.27" poids="1"/>
+  <arc source="//@node.29" target="//@node.26" poids="1"/>
+  <arc source="//@node.32" target="//@node.31" poids="1"/>
+  <arc source="//@node.30" target="//@node.32" poids="1"/>
+  <arc source="//@node.32" target="//@node.35" poids="1"/>
+  <arc source="//@node.33" target="//@node.34" poids="1"/>
+  <arc source="//@node.35" target="//@node.33" poids="1"/>
+  <arc source="//@node.37" target="//@node.38" poids="1"/>
+  <arc source="//@node.40" target="//@node.36" poids="1"/>
+  <arc source="//@node.41" target="//@node.40" poids="1"/>
+  <arc source="//@node.38" target="//@node.41" poids="1"/>
+  <arc source="//@node.38" target="//@node.39" poids="1"/>
+  <arc source="//@node.0" target="//@node.38" poids="1" readArc="true"/>
+  <arc source="//@node.7" target="//@node.38" poids="1" readArc="true"/>
+  <arc source="//@node.13" target="//@node.38" poids="1" readArc="true"/>
+  <arc source="//@node.19" target="//@node.38" poids="1" readArc="true"/>
+  <arc source="//@node.27" target="//@node.38" poids="1" readArc="true"/>
+  <arc source="//@node.31" target="//@node.38" poids="1" readArc="true"/>
+  <arc source="//@node.4" target="//@node.42" poids="1"/>
+  <arc source="//@node.42" target="//@node.3" poids="1"/>
+  <arc source="//@node.42" target="//@node.11" poids="1"/>
+  <arc source="//@node.6" target="//@node.42" poids="1"/>
+  <arc source="//@node.42" target="//@node.14" poids="1"/>
+  <arc source="//@node.12" target="//@node.42" poids="1"/>
+  <arc source="//@node.18" target="//@node.42" poids="1"/>
+  <arc source="//@node.42" target="//@node.20" poids="1"/>
+  <arc source="//@node.24" target="//@node.42" poids="1"/>
+  <arc source="//@node.42" target="//@node.29" poids="1"/>
+  <arc source="//@node.33" target="//@node.42" poids="1"/>
+  <arc source="//@node.42" target="//@node.32" poids="1"/>
+</petrinet:PetriNet>

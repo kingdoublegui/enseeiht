@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="imap">
+    <global-element name="IMAP" type="http://www.mulesoft.org/schema/mule/imaps/connector" entity-id="875c4e64-d3c0-4eba-b89c-b490a535a6b6">
+        <properties>
+            <property name="name" value="IMAP"/>
+            <property name="backupFolder"/>
+            <property name="mailboxFolder"/>
+            <property name="moveToFolder"/>
+            <property name="dispatcherPoolFactory-ref"/>
+            <property name="dynamicNotification"/>
+            <property name="validateConnections" value="true"/>
+            <property name="backupEnabled"/>
+            <property name="deleteReadMessages"/>
+            <property name="checkFrequency" value="1000"/>
+            <property name="defaultProcessMessageAction"/>
+            <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/imaps/connector"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/imaps/tls-client;0">
+                <property name="storePassword" value="*"/>
+                <property name="path" value="*"/>
+            </property-collection>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/imaps/tls-trust-store;0">
+                <property name="storePassword" value="*"/>
+                <property name="path" value="*"/>
+            </property-collection>
+        </properties>
+    </global-element>
+    <flow SubFlow="false" name="imapFlow1" entity-id="e9819f43-ea8e-46fa-9f68-b0bbd006ceac">
+        <lane hadOnlyOneElement="false" entity-id="aa6b14db-62a2-4ed0-aaa3-0c8847dbb2b0">
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="IMAP" type="http://www.mulesoft.org/schema/mule/imaps/endpoint" entity-id="50b37a23-69b7-4eb3-8c3a-46ce89434a66">
+                <properties>
+                    <property name="connector-ref" value=""/>
+                    <property name="address" value=""/>
+                    <property name="mimeType" value=""/>
+                    <property name="encoding" value=""/>
+                    <property name="disableTransportTransformer" value="false"/>
+                    <property name="password" value="tpdhpqsswd"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="ref" value=""/>
+                    <property name="port" value="993"/>
+                    <property name="host" value="imap.gmail.com"/>
+                    <property name="transformer-refs" value=""/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/imaps/endpoint"/>
+                    <property name="user" value="tpdhlogin"/>
+                    <property name="responseTimeout" value="10000"/>
+                </properties>
+                <description></description>
+            </endpoint>
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="File" type="http://www.mulesoft.org/schema/mule/file/endpoint" entity-id="bdf43da6-c4f0-485d-aeed-5c0bf666c028">
+                <properties>
+                    <property name="connector-ref" value=""/>
+                    <property name="path" value="/tmp/out"/>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="ref" value=""/>
+                    <property name="address" value=""/>
+                    <property name="mimeType" value=""/>
+                    <property name="transformer-refs" value=""/>
+                    <property name="outputPattern" value=""/>
+                    <property name="encoding" value=""/>
+                    <property name="responseTimeout" value="10000"/>
+                    <property name="disableTransportTransformer" value="false"/>
+                </properties>
+                <description></description>
+            </endpoint>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

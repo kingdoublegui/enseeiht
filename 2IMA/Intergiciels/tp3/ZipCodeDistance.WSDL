@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://malaikaconsultants.com/ZipCodeWebService/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://malaikaconsultants.com/ZipCodeWebService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://malaikaconsultants.com/ZipCodeWebService/">
+      <s:element name="GetZIPCodesWithinRadius">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZIPCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RadiusInMiles" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetZIPCodesWithinRadiusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetZIPCodesWithinRadiusResult" type="tns:ArrayOfZIPCodeWithinRadius" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfZIPCodeWithinRadius">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ZIPCodeWithinRadius" nillable="true" type="tns:ZIPCodeWithinRadius" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ZIPCodeWithinRadius">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ZIPCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Distance" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetDistanceBetweenTwoZIPCodes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZIPCode1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ZIPCode2" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDistanceBetweenTwoZIPCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDistanceBetweenTwoZIPCodesResult" type="tns:ZIPCodeDistance" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ZIPCodeDistance">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ZIPCode1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZIPCode2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Distance" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetZIPCodesWithinRadiusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetZIPCodesWithinRadius" />
+  </wsdl:message>
+  <wsdl:message name="GetZIPCodesWithinRadiusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetZIPCodesWithinRadiusResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDistanceBetweenTwoZIPCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDistanceBetweenTwoZIPCodes" />
+  </wsdl:message>
+  <wsdl:message name="GetDistanceBetweenTwoZIPCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDistanceBetweenTwoZIPCodesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ZipCodeDistanceSoap">
+    <wsdl:operation name="GetZIPCodesWithinRadius">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns all the zip codes within the specified radius (in miles) of a particular zip code.</wsdl:documentation>
+      <wsdl:input message="tns:GetZIPCodesWithinRadiusSoapIn" />
+      <wsdl:output message="tns:GetZIPCodesWithinRadiusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDistanceBetweenTwoZIPCodes">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns the distance (in miles) between 2 zip codes.</wsdl:documentation>
+      <wsdl:input message="tns:GetDistanceBetweenTwoZIPCodesSoapIn" />
+      <wsdl:output message="tns:GetDistanceBetweenTwoZIPCodesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ZipCodeDistanceSoap" type="tns:ZipCodeDistanceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetZIPCodesWithinRadius">
+      <soap:operation soapAction="http://malaikaconsultants.com/ZipCodeWebService/GetZIPCodesWithinRadius" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDistanceBetweenTwoZIPCodes">
+      <soap:operation soapAction="http://malaikaconsultants.com/ZipCodeWebService/GetDistanceBetweenTwoZIPCodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ZipCodeDistanceSoap12" type="tns:ZipCodeDistanceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetZIPCodesWithinRadius">
+      <soap12:operation soapAction="http://malaikaconsultants.com/ZipCodeWebService/GetZIPCodesWithinRadius" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDistanceBetweenTwoZIPCodes">
+      <soap12:operation soapAction="http://malaikaconsultants.com/ZipCodeWebService/GetDistanceBetweenTwoZIPCodes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ZipCodeDistance">
+    <wsdl:port name="ZipCodeDistanceSoap" binding="tns:ZipCodeDistanceSoap">
+      <soap:address location="http://www.malaikaconsultants.com/Malaika-Consultants/ZipCodeDistance.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ZipCodeDistanceSoap12" binding="tns:ZipCodeDistanceSoap12">
+      <soap12:address location="http://www.malaikaconsultants.com/Malaika-Consultants/ZipCodeDistance.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

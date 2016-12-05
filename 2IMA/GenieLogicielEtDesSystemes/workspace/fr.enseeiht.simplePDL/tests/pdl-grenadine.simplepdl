@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simplepdl:Process
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:simplepdl="http://simplepdl"
+    name="Grenadine">
+  <processElements
+      xsi:type="simplepdl:Ressource"
+      quantity="1"
+      name="eau"/>
+  <processElements
+      xsi:type="simplepdl:RessourceSequence"
+      quantity="1"
+      ressource="//@processElements.0"
+      workdefinition="//@processElements.2"/>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      name="grenadine"
+      ressourcesequence="//@processElements.1 //@processElements.4"/>
+  <processElements
+      xsi:type="simplepdl:Ressource"
+      quantity="1"
+      name="sirop"/>
+  <processElements
+      xsi:type="simplepdl:RessourceSequence"
+      quantity="1"
+      ressource="//@processElements.3"
+      workdefinition="//@processElements.2"/>
+</simplepdl:Process>

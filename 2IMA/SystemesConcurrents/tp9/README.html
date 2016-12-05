@@ -1,0 +1,73 @@
+<h1>Allocateur de ressources</h1>
+
+<p>Nous nous intéressons au problème de l'allocation de ressources. </p>
+
+<p>Pour
+simplifier, nous supposons que toutes les ressources sont équivalentes, et
+l'interface est alors définie par <code>allouer(NbDemandés)</code> et <code>libérer(NbLibérés)</code>. </p>
+
+<p>Les activités sont supposées se comporter correctement, c'est-à-dire :</p>
+
+<ul>
+<li>le nombre de ressources demandées est inférieur au nombre total de
+ressources ;</li>
+<li>le nombre de ressources libérées correspond au nombre de ressources
+précédemment obtenues ;</li>
+<li>une activité ne demande pas de ressources si elle en a déjà, ni n'en libère
+sans en avoir.</li>
+</ul>
+
+<p>Cela revient à dire que le code des activités est :</p>
+
+<p><code>{choisir n dans 1..nbressources; allouer(n); libérer(n);}*</code></p>
+
+<h2>Compilation</h2>
+
+<p><code>javac *.java Synchro/*.java</code></p>
+
+<h2>Exécution</h2>
+
+<p><code>java Main</code></p>
+
+<p><code>java Main MonImplantation 6 10</code></p>
+
+<pre><code>          (l'implantation écrite) (nb activités) (nb ressources)
+</code></pre>
+
+<ul>
+<li>Le programme trouve automatiquement
+toutes les implantations disponibles dans le répertoire (par réflexivité),
+et en particulier les nouvelles implantations rajoutées.</li>
+<li>Le bouton d'aide de la fenêtre affichée par l'application en présente les fonctionnalités.</li>
+</ul>
+
+<h2>À faire</h2>
+
+<p>Écrire une classe implantant Allocateur.java, en s'inspirant par exemple de
+Allocateur_SansStrategie2.java</p>
+
+<h3>Stratégie : petits demandeurs</h3>
+
+<p>Dans cette stratégie :</p>
+
+<ul>
+<li>on laisse passer une activité si elle demande moins de ressources qu'il
+n'en reste;    </li>
+<li>on débloque en commençant par considérer les plus petits demandeurs,
+puis en remontant progressivement jusqu'à ne plus pouvoir débloquer.    </li>
+<li>il faut donc pouvoir distinguer une activité demandant "n" ressources
+d'une activité en demandant "m" (m != n) : donc tableau de variables
+conditions.    </li>
+<li>il faut savoir s'il y a une (ou des) activités en attente à un étage
+donné.    </li>
+<li>l'utilisation du réveil en chaîne est quasiment obligatoire, sous peine
+de code acrobatique.</li>
+</ul>
+
+<h3>Stratégie variante : best fit</h3>
+
+<p>comme petits demandeurs, mais on débloque en
+commençant par <em>les plus gros qui peuvent être débloqués</em>.</p>
+
+<p><strong>Note</strong> : il est préférable de changer les paramètres de la simulation pour
+réduire ou éviter les grosses demandes.</p>

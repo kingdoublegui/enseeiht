@@ -1,0 +1,30 @@
+import ecore : 'http://www.eclipse.org/emf/2002/Ecore' ;
+
+package petrinet : petrinet = 'http://petrinet'
+{
+	class PetriNet
+	{
+		attribute name : String[1];
+		property node : Node[*|1] { ordered composes };
+		property arc : Arc[*|1] { ordered composes };
+	}
+	abstract class Node
+	{
+		attribute name : String[1];
+	}
+	class Arc
+	{
+		property source : Node[1];
+		property target : Node[1];
+		attribute poids : ecore::EInt[1];
+		attribute readArc : Boolean[1];
+		invariant sourceTypeDiffTarget: self.source.oclType() <> self.target.oclType();
+		invariant positive: self.poids > 0;
+	}
+	class Place extends Node
+	{
+		attribute nbJetons : ecore::EInt[1];
+		invariant positive: self.nbJetons >= 0;
+	}
+	class Transition extends Node;
+}

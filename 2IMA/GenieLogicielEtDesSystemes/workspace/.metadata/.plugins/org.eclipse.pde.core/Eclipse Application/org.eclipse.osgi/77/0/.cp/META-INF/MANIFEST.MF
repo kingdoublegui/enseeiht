@@ -1,0 +1,71 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: org.eclipse.amalgam.discovery.modeling;singleton:
+ =true
+Archiver-Version: Plexus Archiver
+Built-By: genie.amalgam
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.ui,org.eclipse.am
+ algam.discovery.ui;bundle-version="1.0.0",org.eclipse.core.net;bundle
+ -version="1.2.200"
+Bundle-ManifestVersion: 2
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: Eclipse Modeling Project
+Export-Package: org.eclipse.amalgam.discovery.modeling;x-internal:=tru
+ e,org.eclipse.amalgam.discovery.modeling.handlers;x-internal:=true
+Bundle-Name: Amalgam Modeling Discovery UI
+Bundle-Version: 1.7.0.201605311215
+Bundle-Activator: org.eclipse.amalgam.discovery.modeling.Activator
+Created-By: Apache Maven 3.3.9
+Build-Jdk: 1.8.0_51
+
+Name: about.html
+SHA-256-Digest: bfZTK5LN15EseTDjwHyfLbBfEqNWEMGdt+oFKsrN0B4=
+
+Name: plugin.xml
+SHA-256-Digest: h1g+OXv458VPOxcv75Yr5kq3edgvU2J26LQsMOFVWOw=
+
+Name: icons/modeling16.png
+SHA-256-Digest: ou9r+zJGdGU44USQhgZV/ctIz91HTVyHrQNe6sGasA8=
+
+Name: org/eclipse/amalgam/discovery/modeling/Activator.class
+SHA-256-Digest: x7tMtNbykS2yEGhwvKvw6NpBXMrrh3XKeLEFcStrIq8=
+
+Name: intro/images/banner-discovery.png
+SHA-256-Digest: IWkd2C549R2jSfgC0+Q81YMWYOq0OUz/glttLtKgYOo=
+
+Name: intro/css/overview.css
+SHA-256-Digest: lZLOZ5/DBsAdpZKEFtpQ7QbwEP6gO9Lqiv3RPXa+/V0=
+
+Name: intro/css/overview.properties
+SHA-256-Digest: P7w3oZKOLuam/5weY0gPuuZTwDpLE7EHP1xdBpoXh1A=
+
+Name: META-INF/maven/org.eclipse.amalgam/org.eclipse.amalgam.discovery
+ .modeling/pom.xml
+SHA-256-Digest: UiWpHxBvZyxBf6ZMphgjO+3aH3IDOitAV6+/yDQAWK4=
+
+Name: org/eclipse/amalgam/discovery/modeling/handlers/ModelingPackageD
+ iscovery.class
+SHA-256-Digest: TwqX9T55DF5Q4niqVnz2F0EHFdciB/mzujkC+c99aPY=
+
+Name: intro/amalgamDiscovery.xml
+SHA-256-Digest: pdQ7updWSGRxufU9fthhy5Dk85SjG1B2A6gB5PFhvc4=
+
+Name: org/eclipse/amalgam/discovery/modeling/handlers/ModelingDiscover
+ yHandler.class
+SHA-256-Digest: ed61bAa68wO6eAMJI+BbsvogH3+9mrX/ccSb6pOCDNw=
+
+Name: META-INF/maven/org.eclipse.amalgam/org.eclipse.amalgam.discovery
+ .modeling/pom.properties
+SHA-256-Digest: 6R8U/Rs9PSKF+2LZcQFEeW0LsBeM9BTzCGlRZkwlU/E=
+
+Name: org/eclipse/amalgam/discovery/modeling/handlers/ModelingPackageD
+ iscovery$1.class
+SHA-256-Digest: ddVIls3MXU9uTQXI2ndirVo2GmG2dEecuU0wXOlA4Kw=
+
+Name: icons/modeling32.png
+SHA-256-Digest: saSrfvJ79Uzl2BFpCbuVBho1UTuf14LrjD+wGJG44Ok=
+
+Name: org/eclipse/amalgam/discovery/modeling/handlers/ModelingDiscover
+ yAction.class
+SHA-256-Digest: s0OJi9fI8A03z9CWqQNpXDGK9TylJS5C8BUc1WmIdUo=
+

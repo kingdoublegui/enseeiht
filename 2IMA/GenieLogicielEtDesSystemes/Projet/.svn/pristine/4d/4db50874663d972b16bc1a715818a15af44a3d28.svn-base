@@ -1,0 +1,25 @@
+net enigme
+
+tr Initialisation Debut -> Enigme
+tr BonChemin Enigme BonChemin_visible BonneFin_Ok?1 -> Succes
+tr MauvaisChemin Enigme Question MauvaisChemin_visible MauvaiseFin_Ok?1 -> Echec
+
+tr Sphinx Enigme -> Question
+
+tr BonneReponse Question -> FinQuestion Reussite
+tr MauvaiseReponse_EncoreTentative Question Tentative Poids EncoreTentative_Ok -> Question
+tr MauvaiseReponse_MauvaiseFin Question Tentative Poids MauvaiseFin_Ok -> FinQuestion
+tr FinQuestion_fin FinQuestion -> Enigme
+
+tr BonneFin Reussite?1 -> BonneFin_Ok
+tr MauvaiseFin Tentative?0 -> MauvaiseFin_Ok
+tr PremiereQuestion Tentative?3 -> PremiereQuestion_Ok
+tr EncoreTentative Tentative?1 -> EncoreTentative_Ok
+
+pl Facile (1)
+pl Debut (1)
+pl Poids (0)
+pl Tentative (3)
+
+pl BonChemin_visible (1)
+pl MauvaisChemin_visible (1)

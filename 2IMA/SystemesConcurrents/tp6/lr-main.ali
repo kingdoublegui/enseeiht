@@ -1,0 +1,234 @@
+V "GNAT Lib v4.9"
+M P W=b
+P SS ZX
+
+RN
+RV NO_ALLOCATORS
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTION_PROPAGATION
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_LOCAL_ALLOCATORS
+RV NO_SECONDARY_STACK
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_TASK_ALLOCATORS
+RV NO_TASKING
+RV NO_DEFAULT_INITIALIZATION
+RV SPARK_05
+RV MAX_TASKS=1+
+
+U lr.main%b		lr-main.adb		fe93fc7c NE OO SU IU
+W ada%s			ada.ads			ada.ali
+W ada.command_line%s	a-comlin.adb		a-comlin.ali
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W gdk%s			gdk.ads			gdk.ali
+W gdk.threads%s		gdk-threads.ads		gdk-threads.ali
+W gtk%s			gtk.ads			gtk.ali
+W gtk.main%s		gtk-main.adb		gtk-main.ali
+W lr%s			lr.ads			lr.ali
+W lr.affic%s		lr-affic.adb		lr-affic.ali
+W lr.simu%s		lr-simu.adb		lr-simu.ali
+W lr.synchro%s		lr-synchro.adb		lr-synchro.ali
+W lr.tasks%s		lr-tasks.adb		lr-tasks.ali
+W system%s		system.ads		system.ali
+W system.concat_2%s	s-conca2.adb		s-conca2.ali
+W system.img_int%s	s-imgint.adb		s-imgint.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.tasking%s	s-taskin.adb		s-taskin.ali
+W system.tasking.rendezvous%s  s-tasren.adb	s-tasren.ali
+W system.tasking.stages%s  s-tassta.adb		s-tassta.ali
+W system.val_int%s	s-valint.adb		s-valint.ali
+
+D ada.ads		20070406091342 3ffc8e18
+D a-comlin.ads		20140225151544 ea62afbc
+D a-except.ads		20140129161953 f86a4103
+D a-finali.ads		20111121113555 52ecdc1b
+D a-ioexce.ads		20140225151544 e4a01f64
+D a-reatim.ads		20090409150019 63f07669
+D a-stream.ads		20140122164720 1a984740
+D a-tags.ads		20111212115430 6c0509d0
+D a-textio.ads		20140129155348 386df5d4
+D a-unccon.ads		20070406091342 f9eb8f06
+D a-uncdea.ads		20070406091342 f15a5ed1
+D cairo.ads		20141109155105 8dc0603a
+D cairo-region.ads	20141109155105 b7133728
+D gdk.ads		20141109155105 f909352d
+D gdk-bitmap.ads	20141109155105 a30f71c4
+D gdk-color.ads		20141109155104 8aa593ee
+D gdk-cursor.ads	20141109155104 d92b2ac1
+D gdk-display.ads	20141109155105 f1fc98fd
+D gdk-drawable.ads	20141109155105 15e54888
+D gdk-event.ads		20141109155105 8e0f7bb6
+D gdk-font.ads		20141109155105 46e43fa8
+D gdk-gc.ads		20141109155105 a96f1ba5
+D gdk-pixbuf.ads	20141109155104 8572dcfc
+D gdk-pixmap.ads	20141109155106 677b62c0
+D gdk-rectangle.ads	20141109155105 7b900608
+D gdk-region.ads	20141109155105 ff429b15
+D gdk-rgb.ads		20141109155104 f5b16ba0
+D gdk-threads.ads	20141109155105 9ad6784e
+D gdk-types.ads		20141109155105 e94b1380
+D gdk-visual.ads	20141109155105 615e934c
+D gdk-window.ads	20141109155106 a02582f1
+D glib.ads		20141109155105 0f441d83
+D glib-error.ads	20141109155105 e055fabe
+D glib-generic_properties.ads  20141109155104 a1807006
+D glib-glist.ads	20141109155105 65a6e1be
+D glib-gslist.ads	20141109155105 8fe7d6f1
+D glib-object.ads	20141109155104 948e384a
+D glib-properties.ads	20141109155105 48c8d9fb
+D glib-values.ads	20141109155105 37b4897e
+D gtk.ads		20141109155105 81513fe2
+D gtk-accel_group.ads	20141109155106 db8139a9
+D gtk-adjustment.ads	20141109155106 4fe0ef6d
+D gtk-enums.ads		20141109155104 31c39095
+D gtk-main.ads		20141109155104 ebc5b10c
+D gtk-style.ads		20141109155105 f6c76a3d
+D gtk-widget.ads	20141109155104 589f5486
+D gtkada.ads		20141109155105 57aea1c7
+D gtkada-types.ads	20141109155105 b7bc0c77
+D interfac.ads		20140225151838 69adb1b9
+D i-c.ads		20110801143639 5421119b
+D i-cstrin.ads		20130104124955 341d0ddf
+D i-cstrea.ads		20130412125801 8128536b
+D lr.ads		20141028181748 400998c9
+D lr-affic.ads		20121001134031 b5dbcf32
+D lr-main.adb		20121023084008 d7f1fdf3
+D lr-main.adb		20121023084008 d7f1fdf3
+D lr-simu.ads		20121002073810 af6ee446
+D lr-synchro.ads	20141028181624 2f8e537d
+D lr-tasks.ads		20121001133740 472fabaf
+D pango.ads		20141109155105 d3c8e76d
+D pango-attributes.ads	20141109155105 34135516
+D pango-context.ads	20141109155105 a00383e5
+D pango-enums.ads	20141109155104 8ef2dddf
+D pango-font.ads	20141109155105 375007f3
+D pango-layout.ads	20141109155104 0814381c
+D pango-tabs.ads	20141109155105 1dd550ef
+D system.ads		20141119215827 90249111
+D s-atacco.ads		20120515093410 4c36d12f
+D s-conca2.ads		20140225151544 02a0d7d0
+D s-crtl.ads		20140225151544 840e6817
+D s-exctab.ads		20140225151139 54135002
+D s-ficobl.ads		20120709130952 55a71d43
+D s-finmas.ads		20140225151139 814daec4
+D s-finroo.ads		20120426095924 4ff27390
+D s-imgint.ads		20090409150019 02dbe0c2
+D s-linux.ads		20140409145429 5b2f79a5
+D s-multip.ads		20101011073009 38ac9f73
+D s-oscons.ads		20141119215827 a445b120
+D s-osinte.ads		20140409145429 59011f13
+D s-parame.ads		20140225151139 ab8cb46a
+D s-pooglo.ads		20110804083314 542f33d0
+D s-secsta.ads		20140225151139 86a2856d
+D s-soflin.ads		20140225151139 aa763b52
+D s-stache.ads		20140225151139 a37c21ec
+D s-stausa.ads		20110804134155 017a0a05
+D s-stalib.ads		20140225151139 a891183f
+D s-stoele.ads		20140225151139 2dc34a04
+D s-stoele.adb		20140225151139 ed88f8fb
+D s-stopoo.ads		20131010103753 b16154c2
+D s-stposu.ads		20121005142121 ffeba1c5
+D s-stratt.ads		20131014135145 aedef97e
+D s-tasinf.ads		20120730151500 21316953
+D s-taspri.ads		20110927094500 15f617a8
+D s-taprop.ads		20111212143339 1dd2e1b6
+D s-taskin.ads		20140131154341 3f821f32
+D s-taprob.ads		20110927094500 502249e3
+D s-tpoben.ads		20121029113218 b641f948
+D s-tasren.ads		20120208100446 a67a9949
+D s-tassta.ads		20121029110946 70812003
+D s-traent.ads		20140225151139 b5116092
+D s-unstyp.ads		20140225151139 510692af
+D s-valint.ads		20090409150019 48a52a3f
+D s-wchcon.ads		20140225151139 1b7d22d2
+D unchconv.ads		20070406091342 ca2f9e18
+X 1 ada.ads
+16K9*Ada 19e8 56|3r6 4r6 5r6 6r5 33r7 38r33 39r35 60r58
+X 2 a-comlin.ads
+38K13*Command_Line 139e21 56|4w10 33r11 38r37 39r39
+41V13*Argument_Count{natural} 56|33s24
+48V13*Argument{string} 56|38s50 39s52
+X 3 a-except.ads
+53K13*Exceptions 360e19 56|5w10 60r62
+103V13*Exception_Information{string} 56|60s73
+X 9 a-textio.ads
+49K13*Text_IO 471e16 56|3w10 34r7 42r7 60r7
+263U14*Put_Line 56|34s15 42s15 60s15
+X 14 gdk.ads
+34K9*Gdk 60e8 56|7r6 46r4 47r4 54r4 56r4
+41P9*Gdk_Drawable<32|149P9>
+50P9*Gdk_Visual<32|149P9>
+X 28 gdk-threads.ads
+36K13*Threads 66e16 56|7w10 46r8 47r8 54r8 56r8
+38U14*G_Init 56|46s16
+43U14*Init 56|47s16
+48U14*Enter 56|54s16
+53U14*Leave 56|56s16
+X 30 gdk-visual.ads
+77V13*Convert[104|20]{67|64M9} 35|57i21
+78V13*Convert[104|20]{14|50P9} 35|58i21
+X 31 gdk-window.ads
+531V13*Convert[104|20]{67|64M9} 35|57i21
+532V13*Convert[104|20]{14|41P9} 35|58i21
+X 32 glib.ads
+149P9*C_Proxy(146R9)
+X 37 glib-object.ads
+40P9*GObject(39R9)
+415V13*Convert{67|64M9} 35|57i21 36|49i21
+416V13*Convert{40P9} 35|58i21 36|50i21
+X 40 gtk.ads
+41K9*Gtk 77e8 56|8r6 48r4 55r4
+X 43 gtk-enums.ads
+442V13*Convert{67|64M9} 35|57i21 36|49i21
+443V13*Convert{string} 35|58i21 36|50i21
+X 44 gtk-main.ads
+42K13*Main 514e13 56|8w10 48r8 55r8
+49U14*Init 56|48s13
+149U14*Main 56|55s13
+X 46 gtk-widget.ads
+71P9*Gtk_Widget(70R9)
+114V13*Convert{67|64M9} 35|57i21 36|49i21
+115V13*Convert{71P9} 35|58i21 36|50i21
+X 53 lr.ads
+1K9*LR 2e7 56|9r6 10r6 11r6 12r6 14r11 19r12 20r12 23r20 27r20 41r38 42r83
+. 50r4 51r4 51r34 61r5
+X 54 lr-affic.ads
+5K12*Affic 14e13 56|9w9 51r7
+9U14*Init 56|51s13
+9s20 Nomstrategie{string} 56|51r18
+9i42 Nblect{natural} 56|51r60
+9i60 Nbred{natural} 56|51r83
+X 56 lr-main.adb
+14U14*Main 53|1k9 56|14b14 61l8 61t12
+15i4 Nb_Lecteurs{natural} 22r19 28r18 38m4 41r24 50r33 51r70
+16i4 Nb_Redacteurs{natural} 26r21 39m4 41r8 50r17 51r92
+18U14 Start_Client_Tasks 18b14 30l8 30t26 52s4
+19p7 Tl{59|18P9} 23m10 24r10
+20p7 Tr{59|19P9} 27m10 28r10
+22i11 I{integer} 24r18
+26i11 I{integer} 28r32
+59r9 Error{3|62R9} 60r95
+X 57 lr-simu.ads
+7K12*Simu 56|11w9 50r7 57|40e12
+10U14*Init 56|50s12
+X 58 lr-synchro.ads
+1K12*Synchro 56|12w9 51r37 58|10e15
+3V13*Nom_Strategie{string} 56|51s45
+X 59 lr-tasks.ads
+4K12*Tasks 56|10w9 19r15 20r15 23r23 27r23 41r41 42r86 59|21e13
+6i4*MAXPROCS{integer} 56|41r47 42r92
+10T14*Lecteur 56|23r29 59|12e15
+11Y13 Init 56|24s13
+14T14*Redacteur 56|27r29 59|16e17
+15Y13 Init 56|28s13
+18P9*Lecteur_Access(10T14) 56|19r21
+19P9*Redacteur_Access(14T14) 56|20r21
+X 67 system.ads
+64M9*Address
+X 85 s-stausa.ads
+203U14*Initialize 204i<c,__gnat_stack_usage_initialize>22
+268U14*Output_Results 272i<c,__gnat_stack_usage_output_results>22
+

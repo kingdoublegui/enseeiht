@@ -1,0 +1,24 @@
+digraph Saisons {
+	{
+		node [shape=circle]
+		Ete [label=0]
+		Automne [label=0]
+		Hiver [label=1]
+		Printemps [label=0]
+	}
+	{
+		node [shape=box]
+		21_Juin
+		21_Septembre
+		21_Decembre
+		20_Mars
+	}
+	Ete -> 21_Septembre [arrowhead=vee label=1]
+	21_Septembre -> Automne [arrowhead=vee label=1]
+	Automne -> 21_Decembre [arrowhead=vee label=1]
+	21_Decembre -> Hiver [arrowhead=vee label=1]
+	Hiver -> 20_Mars [arrowhead=vee label=1]
+	20_Mars -> Printemps [arrowhead=vee label=1]
+	Printemps -> 21_Juin [arrowhead=vee label=1]
+	21_Juin -> Ete [arrowhead=vee label=1]
+}

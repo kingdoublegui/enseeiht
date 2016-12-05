@@ -1,0 +1,36 @@
+grammar fr.enseeiht.txt.SimplePDL with org.eclipse.xtext.common.Terminals
+import "platform:/resource/fr.enseeiht.simplepdl/SimplePDL.ecore" as pdl
+// generate simplePDL "http://www.enseeiht.fr/txt/SimplePDL"
+
+Process returns pdl::Process :
+	'process' name=ID '{'
+	processElements+=ProcessElement*
+	'}'
+	;
+
+ProcessElement returns pdl::ProcessElement :
+	WorkDefinition
+	| WorkSequence
+	| Guidance
+	;
+		
+WorkDefinition returns pdl::WorkDefinition :
+	'wd' name=ID
+	;
+	
+WorkSequence returns pdl::WorkSequence :
+	'ws' linkType=WorkSequenceType
+		'from' predecessor=[pdl::WorkDefinition]
+		'to' successor=[pdl::WorkDefinition]
+	;
+	
+Guidance returns pdl::Guidance :
+	text=STRING
+	;
+
+enum WorkSequenceType returns pdl::WorkSequenceType :
+	startToStart = 's2s'
+	| finishToStart = 'f2s'
+	| startToFinish = 's2f'
+	| finishToFinish = 'f2f'
+	;

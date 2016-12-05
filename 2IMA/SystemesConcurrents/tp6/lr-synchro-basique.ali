@@ -1,0 +1,127 @@
+V "GNAT Lib v4.9"
+P SS ZX
+
+RN
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTION_PROPAGATION
+RV NO_EXCEPTIONS
+RV NO_IO
+RV NO_SECONDARY_STACK
+RV NO_SELECT_STATEMENTS
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_TASKING
+RV NO_TERMINATE_ALTERNATIVES
+RV NO_DEFAULT_INITIALIZATION
+RV NO_ELABORATION_CODE
+RV SPARK_05
+RV MAX_SELECT_ALTERNATIVES=3
+RV MAX_TASK_ENTRIES=4
+RV MAX_TASKS=1
+
+U lr.synchro.basique%b	lr-synchro-basique.adb	84b04dfd OO PK IU
+W ada%s			ada.ads			ada.ali
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.real_time%s	a-reatim.adb		a-reatim.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W interfaces%s		interfac.ads		interfac.ali
+W lr.synchro%s		lr-synchro.adb		lr-synchro.ali
+W system%s		system.ads		system.ali
+W system.concat_2%s	s-conca2.adb		s-conca2.ali
+W system.parameters%s	s-parame.adb		s-parame.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+W system.task_info%s	s-tasinf.adb		s-tasinf.ali
+W system.tasking%s	s-taskin.adb		s-taskin.ali
+W system.tasking.rendezvous%s  s-tasren.adb	s-tasren.ali
+W system.tasking.stages%s  s-tassta.adb		s-tassta.ali
+
+U lr.synchro.basique%s	lr-synchro-basique.ads	98c199c5 EE NE OO PK IU
+W lr.synchro%s		lr-synchro.adb		lr-synchro.ali
+
+D ada.ads		20070406091342 3ffc8e18
+D a-except.ads		20140129161953 f86a4103
+D a-finali.ads		20111121113555 52ecdc1b
+D a-ioexce.ads		20140225151544 e4a01f64
+D a-reatim.ads		20090409150019 63f07669
+D a-stream.ads		20140122164720 1a984740
+D a-tags.ads		20111212115430 6c0509d0
+D a-textio.ads		20140129155348 386df5d4
+D a-unccon.ads		20070406091342 f9eb8f06
+D interfac.ads		20140225151838 69adb1b9
+D i-c.ads		20110801143639 5421119b
+D i-cstrea.ads		20130412125801 8128536b
+D lr.ads		20141028181748 400998c9
+D lr-synchro.ads	20141028181624 2f8e537d
+D lr-synchro-basique.ads  20120911082041 b74fcab8
+D lr-synchro-basique.adb  20161116100129 f3f83392
+D system.ads		20141119215827 90249111
+D s-atacco.ads		20120515093410 4c36d12f
+D s-conca2.ads		20140225151544 02a0d7d0
+D s-crtl.ads		20140225151544 840e6817
+D s-exctab.ads		20140225151139 54135002
+D s-ficobl.ads		20120709130952 55a71d43
+D s-finmas.ads		20140225151139 814daec4
+D s-finroo.ads		20120426095924 4ff27390
+D s-linux.ads		20140409145429 5b2f79a5
+D s-multip.ads		20101011073009 38ac9f73
+D s-oscons.ads		20141119215827 a445b120
+D s-osinte.ads		20140409145429 59011f13
+D s-parame.ads		20140225151139 ab8cb46a
+D s-pooglo.ads		20110804083314 542f33d0
+D s-secsta.ads		20140225151139 86a2856d
+D s-soflin.ads		20140225151139 aa763b52
+D s-stache.ads		20140225151139 a37c21ec
+D s-stausa.ads		20110804134155 017a0a05
+D s-stalib.ads		20140225151139 a891183f
+D s-stoele.ads		20140225151139 2dc34a04
+D s-stoele.adb		20140225151139 ed88f8fb
+D s-stopoo.ads		20131010103753 b16154c2
+D s-tasinf.ads		20120730151500 21316953
+D s-taspri.ads		20110927094500 15f617a8
+D s-taprop.ads		20111212143339 1dd2e1b6
+D s-taskin.ads		20140131154341 3f821f32
+D s-taprob.ads		20110927094500 502249e3
+D s-tpoben.ads		20121029113218 b641f948
+D s-tasren.ads		20120208100446 a67a9949
+D s-tassta.ads		20121029110946 70812003
+D s-traent.ads		20140225151139 b5116092
+D s-unstyp.ads		20140225151139 510692af
+D s-wchcon.ads		20140225151139 1b7d22d2
+X 1 ada.ads
+16K9*Ada 19e8 16|1r6 1r23 2r6 51r53
+X 2 a-except.ads
+53K13*Exceptions 360e19 16|2w10 51r57
+103V13*Exception_Information{string} 16|51s68
+X 8 a-textio.ads
+49K13*Text_IO 471e16 16|1w10 1r27
+263U14*Put_Line 16|51s10
+X 13 lr.ads
+1K9*LR 2e7 15|3r9 12r5 16|5r14 74r5
+X 14 lr-synchro.ads
+1K12*Synchro 13|1k9 14|10e15 15|3r12 12r8 16|5r17 74r8
+X 15 lr-synchro-basique.ads
+3K20*Basique 14|1k12 15|12l16 12e23 16|5b25 74l16 74t23
+5V13*Nom_Strategie{string} 16|7b13 10l8 10t21
+7U14*Demander_Lecture 16|54b14 57l8 57t24
+8U14*Demander_Ecriture 16|59b14 62l8 62t25
+9U14*Terminer_Lecture 16|64b14 67l8 67t24
+10U14*Terminer_Ecriture 16|69b14 72l8 72t25
+X 16 lr-synchro-basique.adb
+12t9 LectRedTask 19b14 52l8 52t19 56r7 61r7 66r7 71r7
+13Y13 Demander_Lecture 29b28 38b28 56s19
+14Y13 Demander_Ecriture 40b28 61s19
+15Y13 Terminer_Lecture 31b28 66s19
+16Y13 Terminer_Ecriture 45b24 71s19
+20E13 Etat 20e47 21r16
+20n22 lecture{20E13} 27r18 38r71
+20n31 libre{20E13} 21r24 34r31 36r18 46r27
+20n38 ecriture{20E13} 40r57 44r18
+21e8 unEtat{20E13} 26r14 34m21 38m61 40m47 46m17
+22i8 nbL{integer} 29m46 29r53 31m46 31r53 33r20 38m46 38r53
+23i8 nbR{integer}
+50r12 Error{2|62R9} 51r90
+X 34 s-stausa.ads
+203U14*Initialize 204i<c,__gnat_stack_usage_initialize>22
+268U14*Output_Results 272i<c,__gnat_stack_usage_output_results>22
+

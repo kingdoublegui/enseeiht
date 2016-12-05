@@ -1,0 +1,6 @@
+pl Cl2_idle (1) 
+
+tr Cl2_req2 Cl2_idle -> Cl2_wait1 Cl2_G2_req
+tr Cl2_req1 Cl2_wait1 G2_Cl2_ack -> Cl2_wait2 Cl2_G1_req
+tr Cl2_enter Cl2_wait2 G1_Cl2_ack -> Cl2_work
+tr Cl2_exit Cl2_work -> Cl2_G1_release Cl2_G2_release Cl2_idle

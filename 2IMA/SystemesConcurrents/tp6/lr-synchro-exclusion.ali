@@ -1,0 +1,111 @@
+V "GNAT Lib v4.9"
+P SS ZX
+
+RN
+RV NO_IO
+RV NO_SECONDARY_STACK
+RV NO_SELECT_STATEMENTS
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_TASKING
+RV NO_TERMINATE_ALTERNATIVES
+RV NO_DEFAULT_INITIALIZATION
+RV NO_ELABORATION_CODE
+RV SPARK_05
+RV MAX_SELECT_ALTERNATIVES=3
+RV MAX_TASK_ENTRIES=4
+RV MAX_TASKS=1
+
+U lr.synchro.exclusion%b  lr-synchro-exclusion.adb  eed26cb4 OO PK IU
+W ada%s			ada.ads			ada.ali
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.real_time%s	a-reatim.adb		a-reatim.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W lr.synchro%s		lr-synchro.adb		lr-synchro.ali
+W system%s		system.ads		system.ali
+W system.parameters%s	s-parame.adb		s-parame.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+W system.task_info%s	s-tasinf.adb		s-tasinf.ali
+W system.tasking%s	s-taskin.adb		s-taskin.ali
+W system.tasking.rendezvous%s  s-tasren.adb	s-tasren.ali
+W system.tasking.stages%s  s-tassta.adb		s-tassta.ali
+
+U lr.synchro.exclusion%s  lr-synchro-exclusion.ads  13aefc59 EE NE OO PK IU
+W lr.synchro%s		lr-synchro.adb		lr-synchro.ali
+
+D ada.ads		20070406091342 3ffc8e18
+D a-except.ads		20140129161953 f86a4103
+D a-finali.ads		20111121113555 52ecdc1b
+D a-ioexce.ads		20140225151544 e4a01f64
+D a-reatim.ads		20090409150019 63f07669
+D a-stream.ads		20140122164720 1a984740
+D a-tags.ads		20111212115430 6c0509d0
+D a-textio.ads		20140129155348 386df5d4
+D a-unccon.ads		20070406091342 f9eb8f06
+D interfac.ads		20140225151838 69adb1b9
+D i-c.ads		20110801143639 5421119b
+D i-cstrea.ads		20130412125801 8128536b
+D lr.ads		20141028181748 400998c9
+D lr-synchro.ads	20141028181624 2f8e537d
+D lr-synchro-exclusion.ads  20141028182706 3c20af24
+D lr-synchro-exclusion.adb  20141028083639 12f57747
+D system.ads		20141119215827 90249111
+D s-atacco.ads		20120515093410 4c36d12f
+D s-crtl.ads		20140225151544 840e6817
+D s-exctab.ads		20140225151139 54135002
+D s-ficobl.ads		20120709130952 55a71d43
+D s-finmas.ads		20140225151139 814daec4
+D s-finroo.ads		20120426095924 4ff27390
+D s-linux.ads		20140409145429 5b2f79a5
+D s-multip.ads		20101011073009 38ac9f73
+D s-oscons.ads		20141119215827 a445b120
+D s-osinte.ads		20140409145429 59011f13
+D s-parame.ads		20140225151139 ab8cb46a
+D s-pooglo.ads		20110804083314 542f33d0
+D s-secsta.ads		20140225151139 86a2856d
+D s-soflin.ads		20140225151139 aa763b52
+D s-stache.ads		20140225151139 a37c21ec
+D s-stausa.ads		20110804134155 017a0a05
+D s-stalib.ads		20140225151139 a891183f
+D s-stoele.ads		20140225151139 2dc34a04
+D s-stoele.adb		20140225151139 ed88f8fb
+D s-stopoo.ads		20131010103753 b16154c2
+D s-tasinf.ads		20120730151500 21316953
+D s-taspri.ads		20110927094500 15f617a8
+D s-taprop.ads		20111212143339 1dd2e1b6
+D s-taskin.ads		20140131154341 3f821f32
+D s-taprob.ads		20110927094500 502249e3
+D s-tpoben.ads		20121029113218 b641f948
+D s-tasren.ads		20120208100446 a67a9949
+D s-tassta.ads		20121029110946 70812003
+D s-traent.ads		20140225151139 b5116092
+D s-unstyp.ads		20140225151139 510692af
+D s-wchcon.ads		20140225151139 1b7d22d2
+X 1 ada.ads
+16K9*Ada 19e8 16|1r6 1r23 2r6
+X 2 a-except.ads
+53K13*Exceptions 360e19 16|2w10
+X 8 a-textio.ads
+49K13*Text_IO 471e16 16|1w10 1r27
+X 13 lr.ads
+1K9*LR 2e7 15|1r9 10r5 16|7r14 55r5
+X 14 lr-synchro.ads
+1K12*Synchro 13|1k9 14|10e15 15|1r12 10r8 16|7r17 55r8
+X 15 lr-synchro-exclusion.ads
+1K20*Exclusion 14|1k12 15|10l16 10e25 16|7b25 55l16 55t25
+3V13*Nom_Strategie{string} 16|9b13 12l8 12t21
+5U14*Demander_Lecture 16|35b14 38l8 38t24
+6U14*Demander_Ecriture 16|40b14 43l8 43t25
+7U14*Terminer_Lecture 16|45b14 48l8 48t24
+8U14*Terminer_Ecriture 16|50b14 53l8 53t25
+X 16 lr-synchro-exclusion.adb
+14t9 LectRedTask 21b14 33l8 33t19 37r7 42r7 47r7 52r7
+15Y13 Demander_Lecture 25b32 37s19
+16Y13 Demander_Ecriture 27b32 42s19
+17Y13 Terminer_Lecture 25b57 47s19
+18Y13 Terminer_Ecriture 27b58 52s19
+X 33 s-stausa.ads
+203U14*Initialize 204i<c,__gnat_stack_usage_initialize>22
+268U14*Output_Results 272i<c,__gnat_stack_usage_output_results>22
+

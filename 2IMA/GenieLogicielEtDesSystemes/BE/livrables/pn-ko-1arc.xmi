@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<petrinet:PetriNet
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:petrinet="http://petrinet"
+    name="PetriNet KO Arc">
+  <arc poids="1"/>
+</petrinet:PetriNet>

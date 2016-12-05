@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simplepdl:Process
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:simplepdl="http://simplepdl"
+    name="Galette">
+  <processElements
+      xsi:type="simplepdl:Ressource"
+      quantity="6"
+      name="Galette"/>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      linksToSuccessors="//@processElements.14"
+      name="Toto"
+      ressourcesequence="//@processElements.7"/>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      linksToSuccessors="//@processElements.15"
+      name="La soeur de Toto"
+      ressourcesequence="//@processElements.8"/>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      linksToSuccessors="//@processElements.16"
+      name="Le papa de Toto"
+      ressourcesequence="//@processElements.9"/>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      linksToSuccessors="//@processElements.17"
+      name="La maman de Toto"
+      ressourcesequence="//@processElements.10"/>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      linksToSuccessors="//@processElements.18"
+      name="Le copain de Toto"
+      ressourcesequence="//@processElements.11"/>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      linksToSuccessors="//@processElements.19"
+      name="Le chien de Toto"
+      ressourcesequence="//@processElements.12"/>
+  <processElements
+      xsi:type="simplepdl:RessourceSequence"
+      quantity="1"
+      ressource="//@processElements.0"
+      workdefinition="//@processElements.1"/>
+  <processElements
+      xsi:type="simplepdl:RessourceSequence"
+      quantity="1"
+      ressource="//@processElements.0"
+      workdefinition="//@processElements.2"/>
+  <processElements
+      xsi:type="simplepdl:RessourceSequence"
+      quantity="1"
+      ressource="//@processElements.0"
+      workdefinition="//@processElements.3"/>
+  <processElements
+      xsi:type="simplepdl:RessourceSequence"
+      quantity="1"
+      ressource="//@processElements.0"
+      workdefinition="//@processElements.4"/>
+  <processElements
+      xsi:type="simplepdl:RessourceSequence"
+      quantity="1"
+      ressource="//@processElements.0"
+      workdefinition="//@processElements.5"/>
+  <processElements
+      xsi:type="simplepdl:RessourceSequence"
+      quantity="1"
+      ressource="//@processElements.0"
+      workdefinition="//@processElements.6"/>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      linksToPredecessors="//@processElements.14 //@processElements.15 //@processElements.16 //@processElements.18 //@processElements.17 //@processElements.19"
+      name="Roi"/>
+  <processElements
+      xsi:type="simplepdl:WorkSequence"
+      linkType="finishToStart"
+      predecessor="//@processElements.1"
+      successor="//@processElements.13"/>
+  <processElements
+      xsi:type="simplepdl:WorkSequence"
+      linkType="finishToStart"
+      predecessor="//@processElements.2"
+      successor="//@processElements.13"/>
+  <processElements
+      xsi:type="simplepdl:WorkSequence"
+      linkType="finishToStart"
+      predecessor="//@processElements.3"
+      successor="//@processElements.13"/>
+  <processElements
+      xsi:type="simplepdl:WorkSequence"
+      linkType="finishToStart"
+      predecessor="//@processElements.4"
+      successor="//@processElements.13"/>
+  <processElements
+      xsi:type="simplepdl:WorkSequence"
+      linkType="finishToStart"
+      predecessor="//@processElements.5"
+      successor="//@processElements.13"/>
+  <processElements
+      xsi:type="simplepdl:WorkSequence"
+      linkType="finishToStart"
+      predecessor="//@processElements.6"
+      successor="//@processElements.13"/>
+</simplepdl:Process>

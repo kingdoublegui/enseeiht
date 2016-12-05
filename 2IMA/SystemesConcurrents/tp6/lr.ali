@@ -1,0 +1,12 @@
+V "GNAT Lib v4.9"
+P ZX
+
+RN
+
+U lr%s			lr.ads			400998c9 NE OO PK IU
+
+D lr.ads		20141028181748 400998c9
+D system.ads		20141119215827 90249111
+X 1 lr.ads
+1K9*LR 2l5 2e7
+
