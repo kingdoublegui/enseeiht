@@ -13,12 +13,13 @@
 % réparation
 %
 %% DIALOGUE
-cprintf('*comment','          BIENVENUE DANS PLATINE !');
+cprintf('*comment','          BIENVENU(E) DANS PLATINE !');
 disp (' ');
 %
 % Initialisations
 continuer = true;
-subd = 2000;
+subd = 2000; % nombre de pts d'echantillonnage
+%
 while continuer
     %
     disp('********************************************');
@@ -91,52 +92,56 @@ while continuer
             else
                 disp('Le chemin est une NURBS');
                 Chemin_Initial2; %planification offline
-                T(nombre_objets).chemin = 'NURBS';
-                T(nombre_objets).nurbs = nurbsf;
-            end
-            %
-            T(nombre_objets).depart = [idep jdep];
-            T(nombre_objets).arrivee = [iarr jarr];
-            T(nombre_objets).rayon_min = rho_min;
-            T(nombre_objets).diametre_robot = diametre_robot;
-            %
-            % Definir le nombre de fois que le chemin est parcouru dans un
-            % sens puis dans l'autre
-            nbre_rep = input(['Nombre de repetitions du chemin de l''objet ',num2str(nombre_objets),' : ']);
-            T(nombre_objets).nbre_repetition = nbre_rep;
-            %
-            % Creer nouvelle loi de vitesse
-            reponse3 = input ('Vitesse constante ? [Y/N]','s');
-            if reponse3 == 'Y'
-                vitesse = input(['Vitesse de l''objet ',num2str(nombre_objets),' : ']);
-                T(nombre_objets).vitesse = vitesse;
-            else
-                disp('NON IMPLANTE !');
-            end
-            %
-            % Definir la portee de l'objet
-            portee = input(['Portee de l''objet ',num2str(nombre_objets),' : ']);
-            T(nombre_objets).portee = portee;
-            %
-            % Definir le temps de reparation de l'objet
-            temps = input(['Temps de reparation de l''objet ',num2str(nombre_objets),' : ']);
-            T(nombre_objets).temps_repar = temps;
-            %
-            % Sauvegarde de la scene
-            reponse = input('Changement du nom de la scene ? [Y/N] ','s');
-            while reponse == 'Y'
-                NOMSCENE = input('Nouveau nom de la scene : ','s');
-                NOMFIC = ['Scenes/' NOMSCENE '.mat'];
-                if exist(NOMFIC,'file') == 0
-                    disp ('OK'); % le fichier n'existe pas deja , c'est bon
-                    reponse = 'N';
-                else
-                    % le fichier existe deja il faut donner un autre nom
-                    disp('le fichier existe deja il faut donner un autre nom');
+                if ~exception
+                    T(nombre_objets).chemin = 'NURBS';
+                    T(nombre_objets).nurbs = nurbsf;
                 end
             end
-            save(NOMFIC,'im','nombre_objets','subd','T');
-            %
+            if ~exception
+                %
+                T(nombre_objets).depart = [idep jdep];
+                T(nombre_objets).arrivee = [iarr jarr];
+                T(nombre_objets).rayon_min = rho_min;
+                T(nombre_objets).diametre_robot = diametre_robot;
+                %
+                % Definir le nombre de fois que le chemin est parcouru dans un
+                % sens puis dans l'autre
+                nbre_rep = input(['Nombre de repetitions du chemin de l''objet ',num2str(nombre_objets),' : ']);
+                T(nombre_objets).nbre_repetition = nbre_rep;
+                %
+                % Creer nouvelle loi de vitesse
+                reponse3 = input ('Vitesse constante ? [Y/N]','s');
+                if reponse3 == 'Y'
+                    vitesse = input(['Vitesse de l''objet ',num2str(nombre_objets),' : ']);
+                    T(nombre_objets).vitesse = vitesse;
+                else
+                    disp('NON IMPLANTE !');
+                end
+                %
+                % Definir la portee de l'objet
+                portee = input(['Portee de l''objet ',num2str(nombre_objets),' : ']);
+                T(nombre_objets).portee = portee;
+                %
+                % Definir le temps de reparation de l'objet
+                temps = input(['Temps de reparation de l''objet ',num2str(nombre_objets),' : ']);
+                T(nombre_objets).temps_repar = temps;
+                %
+                % Sauvegarde de la scene
+                reponse = input('Changement du nom de la scene ? [Y/N] ','s');
+                while reponse == 'Y'
+                    NOMSCENE = input('Nouveau nom de la scene : ','s');
+                    NOMFIC = ['Scenes/' NOMSCENE '.mat'];
+                    if exist(NOMFIC,'file') == 0
+                        disp ('OK'); % le fichier n'existe pas deja , c'est bon
+                        reponse = 'N';
+                    else
+                        % le fichier existe deja il faut donner un autre nom
+                        disp('le fichier existe deja il faut donner un autre nom');
+                    end
+                end
+                save(NOMFIC,'im','nombre_objets','subd','T');
+                %
+            end
         case 4 % changer la loi de vitesse d'une trajectoire
             %
             NOMSCENE = uigetfile('Scenes/*.mat');

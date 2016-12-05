@@ -39,6 +39,9 @@ ModelisationGraphe;
 cprintf('blue','Calcul du plus court chemin en cours ...');
 disp(' ');
 PlusCourtChemin;
+if exception
+    return
+end
 figure('Name','Plus court chemin entre A et B dans le graphe'); %Affichage du chemin trouve
 imagesc(im);
 

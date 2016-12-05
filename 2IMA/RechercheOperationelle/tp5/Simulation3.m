@@ -1,6 +1,6 @@
 %% SIMULATION PLATINE
 %
-% P(i).s : P(i).s(t) est égal à la longueur du chemin parcouru par l'bjet i
+% P(i).s : P(i).s(t) est égal à la longueur du chemin parcouru par l'objet i
 % au bout d'une durée t (t est entier positif)
 % P(i).pp : P(i).pp(t) est égal à l'index permettant d'accéder à la
 % position du centre de l'objet i à l'instant t :
@@ -29,7 +29,7 @@ for i = 1:nombre_objets
         % Le chemin est une droite
         idep = T(i).depart(1);
         jdep = T(i).depart(2);
-        iarr = T(i).arrivee(1);
+        iarr = T(i).arrivee(1); % T(i).arrivee(i) n'est pas une coordonnee du pt d'arrivees si nbrerepetition est pair !!
         jarr = T(i).arrivee(2);
         %
         for p=1:subd
@@ -44,7 +44,7 @@ for i = 1:nombre_objets
             % Le chemin est une NURBS
             nurbsf = T(i).nurbs;
             xy(:,:,i) = nrbeval(nurbsf,linspace(0.0,1.0,subd));
-            xy2 = xy(1:2,:,i);
+            xy2 = xy(1:2,:,i); %inutile
             nrbplot(nurbsf,subd,couleur(i,:));
         else
             disp('ERREUR');
@@ -95,32 +95,46 @@ tempsparcours = zeros(1,nombre_objets);
 ii = zeros(1,nombre_objets);
 %
 for i=1:nombre_objets
-    v = T(i).vitesse; % vitesse de l'objet i égal à v en unités pixels 
-    % La cinématique est donnée par P(i).s et par P(i).pp
+    v = T(i).vitesse; % vitesse de l'objet i égal à v en unités pixels
+    %
+    % La cinématique de l'objet i est donnée par P(i).s et par P(i).pp
+    %
     % 1. Calcul de P(i).s
     s=0:v:s1(i); % s = 0 v 2v 3v ... s1(i) donc delta(s) = v donc vitesse constante v
     xy2 = xy(1:2,:,i);
     pp0 = pdearcl(p,xy2,s,0,s1(i)); % reindexation du chemin i selon le vecteur d'abscisse curviligne s
     %
-    nbrerepetition = T(i).nbre_repetition;
-    nbrefois = nbrerepetition - 1;
     %
-    s = 0:v:nbrerepetition*s1(i);
+    nbrerepetition = T(i).nbre_repetition;
+    %
+    send = s(end);
+    s = 0:v:nbrerepetition*send; % correction s1(i) --> s(end)
     P(i).s = s;
+    %
     tempsparcours(i) = length(s); % temps du parcours de l'objet i (si pas de collision)
     T(i).tempsparcours = tempsparcours(i);
     %
     % 2. Calcul de P(i).pp
+    nbrefois = floor((nbrerepetition+1)/2);
     pp1 = pp0;
-    for k=1:nbrefois
-        pp00 = pp1(end:-1:1);
-        pp0 = [pp0 pp00];
-        pp1 = pp00;
+    for k=2:nbrefois
+        pp1 = [pp1 pp0(end-1:-1:1)];
+        pp1 = [pp1 pp0(2:end)];
     end
-    P(i).pp = pp0; % sauvegarde de pp0 dans structure P
+    if mod(nbrerepetition,2) == 0
+        pp1 = [pp1 pp0(end-1:-1:1)];
+    end
+    P(i).pp = pp1;
+    %
+    %     pp1 = pp0;
+    %     for k=1:nbrefois
+    %         pp00 = pp1(end-1:-1:1); % correction end devient end-1 29/11/2016
+    %         pp0 = [pp0 pp00];
+    %         pp1 = pp00;
+    %     P(i).pp = pp0; % sauvegarde de pp0 dans structure P
 end
 %% SIMULATION des deplacements des objets
-Temps_reparation = T(1).temps_repar; % Temps de reparation de l'objet 1
+Temps_reparation1 = T(1).temps_repar; % Temps de reparation de l'objet 1
 portee = T(1).portee; % horizon du robot 1
 Nombre_reparations = 0;
 detection = false(1,nombre_objets);
@@ -129,7 +143,7 @@ detection = false(1,nombre_objets);
 % portee
 maxtempsparcours = max(tempsparcours);
 %
-t = 1;
+t = 1; % donc t=1 est l'instant de depart => duree de parcours = temps parcours - 1
 objets_heurtes = [];
 while t <= maxtempsparcours % Boucle temporelle avec maxtempsparcours variable à cause des collisions éventuelles
     %
@@ -145,13 +159,19 @@ while t <= maxtempsparcours % Boucle temporelle avec maxtempsparcours variable �
             ycentre = xy(2,ii(k),k);
         else % t >= tempsparcours(k)
             if t == tempsparcours(k)
+                ii(k) = round(P(k).pp(t)); %% ii(k) est l'index donnant accès à la position du centre de l'objet k à l'instant tempsparcours(k)
                 % L'objet k est arrive a destination !
                 mem = length_couleur(k);
                 cprintf(couleur(k,1:mem),['Arrivee de l''objet ',num2str(k), ' au bout de ',num2str(t),' secondes']);
                 disp(' ');
             end
+            if strcmp(T(k).chemin,'DROITE') && (mod(T(k).nbre_repetition,2)==0)
+                xcentre = T(k).depart(2);
+                ycentre = T(k).depart(1);
+            else
                 xcentre = T(k).arrivee(2);
                 ycentre = T(k).arrivee(1);
+            end
         end
         xunit0 = xcentre + rrob(k) * cos(th);
         yunit0 = ycentre + rrob(k) * sin(th);
@@ -190,11 +210,11 @@ while t <= maxtempsparcours % Boucle temporelle avec maxtempsparcours variable �
 %                 cprintf([0,0,1],['Longueur parcourue par objet ',num2str(i),' : ', num2str(longueur),' pixels']);
 %                 disp(' ');
 %             end
-            pause(1);
+            %pause(1);
             % Il y a eu collision de l'objet 1 avec l'objet kcol,
             % on répare l'objet 1
             Nombre_reparations = Nombre_reparations + 1;
-            cprintf([0,0,0],['Temps de reparation: ',num2str(Temps_reparation),' ']);
+            cprintf([0,0,0],['Temps de reparation: ',num2str(Temps_reparation1),' ']);
             disp(' ');
             %
             % On recalcule les trajectoires des objets 1 et kcol entrés en collision,
@@ -202,9 +222,11 @@ while t <= maxtempsparcours % Boucle temporelle avec maxtempsparcours variable �
             % restent inchangées
             %
             num = [1 kcol];
-            for i = num(1):num(end)
+            for k=1:2
+                i=num(k);
                 % 1. MAJ de P(i).s
                 savantcollision = P(i).s(1:t);
+                Temps_reparation = T(i).temps_repar;
                 ss = P(i).s(t) * ones(1,Temps_reparation);
                 saprescollision = P(i).s(t+1:end);
                 s = [savantcollision , ss , saprescollision];

@@ -5,7 +5,7 @@ chemin = but;
 while pred ~= ini
     mem = PRED(pred);
     chemin = [chemin mem];
-    longueur = longueur + dist(pred,mem);
+    longueur = longueur + dist1(pred,mem);
     pred = mem;
 end
 nsomchemin = size(chemin,2);

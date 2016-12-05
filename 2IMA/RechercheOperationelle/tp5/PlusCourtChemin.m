@@ -1,23 +1,27 @@
 % Calcul des chemins les plus courts d'un noeud du graphe reduit a un autre
-[PRED,V]=bellman(ntotsom,ini,graphered,dist); % algorihme de Bellman (cf RO)
-
+exception = false;
+[PRED,V]=bellman(ntotsom,ini,graphered,dist1); % algorihme de Bellman (cf RO)
 [but,som_trouve] = sommet(iarr,jarr,icar,jcar); % but no sommet d'arrivee
 if ~som_trouve
     disp (['Le pixel d''arrivee ( ',num2str(iarr),',', num2str(jarr), ') ','n''est pas un sommet du graphe']);
+    exception = true;
     return;
 end
-% on est s�r que le pixel d'arrivee est un sommet du graphe, son numero est but
+% on est sur que le pixel d'arrivee est un sommet du graphe, son numero est but
 
 if V(1,but) == Inf
-    disp('Le point d''arrivee est inatteignable �partir du point de depart');
-    return
+    exception = true;
+    disp('Le point d''arrivee est inatteignable a partir du point de depart');
+    return;
 end
 
-cheminopt; % calcul du plus court chemin de ini � but
+% Le sommet d'arrivee but est atteignable
 
-chemin % affichage des num�ros des sommets du chemin trouv�
+cheminopt; % calcul du plus court chemin de ini a but
 
-% Affichage du chemin trouv�
+chemin % affichage des numeros des sommets du chemin trouve
+
+% Affichage du chemin trouve
 im = imscene;
 i1 = double(icar(ini));
 j1 = double(jcar(ini));
