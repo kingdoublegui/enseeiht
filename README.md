@@ -7,7 +7,7 @@ Most of comments are French written.
 
 ## Cloning project with submodules
 ```
-    git clone --recursive https://github.com/wognovice/enseeiht.git
+    git clone --recursive https://github.com/thibmeu/enseeiht.git
 ```
 
 ## If HEAD of submodule detached
