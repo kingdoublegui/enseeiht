@@ -1,0 +1,173 @@
+grammar fr.enseeiht.gls.Game with org.eclipse.xtext.common.Terminals
+
+generate game "http://www.enseeiht.fr/gls/Game"
+
+Jeu:
+	'jeu' name=ID
+	'dans' territoire=[Territoire]
+	'avec' explorateur=[Explorateur]
+	'difficulte' difficulte=Difficulte
+	composants+=Composant*
+;
+
+Composant:
+	Territoire
+	| ComposantTerritoire
+	| Personne
+	| Explorateur
+	| Connaissance
+	| ObjetElementaire
+	| Condition
+	| Choix
+	| Action
+;
+
+Territoire:
+	'territoire' name=ID
+	'couvre' composants+=[ComposantTerritoire]+
+;
+
+ComposantTerritoire:
+	Lieu
+	| Chemin
+;
+
+Lieu:
+	'lieu' name=ID
+	(=> 'possede' possessions+=PossessionConditionnee+)?
+	(=> 'accueille' personnes+=[Personne]+)?
+	(=> 'type' type=Extremite)?
+	(=> 'selon' conditions+=[Condition]+)?
+	(=> 'description' descriptions+=DescriptionConditionnee+)?
+;
+
+DescriptionConditionnee:
+	'{'description=STRING'}' (=> 'selon' conditions+=[Condition]+)?
+;
+
+Chemin:
+	'chemin' name=ID
+	'depuis' depart=[Lieu]
+	'vers' fin=[Lieu]
+	(=> 'ouverture' ouverture=Ouverture (=> 'selon' conditionsOuverture+=[Condition]+)?)?
+	(=> 'passage' obligation=Obligation)?
+	(=> visibilite=Visibilite (=> 'selon' conditionsVisibilite+=[Condition]+)?)?
+	(=> 'possede' possessions+=PossessionConditionnee+)?
+;
+
+Personne:
+	'personne' name=ID
+	(=> 'passage' obligation=Obligation)?
+	(=> 'possede' possessions+=PossessionConditionnee+)?
+	(=> 'offre' choix+=[Choix]*)?
+;
+
+Explorateur:
+	'explorateur' name=ID
+	(=> 'possede' possessions+=PossessionConditionnee+)?
+	'porte' poidsMax=INT
+;
+
+Possession:
+	connaissance=[Connaissance]
+	| Objet
+;
+
+PossessionConditionnee:
+	possession=Possession (=> 'selon' conditions+=[Condition]+)?
+;
+
+Connaissance:
+	'connaissance' name=ID
+	(visibilite=Visibilite (=> 'selon' conditionsVisibilite+=[Condition]+))?
+;
+
+Objet:
+	(=> quantite=INT)? objet=[ObjetElementaire]
+;
+
+ObjetElementaire:
+	'objet' name=ID
+	'mesure' taille=INT
+	(=> visibilite=Visibilite (=> 'selon' conditionsVisibilite+=[Condition]+)?)?
+	(=> transformabilite=Transformabilite conditionsTransformabilite+=Transformation+)?
+;
+
+Transformation:
+	'selon' conditions+=[Condition]+ 'en' objets+=Objet+
+;
+
+Condition:
+	'condition' name=ID
+	(=> 'possede' possessions+=Comparaison+)?
+	(=> 'selon' conditions+=[Condition]+)?
+	(=> 'difficulte' difficulte+=Difficulte+)?
+	// On note seulement la partie decimale de la probabilite
+	// Ne pas mettre cette probabilite modelise un evenement certain
+	(=> '(probabilite' '0.' probabilite=INT ')')?
+;
+
+Comparaison:
+	connaissance=[Connaissance]
+	| comparateur=Comparateur objet=Objet
+;
+
+Choix:
+	'choix' name=ID
+	(=> 'propose' (actions+=ActionConditionnee ',')* actions+=ActionConditionnee)?
+	// Un meme choix ne peut pas etre de depart et de fin
+	(=> 'type' type=Extremite (=> 'selon' conditions+=[Condition]+)?)?
+;
+
+ChoixConditionne:
+	choix=[Choix] (=> 'selon' conditions+=[Condition]* choixPrecedents+=[Choix]*)?
+;
+
+Action:
+	'action' name=ID
+	(=> 'possede' possessions+=PossessionConditionnee+)?
+	(=> 'consomme' objetsConsommes+=Objet+)?
+;
+
+ActionConditionnee:
+	action=[Action]
+	(=> 'selon' conditions+=[Condition]* choixPrecedents+=[Choix]*)?
+	('offre' choixOfferts+=ChoixConditionne)+
+;
+
+enum Difficulte:
+	Facile='facile'
+	| Moyen='moyen'
+	| Difficile='difficile'
+	;
+	
+enum Extremite:
+	Depart='depart'
+	| Fin='fin'
+;
+
+enum Visibilite:
+	Visible='visible'
+	| Invisible='invisible'
+;
+
+enum Ouverture:
+	Ouvert='ouverture'
+	| Ferme='ferme'
+;
+
+enum Obligation:
+	Obligatoire='obligatoire'
+	| Facultatif='facultatif'
+;
+
+enum Transformabilite:
+	Transformable='transformable'
+	| Immuable='immuable'
+;
+
+enum Comparateur:
+	Egal='exactement'
+	| Superieur='plus'
+	| Inferieur='moins'
+;

@@ -1,0 +1,10 @@
+op finished = Succes \/ Echec;
+[]	(finished => dead);
+[]	<> dead;
+[]	(dead => finished);
+-	<> finished;
+
+[]	(Debut => (-(Enigme \/ Echec \/ Succes)));
+[]	(Enigme => (-(Debut \/ Echec \/ Succes)));
+[]	(Echec => (-(Debut \/ Enigme \/ Succes)));
+[]	(Succes => (-(Debut \/ Enigme \/ Echec)));

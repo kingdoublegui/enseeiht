@@ -1,0 +1,96 @@
+In this file you have to write the answers to the questions marked
+with the "pencil" symbol that you will find in the subjects of the
+various exam parts.
+
+
+=======================================================================
+Part 1: Schedules
+
+Assuming the OpenMP parallel for construct has been used to
+parallelize the loop in the schedules.c file, identify the scheduling
+type that is best suited for this code and explain your choice. Report
+also the execution time of the code using 1 and 2 threads with the
+scheduling type you have chosen and with the default, static
+scheduling.
+
+
+
+
+Execution times:
+
+Static 1 thread : ---  seconds
+Static 2 threads: ---  seconds
+Static 4 threads: ---  seconds
+Chosen 1 thread : ---  seconds
+Chosen 2 threads: ---  seconds
+Chosen 4 threads: ---  seconds
+
+The observed results confirm what you expected?
+
+
+
+
+
+
+=======================================================================
+Part 2: Tree traversal
+
+
+
+
+
+
+
+
+=======================================================================
+Part 2: MergeSort
+
+
+
+
+
+
+=======================================================================
+Part 4: ConjugateGradient
+
+Analyze and compare the performance of the parallel code using one or
+two threads. Report file the number of iterations and the execution
+time for both example matrices matrix1.rb and matrix2.rb. 
+
+Results:
+
+matrix1 1 thread :  --- iterations   --- seconds
+matrix1 2 threads:  --- iterations   --- seconds
+matrix1 4 threads:  --- iterations   --- seconds
+matrix2 1 thread :  --- iterations   --- seconds
+matrix2 2 threads:  --- iterations   --- seconds
+matrix2 4 threads:  --- iterations   --- seconds
+matrix3 1 thread :  --- iterations   --- seconds
+matrix3 2 threads:  --- iterations   --- seconds
+matrix3 4 threads:  --- iterations   --- seconds
+
+
+Comment on the observed results: did you observe any speedup
+(reduction of the execution time) using 2 or 4 threads instead of 1?
+did you observe any difference in the number of iterations using 2 or
+4 threads instead of 1?  Is the method still converging when using 2
+or 4 threads?  Did you observe any difference when using a dynamic
+scheduling instead of a static one? can you explain this difference?
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======================================================================
+Part 5: Prefix Scan
+
+Did you observe any speedup (reduction of the execution time) when
+using 2 or 4 threads instead of 1? If not, how can you explain this?

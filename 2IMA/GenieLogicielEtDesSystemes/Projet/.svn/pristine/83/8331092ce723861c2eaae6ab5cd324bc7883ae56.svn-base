@@ -1,0 +1,8 @@
+package modele;
+import java.util.List;
+
+public class Condition extends Composant {
+
+	private List<Comparaison> comparaisons;
+	
+}

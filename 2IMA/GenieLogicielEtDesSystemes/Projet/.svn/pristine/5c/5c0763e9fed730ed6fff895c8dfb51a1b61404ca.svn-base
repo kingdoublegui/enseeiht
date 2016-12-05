@@ -1,0 +1,16 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public  class Personne extends Composant {
+	
+	private Obligation obligation;
+	private List<Choix> choix;
+	private List<PossessionConditionnee> possessions;
+	
+	public Personne(Obligation obligation){
+		this.obligation=obligation;
+		this.choix = new ArrayList<Choix>();
+		this.possessions= new ArrayList<PossessionConditionnee>();
+	}
+
+}

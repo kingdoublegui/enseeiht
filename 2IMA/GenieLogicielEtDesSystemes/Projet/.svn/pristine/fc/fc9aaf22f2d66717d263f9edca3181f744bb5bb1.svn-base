@@ -1,0 +1,123 @@
+import game.*;
+
+public class MainJava {
+
+	public static void main(String[] args) {
+		/**
+		 * Ici on met toutes les initialisations
+		 * On a autant de ligne que dans le .game
+		 */
+		Jeu jeuEnigme = new Jeu("JeuEnigme");
+		Territoire enonce = new Territoire("Enonce");
+		Lieu debut = new Lieu("Debut");
+		Lieu succes = new Lieu("Succes");
+		Lieu echec = new Lieu("Echec");
+		Lieu enigme = new Lieu("Enigme");
+		Chemin initialisation = new Chemin("Initialisation");
+		Chemin bonChemin = new Chemin("BonChemin");
+		Chemin mauvaisChemin = new Chemin("MauvaisChemin");
+		ObjetElementaire tentative = new ObjetElementaire("Tentative");
+		Connaissance reussite = new Connaissance("Reussite");
+		Explorateur joueur = new Explorateur("Joueur");
+		Personne sphinx = new Personne("Sphinx");
+		Choix question = new Choix("Question");
+		Choix finQuestion = new Choix("FinQuestion");
+		Action bonneReponse = new Action("BonneReponse");
+		Action mauvaiseReponse = new Action("MauvaiseReponse");
+		Condition bonneFin = new Condition("BonneFin");
+		Condition mauvaiseFin = new Condition("MauvaiseFin");
+		Condition premiereQuestion = new Condition("PremiereQuestion");
+		Condition encoreTentative = new Condition("EncoreTentative");
+		
+		
+		/**
+		 * Maintenant on peut passer aux elements conditionnes
+		 * On encapsule tout ce qui peut (meme si non necessaire)
+		 */
+		Objet tentative1 = new Objet();
+		Objet tentative1 = new Objet();
+		Objet tentative3 = new Objet();
+		Objet tentative0 = new Objet();
+		Objet tentative3 = new Objet();
+		
+		PossessionConditionnee reussitePossessionConditionnee = new PossessionConditionnee();
+		PossessionConditionnee tentative3PossessionConditionnee = new PossessionConditionnee();
+		
+		
+		ChoixConditionne finQuestionChoixConditionne = new ChoixConditionne();
+		ChoixConditionne finQuestionMauvaiseFinChoixConditionne = new ChoixConditionne();
+		ChoixConditionne questionEncoreTentativeChoixConditionne = new ChoixConditionne();
+		
+		ActionConditionnee mauvaiseReponseActionConditionnee = new ActionConditionnee();
+		ActionConditionnee bonneReponseEncoreTentativeActionConditionnee = new ActionConditionnee();
+		
+		
+		
+		/**
+		 * On peut desormais passer aux associations
+		 * Celles-ci se font par l'intermediaire de methode type addElements pour les listes et setElement pour les attributs simples
+		 */
+		jeuEnigme.setTerritoire(enonce);
+		jeuEnigme.setExplorateur(joueur);
+		jeuEnigme.setDifficulte(Difficulte.facile);
+		
+		enonce.addComposants(debut);
+		enonce.addComposants(succes);
+		enonce.addComposants(echec);
+		enonce.addComposants(enigme);
+		enonce.addComposants(initialisation);
+		enonce.addComposants(bonChemin);
+		enonce.addComposants(mauvaisChemin);
+		
+		debut.setPosition(Emplacement.depart);
+		succes.setPosition(Emplacement.fin);
+		echec.setPosition(Emplacement.fin);
+		enigme.addPersonnes(sphinx);
+		enigme.setPosition(Emplacement.intermediaire);
+		
+		initialisation.setDepart(debut);
+		initialisation.setFin(enigme);
+		initialisation.setOuverture(Ouverture.ouvert);
+		initialisation.setObligation(Obligation.facultatif);
+		initialisation.setVisibilite(Visibilite.visible);
+		bonChemin.setDepart(enigme);
+		bonChemin.setFin(succes);
+		bonChemin.setOuverture(Ouverture.ouvert);
+		bonChemin.setObligation(Obligation.obligatoire);
+		bonChemin.setVisibilite(Visibilite.visible);
+		bonChemin.addConditionVisibilite(bonneFin);
+		mauvaisChemin.setDepart(enigme);
+		mauvaisChemin.setFin(succes);
+		mauvaisChemin.setOuverture(Ouverture.ouvert);
+		mauvaisChemin.setObligation(Obligation.obligatoire);
+		mauvaisChemin.setVisibilite(Visibilite.visible);
+		mauvaisChemin.addConditionVisibilite(mauvaiseFin);
+		
+		sphinx.setObligation(Obligation.obligatoire);
+		sphinx.addChoix(question);
+		
+		joueur.addPossessionConditionnee(tentative3PossessionConditionnee);
+		joueur.setPoidsMax(3);
+		
+		reussite.setVisibilite(Visibilite.visible);
+		
+		tentative.setVisibilite(Visibilite.visible);
+		tentative.setTransformabilite(Transformabilite.immuable);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		jeu.lancer();
+	}
+
+}

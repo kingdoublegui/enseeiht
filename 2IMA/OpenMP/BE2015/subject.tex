@@ -1,0 +1,84 @@
+\documentclass{article}
+
+
+\setlength{\parindent}{0pt}
+\date{07/12/2015}
+\usepackage{marvosym}
+\usepackage{dingbat}
+
+\title{BE Syst\`emes Concurrents}
+
+\begin{document}
+
+\maketitle
+
+This BE is made of five different exercises of increasing difficulty
+for a total of 100 points:
+\begin{description}
+\item[Part 1] Schedules: an exercise on the usage of different
+  scheduling types in the OpenMP parallel for worksharing
+  construct. {\bf 15 points}.
+\item[Part 2] Tree traversal: an exercise on the parallelization of a
+  postordered binary tree traversal. {\bf 20 points}.
+\item[Part 3] MergeSort: an exercise on the parallelization of the
+  Merge Sort algorithm. {\bf 20 points}.
+\item[Part 4] ConjugateGradient: an exercise on the parallelization
+  of the basic operations used in the Conjugate Gradient iterative
+  method. {\bf 20 points}.
+\item[Part 5] PrefixScan: an exercise on the parallelization of the
+  inclusive Prefix Scan operations. {\bf 25 points}.
+\end{description}
+
+For each exercise, detailed explanations and instructions are given in the
+\texttt{subject.pdf} file inside the corresponding directory.
+
+All the exercises include some coding tasks: these tasks consist in
+writing, compiling and executing some OpenMP parallel code and are
+identified by the keyboard symbol {\huge \Keyboard}. 
+
+Some exercises also include more theoretical questions that are
+identified by the pencil symbol \smallpencil. Please write the answer
+to these questions in the \texttt{responses.txt} file in the topmost
+directory of the BE package. {\bf Answers can be written in French}.
+
+\vspace{1cm}
+
+\textbf{General advice:}
+
+\begin{itemize}
+\item When implementing the parallelization, test your code on small
+  data. When you're sure everything works fine, increase the size of
+  data to evaluate performance.
+\item All the proposed parallel solutions have to work with any
+  (reasonable) number of threads. This means that the parallel code
+  has to work also in the case where only one thread is used. Check
+  your parallel code with one thread first; this case will be easier
+  to debug in case of problems. Then test with more threads.
+\item The amount of coding required in each exercise is relatively
+  small. If you find yourself writing a lot of code, you're probably
+  on the wrong track.
+\end{itemize}
+
+
+\vspace{1cm}
+
+
+{\huge \bf Important}
+
+Once you have finished execute the \texttt{pack.sh} script like this:
+\begin{verbatim}
+$ ./pack.sh
+\end{verbatim}
+
+This will generate a package containing the code you have developed
+and the responses you have provided and automatically send it to the
+supervisors.
+
+{\bf Before leaving verify with the supervisor in your room that the
+package has been received.}
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 

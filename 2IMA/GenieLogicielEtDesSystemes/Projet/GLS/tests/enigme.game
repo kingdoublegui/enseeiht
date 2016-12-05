@@ -1,0 +1,21 @@
+jeu JeuEnigme dans Enonce avec Joueur difficulte facile
+territoire Enonce couvre Debut Succes Echec Enigme Initialisation BonChemin MauvaisChemin
+lieu Debut position depart
+lieu Succes position fin
+lieu Echec position fin
+lieu Enigme accueille Sphinx
+chemin Initialisation depuis Debut vers Enigme
+chemin BonChemin depuis Enigme vers Succes passage obligatoire visible selon BonneFin
+chemin MauvaisChemin depuis Enigme vers Echec passage obligatoire visible selon MauvaiseFin
+objet Tentative mesure 1
+connaissance Reussite
+explorateur Joueur possede 3 Tentative porte 3
+personne Sphinx passage obligatoire offre Question
+choix Question propose BonneReponse offre FinQuestion, MauvaiseReponse offre Question selon EncoreTentative offre FinQuestion selon MauvaiseFin position depart selon PremiereQuestion
+choix FinQuestion position fin
+action BonneReponse possede Reussite
+action MauvaiseReponse consomme 1 Tentative
+condition BonneFin possede Reussite
+condition MauvaiseFin possede exactement 0 Tentative
+condition PremiereQuestion possede exactement 3 Tentative
+condition EncoreTentative possede plus 1 Tentative

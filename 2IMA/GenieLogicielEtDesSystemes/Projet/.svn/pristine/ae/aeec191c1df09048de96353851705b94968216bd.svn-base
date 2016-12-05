@@ -1,0 +1,357 @@
+[comment encoding = UTF-8 /]
+[module toJava('http://www.enseeiht.fr/gls/Game')]
+
+
+[template public toJava(jeu : Jeu)]
+[comment @main/]
+[file (jeu.name.concat('.java'), false, 'UTF-8')]
+import game.*;
+
+public class MainJava {
+
+	public static void main(String['[]'/] args) {
+		/**
+		 * Ici on met toutes les initialisations
+		 * On a autant de ligne que dans le .game
+		 */
+		[jeu.initJeu()/]
+		[jeu.composants->initComposants()/]
+		
+		/**
+		 * Maintenant on peut passer aux elements conditionnes
+		 * On encapsule tout ce qui peut (meme si non necessaire)
+		 */
+		[jeu.getObjets()->initObjets()/]
+		[jeu.getPossessionsConditionnees()->initPossessionsConditionnees()/]
+		[jeu.getTransformations()->initTransformations()/]
+		[jeu.getChoixConditionnes()->initChoixConditionnes()/]
+		[jeu.getActionsConditionnees()->initActionsConditionnees()/]
+		[jeu.getDecisions()->initDecisions()/]
+		
+		/**
+		 * On peut desormais passer aux associations
+		 * Celles-ci se font par l'intermediaire de methode type addElements pour les listes et setElement pour les attributs simples
+		 */
+		[jeu.fillJeu()/]
+		[jeu.composants->fillComposants()/]
+		[jeu.fillDependencies()/]
+
+		jeu.lancer();
+	}
+
+}
+[/file]
+[/template]
+
+[template private initJeu(jeu : Jeu)]
+[jeu.eClass().name/] [jeu.name.toLowerFirst()/] = new [jeu.eClass().name/]("[jeu.name/]");
+[/template]
+
+[template private initComposants(composants : OrderedSet(Composant))]
+[for (c : Composant | composants)]
+[c.eClass().name/] [c.name.toLowerFirst()/] = new [c.eClass().name/]("[c.name/]");
+[/for]
+[/template]
+
+[template private initObjets(objets : OrderedSet(Objet))]
+[for (o : Objet | objets)]
+[o.eClass().name/] [o.name().toLowerFirst()/] = new [o.eClass().name/]();
+[/for]
+[/template]
+
+[template private initPossessionsConditionnees(possessionsConditionnees : OrderedSet(PossessionConditionnee))]
+[for (pc : PossessionConditionnee | possessionsConditionnees)]
+[pc.eClass().name/] [pc.name().toLowerFirst()/] = new [pc.eClass().name/]();
+[/for]
+[/template]
+
+[template private initTransformations(transformations : OrderedSet(Transformation))]
+[for (t : Transformation | transformations)]
+[t.eClass().name/] [t.name().toLowerFirst()/] = new [t.eClass().name/]();
+[/for]
+[/template]
+
+[template private initChoixConditionnes(choixConditionnes : OrderedSet(ChoixConditionne))]
+[for (cc : ChoixConditionne | choixConditionnes)]
+[cc.eClass().name/] [cc.name().toLowerFirst()/] = new [cc.eClass().name/]();
+[/for]
+[/template]
+
+[template private initActionsConditionnees(actionsConditionnees : OrderedSet(ActionConditionnee))]
+[for (ac : ActionConditionnee | actionsConditionnees)]
+[ac.eClass().name/] [ac.name().toLowerFirst()/] = new [ac.eClass().name/]();
+[/for]
+[/template]
+
+[template private initDecisions(decisions : OrderedSet(Decision))]
+[for (d : Decision | decisions)]
+[d.eClass().name/] [d.name().toLowerFirst()/] = new [d.eClass().name/]();
+[/for]
+[/template]
+
+[template private fillJeu(jeu : Jeu)]
+[let name : String = jeu.name.toLowerFirst()]
+[name/].setTerritoire([jeu.territoire.name.toLowerFirst()/]);
+[name/].setExplorateur([jeu.explorateur.name.toLowerFirst()/]);
+[name/].setDifficulte(Difficulte.[jeu.difficulte/]);
+[/let]
+[/template]
+
+[template private fillComposants(composants : OrderedSet(Composant))]
+[composants->getTerritoires()->fillTerritoires()/]
+[composants->getLieux()->fillLieux()/]
+[composants->getChemins()->fillChemins()/]
+[composants->getPersonnes()->fillPersonnes()/]
+[composants->getExplorateurs()->fillExplorateurs()/]
+[composants->getConnaissances()->fillConnaissances()/]
+[composants->getObjetsElementaires()->fillObjetsElementaires()/]
+[composants->getConditions()->fillConditions()/]
+[composants->getChoix()->fillChoix()/]
+[composants->getActions()->fillActions()/]
+[/template]
+
+[template private fillTerritoires(territoires : Sequence(Territoire))]
+[for (t : Territoire | territoires)]
+[let name : String = t.name.toLowerFirst()]
+[for (ct : ComposantTerritoire | t.composants)]
+[name/].addComposants([ct.name.toLowerFirst()/]);
+[/for]
+[/let][/for]
+[/template]
+
+[template private fillLieux(lieux : Sequence(Lieu))]
+[for (l : Lieu | lieux)]
+[let name : String = l.name.toLowerFirst()]
+[for (pc : PossessionConditionnee | l.possessions)]
+[name/].addPossessionConditionnee([pc.name().toLowerFirst()/]);
+[/for][for (p : Personne | l.personnes)]
+[name/].addPersonnes([p.name.toLowerFirst()/]);
+[/for][name/].setPosition(Emplacement.[l.position/]);
+[for (c : Condition | l.conditions)]
+[name/].addCondition([c.name.toLowerFirst()/]);
+[/for][for (dc : DescriptionConditionnee | l.descriptions)]
+[name/].addDescriptionConditionnee([dc.name().toLowerFirst()/]);
+[/for]
+[/let][/for]
+[/template]
+
+[template private fillChemins(chemins : Sequence(Chemin))]
+[for (c : Chemin | chemins)]
+[let name : String = c.name.toLowerFirst()]
+[name/].setDepart([c.depart.name.toLowerFirst()/]);
+[name/].setFin([c.fin.name.toLowerFirst()/]);
+[name/].setOuverture(Ouverture.[c.ouverture/]);
+[for (c : Condition | c.conditionsOuverture)]
+[name/].addConditionOuverture([c.name.toLowerFirst()/]);
+[/for][name/].setObligation(Obligation.[c.obligation/]);
+[name/].setVisibilite(Visibilite.[c.visibilite/]);
+[for (c : Condition | c.conditionsVisibilite)]
+[name/].addConditionVisibilite([c.name.toLowerFirst()/]);
+[/for][for (pc : PossessionConditionnee | c.possessions)]
+[name/].addPossessionConditionnee([pc.name().toLowerFirst()/]);
+[/for]
+[/let][/for]
+[/template]
+
+[template private fillPersonnes(personnes : Sequence(Personne))]
+[for (p : Personne | personnes)]
+[let name : String = p.name.toLowerFirst()]
+[name/].setObligation(Obligation.[p.obligation/]);
+[for (pc : PossessionConditionnee | p.possessions)]
+[name/].addPossessionConditionnee([pc.name().toLowerFirst()/]);
+[/for][for (c : Choix | p.choix)]
+[name/].addChoix([c.name.toLowerFirst()/]);
+[/for]
+[/let][/for]
+[/template]
+
+[template private fillExplorateurs(explorateurs : Sequence(Explorateur))]
+[for (e : Explorateur | explorateurs)]
+[let name : String = e.name.toLowerFirst()]
+[for (pc : PossessionConditionnee | e.possessions)]
+[name/].addPossessionConditionnee([pc.name().toLowerFirst()/]);
+[/for][name/].setPoidsMax([e.poidsMax/]);
+[/let][/for]
+[/template]
+
+[template private fillConnaissances(connaissances : Sequence(Connaissance))]
+[for (c : Connaissance | connaissances)]
+[let name : String = c.name.toLowerFirst()]
+[name/].setVisibilite(Visibilite.[c.visibilite/]);
+[for (cv : Condition | c.conditionsVisibilite)]
+[name/].addComposants([cv.name.toLowerFirst()/]);
+[/for]
+[/let][/for]
+[/template]
+
+[template private fillObjetsElementaires(objetsElementaires : Sequence(ObjetElementaire))]
+[for (oe : ObjetElementaire | objetsElementaires)]
+[let name : String = oe.name.toLowerFirst()]
+[name/].setVisibilite(Visibilite.[oe.visibilite/]);
+[for (c : Condition | oe.conditionsVisibilite)]
+[name/].addComposants([c.name.toLowerFirst()/]);
+[/for][name/].setTransformabilite(Transformabilite.[oe.transformabilite/]);
+[for (t : Transformation | oe.conditionsTransformabilite)]
+[name/].addComposants([t.name().toLowerFirst()/]);
+[/for]
+[/let][/for]
+[/template]
+
+[template private fillConditions(conditions : Sequence(Condition))]
+[for (c : Condition | conditions)]
+[let name : String = c.name.toLowerFirst()]
+
+[/let][/for]
+[/template]
+
+[template private fillChoix(choix : Sequence(Choix))]
+[for (c : Choix | choix)]
+[let name : String = c.name.toLowerFirst()]
+
+[/let][/for]
+[/template]
+
+[template private fillActions(actions : Sequence(Action))]
+[for (a : Action | actions)]
+[let name : String = a.name.toLowerFirst()]
+
+[/let][/for]
+[/template]
+
+[template private fillDependencies(jeu : Jeu)]
+[/template]
+
+[query private getTerritoires(composants : OrderedSet(Composant)) : Sequence(Territoire) = 
+    composants-> select(t | t.oclIsTypeOf(Territoire))
+			  -> collect(t | t.oclAsType(Territoire))
+/]
+
+[query private getLieux(composants : OrderedSet(Composant)) : Sequence(Lieu) = 
+    composants-> select(l | l.oclIsTypeOf(Lieu))
+			  -> collect(l | l.oclAsType(Lieu))
+/]
+
+[query private getChemins(composants : OrderedSet(Composant)) : Sequence(Chemin) = 
+    composants-> select(c | c.oclIsTypeOf(Chemin))
+			  -> collect(c | c.oclAsType(Chemin))
+/]
+
+[query private getPersonnes(composants : OrderedSet(Composant)) : Sequence(Personne) = 
+    composants-> select(p | p.oclIsTypeOf(Personne))
+			  -> collect(p | p.oclAsType(Personne))
+/]
+
+[query private getExplorateurs(composants : OrderedSet(Composant)) : Sequence(Explorateur) = 
+    composants-> select(e | e.oclIsTypeOf(Explorateur))
+			  -> collect(e | e.oclAsType(Explorateur))
+/]
+
+[query private getConnaissances(composants : OrderedSet(Composant)) : Sequence(Connaissance) = 
+    composants-> select(c | c.oclIsTypeOf(Connaissance))
+			  -> collect(c | c.oclAsType(Connaissance))
+/]
+
+[query private getObjetsElementaires(composants : OrderedSet(Composant)) : Sequence(ObjetElementaire) = 
+    composants-> select(oe | oe.oclIsTypeOf(ObjetElementaire))
+			  -> collect(oe | oe.oclAsType(ObjetElementaire))
+/]
+
+[query private getConditions(composants : OrderedSet(Composant)) : Sequence(Condition) = 
+    composants-> select(c | c.oclIsTypeOf(Condition))
+			  -> collect(c | c.oclAsType(Condition))
+/]
+
+[query private getChoix(composants : OrderedSet(Composant)) : Sequence(Choix) = 
+    composants-> select(c | c.oclIsTypeOf(Choix))
+			  -> collect(c | c.oclAsType(Choix))
+/]
+
+[query private getActions(composants : OrderedSet(Composant)) : Sequence(Action) = 
+    composants-> select(a | a.oclIsTypeOf(Action))
+			  -> collect(a | a.oclAsType(Action))
+/]
+
+[query private getDescriptionsConditionnees(jeu : Jeu) : OrderedSet(DescriptionConditionnee) = 
+    DescriptionConditionnee::allInstances()->asOrderedSet()
+/]
+
+[query private getObjets(jeu : Jeu) : OrderedSet(Objet) = 
+    Objet::allInstances()->asOrderedSet()
+/]
+
+[query private getPossessions(jeu : Jeu) : OrderedSet(Possession) = 
+    Possession::allInstances()->asOrderedSet()
+/]
+
+[query private getPossessionsConditionnees(jeu : Jeu) : OrderedSet(PossessionConditionnee) = 
+    PossessionConditionnee::allInstances()->asOrderedSet()
+/]
+
+[query private getTransformations(jeu : Jeu) : OrderedSet(Transformation) = 
+    Transformation::allInstances()->asOrderedSet()
+/]
+
+[query private getChoixConditionnes(jeu : Jeu) : OrderedSet(ChoixConditionne) = 
+    ChoixConditionne::allInstances()->asOrderedSet()
+/]
+
+[query private getActionsConditionnees(jeu : Jeu) : OrderedSet(ActionConditionnee) = 
+    ActionConditionnee::allInstances()->asOrderedSet()
+/]
+
+[query private getDecisions(jeu : Jeu) : OrderedSet(Decision) = 
+    Decision::allInstances()->asOrderedSet()
+/]
+
+[query private name(d : DescriptionConditionnee) : String = 
+d.description.concat(d.conditions->name()).concat(d.eClass().name)
+/]
+
+
+[query private name(o : Objet) : String = 
+    o.objet.name.concat(o.quantite.toString())
+/]
+
+[template private name(p : Possession)]
+[if p.connaissance <> null][p.connaissance.name/][else][p.oclAsType(Objet).name()/][/if]
+[/template]
+
+[query private name(pc : PossessionConditionnee) : String = 
+pc.possession.name().concat(pc.conditions->name()).concat(pc.eClass().name)
+/]
+
+[query private name(t : Transformation) : String = 
+t.objets->name().concat(t.conditions->name()).concat(t.eClass().name)
+/]
+
+[template private name(cc : ChoixConditionne)]
+[cc.choix.name/][if cc.conditions <> null][cc.conditions->name()/][/if][if cc.decisionsPrecedentes <> null][cc.decisionsPrecedentes->name()/][/if][cc.eClass().name/]
+[/template]
+
+[template private name(ac : ActionConditionnee)]
+[ac.action.name/][if ac.conditions <> null][ac.conditions->name()/][/if][if ac.decisionsPrecedentes <> null][ac.decisionsPrecedentes->name()/][/if][ac.choixOfferts->name()/][ac.eClass().name/]
+[/template]
+
+[query private name(d : Decision) : String = 
+d.choix.name.concat(d.action.name).concat(d.eClass().name)
+/]
+
+[template private name(objets : OrderedSet(Objet))]
+[for (o : Objet | objets)]
+[o.name().toUpperFirst()/][/for]
+[/template]
+
+[template private name(condition : Sequence(Condition))]
+[for (c : Condition | condition)]
+[c.name.toUpperFirst()/][/for]
+[/template]
+
+[template private name(choixConditionnes : OrderedSet(ChoixConditionne))]
+[for (cc : ChoixConditionne | choixConditionnes)]
+[cc.name().toUpperFirst()/][/for]
+[/template]
+
+[template private name(decisions : OrderedSet(Decision))]
+[for (d : Decision | decisions)]
+[d.name().toUpperFirst()/][/for]
+[/template]
