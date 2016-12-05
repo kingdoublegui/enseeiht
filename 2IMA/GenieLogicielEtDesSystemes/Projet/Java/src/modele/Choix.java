@@ -5,13 +5,13 @@ import java.util.List;
 public class Choix extends Composant {
 	
 	private List<ActionConditionnee> actions;
-	private Extremite extremite;
 	private List<Condition> conditions;
+	private Extremite extre;
 	
 	
-	public Choix(String name, Extremite extre){
+	public Choix(String name){
+		this.extre=Extremite.Intermediaire;
 		this.name=name;
-		this.extremite=extre;
 		this.actions = new ArrayList<ActionConditionnee>();
 		this.conditions = new ArrayList<Condition>();
 	}
@@ -22,6 +22,9 @@ public class Choix extends Composant {
 	
 	public void addActionConditionnee(ActionConditionnee a){
 		this.actions.add(a);
+	}
+	public void addExtremite(Extremite e){
+		this.extre=e;
 	}
 
 }

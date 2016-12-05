@@ -8,32 +8,43 @@ public class Chemin extends ComposantTerritoire {
 	private Lieu depart;
 	private Lieu fin;
 	private Ouverture ouverture;
-	private List<ConditionOuverture> conditionsopen;
+	private List<Condition> conditionsopen;
 	private Obligation obligation;
 	private Visibilite visibilite;
-	private List<ConditionVisibilite> conditionsvis;
+	private List<Condition> conditionsvis;
 	private List<PossessionConditionnee> possessions;
 	
-	public Chemin (Lieu depart,Lieu fin,Ouverture ouv,Obligation obli, Visibilite visi){
+	public Chemin (String name,Lieu depart,Lieu fin){
+		this.name=name;
+		this.obligation=Obligation.Facultatif;
+		this.visibilite=Visibilite.Visible;
+		this.ouverture=Ouverture.Ouvert;
 		this.depart=depart;
 		this.fin=fin;
-		this.ouverture=ouv;
-		this.obligation=obli;
-		this.visibilite=visi;
-		this.conditionsopen = new ArrayList<ConditionOuverture>();
-		this.conditionsvis = new ArrayList<ConditionVisibilite>();
+		this.conditionsopen = new ArrayList<Condition>();
+		this.conditionsvis = new ArrayList<Condition>();
 		this.possessions = new ArrayList<PossessionConditionnee>();		
 	}
 	
-	public void addConditionOuverture(ConditionOuverture c){
+	public void addConditionOuverture(Condition c){
 		this.conditionsopen.add(c);
 	}
 	
-	public void addConditionVisibilite(ConditionVisibilite c){
+	public void addConditionVisibilite(Condition c){
 		this.conditionsvis.add(c);
 	}
 	public void addPossessionConditionnee(PossessionConditionnee p){
 		this.possessions.add(p);
 	}
 
+	public void addObligation(Obligation o ){
+		this.obligation=o;
+	}
+	public void addVisibilite(Visibilite v){
+		this.visibilite=v;
+	}
+	public void addOuverture(Ouverture ouv){
+		this.ouverture=ouv;
+	}
+	
 }

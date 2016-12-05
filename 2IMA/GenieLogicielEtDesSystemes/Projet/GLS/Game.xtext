@@ -114,7 +114,7 @@ ObjetElementaire:
 ;
 
 Transformation:
-	'selon' conditions+=[Condition]+ 'en' objets+=Objet+
+	 'en' objets+=Objet+ 'selon' conditions+=[Condition]+
 ;
 
 Condition:
@@ -192,7 +192,7 @@ enum Visibilite:
 ;
 
 enum Ouverture:
-	Ouvert='ouverture'
+	Ouvert='ouvert'
 	| Ferme='ferme'
 ;
 
@@ -215,4 +215,5 @@ enum Comparateur:
 enum Operateur:
 	EtLogique='et'
 	| OuLogique='ou'
+	| NonLogique='non'
 ;

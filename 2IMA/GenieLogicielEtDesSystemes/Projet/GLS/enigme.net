@@ -1,25 +1,28 @@
 net enigme
 
+# chemin
 tr Initialisation Debut -> Enigme
-tr BonChemin Enigme BonChemin_visible BonneFin_Ok?1 -> Succes
-tr MauvaisChemin Enigme Question MauvaisChemin_visible MauvaiseFin_Ok?1 -> Echec
+tr BonChemin FinQuestion BonChemin_visible Reussite?1 -> Succes
+tr MauvaisChemin FinQuestion MauvaisChemin_visible Tentative?0 Tentative?-1 -> Echec Tentative*0
 
+# personne
 tr Sphinx Enigme -> Question
 
-tr BonneReponse Question -> FinQuestion Reussite
-tr MauvaiseReponse_EncoreTentative Question Tentative Poids EncoreTentative_Ok -> Question
-tr MauvaiseReponse_MauvaiseFin Question Tentative Poids MauvaiseFin_Ok -> FinQuestion
-tr FinQuestion_fin FinQuestion -> Enigme
+# action
+tr BonneReponse Question Tentative?1 -> FinQuestion Reussite
+tr MauvaiseReponse_EncoreTentative Question Tentative -> Question Poids
+tr MauvaiseReponse_MauvaiseFin Question Tentative?0 Tentative?-1 -> FinQuestion Poids Tentative*0
 
-tr BonneFin Reussite?1 -> BonneFin_Ok
-tr MauvaiseFin Tentative?0 -> MauvaiseFin_Ok
-tr PremiereQuestion Tentative?3 -> PremiereQuestion_Ok
-tr EncoreTentative Tentative?1 -> EncoreTentative_Ok
-
+# difficulte
 pl Facile (1)
-pl Debut (1)
-pl Poids (0)
-pl Tentative (3)
 
+# lieu de position depart
+pl Debut (1)
+
+# Init de "possession" et "porte"
+pl Tentative (3)
+pl Poids (0)
+
+# Chemins visibles init à 1
 pl BonChemin_visible (1)
 pl MauvaisChemin_visible (1)

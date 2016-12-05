@@ -1,5 +1,6 @@
 package modele;
 
-public class Comparaison {
+public  abstract class Comparaison {
 
+	
 }

@@ -1,18 +1,36 @@
 package modele;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Jeu {
+public class Jeu extends Composant {
 
 	private Territoire territoire;
 	private Explorateur explorateur;
 	private List<Composant> composants;
+	private Difficulte diff;
 	
 	
-	public Jeu(Territoire territoire, Explorateur explorateur, List<Composant> composants) {
-		this.territoire = territoire;
-		this.explorateur = explorateur;
-		this.composants = composants;
+	public Jeu(String name,Difficulte diff) {
+		this.composants=new ArrayList<Composant>();
+		this.name=name;
+		this.diff=diff;
 	}
+	
+	public void addTerritoire(Territoire t){
+		this.territoire=t;
+	}
+	
+	public void addExplorateur(Explorateur e){
+		this.explorateur=e;
+	}
+	
+	public void addComposant(Composant c){
+		this.composants.add(c);
+	}
+	
+	
+	
+	
 
 	
 	

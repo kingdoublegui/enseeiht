@@ -7,14 +7,14 @@ public class ActionConditionnee {
 
 	private Action action;
 	private List<Condition> conditions;
-	private List<Choix> choixprecedents;
+	private List<Decision> decisionPrecedentes;
 	private List<ChoixConditionnee> choixofferts;
 	
 	public ActionConditionnee(Action a){
 		this.action=a;
 		this.conditions = new ArrayList<Condition>();
 		this.choixofferts = new ArrayList<ChoixConditionnee>();
-		this.choixprecedents = new ArrayList<Choix>();
+		this.decisionPrecedentes = new ArrayList<Decision>();
 	}
 	
 	
@@ -26,7 +26,7 @@ public class ActionConditionnee {
 		this.choixofferts.add(c);
 	}
 	
-	public void addChoixprecedent(Choix c){
-		this.choixprecedents.add(c);
+	public void addChoixprecedent(Decision d){
+		this.decisionPrecedentes.add(d);
 	}
 }

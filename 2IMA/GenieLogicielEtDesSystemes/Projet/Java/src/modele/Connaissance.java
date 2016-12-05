@@ -6,15 +6,19 @@ public class Connaissance extends Possession{
 
 	
 	private Visibilite visi;
-	private List<ConditionVisibilite> conditionsvisi;
+	private List<Condition> conditionsvisi;
 	
-	public Connaissance(String name, Visibilite v ){
+	public Connaissance(String name){
 		this.name=name;
-		this.visi=v;
-		this.conditionsvisi = new ArrayList<ConditionVisibilite>();
+		this.visi=Visibilite.Visible;
+		this.conditionsvisi = new ArrayList<Condition>();
 	}
 	
-	public void addConditionVisibilite(ConditionVisibilite c){
+	public void addConditionVisibilite(Condition c){
 		this.conditionsvisi.add(c);
+	}
+	
+	public void addVisibilite(Visibilite v){
+		this.visi=v;
 	}
 }

@@ -8,7 +8,7 @@ public  class Personne extends Composant {
 	private List<Choix> choix;
 	private List<PossessionConditionnee> possessions;
 	
-	public Personne(String name, Obligation obligation){
+	public Personne(String name){
 		this.name=name;
 		this.obligation=obligation;
 		this.choix = new ArrayList<Choix>();
@@ -21,6 +21,10 @@ public  class Personne extends Composant {
 	
 	public void addPossession(PossessionConditionnee p){
 		this.possessions.add(p);
+	}
+	
+	public void addObligation(Obligation o){
+		this.obligation=o;
 	}
 
 }

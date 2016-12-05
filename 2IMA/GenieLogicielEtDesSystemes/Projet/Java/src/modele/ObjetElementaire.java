@@ -11,10 +11,10 @@ public class ObjetElementaire extends Composant{
 	private List<ConditionVisibilite> conditionvis;
 	
 
-	public ObjetElementaire(String name, int poid, Visibilite visi){
+	public ObjetElementaire(String name, int poid){
 		this.poid=poid;
 		this.name=name;
-		this.visi=visi;
+		this.visi=Visibilite.Visible;
 		this.conditionvis = new ArrayList<ConditionVisibilite>();
 		this.conditiontrans = new ArrayList<Transformation>();
 	}
@@ -23,7 +23,14 @@ public class ObjetElementaire extends Composant{
 		this.conditionvis.add(c);
 	}
 	
+	public void addVisibilite(Visibilite v){
+		this.visi=v;
+	}
+	
 	public void addTransformation(Transformation t){
 		this.conditiontrans.add(t);
+	}
+	public String getName(){
+		return this.name;
 	}
 }

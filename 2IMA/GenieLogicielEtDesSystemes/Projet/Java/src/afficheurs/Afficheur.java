@@ -5,7 +5,7 @@ import modele.*;
 
 public interface Afficheur {
 
-	/** Affiche le nom du lieu
+	/** Affiche le lieu
 	 * 
 	 * @param lieu
 	 */
@@ -17,13 +17,19 @@ public interface Afficheur {
 	 */
 	public void visiterLieu(Lieu lieu);
 	
-	/** Affiche les chemins accessibles et ouverts depuis un lieu
+	/** Affiche les chemins visibles et ouverts depuis un lieu
 	 * 
 	 * @param lieu
 	 * @param chemins liste de tous les chemins du jeu.
 	 */
-	public void afficherCheminsOuverts(Lieu lieu, List<Chemin> chemins);
+	public void afficherCheminsAccessibles(Lieu lieu, List<Chemin> chemins);
 	
+	/** Informe le joueur qu'il emprunte un chemin.
+	 * 
+	 * @param chemin
+	 */
+	public void emprunterChemin(Chemin chemin);
+		
 	/** Liste les objets que possède le joueur, leur quantité et leur taille. 
 	* Affiche également la taille cumulée des objets portés et la taille totale disponible
 	* 
