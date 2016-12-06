@@ -1,8 +1,7 @@
-function y = q( f, grad, hess, t, x)
+function y = q( f, g, H, s)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
-s = -t*grad(x);
-y = f(x) + grad(x).'*s + 1/2*s.'*hess(x)*s;
+y = f + g.'*s + 1/2*s.'*H*s;
 
 end
 

@@ -3,7 +3,7 @@ function pas = pasCauchy(g, H, delta)
     % q(s) = g'*s + (1/2)s'*H*s
     % p(t) = q(-t*g) -> intervalle non intuitif
     % p(alpha) = q(-alpha*(delta*g/norm(g))) avec alpha entre 0 et 1
-    
+
     c = -delta * (g / norm(g))
     % Courbe convexe, donc admet un minimum
     if (c' * H * c >= 0)
@@ -12,9 +12,9 @@ function pas = pasCauchy(g, H, delta)
         if (p0 < p1)
             pas = 0;
         else
-            pas = -delta*g;
+            pas = c;
         end
-    % Courbe concave
+        % Courbe concave
     else
         alpha0 = norm(c' \ (c' * H * c));
         if (alpha0 <= 1)
@@ -25,7 +25,8 @@ function pas = pasCauchy(g, H, delta)
             if (p0 < p1)
                 pas = 0;
             else
-                pas = delta;
+                pas = c;
             end
         end
     end
+end
