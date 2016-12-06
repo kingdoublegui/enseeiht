@@ -16,3 +16,6 @@ hs_err_pid*
 
 *eclipse-gls
 *eclipse-gls.tar.gz
+
+# OSX / *nix default autosave extension
+*.m~
