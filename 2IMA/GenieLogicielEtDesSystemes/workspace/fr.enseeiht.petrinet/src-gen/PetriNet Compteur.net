@@ -1,4 +1,0 @@
-net PetriNet Compteur
-pl pl1 (1)
-pl compteur (0)
-tr tr1 pl1 -> pl1 compteur

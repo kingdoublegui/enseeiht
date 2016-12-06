@@ -1,9 +1,0 @@
-net Grenadine
-pl grenadine_finished (0)
-pl grenadine_ready (1)
-pl grenadine_started (0)
-pl grenadine_running (0)
-pl ressource_eau (1)
-pl ressource_sirop (1)
-tr grenadine_finish grenadine_running -> grenadine_finished ressource_eau ressource_sirop
-tr grenadine_start grenadine_ready ressource_eau ressource_sirop -> grenadine_started grenadine_running

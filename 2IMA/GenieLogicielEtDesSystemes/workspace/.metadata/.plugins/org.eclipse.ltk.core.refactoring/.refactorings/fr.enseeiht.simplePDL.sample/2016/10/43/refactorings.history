@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;Developement.simplepdl&apos; to &apos;tests&apos;&#x0A;- Original project: &apos;fr.enseeiht.simplePDL.sample&apos;&#x0A;- Destination element: &apos;tests&apos;&#x0A;- Original element: &apos;Developement.simplepdl&apos;" description="Copy file" element1="Developement.simplepdl" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1477650992248" target="/fr.enseeiht.simplePDL/tests" units="0" version="1.0"/>
-</session>

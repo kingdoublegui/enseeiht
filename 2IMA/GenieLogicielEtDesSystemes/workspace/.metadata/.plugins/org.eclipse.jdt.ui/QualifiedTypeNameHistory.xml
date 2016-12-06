@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="simplepdl.WorkSequence"/>
-<fullyQualifiedTypeName name="petrinet.Place"/>
-<fullyQualifiedTypeName name="petrinet.Transition"/>
-<fullyQualifiedTypeName name="petrinet.Arc"/>
-<fullyQualifiedTypeName name="petrinet.Node"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
-</qualifiedTypeNameHistroy>

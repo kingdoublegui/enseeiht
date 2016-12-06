@@ -1,5 +1,0 @@
-op finished = Ete /\ Automne /\ Hiver /\ Printemps;
-[] (finished => dead),
-[] <> dead,
-[] (dead => finished),
-- <> finished,

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;fr.enseeiht.petrinet/PetriNet.genmodel&apos; to &apos;PetriNet.genmodel.old&apos;" description="Rename resource &apos;PetriNet.genmodel&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="PetriNet.genmodel" name="PetriNet.genmodel.old" stamp="1476287160642" updateReferences="true"/>
-</session>

@@ -1,7 +1,0 @@
-process Grenadine {
-	wd grenadine
-	re eau 1
-	rs grenadine needs 1 eau
-	re sirop 1
-	rs grenadine needs 1 sirop
-}
