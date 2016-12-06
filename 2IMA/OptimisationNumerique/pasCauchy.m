@@ -1,25 +1,31 @@
-function [ r, resultat ] = pasCauchy( grad, hess, delta )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
-
-r = -1;
-
-c = delta * grad/norm(grad);
-
-% Si la matrice est semi definie positive
-if (c.'*hess*c >= 0)
-    % Si le minimum est dans l'intervalle
-    m =  zeros(size(grad)) \ hess(x);
-    if (true)
-        
-    else
-        r = max(1, delta); % ce serait plus f(delta) d'aillleurs
-    end;
-else
-    r = max(1, delta);
+function pas = pasCauchy(g, H, delta)
+    % Calcul du pas de Cauchy
+    % q(s) = g'*s + (1/2)s'*H*s
+    % p(t) = q(-t*g) -> intervalle non intuitif
+    % p(alpha) = q(-alpha*(delta*g/norm(g))) avec alpha entre 0 et 1
     
-end
-% Cas concave
-
-end
-
+    c = -delta * (g / norm(g))
+    % Courbe convexe, donc admet un minimum
+    if (c' * H * c >= 0)
+        p0 = 0;
+        p1 = g' * c + (1/2) * c' * H * c;
+        if (p0 < p1)
+            pas = 0;
+        else
+            pas = -delta*g;
+        end
+    % Courbe concave
+    else
+        alpha0 = norm(c' \ (c' * H * c));
+        if (alpha0 <= 1)
+            pas = alpha0 * delta * norm(g);
+        else
+            p0 = 0;
+            p1 = g' * c + (1/2) * c' * H * c;
+            if (p0 < p1)
+                pas = 0;
+            else
+                pas = delta;
+            end
+        end
+    end
