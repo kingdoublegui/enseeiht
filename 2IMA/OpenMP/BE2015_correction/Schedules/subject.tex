@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{marvosym}
+\usepackage{dingbat}
+
+
+\title{OpenMP parallel for scheduling}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+The OpenMP parallel for worksharing construct supports different types
+of scheduling. The objective of this exercise is to define a
+scheduling strategy that is best suited for a specific code, propose a
+parallelization and analyze the resulting behavior.
+
+\section{Package content}
+The \texttt{Schedules} directory contains a single file named
+\texttt{schedules.c}. The relevant part of this file is represented by
+the following two lines of code
+\begin{verbatim}
+  for (n=size; n>=100; n-=100){
+    mat_mult(n, A+ptr[n], B+ptr[n], C+ptr[n]);
+\end{verbatim}
+At every iteration of this loop a matrix-matrix product of the form
+$C=A\cdot B$ is performed, where $A$, $B$ and $C$ are dense matrices
+of size \texttt{n}. Note that the $A$, $B$ and $C$ matrices are
+different at every iteration and thus there are no loop-carried
+dependencies. In the code, \texttt{size} is set to be equal to 1500.
+
+The code can be compiled using the \texttt{make} command: just type
+\texttt{make} inside the \texttt{Schedules} directory. This will
+generate an executable \texttt{main} file that can be launched like
+this
+\begin{verbatim}
+$ ./main
+\end{verbatim}
+Upon execution, the \texttt{main} program will print the execution
+time for the loop above.
+
+\section{Assignment}
+
+\begin{itemize}
+\item \smallpencil assuming the OpenMP parallel for construct has been
+  used to parallelize the loop above, identify the scheduling type
+  that is best suited for this code and explain your choice in the
+  \texttt{responses.txt} file. Report in this file also the execution
+  time of the code using 1, 2 and 4 threads with the scheduling type you
+  have chosen and with the default, static scheduling. The observed
+  results confirm what you expected?
+\item {\huge \Keyboard} use the OpenMP parallel for construct to
+  parallelize the loop above in the \texttt{schedules.c} file. Compile
+  and run the program using 1, 2 and 4 threads, with both the scheduling
+  type you have chosen and the default static scheduling; report the
+  corresponding execution times in the \texttt{responses.txt} file as
+  described above.
+\end{itemize}
+
+
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
