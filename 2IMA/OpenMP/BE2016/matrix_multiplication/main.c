@@ -66,12 +66,17 @@ void sequential_product(block **a, block **b, block **c, int n, int nb){
 void parallel_product(block **a, block **b, block **c, int n, int nb){
   int i, j, k;
 
-
+#pragma omp parallel
+  {
+#pragma omp single private(i,j)
+    {
   for(i=0; i<n; i++)
     for(j=0; j<n; j++)
+#pragma omp task firstprivate(k)
+    {
       for(k=0; k<n; k++)
-        {
           block_mult(a[i][k], b[k][j], c[i][j], nb);
-        }
-
+    }
+    }
+  }
 }

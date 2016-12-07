@@ -74,15 +74,31 @@ unsigned long parallel_for_sweep(struct node *head){
 
   curr = head;
   acc = 0;
-  while(curr){
+  int i;
+  struct node *c;
+#pragma omp parallel for private(c)
+  for (i = 0; i < 1000000; i++) {
     /* Loop until the last element in the list and accumulate the
        result of nodes processing */
-    acc += process_node(curr);
-    curr = curr->next;
+#pragma omp critical
+      {
+          if (curr) {
+      c = curr;
+      curr = curr->next;
+          } else {
+            c = -1;
+            i=1000000;
+          }
+      }
+
+      if (c != -1)
+          {
+#pragma omp atomic update
+              acc += process_node(c); 
+          }
   }
 
   return acc;
-
 }
 
 
@@ -91,19 +107,28 @@ unsigned long parallel_for_sweep(struct node *head){
 
 
   
-unsigned long parallel_task_sweep(struct node *head){
-
+unsigned long parallel_task_sweep(struct node *head) {
   unsigned long acc;
   struct node *curr;
 
   curr = head;
   acc = 0;
+#pragma omp parallel
+{
+#pragma omp single
+    {
   while(curr){
+#pragma omp task firstprivate(curr)
+      {
     /* Loop until the last element in the list and accumulate the
        result of nodes processing */
+#pragma omp atomic update
     acc += process_node(curr);
+      }
     curr = curr->next;
   }
+}
+}
 
   return acc;
   

@@ -6,38 +6,74 @@ various exam parts.
 =======================================================================
 Part 1: Derivative-free minimization
 
+./main 10000 0.01
+Sequential   time             :  1070.83 msec
+Parallel     time (1 threads) :  1078.43 msec
+Parallel     time (2 threads) :   688.83 msec
+Parallel     time (4 threads) :   524.58 msec
 
+The performance gain is about 30% for 2 threads and 50% for 4. It can be because of the computanional time of each function, but also the way I have implanted the parallelism. There is only one parallel section while excecuting the main loop in parallel may provide better results.
 
-
-
+The two algorithms can follow a different path because the parallel one's does not choose the better at each iteration. The data it bases its computation on may be outdated.
 
 =======================================================================
 Part 2: Linked list
+./main 1000
+Sequential      time             :   500.02 msec.       -- result: 50005001
+Parallel for time (1 threads)    :   500.03 msec.       -- result: 50005001
+Parallel for time (2 threads)    :   250.89 msec.       -- result: 50005001
+Parallel for time (4 threads)    :   133.20 msec.       -- result: 50005001
+Parallel task   time (1 threads) :   500.03 msec.       -- result: 50005001
+Parallel task   time (2 threads) :   250.91 msec.       -- result: 50005001
+Parallel task   time (4 threads) :   150.41 msec.       -- result: 50005001
 
-
-
-
-
-
-
-
+With the parallelisation of this algorithm, there is an linear improvement. Both task and for version of the algorithm are showing the same performances, and the same result. 
 
 =======================================================================
 Part 3: Matrix Multiplication
 
+./main 20
+Sequential   time             :  1456.67 msec.
+Parallel     time (1 threads) :  1461.72 msec.
+Parallel     time (2 threads) :   802.45 msec.
+Parallel     time (4 threads) :   430.12 msec.
+The maximum difference on coefficients is 0.000000e+00
 
-
-
-
+For 1 thread, the computation time was slightly better for the sequential version of the algorith: creating the task takes time.
+The computation time for 2 threads is divided by 2, which starts to be pretty efficient.
+The bigger gain is on 4 threads: it approaches 75%!
 
 =======================================================================
 Part 4: Reduction
 
+./main 100
+Sequential time             :   990.00 msec.  ---  Result: 5184
+Parallel   time (1 threads) :   990.07 msec.  ---  Result: 5184
+Parallel   time (2 threads) :   500.15 msec.  ---  Result: 5184
+Parallel   time (4 threads) :   370.50 msec.  ---  Result: 5184
 
-
-
-
-
+The algorithm proposed is not parallisable because the operator modify x directly.
+Then I have decided to use the associativity of the operator, and divided the array in
+two at each iteration. The computation time is reduced by 70% on 4 threads. I have not
+achieved a linear speedup. I suspect the taskwait to be involved.
 
 =======================================================================
 Part 5: Synchronizations
+
+./main
+Sequential   time             :  1021.62 msec.       -- result: 1000000
+Critical     time (1 threads) :  1022.58 msec.       -- result: 1000000
+Critical     time (2 threads) :   505.15 msec.       -- result: 1000000
+Critical     time (4 threads) :   357.91 msec.       -- result: 1000000
+Atomic       time (1 threads) :  1019.67 msec.       -- result: 1000000
+Atomic       time (2 threads) :   506.71 msec.       -- result: 1000000
+Atomic       time (4 threads) :   507.29 msec.       -- result: 1000000
+Locks        time (1 threads) :  1021.92 msec.       -- result: 1000000
+Locks        time (2 threads) :   506.97 msec.       -- result: 1000000
+Locks        time (4 threads) :   303.34 msec.       -- result: 1000000
+
+Regardless the number of threads involved, the critical and lock version performed poorly due to the time required for computing function `func`.
+Placing  a critical session or a lock would not have been effective. I decided to compute this function separatly to benefit from the parallelisation.
+The only version effective is omp atomic update, because it computes in parallel the right term and do the update in a critical way. However it does not
+have better performances with 4 threads than with 2. The gain is around 50%.
+

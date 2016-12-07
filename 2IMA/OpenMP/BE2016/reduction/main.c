@@ -66,12 +66,42 @@ int sequential_reduction(int *x, int n){
   return x[0];
 }
 
+int parallel_reduction(int *x, int n) {
+    int result;
+    #pragma omp parallel
+    {
+        #pragma omp single
+        {
+            result = parallel_reduction_rec(x, n);
+        }
+    }
+    return result;
+}
 
-int parallel_reduction(int *x, int n){
+int parallel_reduction_rec(int *x, int n){
   int i;
 
-  for(i=1; i<n; i++)
-    operator(x, x+i);
+  int m = n/2;
+  int seuil = 2;
 
+  int j;
+  if (m <= seuil) {
+    for (j=1; j < n; j++)
+      operator(x, x+j);
+    return x[0];
+  }
+  
+#pragma omp task if (m > seuil)
+  {
+  parallel_reduction_rec(x, m);
+}
+#pragma omp task if (m > seuil)
+{
+  parallel_reduction_rec(x+m, n-m);
+}
+
+#pragma omp taskwait
+  operator(x, x+m);
+  
   return x[0];
 }

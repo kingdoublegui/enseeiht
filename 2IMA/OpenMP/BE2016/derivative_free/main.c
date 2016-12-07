@@ -95,6 +95,7 @@ double parallel_minimization(double s, int p, double x0, double y0){
   
   xyz[0][0] = x0; xyz[0][1]=y0; xyz[0][2] = evaluate(xyz[0][0], xyz[0][1]);
 
+  {
   for(cnt=0;cnt<MAXIT;cnt++){
     x = xyz[0][0];
     y = xyz[0][1];
@@ -102,7 +103,10 @@ double parallel_minimization(double s, int p, double x0, double y0){
     /* Evaluate function on the 8 points around the current minimum */
     /* The current minimum is included again in the evaluation for
        simplicipy; this makes a total of 9 evaluations */
+
+#pragma omp parallel for private(nx, ny, nz)
     for(i=0; i<p; i++){
+        {
       nx = x+ s*cos(2.0*M_PI*i/((double)p));
       ny = y+ s*sin(2.0*M_PI*i/((double)p));
       nz = evaluate(nx,ny);
@@ -114,12 +118,14 @@ double parallel_minimization(double s, int p, double x0, double y0){
         xyz[0][0] = nx;
         xyz[0][1] = ny;
       }
+        }
     }
     /* Uncomment the line below if you want to debug */
     /* printf("%4d -- %5.2f %5.2f %10.4f\n",cnt,xyz[0][0], xyz[0][1], xyz[0][2]); */
 
     /* If no improvement over the old minimum, terminate */
     if(xyz[0][2]>=z) break;
+  }
   }
 
   printf("Minimum found is %.10f  at x=%.4f, y=%.4f  in %d steps\n",xyz[0][2],xyz[0][0],xyz[0][1],cnt);

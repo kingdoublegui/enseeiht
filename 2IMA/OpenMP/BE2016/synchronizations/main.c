@@ -107,10 +107,15 @@ void sequential(int *data){
 
 void parallel_critical(int *data){
   int i, j;
-  
+
+#pragma omp parallel for private(j) 
   for(i=0; i<NIT; i++){
     j = rand() % NE;
-    data[j] += func();
+    int f = func();
+#pragma omp critical
+    {
+    data[j] += f;
+    }
   }
 
 }
@@ -121,20 +126,34 @@ void parallel_critical(int *data){
 void parallel_atomic(int *data){
   int i, j;
   
+#pragma omp parallel for private(j)
   for(i=0; i<NIT; i++){
     j = rand() % NE;
+#pragma omp atomic update
     data[j] += func();
-  }
+}
   
 }
 
 
 void parallel_locks(int *data){
   int i, j;
-  
+  omp_lock_t lock;
+
+#pragma omp master
+  {
+  omp_init_lock(&lock);
+  }
+
+#pragma omp parallel for private(j) 
   for(i=0; i<NIT; i++){
     j = rand() % NE;
-    data[j] += func();
+
+    int f = func();
+    omp_set_lock(&lock);
+    data[j] += f;
+    omp_unset_lock(&lock);
   }
+  omp_destroy_lock(&lock);
 
 }
