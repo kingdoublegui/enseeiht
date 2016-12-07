@@ -1,0 +1,43 @@
+In this file you have to write the answers to the questions marked
+with the "pencil" symbol that you will find in the subjects of the
+various exam parts.
+
+
+=======================================================================
+Part 1: Derivative-free minimization
+
+
+
+
+
+
+=======================================================================
+Part 2: Linked list
+
+
+
+
+
+
+
+
+
+=======================================================================
+Part 3: Matrix Multiplication
+
+
+
+
+
+
+=======================================================================
+Part 4: Reduction
+
+
+
+
+
+
+
+=======================================================================
+Part 5: Synchronizations
