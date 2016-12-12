@@ -1,4 +1,6 @@
-import game.*;
+import modele.*;
+import afficheurs.*;
+import controleurs.*;
 
 public class MainJava {
 
@@ -39,9 +41,7 @@ public class MainJava {
 		// Init Dependencies
 		// Init Objets
 		Objet tentative1 = new Objet();
-		Objet tentative1 = new Objet();
 		Objet tentative0 = new Objet();
-		Objet tentative3 = new Objet();
 		Objet tentative3 = new Objet();
 		
 		// Init PossessionsConditionnees
@@ -104,7 +104,7 @@ public class MainJava {
 		bonChemin.setVisibilite(Visibilite.visible);
 		bonChemin.addConditionVisibilite(bonneFin);
 		mauvaisChemin.setDepart(enigme);
-		mauvaisChemin.setFin(succes);
+		mauvaisChemin.setFin(echec);
 		mauvaisChemin.setOuverture(Ouverture.ouvert);
 		mauvaisChemin.setObligation(Obligation.obligatoire);
 		mauvaisChemin.setVisibilite(Visibilite.visible);
@@ -128,27 +128,27 @@ public class MainJava {
 		// Fill Conditions
 		bonneFin.addComparaison(reussiteComparaison);
 		bonneFin.setOperateur(Operateur.et);
-		bonneFin.setDifficulte(Difficulte.);
+		bonneFin.setDifficulte(Difficulte.difficile);
 		bonneFin.setProbabilite(0);
 		mauvaiseFin.addComparaison(exactementTentative0Comparaison);
 		mauvaiseFin.setOperateur(Operateur.et);
-		mauvaiseFin.setDifficulte(Difficulte.);
+		mauvaiseFin.setDifficulte(Difficulte.difficile);
 		mauvaiseFin.setProbabilite(0);
 		premiereQuestion.addComparaison(exactementTentative3Comparaison);
 		premiereQuestion.setOperateur(Operateur.et);
-		premiereQuestion.setDifficulte(Difficulte.);
+		premiereQuestion.setDifficulte(Difficulte.difficile);
 		premiereQuestion.setProbabilite(0);
 		encoreTentative.addComparaison(plusTentative1Comparaison);
 		encoreTentative.setOperateur(Operateur.et);
-		encoreTentative.setDifficulte(Difficulte.);
+		encoreTentative.setDifficulte(Difficulte.difficile);
 		encoreTentative.setProbabilite(0);
 		
 		// Fill Choix
 		question.addAction(bonneReponseEncoreTentativeActionConditionnee);
 		question.addAction(mauvaiseReponseActionConditionnee);
-		question.setPosition(Emplacementdepart);
+		question.setPosition(Emplacement.depart);
 		question.addCondition(premiereQuestion);
-		finQuestion.setPosition(Emplacementfin);
+		finQuestion.setPosition(Emplacement.fin);
 		
 		// Fill Actions
 		bonneReponse.addPossessionConditionnee(reussitePossessionPossessionConditionnee);
@@ -157,28 +157,24 @@ public class MainJava {
 		// Fill Dependencies
 		// Fill Objets
 		tentative1.setQuantite(1);
-		tentative1.setObjet(Tentative);
-		tentative1.setQuantite(1);
-		tentative1.setObjet(Tentative);
+		tentative1.setObjet(tentative);
 		tentative0.setQuantite(0);
-		tentative0.setObjet(Tentative);
+		tentative0.setObjet(tentative);
 		tentative3.setQuantite(3);
-		tentative3.setObjet(Tentative);
-		tentative3.setQuantite(3);
-		tentative3.setObjet(Tentative);
+		tentative3.setObjet(tentative);
 		
 		// Fill PossessionsConditionnees
-		tentative3ObjetPossessionConditionnee.setPossession(Tentative3Objet);
-		reussitePossessionPossessionConditionnee.setPossession(ReussitePossession);
+		tentative3ObjetPossessionConditionnee.setPossession(tentative3);
+		//reussitePossessionPossessionConditionnee.setPossession(ReussitePossession);
 		
 		// Fill Transformations
 		
 		// Fill ChoixConditionnes
 		questionEncoreTentativeChoixConditionne.setChoix(question);
-		questionEncoreTentativeChoixConditionne.addCondition(encoreTentative);
+		questionEncoreTentativeChoixConditionne.addContion(encoreTentative);
 		finQuestionChoixConditionne.setChoix(finQuestion);
 		finQuestionMauvaiseFinChoixConditionne.setChoix(finQuestion);
-		finQuestionMauvaiseFinChoixConditionne.addCondition(mauvaiseFin);
+		finQuestionMauvaiseFinChoixConditionne.addContion(mauvaiseFin);
 		
 		// Fill ActionsConditionnees
 		mauvaiseReponseActionConditionnee.setAction(mauvaiseReponse);
@@ -189,24 +185,24 @@ public class MainJava {
 		bonneReponseEncoreTentativeActionConditionnee.addChoixOffert(finQuestionChoixConditionne);
 		
 		// Fill Comparaisons
-		plusTentative1Comparaison.setConnaissance(invalid);
+		//plusTentative1Comparaison.setConnaissance(invalid);
 		plusTentative1Comparaison.setComparateur(Comparateur.plus);
 		plusTentative1Comparaison.setObjet(tentative1);
-		exactementTentative0Comparaison.setConnaissance(invalid);
+		//xactementTentative0Comparaison.setConnaissance(invalid);
 		exactementTentative0Comparaison.setComparateur(Comparateur.exactement);
 		exactementTentative0Comparaison.setObjet(tentative0);
-		exactementTentative3Comparaison.setConnaissance(invalid);
+		//exactementTentative3Comparaison.setConnaissance(invalid);
 		exactementTentative3Comparaison.setComparateur(Comparateur.exactement);
 		exactementTentative3Comparaison.setObjet(tentative3);
 		reussiteComparaison.setConnaissance(reussite);
 		reussiteComparaison.setComparateur(Comparateur.exactement);
-		reussiteComparaison.setObjet(invalid);
+		//reussiteComparaison.setObjet(invalid);
 		
-
 		/**
 		 * Launch the game
 		 */
-		jeu.lancer();
+		ControleurTexte contro = new ControleurTexte(new AfficheurTexte(),jeuEnigme);
+		contro.jouer();
 	}
 
 }

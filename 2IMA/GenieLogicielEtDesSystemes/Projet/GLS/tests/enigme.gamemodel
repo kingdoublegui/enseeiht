@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ASCII"?>
+<game:Jeu xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:game="http://www.enseeiht.fr/gls/Game" name="JeuEnigme" territoire="//@composants.0" explorateur="//@composants.10" difficulte="facile">
+  <composants xsi:type="game:Territoire" name="Enonce" composants="//@composants.1 //@composants.2 //@composants.3 //@composants.4 //@composants.5 //@composants.6 //@composants.7"/>
+  <composants xsi:type="game:Lieu" name="Debut" position="depart"/>
+  <composants xsi:type="game:Lieu" name="Succes" position="fin"/>
+  <composants xsi:type="game:Lieu" name="Echec" position="fin"/>
+  <composants xsi:type="game:Lieu" name="Enigme" personnes="//@composants.11"/>
+  <composants xsi:type="game:Chemin" name="Initialisation" depart="//@composants.1" fin="//@composants.4"/>
+  <composants xsi:type="game:Chemin" name="BonChemin" depart="//@composants.4" fin="//@composants.2" obligation="obligatoire" conditionsVisibilite="//@composants.16"/>
+  <composants xsi:type="game:Chemin" name="MauvaisChemin" depart="//@composants.4" fin="//@composants.3" obligation="obligatoire" conditionsVisibilite="//@composants.17"/>
+  <composants xsi:type="game:ObjetElementaire" name="Tentative" taille="1"/>
+  <composants xsi:type="game:Connaissance" name="Reussite"/>
+  <composants xsi:type="game:Explorateur" name="Joueur" poidsMax="3">
+    <possessions>
+      <possession xsi:type="game:Objet" quantite="3" objet="//@composants.8"/>
+    </possessions>
+  </composants>
+  <composants xsi:type="game:Personne" name="Sphinx" obligation="obligatoire" choix="//@composants.12"/>
+  <composants xsi:type="game:Choix" name="Question" position="depart" conditions="//@composants.18">
+    <actions action="//@composants.14" conditions="//@composants.19">
+      <choixOfferts choix="//@composants.13"/>
+    </actions>
+    <actions action="//@composants.15">
+      <choixOfferts choix="//@composants.12" conditions="//@composants.19"/>
+      <choixOfferts choix="//@composants.13" conditions="//@composants.17"/>
+    </actions>
+  </composants>
+  <composants xsi:type="game:Choix" name="FinQuestion" position="fin"/>
+  <composants xsi:type="game:Action" name="BonneReponse">
+    <possessions>
+      <possession connaissance="//@composants.9"/>
+    </possessions>
+  </composants>
+  <composants xsi:type="game:Action" name="MauvaiseReponse">
+    <objetsConsommes quantite="1" objet="//@composants.8"/>
+  </composants>
+  <composants xsi:type="game:Condition" name="BonneFin">
+    <possessions connaissance="//@composants.9"/>
+  </composants>
+  <composants xsi:type="game:Condition" name="MauvaiseFin">
+    <possessions>
+      <objet objet="//@composants.8"/>
+    </possessions>
+  </composants>
+  <composants xsi:type="game:Condition" name="PremiereQuestion">
+    <possessions>
+      <objet quantite="3" objet="//@composants.8"/>
+    </possessions>
+  </composants>
+  <composants xsi:type="game:Condition" name="EncoreTentative">
+    <possessions comparateur="plus">
+      <objet quantite="1" objet="//@composants.8"/>
+    </possessions>
+  </composants>
+</game:Jeu>

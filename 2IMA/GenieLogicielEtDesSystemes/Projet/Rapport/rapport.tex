@@ -1,0 +1,59 @@
+\documentclass[12pt]{article}
+
+\usepackage[top=3.5cm, bottom=3cm, left=2.5cm , right=2.5cm]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{graphicx}
+
+\newcommand{\Matiere}{Génie des Logiciels et des Systèmes}
+\newcommand{\titre}{Modélisation, Vérification et Génération de Jeux}
+
+\title{\Matiere:\\ \titre}
+\author{Kévin CARENOU \and Thibault MEUNIER \and Matthieu PERRIER \and Sacha VANLEENE}
+\date{15 décembre 2016}
+
+\pagestyle{fancy}
+\fancyhead[L]{\titre}
+\fancyhead[R]{\nouppercase{\leftmark}}
+\fancyfoot[L]{\Matiere}
+\fancyfoot[C]{Page \thepage}
+\fancyfoot[R]{ENSEEIHT - IMA 2A}
+
+\begin{document}
+\maketitle
+
+\setcounter{page}{0}
+\thispagestyle{empty} % enlever numerotation de la page de garde
+
+\newpage
+
+\section*{Introdution}
+\lipsum[1]\lipsum[2]
+\newpage
+
+\renewcommand{\contentsname}{Sommaire}
+\tableofcontents
+\newpage
+
+\section{Metamodèle}
+\lipsum
+
+\section{Editeur Graphique}
+\lipsum
+
+\section{Transformation en PetriNet}
+\lipsum
+
+\section{Implémentatiuon en Java}
+Nous avons décider d'implanter ce jeu en u
+
+\end{document}

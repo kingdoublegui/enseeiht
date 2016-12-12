@@ -171,7 +171,7 @@ ActionConditionnee:
 ;
 
 Decision:
-	choix=[Choix] 'propose' action=[Action]
+	'decision' name=ID 'offre' choix=[Choix] 'propose' action=[Action]
 ;
 
 enum Difficulte:
