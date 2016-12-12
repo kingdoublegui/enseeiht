@@ -11,7 +11,7 @@ objet Tentative mesure 1
 connaissance Reussite
 explorateur Joueur possede 3 Tentative porte 3
 personne Sphinx passage obligatoire offre Question
-choix Question propose BonneReponse offre FinQuestion, MauvaiseReponse offre Question selon EncoreTentative offre FinQuestion selon MauvaiseFin position depart selon PremiereQuestion
+choix Question propose BonneReponse selon EncoreTentative offre FinQuestion, MauvaiseReponse offre Question selon EncoreTentative offre FinQuestion selon MauvaiseFin position depart selon PremiereQuestion
 choix FinQuestion position fin
 action BonneReponse possede Reussite
 action MauvaiseReponse consomme 1 Tentative

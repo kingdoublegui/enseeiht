@@ -3,17 +3,33 @@ package modele;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PossessionConditionnee {
+public class PossessionConditionnee extends Possession {
 
 	private Possession possession;
 	private List<Condition> conditions;
 	
-	public PossessionConditionnee(Possession p){
-		this.possession=p;
+	public PossessionConditionnee(){
 		this.conditions=new ArrayList<Condition>();
 	}
 	
+	public PossessionConditionnee(Possession objet) {
+		this();
+		this.possession = objet;
+	}
+
 	public void addCondition(Condition c){
 		this.conditions.add(c);
+	}
+	
+	public void setPossession(Possession p){
+		this.possession=p;
+	}
+
+	public Possession getPossession() {
+		return possession;
+	}
+
+	public List<Condition> getConditions() {
+		return conditions;
 	}
 }

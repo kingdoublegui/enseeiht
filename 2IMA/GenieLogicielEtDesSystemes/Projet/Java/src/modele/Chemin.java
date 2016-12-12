@@ -14,13 +14,11 @@ public class Chemin extends ComposantTerritoire {
 	private List<Condition> conditionsvis;
 	private List<PossessionConditionnee> possessions;
 	
-	public Chemin (String name,Lieu depart,Lieu fin){
+	public Chemin (String name){
 		this.name=name;
-		this.obligation=Obligation.Facultatif;
-		this.visibilite=Visibilite.Visible;
-		this.ouverture=Ouverture.Ouvert;
-		this.depart=depart;
-		this.fin=fin;
+		this.obligation=Obligation.facultatif;
+		this.visibilite=Visibilite.visible;
+		this.ouverture=Ouverture.ouvert;
 		this.conditionsopen = new ArrayList<Condition>();
 		this.conditionsvis = new ArrayList<Condition>();
 		this.possessions = new ArrayList<PossessionConditionnee>();		
@@ -37,14 +35,59 @@ public class Chemin extends ComposantTerritoire {
 		this.possessions.add(p);
 	}
 
-	public void addObligation(Obligation o ){
+	public void setObligation(Obligation o ){
 		this.obligation=o;
 	}
-	public void addVisibilite(Visibilite v){
+	public void setVisibilite(Visibilite v){
 		this.visibilite=v;
 	}
-	public void addOuverture(Ouverture ouv){
+	public void setOuverture(Ouverture ouv){
 		this.ouverture=ouv;
 	}
 	
+	public void setDepart(Lieu depart){
+		this.depart=depart;
+	}
+	
+	public void setFin(Lieu fin){
+		this.fin=fin;
+	}
+
+	public Lieu getDepart() {
+		return depart;
+	}
+
+	public Lieu getFin() {
+		return fin;
+	}
+
+	public Ouverture getOuverture() {
+		return ouverture;
+	}
+
+	public List<Condition> getConditionsopen() {
+		return conditionsopen;
+	}
+
+	public Obligation getObligation() {
+		return obligation;
+	}
+
+	public Visibilite getVisibilite() {
+		return visibilite;
+	}
+
+	public List<Condition> getConditionsvis() {
+		return conditionsvis;
+	}
+
+	public List<PossessionConditionnee> getPossessions() {
+		return possessions;
+	}
+	public boolean isAccessible(){
+		return(this.ouverture==Ouverture.ouvert);
+	}
+	public String getDescription(){
+		return("le chemin "+this.name+" qui va de "+this.depart.getName()+" à "+this.fin.getName());
+	}
 }

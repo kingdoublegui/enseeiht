@@ -67,9 +67,43 @@ public interface Afficheur {
 	 */
 	public void interaction(Personne personne);
 	
-	/** Liste les choix réalisable par l'utilisateur
+	/** Affiche les choix réalisable par l'utilisateur
+	 *  Informe le joueur si celui ci est vide
 	 * 
 	 * @param choix liste a afficher
+	 * @return le nombre d'éléments de la liste
 	 */
-	public void listerChoix(List<Choix> choix);
+	public int listerActions(List<Action> actions);
+
+	/** Affiche un ensemble d'objets
+	 *  Informe le joueur si celui ci est vide
+	 *  
+	 * @param objets liste a afficher
+	 * @return le nombre d'éléments de la liste
+	 */
+	public int listerObjets(List<Objet> objets);
+	
+	/** Affiche un ensemble de connaissances
+	 *  Informe le joueur si celui ci est vide
+	 *  
+	 * @param connaissances liste a afficher
+	 * @return le nombre d'éléments de la liste
+	 */
+	public int listerConnaissances(List<Connaissance> connaissances);
+	
+	/** Affiche un ensemble de personnes
+	 *  Informe le joueur si celui ci est vide
+	 *  
+	 * @param personnes liste a afficher
+	 * @return le nombre d'éléments de la liste
+	 */
+	public int listerPersonnes(List<Personne> personnes);
+	
+	/** Affiche un ensemble de chemin
+	 *  Informe le joueur si celui ci est vide
+	 *  
+	 * @param chemins liste a afficher
+	 * @return le nombre d'éléments de la liste
+	 */
+	public int listerChemins(List<Chemin> chemins);
 }
