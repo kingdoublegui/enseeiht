@@ -8,7 +8,7 @@ function pas = pasCauchy(g, H, delta)
     % Courbe concave, donc admet un minimum
     if (c' * H * c >= 0)
         p0 = 0;
-        p1 = g' * c + (1/2) * c' * H * c;
+        p1 = g' * c + 1/2* c' * H * c;
         if (p0 < p1)
             pas = zeros(size(c));
         else
@@ -18,7 +18,7 @@ function pas = pasCauchy(g, H, delta)
     else
         alpha0 = norm(c' \ (c' * H * c));
         if (alpha0 <= 1)
-            pas = -delta * g/ norm(g);
+            pas = -H \ g;
         else
             p0 = 0;
             p1 = g' * c + (1/2) * c' * H * c;

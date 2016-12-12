@@ -1,13 +1,14 @@
-function [ t, x ] = regionConfiance( f, x0, delta0, delta_max, gamma1, gamma2, eta1, eta2 )
+function [ t, x ] = regionConfiance( f, x0, delta0, gamma1, gamma2, eta1, eta2 )
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 
+delta_max = 10*norm(x0, 1);
 t = 0;
 
 x =x0;
 
 delta = delta0;
-nbIterations = 10;
+nbIterations = 50;
 k = 0;
 
 epsilon = 1/10^8;
@@ -19,11 +20,9 @@ hess = hessian(f, var);
 
 g = eval(subs(grad, var, x));
 H = eval(subs(hess, var, x));
+s = pasCauchy(g, H, delta);
 
-while k < nbIterations
-    g = eval(subs(grad, var, x));
-    H = eval(subs(hess, var, x));
-    s = pasCauchy(g, H, delta);
+while k < nbIterations && ~isequal(s,0)
     
     c = num2cell(x);
     f_x = f(c{:});
@@ -43,6 +42,11 @@ while k < nbIterations
          delta = gamma1*delta;
         end
     end
+    
+    g = eval(subs(grad, var, x));
+    H = eval(subs(hess, var, x));
+    s = pasCauchy(g, H, delta);
+    
     k = k+1;
     t = k;
 end
