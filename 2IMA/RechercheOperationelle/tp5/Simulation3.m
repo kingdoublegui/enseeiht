@@ -144,9 +144,10 @@ detection = false(1,nombre_objets);
 maxtempsparcours = max(tempsparcours);
 %
 t = 1; % donc t=1 est l'instant de depart => duree de parcours = temps parcours - 1
-objets_heurtes = [];
+objets_heurtes = []; % Le robot 1 n'a encore heurte aucun autre objet
+Vulnerable = true(1,nombre_objets); % Tous les objets sont vulnerables au depart
+%
 while t <= maxtempsparcours % Boucle temporelle avec maxtempsparcours variable à cause des collisions éventuelles
-    %
     xunit = [];
     yunit = [];
     if exist('robot','var') == 1
@@ -181,7 +182,7 @@ while t <= maxtempsparcours % Boucle temporelle avec maxtempsparcours variable �
     affich_robots; %affichage des objets
     drawnow;
     pause(pasTemps);
-    %
+    %%
     % Test de détection d'obstacles de l'objet 1 avec les autres objets
     % kobj
     % On ne considère ici que les collisions de l'objet 1 avec les autres
@@ -191,76 +192,90 @@ while t <= maxtempsparcours % Boucle temporelle avec maxtempsparcours variable �
         % kobj est le numero de l'objet susceptible de rentrer en collision avec l'objet 1
         distance = norm(xy(1:2,ii(kobj),kobj)-xy(1:2,ii(1),1)); % distance du robot (objet 1) à l'objet kobj
         sumray = rrob(1)+rrob(kobj);
-        if distance < sumray && ~any(ismember(objets_heurtes,kobj))
+         if distance < sumray && Vulnerable(1) && Vulnerable(kobj)
+             %
             % collision de l'objet 1 avec l'objet kobj à l'instant t!!
-            % car la distance les séparant est trop petite et ils ne sont
-            % jamais entres en collision precedemment
-            % l'objet 1 ne pourra plus rentrer desormais en collision avec
-            % kobj
-            objets_heurtes = [objets_heurtes kobj];
+            % car la distance les séparant est trop petite et l'objet 1 et l'objet kobj
+            % sont vulnerables
+            objets_heurtes = [objets_heurtes kobj]; % liste des objets heurtes par le robot 1 (MICKEY)
             kcol = kobj; % on sauvegarde le numero de l'objet kobj rentré en collision avec l'objet 1
-            load gong.mat
+            %
+            %les objets 1 et kcol deviennent invulnerables
+            Vulnerable(1) = false;
+            Vulnerable(kcol) = false;
+            %
+            load gong.mat % le gong retentit pour signifier la collision
             sound(y)
+            %
             cprintf([1,0,0],['COLLISION AVEC OBJET ',num2str(kobj), ' !! au bout de ',num2str(t),' secondes']);
             disp(' ');
-            % Calcul des longueurs parcourues par chaque objet i au moment
-            % de la collision
-%             for i = 1:nombre_objets
-%                 longueur = P(i).s(t);
-%                 cprintf([0,0,1],['Longueur parcourue par objet ',num2str(i),' : ', num2str(longueur),' pixels']);
-%                 disp(' ');
-%             end
-            %pause(1);
             % Il y a eu collision de l'objet 1 avec l'objet kcol,
             % on répare l'objet 1
             Nombre_reparations = Nombre_reparations + 1;
             cprintf([0,0,0],['Temps de reparation: ',num2str(Temps_reparation1),' ']);
             disp(' ');
             %
-            % On recalcule les trajectoires des objets 1 et kcol entrés en collision,
-            % les chemins restant les mêmes; les autres trajectoires
+            % On recalcule les trajectoires des objets 1 et kcol entrés en collision
+            % a condition que les objets ne soient pas arrives a
+            % destination;
+            % les chemins restent les mêmes; les autres trajectoires
             % restent inchangées
             %
             num = [1 kcol];
             for k=1:2
                 i=num(k);
-                % 1. MAJ de P(i).s
-                savantcollision = P(i).s(1:t);
-                Temps_reparation = T(i).temps_repar;
-                ss = P(i).s(t) * ones(1,Temps_reparation);
-                saprescollision = P(i).s(t+1:end);
-                s = [savantcollision , ss , saprescollision];
-                P(i).s = s;
-                % 2. MAJ de P(i).pp
-                pavantcollision = P(i).pp(1:t);
-                ppp = P(i).pp(t) * ones(1,Temps_reparation);
-                paprescollision = P(i).pp(t+1:end);
-                P(i).pp= [pavantcollision , ppp , paprescollision];
-                % 3. MAJ de tempsparcours(i)
-                tempsparcours(i) = tempsparcours(i) + Temps_reparation;
-                T(i).tempsparcours = tempsparcours(i);
+                if t < tempsparcours(i)
+                    % l'objet i n'est pas encore arrivé à destination
+                    % 1. MAJ de P(i).s
+                    savantcollision = P(i).s(1:t);
+                    Temps_reparation = T(i).temps_repar;
+                    ss = P(i).s(t) * ones(1,Temps_reparation);
+                    saprescollision = P(i).s(t+1:end);
+                    s = [savantcollision , ss , saprescollision];
+                    P(i).s = s;
+                    % 2. MAJ de P(i).pp
+                    pavantcollision = P(i).pp(1:t);
+                    ppp = P(i).pp(t) * ones(1,Temps_reparation);
+                    paprescollision = P(i).pp(t+1:end);
+                    P(i).pp= [pavantcollision , ppp , paprescollision];
+                    % 3. MAJ de tempsparcours(i)
+                    tempsparcours(i) = tempsparcours(i) + Temps_reparation;
+                    T(i).tempsparcours = tempsparcours(i);
+                end
             end
             maxtempsparcours = max(tempsparcours); % reactualisation du temps maximal de parcours
-        else %pas de collision : distance >= sumray
-            if distance <= portee % sumray <= distance <= portee
-                % l'obstacle kobj est detecte
-                % Etait-il deja detecte a l'instant precedent ?
-                % si non on ecrit le message objet detecte
-                if ~ detection(kobj)
-                    cprintf([1,0.5,0],['OBJET ',num2str(kobj),' DETECTE']);
-                    disp(' ');
-                    detection(kobj) = true;
-                end
-            else % distance > portee
-                % Si l'objet etait precedemment detecte on ecrit le message
-                % fin de detection
-                if detection(kobj)
-                    cprintf([0,0,0],['fin detection objet ',num2str(kobj)]);
-                    disp(' ');
-                    detection(kobj) = false;
-                end
-            end
-        end
+            %
+            Vulnerable(1) = false; % l'objet 1 devient invulnerable
+            Vulnerable(kcol) = false; % l'objet kcol devient invulnerable
+            %
+         else if distance >= sumray
+                 %pas de collision : distance >= sumray
+                 if ~Vulnerable(1) && ~Vulnerable(kobj)
+                     % Les 2 objets 1 et kobj sont invulnerables et ne sont plus
+                     % en collision : ils redeviennent vulnerables
+                     Vulnerable(1) = true;
+                     Vulnerable(kobj) = true;
+                 end
+                 if distance <= portee % sumray <= distance <= portee
+                     % l'obstacle kobj est detecte
+                     % Etait-il deja detecte a l'instant precedent ?
+                     % si non on ecrit le message objet detecte
+                     if ~ detection(kobj)
+                         cprintf([1,0.5,0],['OBJET ',num2str(kobj),' DETECTE']);
+                         disp(' ');
+                         detection(kobj) = true;
+                     end
+                 else % distance > portee
+                     % Si l'objet etait precedemment detecte on ecrit le message
+                     % fin de detection
+                     if detection(kobj)
+                         cprintf([0,0,0],['fin detection objet ',num2str(kobj)]);
+                         disp(' ');
+                         detection(kobj) = false;
+                     end
+                 end
+             end
+         end
     end
     %
     t = t + 1;

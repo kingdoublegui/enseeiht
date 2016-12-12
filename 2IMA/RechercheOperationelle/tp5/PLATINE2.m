@@ -1,6 +1,3 @@
-clear all;
-close all;
-
 %% Programme PLATINE : script de dialogue
 %
 % permet de :
@@ -91,6 +88,7 @@ while continuer
             if type_chemin == 'D'
                 disp ('Le chemin est un segment de DROITE')
                 Chemin_Initial_Droite;
+                exception = false; % Pas d'exception si chemin est D
                 T(nombre_objets).chemin = 'DROITE';
             else
                 disp('Le chemin est une NURBS');
@@ -163,6 +161,8 @@ while continuer
             NOMFIC = ['Scenes/' NOMSCENE];
             load(NOMFIC);
             Simulation3; % execution de la simulation
+        otherwise
+            disp ('CHOIX INCORRECT');
     end
     reponse = input('Continuer ? [Y/N] ','s');
     if (reponse == 'N')

@@ -63,6 +63,22 @@ imsauv = im; %sauvegarde de im
 % L'analyse démarre d'un carrefour
 i = icar(1);
 j = jcar(1);
+if nbrecar == 0
+    i = idep;
+    j = jdep;
+    icar(1) = i;
+    jcar(1) = j;
+    nbrecar = 1;
+    im(i,j) = 4;
+    for k = 1:8
+        ii = i + itab(k);
+        jj = j + jtab(k);
+        if im(ii,jj) ~= 7
+            im(ii,jj) = 2;
+        end
+    end
+    imsauv = im;
+end   
 % On introduit le pixel P = (i,j) dans la pile des carrefours
 while indpil ~= 0
     etat = im(i,j);
