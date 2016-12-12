@@ -39,6 +39,7 @@ while k < nbIterations
         end
     end
     k = k+1;
+    t = k;
 end
 
 end
