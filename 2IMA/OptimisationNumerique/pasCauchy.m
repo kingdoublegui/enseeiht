@@ -4,26 +4,26 @@ function pas = pasCauchy(g, H, delta)
     % p(t) = q(-t*g) -> intervalle non intuitif
     % p(alpha) = q(-alpha*(delta*g/norm(g))) avec alpha entre 0 et 1
 
-    c = -delta * (g / norm(g))
-    % Courbe convexe, donc admet un minimum
+    c = -delta * (g / norm(g));
+    % Courbe concave, donc admet un minimum
     if (c' * H * c >= 0)
         p0 = 0;
         p1 = g' * c + (1/2) * c' * H * c;
         if (p0 < p1)
-            pas = 0;
+            pas = zeros(size(c));
         else
             pas = c;
         end
-        % Courbe concave
+    % Courbe convexe
     else
         alpha0 = norm(c' \ (c' * H * c));
         if (alpha0 <= 1)
-            pas = alpha0 * delta * norm(g);
+            pas = -delta * g/ norm(g);
         else
             p0 = 0;
             p1 = g' * c + (1/2) * c' * H * c;
             if (p0 < p1)
-                pas = 0;
+                pas = zeros(size(c));
             else
                 pas = c;
             end

@@ -10,10 +10,15 @@ delta = delta0;
 nbIterations = 10;
 k = 0;
 
+epsilon = 1/10^8;
+
 var = sym('x', [length(x) 1]);
  
 grad = gradient(f, var);
 hess = hessian(f, var);
+
+g = eval(subs(grad, var, x));
+H = eval(subs(hess, var, x));
 
 while k < nbIterations
     g = eval(subs(grad, var, x));
@@ -26,13 +31,13 @@ while k < nbIterations
     f_xs = f(c{:});
     m_x = f_x;
     m_xs = q(f_x, g, H, s);
-    
+
     rho = (f_x-f_xs)/(m_x-m_xs);
     
-    if rho > eta1
+    if rho >= eta1
         x = x+s;
     end
-    if rho > eta2
+    if rho >= eta2
         delta = min(gamma2*delta, delta_max);
     else if rho < eta1
          delta = gamma1*delta;
