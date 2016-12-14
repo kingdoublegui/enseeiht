@@ -8,7 +8,7 @@ Jeu:
 	'avec' explorateur=[Explorateur]
 	// default: difficulte=Moyen
 	(=> 'difficulte' difficulte=Difficulte)?
-	composants+=Composant*
+	(composants+=Composant | comments+=Commentaire)*
 ;
 
 Composant:
@@ -21,6 +21,19 @@ Composant:
 	| Condition
 	| Choix
 	| Action
+;
+
+Commentaire:
+	CommentaireLigne
+	| CommentaireMultiLignes
+;
+
+CommentaireLigne:
+	'//' comment=STRING
+;
+
+CommentaireMultiLignes:
+	'/*' comments+=STRING+ '*/'
 ;
 
 Territoire:

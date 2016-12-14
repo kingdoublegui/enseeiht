@@ -128,4 +128,8 @@ public interface Afficheur {
 	 * @return le nombre d'éléments de la liste
 	 */
 	public int listerChemins(List<Chemin> chemins);
+	
+	/** Fin du jeu
+	 */
+	public void finJeu();
 }

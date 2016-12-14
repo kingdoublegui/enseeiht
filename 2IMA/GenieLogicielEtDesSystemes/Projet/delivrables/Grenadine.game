@@ -1,0 +1,18 @@
+jeu Grenadine dans Maison avec Etudiant
+territoire Maison couvre Cuisine Salon Couloir
+lieu Cuisine possede 1 Verre, 1 Eau, 1 Sirop position depart
+lieu Salon position fin
+chemin Couloir depuis Cuisine vers Salon passage obligatoire visible selon UneGrenadine
+explorateur Etudiant porte 2
+objet Verre mesure 1 transformable en 1 VerreEau selon UneEau en 1 VerreSirop selon UnSirop en 1 VerreGrenadine selon UnVerreSirop
+objet Eau mesure 1 transformable
+objet Sirop mesure 1 transformable
+objet VerreEau mesure 1 transformable en 1 VerreGrenadine selon UnSirop
+objet VerreSirop mesure 1 transformable en 1 VerreGrenadine selon UneEau
+objet VerreGrenadine mesure 1
+condition UneGrenadine possede exactement 1 VerreGrenadine
+condition UnVerre possede exactement 1 Verre
+condition UneEau possede exactement 1 Eau
+condition UnSirop possede exactement 1 Sirop
+condition UnVerreEau possede exactement 1 VerreEau
+condition UnVerreSirop possede exactement 1 VerreSirop

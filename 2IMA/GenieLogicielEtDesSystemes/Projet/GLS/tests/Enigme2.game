@@ -1,4 +1,4 @@
-jeu JeuEnigme dans Enonce avec Joueur difficulte facile
+jeu JeuEnigme2 dans Enonce avec Joueur difficulte facile
 territoire Enonce couvre Debut Succes Echec Enigme Initialisation BonChemin MauvaisChemin
 lieu Debut position depart
 lieu Succes position fin
@@ -15,7 +15,7 @@ choix Question propose BonneReponse selon EncoreTentative offre FinQuestion, Mau
 choix FinQuestion position fin
 action BonneReponse possede Reussite
 action MauvaiseReponse consomme 1 Tentative
-condition BonneFin possede Reussite
-condition MauvaiseFin possede exactement 0 Tentative
+decision BonneFin offre Question propose BonneReponse
+condition MauvaiseFin selon BonneFin operateur non
 condition PremiereQuestion possede exactement 3 Tentative
 condition EncoreTentative possede plus 1 Tentative

@@ -2,62 +2,15 @@ package modele;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Explorateur extends Composant {
-
+public class ExplorateurOld extends Composant {
+	
 	private int Poidsmax;
 	private List<PossessionConditionnee> possessions;
 	
-	public Explorateur(String name){
+	public ExplorateurOld(String name){
 		this.name=name;
 		this.Poidsmax=1;
 		this.possessions = new ArrayList<PossessionConditionnee>();
-	}
-
-	public void addPossessionConditionnee(PossessionConditionnee nvPoss) {
-		// Si c'est un objet, on l'ajoute aux objets d
-		if (nvPoss.getPossession() instanceof Objet) {
-			Objet nvObj = (Objet) nvPoss.getPossession();
-			
-			// On cherche une instance similaire de cet objet
-			for (Objet obj : objets) {
-				if (nvObj.sameAs(obj)) {
-					// Si un tel objet existe, on somme les quantités
-					obj.addQuantite(nvObj.getQuantite());
-					return;
-				}
-			}
-			// L'explorateur ne possède pas cet objet, on l'ajoute
-			objets.add(nvObj);
-			return;
-
-		} else if (nvPoss.getPossession() instanceof Connaissance) {
-			Connaissance nvConn = (Connaissance) nvPoss.getPossession();
-
-			// On cherche une instance de cette connaissance
-			for (Connaissance c : connaissances) {
-				if (c.getName().equals(nvConn.getName())) {
-					// Si on possède déjà la connaissance, on ne fait rien
-					return;
-				}
-			}
-			// L'explorateur ne possède pas cette connaissance, on l'ajoute
-			connaissances.add(nvConn);
-			return;
-		} else {
-			throw new RuntimeException();
-		}
-	}
-
-	public void addConnaissances(Connaissance nvConn) {
-		// On cherche une instance de cette connaissance
-		for (Connaissance c : connaissances) {
-			if (c.getName().equals(nvConn.getName())) {
-				// Si on possède déjà la connaissance, on ne fait rien
-				return;
-			}
-		}
-		// L'explorateur ne possède pas cette connaissance, on l'ajoute
-		connaissances.add(nvConn);	
 	}
 	
 	public void addPossessionConditionnee(PossessionConditionnee nvposs){
@@ -151,9 +104,9 @@ public class Explorateur extends Composant {
 	
 	public boolean connaissancePossedee(Connaissance c){
 		boolean res = false;
-		for (Possession p : this.possessions){
-			if(p instanceof Connaissance){
-				Connaissance conn = (Connaissance) p;
+		for (PossessionConditionnee p : this.possessions){
+			if(p.getPossession() instanceof Connaissance){
+				Connaissance conn = (Connaissance) p.getPossession();
 				if(conn.getName().equals(c.getName())){
 					res = true;
 				}
@@ -161,17 +114,20 @@ public class Explorateur extends Composant {
 		}
 		return res;
 	}
-	
-	public void consommeObjet(Objet o){
-		for(Objet obj : this.getObjets()){
-			if(o.getObjet().getName().equals(obj.getObjet().getName())){
-				int quantite = obj.getQuantite();
-				quantite = quantite-o.getQuantite();
-				if(quantite <= 0){ //enlever l'objet
-					this.getObjets().remove(obj);
+
+	public void consommeObjet(Objet objConsomme){
+		for(PossessionConditionnee poss : this.possessions){
+			if (poss.getPossession() instanceof Objet) {
+				Objet obj = (Objet) poss.getPossession();
+				if(obj.sameAs(objConsomme)) {
+					obj.addQuantite(-objConsomme.getQuantite());
+					if(obj.getQuantite() <= 0){ //enlever l'objet
+						this.possessions.remove(poss);
+					}
+					return;
 				}
 			}
 		}
 	}
-	
+
 }
