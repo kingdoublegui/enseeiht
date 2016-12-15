@@ -11,7 +11,7 @@ delta = delta0;
 nbIterations = 50;
 k = 0;
 
-epsilon = 1/10^8;
+epsilon = 10^-3;
 
 var = sym('x', [length(x) 1]);
  
@@ -21,18 +21,23 @@ hess = hessian(f, var);
 g = eval(subs(grad, var, x));
 H = eval(subs(hess, var, x));
 s = pasCauchy(g, H, delta);
+c = num2cell(x);
 
-while k < nbIterations && ~isequal(s,0)
-    
-    c = num2cell(x);
+testArret0 = false;
+testArret1 = false;
+testArret2 = false;
+g0 = eval(subs(grad, var, x0));
+
+while (k < nbIterations) && ~testArret0
+    x_ancien = x;
     f_x = f(c{:});
     c = num2cell(x+s);
     f_xs = f(c{:});
     m_x = f_x;
     m_xs = q(f_x, g, H, s);
-
-    rho = (f_x-f_xs)/(m_x-m_xs);
     
+    rho = (f_x-f_xs)/(m_x-m_xs);
+
     if rho >= eta1
         x = x+s;
     end
@@ -46,9 +51,13 @@ while k < nbIterations && ~isequal(s,0)
     g = eval(subs(grad, var, x));
     H = eval(subs(hess, var, x));
     s = pasCauchy(g, H, delta);
+    c = num2cell(x);
     
     k = k+1;
     t = k;
+    testArret0 = norm(g) <= epsilon*(norm(g0) + sqrt(eps));
+    testArret1 = norm(x - x_ancien) <= epsilon*(norm(x_ancien) + sqrt(eps));
+    testArret2 = norm(f(c{:}) - f_x) <= epsilon*(norm(f_x) + sqrt(eps));
 end
 
 end

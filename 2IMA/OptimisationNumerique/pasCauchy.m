@@ -1,32 +1,20 @@
-function pas = pasCauchy(g, H, delta)
-    % Calcul du pas de Cauchy
-    % q(s) = g'*s + (1/2)s'*H*s
-    % p(t) = q(-t*g) -> intervalle non intuitif
-    % p(alpha) = q(-alpha*(delta*g/norm(g))) avec alpha entre 0 et 1
-
-    c = -delta * (g / norm(g));
-    % Courbe concave, donc admet un minimum
-    if (c' * H * c >= 0)
-        p0 = 0;
-        p1 = g' * c + 1/2* c' * H * c;
-        if (p0 < p1)
-            pas = zeros(size(c));
-        else
-            pas = c;
+function s = pasCauchy(g, H, delta)
+    c = g' * H * g;
+    ng = norm(g);
+    
+    % Calcul de s
+    if c > 0
+        t = ng^2 / c;
+        if t > delta / ng
+            t = delta / ng;
         end
-    % Courbe convexe
     else
-        alpha0 = norm(c' \ (c' * H * c));
-        if (alpha0 <= 1)
-            pas = -H \ g;
+        if ng == 0
+            t = 1;
         else
-            p0 = 0;
-            p1 = g' * c + (1/2) * c' * H * c;
-            if (p0 < p1)
-                pas = zeros(size(c));
-            else
-                pas = c;
-            end
+            t = delta / ng;
         end
     end
+    
+    s = - t * g;
 end

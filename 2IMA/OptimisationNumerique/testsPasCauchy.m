@@ -17,9 +17,9 @@ H1 = [7 0; 0 2];
 % Quadratique 2
 g2 = [6; 2];
 H2 = [7 0; 0 2];
-pasCauchy(g2, H2, delta);
+pasCauchy(g2, H2, delta)
 
 % Quadratique 2
 g3 = [-2; 1];
 H3 = [-2 0; 0 10];
-pasCauchy(g3, H3, delta);
+pasCauchy(g3, H3, delta)
