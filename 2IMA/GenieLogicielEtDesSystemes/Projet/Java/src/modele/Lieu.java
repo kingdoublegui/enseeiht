@@ -6,17 +6,17 @@ public class Lieu extends ComposantTerritoire {
 
 	private Emplacement type;
 	private List<Personne> personnes;
-	private List<Condition> conditions;
+	private List<Condition> conditionsDeposerObjets;
 	private List<DescriptionConditionnee> descriptions;
-	private List<PossessionConditionnee> possession;
+	private List<PossessionConditionnee> possessions;
 	
 	public Lieu(String nom) {
 		this.name=nom;
 		this.type= Emplacement.intermediaire;
 		this.personnes = new ArrayList<Personne>();
-		this.conditions = new ArrayList<Condition>();
+		this.conditionsDeposerObjets = new ArrayList<Condition>();
 		this.descriptions = new ArrayList<DescriptionConditionnee>();
-		this.possession = new ArrayList<PossessionConditionnee>();
+		this.possessions = new ArrayList<PossessionConditionnee>();
 	}
 	
 	public void setPosition(Emplacement e){
@@ -28,7 +28,7 @@ public class Lieu extends ComposantTerritoire {
 	}
 	
 	public void addCondition(Condition c){
-		this.conditions.add(c);
+		this.conditionsDeposerObjets.add(c);
 	}
 	
 	public void addDescription(DescriptionConditionnee d){

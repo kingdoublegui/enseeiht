@@ -2,7 +2,6 @@ package modele;
 
 public class Objet extends Possession{
 
-	
 	private int quantite;
 	private ObjetElementaire objet;
 	

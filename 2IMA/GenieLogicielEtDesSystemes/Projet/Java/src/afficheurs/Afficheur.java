@@ -49,17 +49,39 @@ public interface Afficheur {
 	 */
 	public void nouvelleConnaissance(Connaissance connaissance);
 	
+	/** Informe le joueur qu'il a choisi un objet.
+	 * 
+	 * @param objet nouvel objet
+	 */
+	public void choisirObjet(Objet objet);
+	
 	/** Informe le joueur qu'il possède un nouvel objet.
 	 * 
 	 * @param objet nouvel objet
 	 */
 	public void nouvelObjet(Objet objet);
 	
+	/** Informe le joueur qu'il n'a pas assez de place pour acquérir un objet.
+	 * 
+	 * @param objet trop gros
+	 */
+	public void placeInsuffisante(Objet objet);
+	
+	/** Informe le joueur qu'il ne peut pas poser un objet ici un objet.
+	 */
+	public void depotImpossible();
+	
 	/** Informe le joueur qu'il depose un objet.
 	 * 
 	 * @param objet  objet deposé
 	 */
 	public void deposerObjet(Objet objet);
+	
+	/** Informe le joueur qu'il consomme un objet.
+	 * 
+	 * @param objet  objet consommé
+	 */
+	public void consommerObjet(Objet objet);
 	
 	/** Affiche l'interaction avec un personnage
 	 * 

@@ -1,0 +1,122 @@
+.main {
+	position: fixed;
+	top: 0;
+	bottom: 30px;
+	left: 0;
+	right: 0;
+	background-color: #ccc;
+}
+
+.footer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 30px;
+	line-height: 30px;
+	font-size: 30px;
+	background-color: #222;
+	color: #fff;
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.footer .score {
+	flex: 1 1;
+	text-align: center;
+}
+
+.footer .settings {
+	flex: 0 0;
+	cursor: pointer;
+	padding: 0px 5px;
+}
+
+.overlay{
+	z-index: 10;
+	position: fixed;
+	top: 0;
+	bottom: 30px;
+	left: 0;
+	right: 0;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+
+.connexion-panel{
+	color: #fff;
+	background-color: #222;
+	border-radius: 2px;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .3);
+	padding: 20px;
+	text-align: center;
+}
+
+.game {
+	height: 100%;
+	width: 100%;
+}
+
+.game-2 .tile {
+	height: 50%;
+	width: 50%;
+}
+.game-3 .tile {
+	height: 33.33%;
+	width: 33.33%;
+}
+
+.tile {
+	float: left;
+	cursor: pointer;
+	transition: box-shadow .3s ease;
+}
+
+.tile:hover {
+	/*opacity: .9;*/
+}
+
+.tile:active {
+	opacity: .7;
+}
+
+#red {
+	background-color: #f44336;
+}
+
+#purple {
+	background-color: #9c27b0;
+}
+
+#blue {
+	background-color: #2196f3;
+}
+
+#green {
+	background-color: #4caf50;
+}
+
+#yellow {
+	background-color: #ffeb3b;
+}
+
+#orange {
+	background-color: #ff9800;
+}
+
+#white {
+	background-color: #fff;
+}
+
+#grey {
+	background-color: #9e9e9e;
+}
+
+#black {
+	background-color: #eee;
+}
+
+.hidden {
+	display: none;
+}

@@ -1,0 +1,302 @@
+-- @path Game=/fr.enseeiht.gls.game/model/generated/Game.ecore
+-- @path Petrinet=/fr.enseeiht.gls.game.petrin/petrinet.ecore
+
+module gameToPetrinet;
+create OUT : Petrinet from IN : Game;
+
+helper context Game!ActionConditionnee
+def: actionFin(seq : Sequence(Game!ActionConditionnee)): Sequence(Game!ActionConditionnee) =
+	if self.choixOfferts -> one(c | c.choix.position = #fin) then
+		Sequence{self}
+	else (
+		if seq -> excludes(self) then
+			self.choixOfferts -> collect(a | a.choix.actions -> collect(c | c.actionFin(seq -> append(self)))) -> flatten()
+		else
+			Sequence{}
+		endif
+	)
+	endif;
+
+helper context Game!Jeu
+def: quantiteObjet(o : Game!ObjetElementaire): Integer =
+	if self.explorateur.possessions -> select(pc | pc.possession.objet = o) -> isEmpty() then
+		0
+	else
+		self.explorateur.possessions -> select(pc | pc.possession.objet = o) -> collect(pc | pc.possession.quantite) -> sum()
+	endif;
+
+rule Jeu {
+	from j : Game!Jeu
+	to 
+		pn : Petrinet!PetriNet( 
+			name <- j.name		
+		)
+	do {
+		thisModule.Difficulte(j.difficulte);
+		j.composants -> select(o | o.oclIsTypeOf(Game!ObjetElementaire))
+					 -> collect(o | thisModule.ObjetExplo(o));
+		j.composants -> select(c | c.oclIsTypeOf(Game!Connaissance))
+					 -> collect(c | thisModule.ConnaissanceExplo(c));
+		thisModule.Explorateur(j.explorateur);
+		j.territoire.composants -> select(c | c.oclIsTypeOf(Game!Chemin))
+								-> collect(c | thisModule.Chemin(c));
+		pn.node <- Petrinet!Place.allInstances();
+		pn.node <- Petrinet!Transition.allInstances();
+		pn.arc  <- Petrinet!Arc.allInstances();
+	}
+}
+
+unique lazy rule ObjetExplo {
+	from o : Game!ObjetElementaire
+	to
+		objetExplo : Petrinet!Place(
+			name <- o.name,
+			nbJetons <- Game!Jeu.allInstances() -> first() -> quantiteObjet(o)
+		)
+	do {
+		--if(o.transformabilite = #transformable){
+		--	o.conditionsTransformabilite -> collect(t | t.objets)
+		--								-> collect(ob | thisModule.transformation(o, ob));
+		--}
+	}
+}
+
+rule transformation(oe : Game!ObjetElementaire, o : Game!Objet){
+	to
+		transfo : Petrinet!Arc(
+			source <- thisModule.ObjetExplo(oe),
+			target <- thisModule.ObjetExplo(o.objet),
+			poids <- o.quantite,
+			readArc <- false
+		)
+}
+
+unique lazy rule ConnaissanceExplo {
+	from c : Game!Connaissance
+	to
+		connaisanceExplo : Petrinet!Place(
+			name <- c.name,
+			nbJetons <- 0
+		)
+}
+
+unique lazy rule Difficulte {
+	from d : Game!Difficulte
+	to 
+		facile : Petrinet!Place(
+			name <- 'Facile',
+			nbJetons <-	if(d = #facile) then 1 else 0 endif
+		),
+		moyen : Petrinet!Place(
+			name <- 'Moyen',
+			nbJetons <-	if(d = #moyen) then 1 else 0 endif
+		),
+		difficile : Petrinet!Place(
+			name <- 'Difficile',
+			nbJetons <-	if(d = #difficile) then 1 else 0 endif
+		)
+}
+
+unique lazy rule Lieu {
+	from l : Game!Lieu
+	to
+		lieu : Petrinet!Place(
+			name <- l.name,
+			nbJetons <- if l.position = #depart then 1 else 0 endif
+		)
+	do {
+		for(p in l.personnes){
+			for(c in p.choix -> collect(ch | ch.actions -> collect(a | a.actionFin(Sequence{}))) -> flatten()){
+				thisModule.ChoixToLieu(lieu, c);
+			}
+			thisModule.LieuToPersonne(lieu, p);
+		}
+	}
+}
+
+rule LieuToPersonne(lieu : Petrinet!Place, p : Game!Personne) {
+	to 
+		lieuToPersonne : Petrinet!Arc(
+			source <- lieu,
+			target <- thisModule.Personne(p),
+			poids <- 1,
+			readArc <- false
+		)
+}
+
+rule ChoixToLieu(lieu : Petrinet!Place, ac : Game!ActionConditionnee){
+	to choixToLieu : Petrinet!Arc(
+			source <- thisModule.ActionConditionnee(ac),
+			target <- lieu,
+			poids <- 1,
+			readArc <- false
+		)
+}
+
+lazy rule Chemin {
+	from c : Game!Chemin
+	to
+		chemin : Petrinet!Transition(
+			name <- c.name
+		),
+		cheminVisible : Petrinet!Place(
+			name <- c.name + 'Visible',
+			nbJetons <- if c.visibilite = #visible then 1 else 0 endif
+		),
+		cheminVisibleToChemin : Petrinet!Arc(
+			source <- cheminVisible,
+			target <- chemin,
+			poids <- 1,
+			readArc <- true
+		),
+		cheminOuvert : Petrinet!Place(
+			name <- c.name + 'Ouvert',
+			nbJetons <- if c.ouverture = #ouvert then 1 else 0 endif
+		),
+		cheminOuvertToChemin : Petrinet!Arc(
+			source <- cheminOuvert,
+			target <- chemin,
+			poids <- 1,
+			readArc <- true
+		),
+		fromLieu : Petrinet!Arc(
+			source <- thisModule.Lieu(c.depart),
+			target <- chemin,
+			poids <- 1,
+			readArc <- false
+		),
+		toLieu : Petrinet!Arc(
+			source <- chemin,
+			target <- thisModule.Lieu(c.fin),
+			poids <- 1,
+			readArc <- false
+		)
+}
+
+lazy rule Personne {
+	from p : Game!Personne
+	to
+		personne : Petrinet!Transition(
+			name <- p.name
+		)
+	do {
+		for(c in p.choix){
+			thisModule.PersonneToChoix(personne, c);
+		}
+	}
+}
+
+rule PersonneToChoix(personne : Petrinet!Place, c : Game!Choix) {
+	to 
+		personneToChoix : Petrinet!Arc(
+			source <- personne,
+			target <- thisModule.Choix(c),
+			poids <- 1,
+			readArc <- false
+		)
+}
+
+lazy rule Explorateur {
+	from e : Game!Explorateur
+	to
+		poids : Petrinet!Place(
+			name <- 'Poids',
+			nbJetons <- e.poidsMax
+		)
+	do {
+		for(pc in e.possessions){
+			if(pc.possession -> oclIsTypeOf(Game!Objet)){
+				poids.nbJetons <- poids.nbJetons - pc.possession.quantite;
+			}
+		}
+	}
+}
+
+unique lazy rule PossessionConditionneeExplo {
+	from pc : Game!PossessionConditionnee
+	to 
+		possessionConditionnee : Petrinet!Place(
+			name <- if pc.possession -> oclIsTypeOf(Game!Objet) then pc.possession.objet.name else pc.possession.connaissance.name endif,
+			nbJetons <-	
+				if pc.conditions -> size() > 0 then
+					if pc.possession -> oclIsTypeOf(Game!Objet) then pc.possession.quantite else 1 endif
+				else
+					0
+				endif
+		)
+}
+
+unique lazy rule Choix {
+	from c : Game!Choix
+	to
+		choix : Petrinet!Place(
+			name <- c.name,
+			nbJetons <- 0
+		)
+	do {
+		if(c.position <> #fin){
+			for(ac in c.actions){
+				thisModule.ChoixToAction(choix, ac);
+			}
+		}
+	}
+}
+
+rule ChoixToAction(choix : Petrinet!Place, ac : Game!ActionConditionnee){
+	to choixToAction : Petrinet!Arc(
+			source <- choix,
+			target <- thisModule.ActionConditionnee(ac),
+			poids <- 1,
+			readArc <- false
+		)
+}
+
+unique lazy rule ActionConditionnee {
+	from ac : Game!ActionConditionnee
+	to
+		actionConditionnee : Petrinet!Transition(
+			name <- ac.action.name
+		)
+	do {
+		for(o in ac.action.objetsConsommes){
+			thisModule.objetToAction(actionConditionnee, o);
+		}
+		for(pc in ac.action.possessions){
+			if(pc.possession.oclIsTypeOf(Game!Objet)){
+				thisModule.actionToObjet(actionConditionnee, pc.possession.objet);
+			}else{
+				thisModule.actionToConnaissance(actionConditionnee, pc.possession.connaissance);
+			}
+		}
+	}
+}
+
+rule objetToAction(actionConditionnee : Petrinet!Transition, o : Game!Objet){
+	to
+		objetToAction : Petrinet!Arc(
+			source <- thisModule.ObjetExplo(o.objet),
+			target <- actionConditionnee,
+			poids <- o.quantite,
+			readArc <- false
+		)
+}
+
+rule actionToObjet(actionConditionnee : Petrinet!Transition, o : Game!Objet){
+	to
+		objetToAction : Petrinet!Arc(
+			source <- actionConditionnee,
+			target <- thisModule.ObjetExplo(o.objet),
+			poids <- o.quantite,
+			readArc <- false
+		)
+}
+
+rule actionToConnaissance(actionConditionnee : Petrinet!Transition, c : Game!Connaissance){
+	to
+		objetToAction : Petrinet!Arc(
+			source <- actionConditionnee,
+			target <- thisModule.ConnaissanceExplo(c),
+			poids <- 1,
+			readArc <- false
+		)
+}

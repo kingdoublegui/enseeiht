@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ASCII"?>
+<game:Jeu xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:game="http://www.enseeiht.fr/gls/Game" name="Grenadine" territoire="//@composants.0" explorateur="//@composants.4">
+  <composants xsi:type="game:Territoire" name="Maison" composants="//@composants.1 //@composants.2 //@composants.3"/>
+  <composants xsi:type="game:Lieu" name="Cuisine" position="depart">
+    <possessions>
+      <possession xsi:type="game:Objet" quantite="1" objet="//@composants.5"/>
+    </possessions>
+    <possessions>
+      <possession xsi:type="game:Objet" quantite="1" objet="//@composants.6"/>
+    </possessions>
+    <possessions>
+      <possession xsi:type="game:Objet" quantite="1" objet="//@composants.7"/>
+    </possessions>
+  </composants>
+  <composants xsi:type="game:Lieu" name="Salon" position="fin"/>
+  <composants xsi:type="game:Chemin" name="Couloir" depart="//@composants.1" fin="//@composants.2" obligation="obligatoire" conditionsVisibilite="//@composants.11"/>
+  <composants xsi:type="game:Explorateur" name="Etudiant" poidsMax="2"/>
+  <composants xsi:type="game:ObjetElementaire" name="Verre" taille="1" transformabilite="transformable">
+    <conditionsTransformabilite conditions="//@composants.13">
+      <objets quantite="1" objet="//@composants.8"/>
+    </conditionsTransformabilite>
+    <conditionsTransformabilite conditions="//@composants.14">
+      <objets quantite="1" objet="//@composants.9"/>
+    </conditionsTransformabilite>
+    <conditionsTransformabilite conditions="//@composants.16">
+      <objets quantite="1" objet="//@composants.10"/>
+    </conditionsTransformabilite>
+  </composants>
+  <composants xsi:type="game:ObjetElementaire" name="Eau" taille="1" transformabilite="transformable"/>
+  <composants xsi:type="game:ObjetElementaire" name="Sirop" taille="1" transformabilite="transformable"/>
+  <composants xsi:type="game:ObjetElementaire" name="VerreEau" taille="1" transformabilite="transformable">
+    <conditionsTransformabilite conditions="//@composants.14">
+      <objets quantite="1" objet="//@composants.10"/>
+    </conditionsTransformabilite>
+  </composants>
+  <composants xsi:type="game:ObjetElementaire" name="VerreSirop" taille="1" transformabilite="transformable">
+    <conditionsTransformabilite conditions="//@composants.13">
+      <objets quantite="1" objet="//@composants.10"/>
+    </conditionsTransformabilite>
+  </composants>
+  <composants xsi:type="game:ObjetElementaire" name="VerreGrenadine" taille="1"/>
+  <composants xsi:type="game:Condition" name="UneGrenadine">
+    <possessions>
+      <objet quantite="1" objet="//@composants.10"/>
+    </possessions>
+  </composants>
+  <composants xsi:type="game:Condition" name="UnVerre">
+    <possessions>
+      <objet quantite="1" objet="//@composants.5"/>
+    </possessions>
+  </composants>
+  <composants xsi:type="game:Condition" name="UneEau">
+    <possessions>
+      <objet quantite="1" objet="//@composants.6"/>
+    </possessions>
+  </composants>
+  <composants xsi:type="game:Condition" name="UnSirop">
+    <possessions>
+      <objet quantite="1" objet="//@composants.7"/>
+    </possessions>
+  </composants>
+  <composants xsi:type="game:Condition" name="UnVerreEau">
+    <possessions>
+      <objet quantite="1" objet="//@composants.8"/>
+    </possessions>
+  </composants>
+  <composants xsi:type="game:Condition" name="UnVerreSirop">
+    <possessions>
+      <objet quantite="1" objet="//@composants.9"/>
+    </possessions>
+  </composants>
+</game:Jeu>

@@ -7,7 +7,9 @@ public class AfficheurTexte implements Afficheur {
 	
 	@Override
 	public void afficherLieu(Lieu lieu) {
+		System.out.println();
 		System.out.println("Vous êtes dans " + lieu.getName());
+		System.out.println();
 	}
 
 	@Override
@@ -67,15 +69,35 @@ public class AfficheurTexte implements Afficheur {
 	}
 
 	@Override
+	public void choisirObjet(Objet objet) {
+		System.out.println("Vous avez choisi : " + objet.getName());
+	}
+	
+	@Override
 	public void nouvelObjet(Objet objet) {
 		System.out.println("Vous venez d'acquérir : " + objet.getQuantite() + " " + objet.getName());		
 	}
-
+	
+	@Override
+	public void placeInsuffisante(Objet objet) {
+		System.out.println("Pas assez de place pour acquérir "+objet);
+	}
+	
+	@Override
+	public void depotImpossible() {
+		System.out.println("Vous n'avez pas le droit de déposer des objets ici");
+	}
+	
 	@Override
 	public void deposerObjet(Objet objet) {	
-		System.out.println("Vous venez de déposer l'objet : " + objet.getName());		
+		System.out.println("Vous venez de déposer " + objet);		
 	}
 
+	@Override
+	public void consommerObjet(Objet objet) {	
+		System.out.println("Vous venez de consommer " + objet);		
+	}
+	
 	@Override
 	public void interaction(Personne personne) {
 		System.out.println(personne.getName() + " vous propose les actions suivantes");

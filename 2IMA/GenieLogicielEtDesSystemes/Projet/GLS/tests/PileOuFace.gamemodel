@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<game:Jeu xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:game="http://www.enseeiht.fr/gls/Game" name="PileOuFace" territoire="//@composants.0" explorateur="//@composants.6">
+  <composants xsi:type="game:Territoire" name="Rue" composants="//@composants.1 //@composants.2 //@composants.3 //@composants.4 //@composants.5"/>
+  <composants xsi:type="game:Lieu" name="Interpelation" position="depart"/>
+  <composants xsi:type="game:Lieu" name="Richesse" position="fin"/>
+  <composants xsi:type="game:Lieu" name="Ruine" position="fin"/>
+  <composants xsi:type="game:Chemin" name="Pile" depart="//@composants.1" fin="//@composants.2" obligation="obligatoire" conditionsVisibilite="//@composants.7"/>
+  <composants xsi:type="game:Chemin" name="Face" depart="//@composants.1" fin="//@composants.3"/>
+  <composants xsi:type="game:Explorateur" name="Passant"/>
+  <composants xsi:type="game:Condition" name="Lance" probabilite="50"/>
+</game:Jeu>
