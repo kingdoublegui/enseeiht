@@ -1,8 +1,0 @@
-package modele;
-import java.util.List;
-
-public class Choix extends Composant {
-	
-	private List<Condition> conditions;
-
-}

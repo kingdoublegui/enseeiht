@@ -19,7 +19,7 @@ public class AfficheurTexte implements Afficheur {
 		
 		System.out.println("******************* Objets Visibles *******************");
 		listerObjets(objetsVisibles);
-		System.out.println("***************** Personnes Visibles ******************");
+		System.out.println("***************** Personnes  Visibles *****************");
 		listerPersonnes(personnesVisibles);
 		System.out.println("*******************************************************");
 
@@ -37,7 +37,7 @@ public class AfficheurTexte implements Afficheur {
 
 	@Override
 	public void emprunterChemin(Chemin chemin) {
-		System.out.println("Vous emprunter " + chemin.getDescription());
+		System.out.println("Vous empruntez " + chemin.getDescription());
 	}
 	
 	@Override
@@ -142,7 +142,7 @@ public class AfficheurTexte implements Afficheur {
 		int indice = 0;
 		
 		if (connaissances.size() == 0) {
-			System.out.println("Il n'y a aucunes connaissances");
+			System.out.println("Il n'y a aucune connaissances");
 		} 
 		for (Connaissance c : connaissances){
 			indice++;
@@ -177,5 +177,10 @@ public class AfficheurTexte implements Afficheur {
 			System.out.println("   " + indice + ") " + ch.getDescription()); 
 		}
 		return indice;
+	}
+	
+	@Override
+	public void finJeu() {
+		System.out.println("Vous avez fini le jeu !");
 	}
 }

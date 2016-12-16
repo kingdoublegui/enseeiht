@@ -1,5 +1,0 @@
-package modele;
-
-public class Action extends Composant{
-
-}

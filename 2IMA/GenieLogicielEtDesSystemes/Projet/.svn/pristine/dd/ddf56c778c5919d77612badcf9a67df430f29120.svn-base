@@ -1,6 +1,0 @@
-
-public class Explorateur extends Composant {
-	
-	private int Poidsmax;
-
-}

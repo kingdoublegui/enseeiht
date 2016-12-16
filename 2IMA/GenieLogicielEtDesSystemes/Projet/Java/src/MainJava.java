@@ -171,10 +171,10 @@ public class MainJava {
 		
 		// Fill ChoixConditionnes
 		questionEncoreTentativeChoixConditionne.setChoix(question);
-		questionEncoreTentativeChoixConditionne.addContion(encoreTentative);
+		questionEncoreTentativeChoixConditionne.addCondition(encoreTentative);
 		finQuestionChoixConditionne.setChoix(finQuestion);
 		finQuestionMauvaiseFinChoixConditionne.setChoix(finQuestion);
-		finQuestionMauvaiseFinChoixConditionne.addContion(mauvaiseFin);
+		finQuestionMauvaiseFinChoixConditionne.addCondition(mauvaiseFin);
 		
 		// Fill ActionsConditionnees
 		mauvaiseReponseActionConditionnee.setAction(mauvaiseReponse);
