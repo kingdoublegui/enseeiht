@@ -97,11 +97,20 @@ Visualiser les lieux et leurs connections et un point essentiel a la progression
 Les interactions furent plus techniques a implementer, notamment du fait des multiples conditions sur ces objets. Une interaction se constitue par une suite de choix et d'action. Les actions etant proposee par les choix, elles sont dans ceux -ci, puis reliees aux choix vers lesquelles elles menent.
 
 \section{Verification en PetriNet}
-\subsection{Metamodele et contraintes dynamiques}
+Afin de vérifier les contraintes dynamiques du jeu via l'outil Tina, il a était nécessaire de pouvoir réaliser un réseau de Pétri modélisant le plus précisement possible le jeu.
 
 \subsection{Transformation vers Petrinet}
+La transformation vers Petrinet s'est faite via l'outil ATL.\\
+Pour contourner un problème d'instanciations non-maitrisées (par exemple, des objets présents dans des conditions se retrouvaient instanciés comme étant des objets réels), nous avons utilisé et couplé les \textit{lazy rules}, les \textit{called rules} et les sections impératives \textit{do}. Ainsi, le modèle est parcouru manuellement et les éléments sont instanciés de façon maitrisée : deux éléments ne seront pas traités de la même façon selon leur utilité réelle déterminée par leur position dans le modèle.\\
+De plus, pour représentater les conditions du type \textit{"quantité d'un objet est supérieur / inférieure / égale à $n$"}, nous avons utilisés la combinaison d'arc classiques et d'arcs inhibiteurs découverts lors du parcours de la documentation de l'outil \textit{nd}.\\
+Ainsi, bien que la transformation ne soit pas complète (les conditions ne sont pas présentes, la transformation des objets et le fait de poser un objet dans un lieu ne sont pas modélisés), elle permet d'obtenir une bonne représentation du jeu sous forme de réseau de Pétri.
+\newline\newline
+\includegraphics[width=\textwidth]{images/petrinet}
+\newline\newline
 
 \subsection{Terminaison du jeu}
+Une transformation vers LTL a été créée dans le but de vérifier les contraintes dynamiques. Des templates ont été créés pour faciliter l'écriture de relations logiques.\\
+Les contraintes dynamiques actuellement testés sont la terminaison possible du jeu ainsi que l'unicité de la présence dans un lieu (pas de dédoublement de l'explorateur).
 
 \section{Generation de code}
 Nous avons décider d'implanter ce jeu en Java.
