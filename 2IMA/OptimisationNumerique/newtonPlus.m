@@ -11,7 +11,7 @@ while ~((abs(phi(lambda_min))  < epsilon) || (abs(phi(lamdaMax))  < epsilon))
     
     lambda_n = lambda + phi(lambda)/phi_p_lambda;
     
-    if (lambda_min < lambda_n < lambda_max) && (abs(phi(lambda_n)) < 1/2*abs(phi(lambda)))
+    if (lambda_min < lambda_n) && (lambda_n < lambda_max) && (abs(phi(lambda_n)) < 1/2*abs(phi(lambda)))
         lambda = lambda_n;
     else
         lambda_d = (lambda_min+lambda_max)/2;

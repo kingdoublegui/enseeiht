@@ -11,7 +11,8 @@ if (H >= 0) && (H*sval == -g)
     lambda = 0;
 else
     [Q, L] = eig(H);
-    if Q(:, 1)*g ~= 0
+    indice = 1;
+    while (indice <= size(Q, 1)) && (Q(:, indice)*g ~= 0)
         syms l;
         
     else
