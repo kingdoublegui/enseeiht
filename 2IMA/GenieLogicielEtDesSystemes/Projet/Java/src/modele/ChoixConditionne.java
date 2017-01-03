@@ -14,7 +14,7 @@ public class ChoixConditionne {
 		this.conditions = new ArrayList<Condition>();
 	}
 	
-	public void addContion(Condition c){
+	public void addCondition(Condition c){
 		this.conditions.add(c);
 	}
 	

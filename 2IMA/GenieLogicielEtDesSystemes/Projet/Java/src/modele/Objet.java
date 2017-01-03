@@ -39,4 +39,17 @@ public class Objet extends Possession{
 	public void addQuantite(int qte) {
 		this.quantite += qte;
 	}
+	
+	@Override
+	public String getName() {
+		return this.objet.getName();
+	}
+	
+	public String toString() {
+		return this.quantite + " " + this.objet.getName();
+	}
+	
+	public boolean sameAs(Objet o){
+		return this.objet.equals(o.getObjet());
+	}
 }

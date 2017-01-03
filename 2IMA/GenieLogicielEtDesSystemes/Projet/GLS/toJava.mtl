@@ -29,7 +29,6 @@ public class [jeu.name.toUpperFirst()/] {
 		 * Fill all elements
 		 */
 		[jeu.fillJeu()/]
-		[jeu.fillComposants()/]
 		[jeu.fillDependencies()/]
 		[jeu.fillComposants()/]
 

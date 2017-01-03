@@ -35,40 +35,71 @@ public class Lieu extends ComposantTerritoire {
 		this.descriptions.add(d);
 	}
 	
-	public void addPossessionConditionnee(PossessionConditionnee p){
-		this.possession.add(p);
+	public void addPossessionConditionnee(PossessionConditionnee nvposs){
+		// Si c'est un objet, on l'ajoute aux objets d
+		if (nvposs.getPossession() instanceof Objet) {
+			// On cherche une instance similaire de cet objet
+			for (PossessionConditionnee p : possessions) {
+				if (p.getPossession() instanceof Objet) {
+					if (((Objet) p.getPossession()).getObjet().equals(((Objet)nvposs.getPossession()).getObjet())) {
+						// Si un tel objet existe, on somme les quantités
+						((Objet) p.getPossession()).addQuantite(((Objet)nvposs.getPossession()).getQuantite());
+						return;
+					}
+				}
+			}
+			// L'explorateur ne possède pas cet objet, on l'ajoute
+			possessions.add(nvposs);
+			return;
+			
+		} else if (nvposs.getPossession() instanceof Connaissance){
+			// On cherche une instance de cette connaissance
+			for (PossessionConditionnee p : possessions) {
+				if (p.getPossession() instanceof Connaissance) {
+					if (((Connaissance) p.getPossession()).getName().equals(((Connaissance) nvposs.getPossession()).getName())) {
+						// Si on possède déjà la connaissance, on ne fait rien
+						return;
+					}
+				}
+			}
+			// L'explorateur ne possède pas cette connaissance, on l'ajoute
+			possessions.add(nvposs);
+			return;
+		} else {
+			this.possessions.add(nvposs);
+		}
 	}
+	
 	 /** Retire un objet de la liste des possessions conditionnées
 	  * 
 	  * @param o objet a retirer
-	  * @return true si l'opération a réussie, false sinon
 	  */
-	public boolean rmObjet(Objet o) {
-		for (PossessionConditionnee p : possession) {
+	public void rmObjet(Objet o) {
+		for (PossessionConditionnee p : possessions) {
 			if (p.getPossession() instanceof Objet) {
 				if (((Objet) p.getPossession()).getObjet().equals(o.getObjet())) {
 					// Si un tel objet existe en qté suffisante, on retire la quantité prise
 					if (((Objet) p.getPossession()).getQuantite() == o.getQuantite()) {
-						possession.remove(p);
-						return true;
+						possessions.remove(p);
+						return;
 					} else if (((Objet) p.getPossession()).getQuantite() > o.getQuantite()) {
 						((Objet) p.getPossession()).addQuantite(-o.getQuantite());
-						return true;
+						return;
 					} else {
 						// quantité insuffisante
-						return false;
+						return;
 					}
 				}
 			}
 		}
-		return false;
 	}
 
 	public List<Objet> getObjetsVisibles(){
 		ArrayList<Objet> res = new ArrayList<Objet>();
-		for(PossessionConditionnee p : this.possession){
+		for(PossessionConditionnee p : this.possessions){
 			if(p.getPossession() instanceof Objet){
 				Objet o = (Objet) p.getPossession();
+				System.out.println(" OBJET VISI "+o.getName());
 				if (o.getObjet().getVisi()==Visibilite.visible){
 					res .add(o);
 				}
@@ -93,21 +124,31 @@ public class Lieu extends ComposantTerritoire {
 		return res;
 	}
 	
-	public List<Condition> getConditions(){
-		return this.conditions;
+	public List<Condition> getConditionsDepotObjet(){
+		return this.conditionsDeposerObjets;
 	}
 	
 	public List<PossessionConditionnee> getPossessions(){
-		return this.possession;
+		return this.possessions;
 	}
 
 	public List<PossessionConditionnee> getObjetsConditionnnesVisibles() {
 		ArrayList<PossessionConditionnee> res = new ArrayList<PossessionConditionnee>();
-		for(PossessionConditionnee p : this.possession){
+		for(PossessionConditionnee p : this.possessions){
 			if(p.getPossession() instanceof Objet){
 				if (((Objet) p.getPossession()).getObjet().getVisi()==Visibilite.visible){
 					res .add(p);
 				}
+			}
+		}
+		return res;
+	}
+
+	public List<PossessionConditionnee> getConnaissancesCond() {
+		ArrayList<PossessionConditionnee> res = new ArrayList<PossessionConditionnee>();
+		for(PossessionConditionnee p : this.possessions){
+			if(p.getPossession() instanceof Connaissance){
+				res.add(p);
 			}
 		}
 		return res;

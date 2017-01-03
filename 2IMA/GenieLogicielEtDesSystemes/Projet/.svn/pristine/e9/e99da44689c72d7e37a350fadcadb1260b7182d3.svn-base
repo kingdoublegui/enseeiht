@@ -1,9 +1,0 @@
-jeu PileOuFace dans Rue avec Passant
-territoire Rue couvre Interpelation Richesse Ruine Pile Face
-lieu Interpelation position depart
-lieu Richesse position fin
-lieu Ruine position fin
-chemin Pile depuis Interpelation vers Richesse passage obligatoire visible selon Lance
-chemin Face depuis Interpelation vers Ruine
-explorateur Passant porte 0
-condition Lance (probabilite 50)
