@@ -1,0 +1,62 @@
+.card{
+	border-radius: 2px;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .3);
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+.hidden {
+	display: none;
+}
+
+.flex-fill {
+	flex: 1 1;
+}
+
+	/* Input, buttons */
+.txt-input{
+	border: none;
+	outline: none;
+	background-color: transparent;
+	color: #222;
+	border-bottom: solid 1px #222;
+	margin: 5px;
+}
+
+.txt-input:focus{
+	border-bottom-width: 2px;
+	margin-bottom: 4px;
+}
+
+.btn{
+	border: none;
+	outline: none;
+	background-color: #222;
+	color: #fff;
+	border-radius: 2px;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .3);
+	margin: 5px;
+	padding: 5px;
+}
+
+.btn:active{
+	box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .3);
+}
+
+	/* White on black */
+.white-on-black{
+	color: #fff;
+	background-color: #222;
+}
+
+.white-on-black .txt-input{
+	color: #fff;
+	border-color: #fff;
+}
+
+.white-on-black .btn{
+	background-color: #fff;
+	color: #222;
+}

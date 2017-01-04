@@ -1,0 +1,56 @@
+.game-2 .tile {
+	height: 50%;
+	width: 50%;
+}
+.game-3 .tile {
+	height: 33.33%;
+	width: 33.33%;
+}
+
+.tile {
+	float: left;
+	cursor: pointer;
+	transition: box-shadow .3s ease;
+	opacity: .2;
+}
+
+.tile-active {
+	opacity: 1;
+}
+
+#red {
+	background-color: #f44336;
+}
+
+#purple {
+	background-color: #9c27b0;
+}
+
+#blue {
+	background-color: #2196f3;
+}
+
+#green {
+	background-color: #4caf50;
+}
+
+#yellow {
+	background-color: #ffeb3b;
+}
+
+#orange {
+	background-color: #ff9800;
+}
+
+#white {
+	background-color: #fff;
+}
+
+#grey {
+	background-color: #9e9e9e;
+}
+
+#black {
+	background-color: #eee;
+}
+
