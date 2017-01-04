@@ -13,8 +13,8 @@ disp(phi1(l, @(l)ns2_1(l), delta));
 % l = -13;
 % val = phi1(l, @(l)ns2_1(l), delta);
 % disp(val);
-nP = newtonPlus(phi1(l, @(l)ns2_1(l), delta), 0, 50);
-disp(np);
+[ t , lambda ] = newtonPlus(phi1(l, @(l)ns2_1(l), delta), 0, 50);
+disp(lambda);
 
 
 syms l;
