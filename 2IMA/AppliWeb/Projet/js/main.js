@@ -1,8 +1,30 @@
-var globalTimeout;
-var reactiontime = 1000; //temps de reaction laisser au joueur en miliseconde
-var couputilise = false;
-var indice=-1;
-var 
+var globalTimeout, timerInterval;
+var answerTimeout = 1000; //temps de reaction laisser au joueur en miliseconde
+var tiles = [];
+var scale = [
+	{note: 'C', octave: 5},
+	{note: 'D', octave: 5},
+	{note: 'E', octave: 5},
+	{note: 'F', octave: 5},
+	{note: 'G', octave: 5},
+	{note: 'A', octave: 5},
+	{note: 'B', octave: 5},
+	{note: 'C', octave: 6},
+	{note: 'D', octave: 6}
+];
+
+function createTiles(size){
+	document.getElementsByClassName("game-board")[0].innerHTML = "";
+	tiles = [];
+	for(var i = 0; i < Math.pow(size, 2); i++){
+		var node = document.createElement("div");
+		node.classList.add("tile");
+		node.id = "tile" + i;
+		tiles.push({id: i, node: node});
+		document.getElementsByClassName("game-board")[0].appendChild(node);
+	}
+}
+
 function connect(){
 	document.getElementsByClassName("connexion-panel")[0].classList.add("toCircle");
 	//document.getElementsByClassName("overlay")[0].classList.add("hidden");
@@ -12,58 +34,100 @@ function switchChat(){
 	document.getElementsByClassName("main")[0].classList.toggle("chat-opened");
 
 }
-function sequence(tableau){
-	for(var tab in tableau){
-		var t = parseInt(tab);
+
+function displaySequence(sequence){
+	for(var s = 0; s < sequence.length; s++){
 		setTimeout(
-			function(indice){
-				document.getElementsByClassName("game-board")[0].children[indice].classList.add("tile-active");
+			function(tile){
+				tile.node.classList.add("tile-active");
+				Synth.play('piano', scale[tile.id].note, scale[tile.id].octave, 0.8 * answerTimeout / 1000);
 			},
-			t*1000,
-			tableau[t]
+			s * answerTimeout,
+			tileById(sequence[s])
 		);
-		 setTimeout(
-			function(indice2){
-				document.getElementsByClassName("game-board")[0].children[indice2].classList.remove("tile-active");
+		setTimeout(
+			function(tile){
+				tile.node.classList.remove("tile-active");
 			},
-			t*1000+800,
-			tableau[t]
+			(s + 0.8) * answerTimeout,
+			tileById(sequence[s])
 		);
-		 console.log((t+1)*800);
 	}
-	
 }
-function jouer(tableau){
-	var resultat = [];
-	var i =0;
-	faute=false;
-	while(!faute && tableau[i]!=null &&){ // settimeout -> click desactive timeout
-		//global variable indice maj 
-			globalTimeOut = 
-			 setTimeout(
-						function(){
-							faute=true;
-						},
-						tempsdereaction,
-					);
-			//JESUISENATTENTEDUCLICK(
-		
-	}
-	//si il a gagné 
-}
-function click(tableau,caseclique){
-	//utiliser la global indice et couputilise
-	//allumer la case 50 ms puis eteindre
-	//si il clique sur la bonne case 
-		//il desactive le timeout et il doit annoncer qu'il peux passer au suivant à la fonction jouer!
-	if (!couputilise){
-		document.getElementsByClassName("game-board")[0].children[caseclique].classList.add("tile-active");
-		if(caseclique==tableau[indice]){
-			document.getElementsByClassName("game-board")[0].children[caseclique].classList.remove("tile-active");
-			clearTimeout(globalTimeout);
+
+function getUserClick(sequence, index){
+	for(var t of tiles){
+		if(t.id == sequence[index]){
+			t.node.addEventListener("click", wrightTileListener);
+		}else{
+			t.node.addEventListener("click", wrongTileListener);
 		}
 	}
+	globalTimeout =	setTimeout(gameOver, answerTimeout);
+	clearInterval(timerInterval);
+	runTimer();
+
+	function wrightTileListener(){
+		clear();
+		var tile = tileById(sequence[index]);
+		Synth.play('piano', scale[tile.id].note, scale[tile.id].octave, 0.5 * answerTimeout / 1000);
+		if(index+1 < sequence.length){
+			// On passe à l'élément suivant
+			getUserClick(sequence, index+1);
+		}else{
+			// Sequence réussie
+			alert("GG !");
+		}
+	}
+
+	function wrongTileListener(){
+		clear();
+		gameOver();
+	}
+
+	function clear(){
+		clearTimeout(globalTimeout);
+		for(var t of tiles){
+			t.node.removeEventListener("click", wrightTileListener);
+			t.node.removeEventListener("click", wrongTileListener);
+		}
+	}
+
+	function gameOver(){
+		clear();
+		alert("GAME OVER");
+	}
 }
-//lien avec le server
-var tableaurecue = [1,2,3,0,1,1,2,3,0,2];
-setTimeout(sequence(tableaurecue), 2000);
+
+
+function runTimer(){
+    var elem = document.getElementsByClassName("timeBar")[0];
+    var width = 100;
+    timerInterval = setInterval(
+    	function(){
+		    if (width <= 0) {
+		        clearInterval(timerInterval);
+		    } else {
+		        width--;
+		        elem.style.width = width + '%';
+		    }
+		},
+		answerTimeout/100
+	);
+}
+
+function tileById(id){
+    for(var t of tiles){
+        if(t.id === id){
+            return t;
+        }
+    }
+}
+
+
+// Tests
+//var sequence = [1,1,2,3,0];
+var sequence = [0,0,0,1,2,1,0,2,1,1,0];
+setTimeout(createTiles, 500, 2);
+setTimeout(displaySequence, 2000, sequence);
+setTimeout(getUserClick, 2000+answerTimeout*sequence.length, sequence, 0);

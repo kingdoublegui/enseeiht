@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="style/game-board.css" />
 		<link rel="stylesheet" href="style/anim.css" />
 		<script src="js/main.js"></script>
+		<script src="js/audiosynth.js"></script>
 		<title>Decubx</title>
 	</head>
 
@@ -37,14 +38,15 @@
 				</div>
 				<input class="txt-input" type="text" placeholder="Your message ..."/>
 			</div>
-			<div class="game-board game-2">
-				<div class="tile" id="purple" onclick="click()"></div>
-				<div class="tile" id="grey" onclick="click()"></div>
-				<div class="tile" id="orange" onclick="click()"></div>
-				<div class="tile" id="blue" onclick="click()"></div>
+			<div class="game-board game-2 theme1">
+				<div class="tile" id="1"></div>
+				<div class="tile" id="2"></div>
+				<div class="tile" id="3"></div>
+				<div class="tile" id="4"></div>
 			</div>
 		</main>
 		<footer class="footer white-on-black">
+			<div class="timeBar"></div>
 			<div class="score-display">Score : <span id="score">8</span></div>
 			<div class="settings clickable">
 				<i class="material-icons">settings</i>

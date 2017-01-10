@@ -19,6 +19,14 @@
 	flex-wrap: nowrap;
 }
 
+.footer .timeBar {
+	position: absolute;
+	height: 100%;
+	width: 0%;
+	background-color: #55f;
+	z-index: -1;
+}
+
 .footer .score-display {
 	flex: 1 1;
 	text-align: center;
@@ -79,7 +87,7 @@
     color: #fff;
     text-align: center;
     box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
-    transition: left .4s ease;
+    transition: left .4s ease-in;
 }
 
 .sidebar-switch > i {
@@ -94,12 +102,14 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
+	background-color: #fff;
 	box-shadow: -2px 0 5px 2px rgba(0, 0, 0, .3);
-	transition: left .4s ease;
+	transition: left .4s ease-in;
 }
 
 .chat-opened .sidebar-switch	{
 	left: 300px;
+	transition: left .4s ease-out;
 }
 
 .chat-opened .sidebar-switch > i {
@@ -108,4 +118,5 @@
 
 .chat-opened > .game-board {
 	left: 300px;
+	transition: left .4s ease-out;
 }
