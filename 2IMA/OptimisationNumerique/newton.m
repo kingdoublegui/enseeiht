@@ -6,7 +6,7 @@ function [t, x] = newton( f, x0 )
 
 t = -1;
 % nb iterations apres lesqulles on s'arrete
-nbIterations = 1000;
+nbIterations = 50;
 
 x = x0;
 
@@ -26,7 +26,7 @@ testArret2 = false;
 testArret3 = false;
 testArret4 = false;
 
-while ~testArret2
+while ~testArret4
     % Calcul de d
     d = - H \ g;
     % Mise a jour des variables
@@ -42,7 +42,7 @@ while ~testArret2
     
     testArret1 = norm(g) <= eps(g + epsilon);
     testArret2 = norm(x-x_ancien) <= eps(norm(x_ancien) + epsilon);
-    testArret3 = norm(f(c{:})-f(c_ancien{:})) <= eps(abs(f(c_ancien{:})) + epsilon);
+    %testArret3 = norm(f(c{:})-f(c_ancien{:})) <= eps(abs(f(c_ancien{:})) + epsilon);
     testArret4 = k >= nbIterations;
 end;
 

@@ -1,0 +1,28 @@
+clear all;
+close all;
+
+%% Tests du lagrangien
+disp('### Tests de lagrangien.m ###');
+w = warning ('off','all');
+mu0 = 0.6;
+tau = 0.6;
+etac0 = 0.1258925;
+alpha = 0.1;
+beta = 0.9;
+
+% Sur la fonction f1
+disp('# Test sur f1 #');
+syms x1 x2 x3;
+disp(f1(x1, x2, x3));
+xc11 = [0; 1; 1];
+lambdac11 = 0.6;
+xc12 = [0.5; 1.25; 1];
+lambdac12 = 0.6;
+
+[x, lambda, mu] = lagrangien(@(x1, x2, x3) f1(x1, x2, x3), xc11, lambdac11, ...
+    @(x1, x2, x3) c1(x1, x2, x3), mu0, tau, etac0, alpha, beta)
+
+% Sur la fonction f2
+xc21 = [1; 0];
+xc22 = [sqrt(3)/2; sqrt(3)/2];
+%[t, resultat_f2] = lagrangien(@(x1, x2) f2(x1, x2), @(x1, x2) c2(x1, x2), xc22);
