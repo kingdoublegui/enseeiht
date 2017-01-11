@@ -11,7 +11,7 @@ nbIterations = 1000;
 x = x0;
 
 var = sym('x', [length(x) 1]);
- 
+
 grad = gradient(f, var);
 g = eval(subs(grad, var, x));
 hess = hessian(f, var);
