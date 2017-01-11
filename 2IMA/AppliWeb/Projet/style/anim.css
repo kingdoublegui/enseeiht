@@ -1,3 +1,7 @@
+.anim-paused {
+	animation-play-state: paused;
+}
+
 .connexion-panel {
 	max-height: 200px;
 	max-width: 200px;

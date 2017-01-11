@@ -1,0 +1,29 @@
+.game-2 .tile {
+	height: 50%;
+	width: 50%;
+}
+.game-3 .tile {
+	height: 33.33%;
+	width: 33.33%;
+}
+
+.tile {
+	float: left;
+	cursor: pointer;
+	transition: box-shadow .3s ease;
+	opacity: .2;
+}
+
+.tile-active {
+	opacity: 1;
+}
+
+.theme1 #tile0 { background-color: #f44336; } /* Red 	*/
+.theme1 #tile1 { background-color: #9c27b0; } /* Purple */
+.theme1 #tile2 { background-color: #2196f3; } /* Blue	*/
+.theme1 #tile3 { background-color: #4caf50; } /* Green	*/
+.theme1 #tile4 { background-color: #ffeb3b; } /* Yellow	*/
+.theme1 #tile5 { background-color: #ff9800; } /* Orange	*/
+.theme1 #tile6 { background-color: #ffffff; } /* White	*/
+.theme1 #tile7 { background-color: #9e9e9e; } /* Grey	*/
+.theme1 #tile8 { background-color: #eeeeee; } /* Black	*/

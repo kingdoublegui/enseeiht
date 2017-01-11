@@ -4,7 +4,7 @@
 	bottom: 30px;
 	left: 0;
 	right: 0;
-	background-color: #ccc;
+	display: flex;
 }
 
 .footer {
@@ -15,24 +15,29 @@
 	height: 30px;
 	line-height: 30px;
 	font-size: 30px;
-	background-color: #222;
-	color: #fff;
 	display: flex;
 	flex-wrap: nowrap;
 }
 
-.footer .score {
+.footer .timeBar {
+	position: absolute;
+	height: 100%;
+	width: 0%;
+	background-color: #55f;
+	z-index: -1;
+}
+
+.footer .score-display {
 	flex: 1 1;
 	text-align: center;
 }
 
 .footer .settings {
 	flex: 0 0;
-	cursor: pointer;
 	padding: 0px 5px;
 }
 
-.overlay{
+.overlay {
 	z-index: 10;
 	position: fixed;
 	top: 0;
@@ -42,81 +47,76 @@
 	display: flex;
   	justify-content: center;
   	align-items: center;
+	background-color: rgba(50,50,50,.5);
 }
 
-.connexion-panel{
-	color: #fff;
-	background-color: #222;
-	border-radius: 2px;
-	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .3);
-	padding: 20px;
+.connexion-panel {
+	padding: 15px;
 	text-align: center;
 }
 
-.game {
+.chat-panel {
 	height: 100%;
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+}
+
+.chat-panel .ad {
+	flex: none;
 	width: 100%;
 }
 
-.game-2 .tile {
-	height: 50%;
-	width: 50%;
-}
-.game-3 .tile {
-	height: 33.33%;
-	width: 33.33%;
+.chat {
+	flex: 1 1;
+	overflow-y: auto;
+	padding: 5px;
 }
 
-.tile {
-	float: left;
-	cursor: pointer;
-	transition: box-shadow .3s ease;
+.chat .pseudo {
+	font-weight: bold;
 }
 
-.tile:hover {
-	/*opacity: .9;*/
+.sidebar-switch {
+	position: absolute;
+    left: 0;
+    height: 30px;
+    width: 30px;
+    z-index: 20;
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, .3);
+    transition: left .4s ease-in;
 }
 
-.tile:active {
-	opacity: .7;
+.sidebar-switch > i {
+	font-size: 30px;
+	line-height: 30px;
+	transition: transform .4s ease;
 }
 
-#red {
-	background-color: #f44336;
-}
-
-#purple {
-	background-color: #9c27b0;
-}
-
-#blue {
-	background-color: #2196f3;
-}
-
-#green {
-	background-color: #4caf50;
-}
-
-#yellow {
-	background-color: #ffeb3b;
-}
-
-#orange {
-	background-color: #ff9800;
-}
-
-#white {
+.game-board {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 	background-color: #fff;
+	box-shadow: -2px 0 5px 2px rgba(0, 0, 0, .3);
+	transition: left .4s ease-in;
 }
 
-#grey {
-	background-color: #9e9e9e;
+.chat-opened .sidebar-switch	{
+	left: 300px;
+	transition: left .4s ease-out;
 }
 
-#black {
-	background-color: #eee;
+.chat-opened .sidebar-switch > i {
+	transform: rotate(180deg);
 }
 
-.hidden {
-	display: none;
+.chat-opened > .game-board {
+	left: 300px;
+	transition: left .4s ease-out;
 }

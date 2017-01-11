@@ -5,31 +5,50 @@
 		<meta name="viewport" content="initial-scale=1.0">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="style/default.css" />
+		<link rel="stylesheet" href="style/general-classes.css" />
+		<link rel="stylesheet" href="style/game-board.css" />
 		<link rel="stylesheet" href="style/anim.css" />
 		<script src="js/main.js"></script>
-		<title></title>
+		<script src="js/audiosynth.js"></script>
+		<title>Decubx</title>
 	</head>
 
 	<body>
-		<div class="overlay">
-			<div class="connexion-panel">
+		<div class="overlay hidden">
+			<div class="connexion-panel card white-on-black">
 				<h1>Hello !</h1>
-				<input type="text" placeholder="Username"/><br>
-				<input type="password" placeholder="Password"/><br>
-				<button onclick="connect()"/>Connect</button>
+				<input class="txt-input" type="text" placeholder="Username"/><br>
+				<input class="txt-input" type="password" placeholder="Password"/><br>
+				<button class="btn" onclick="connect()"/>Connect</button>
 			</div>
 		</div>
-		<main class="main">
-			<div class="game game-2">
-				<div class="tile" id="red"></div>
-				<div class="tile" id="green"></div>
-				<div class="tile" id="yellow"></div>
-				<div class="tile" id="blue"></div>
+		<main class="main chat-opened">
+			<div class="chat-panel">
+				<div class="sidebar-switch clickable" onclick="switchChat()">
+					<i class="material-icons">keyboard_arrow_right</i>
+				</div>
+				<img class="ad" src="https://lh5.ggpht.com/rArexceEo8IgTctYUUrkhYn-5LQbbyDYHSDmdn7KTY9ZQt8dQfCBVf4zeTAa6xaHiGrJo3d1=w300-h250">
+				<div class="chat">
+					<!-- DTC random -->
+					<span class="pseudo">ManaRATZ</span> : Ça y est la colloc belge est rentré<br>
+					<span class="pseudo">ManaRATZ</span> : Et internet recommence a déconner,<br>
+					<span class="pseudo">ManaRATZ</span> : Plus de doute maintenant tout est lié,<br>
+					<span class="pseudo">ManaRATZ</span> : Son ordi un jour je vais exploser !<br>
+					<span class="pseudo">Onepiece1995</span> : Mets une frite sur une tapette à souris géante !
+				</div>
+				<input class="txt-input" type="text" placeholder="Your message ..."/>
+			</div>
+			<div class="game-board game-2 theme1">
+				<div class="tile" id="1"></div>
+				<div class="tile" id="2"></div>
+				<div class="tile" id="3"></div>
+				<div class="tile" id="4"></div>
 			</div>
 		</main>
-		<footer class="footer">
-			<div class="score">Score : 8</div>
-			<div class="settings">
+		<footer class="footer white-on-black">
+			<div class="timeBar"></div>
+			<div class="score-display">Score : <span id="score">8</span></div>
+			<div class="settings clickable">
 				<i class="material-icons">settings</i>
 			</div>
 		</footer>
