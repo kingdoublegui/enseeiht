@@ -47,14 +47,14 @@ JB = setdiff(J,JN);
 % Changer les signes des équations si b(i) < 0
 % On rend ainsi b >=0
 s = sign(b); % s(i) == 0 si b(i) == 0 !!
-s(s == 0) = 1; % s(i)== 1 si b(i) >=0 , s(i)== -1 si b(i) < 0
-A = A.*repmat(s,1,n);
-b = b.*s;
+s(s==0) = 1; % s(i)== 1 si b(i) >=0 , s(i)== -1 si b(i) < 0
+A(s<0,:) = -A(s<0,:);
+b(s<0) = -b(s<0);
 %
 %% PHASE I
 % Trouver un sommet initial
 if A(:,n-m+1:n) == eye(m)
-    % la base canonique A(:,n-m+1) ... A(:,n) est une base réalisable
+    % la base canonique A(:,nim+1) ... A(:,n) est une base réalisable
     % puisque b>=0
     % x=(0,b) est donc un sommet initial
     GAMMA = [A b];
@@ -62,24 +62,23 @@ else
     disp('Appliquer la méthode de la base artificielle')
     return
 end
-
 %
 %% PHASE II
 % Trouver un sommet optimal à partir du sommet initial
 %
 z = c(JB)' * GAMMA(:,JN);
-pentes = c(JN)'-z; % pentes contient les mesures des pentes des chemins partant du sommet courant
+pentes = c(JN)' - z; % pentes contient les mesures des pentes des chemins partant du sommet courant
 %% Step 1. Test d'optimalité
-while any(OPT*pentes > 0) % Y-a-t-il un chemin améliorant ?
+while any(OPT*pentes > 0)  % Y-a-t-il un chemin améliorant ?
     %
     %% Step 2. Test d'existence de solution optimale
-    indJNP = OPT*pentes > 0; %indJNP : indices dans le vecteur des pentes des chemins améliorant
-    JNP =  JN(indJNP);  %JNP : indices j des vecteurs Aj définissant des chemins améliorant (xj > 0)
+    indJNP = OPT*pentes>0; %indJNP : indices dans le vecteur des pentes des chemins améliorant
+    JNP = JN(indJNP);  %JNP : indices j des vecteurs Aj définissant des chemins améliorant (xj > 0)
     % Existe-t-il un vecteur Aj, j dans JNP, dont toutes les composantes sur la
     % base courante soient négatives ou nulles ?
     % Il définit alors un chemin infini (xj > 0) admissible (inclus dans l'ensemble des contraintes)
     % sur lequel le critère croit (OPT = 1) ou décroit (OPT=-1) infiniment
-    if any(all(OPT*GAMMA(:, JNP)<=0,1))
+    if any(all(OPT*GAMMA(:,JNP)<=0,1))
         disp('pas de solution optimale')
         x=Inf; 
         F = OPT*Inf;
@@ -96,7 +95,7 @@ while any(OPT*pentes > 0) % Y-a-t-il un chemin améliorant ?
     % VEC(i) = GAMMA(i,alpha) si GAMMA(i,alpha) > 0
     % VEC(i) = +0             si GAMMA(i,alpha) <= 0
     % Se rappeler aussi que 1/+0 = Inf !!
-    [~,indbeta] = min(GAMMA(:, n+1)./VEC);
+    [~,indbeta] = min(GAMMA(:,n+1)./VEC);
     % donc beta = JB(indbeta);
     %
     %% Step 5. Changement de base et calcul du nouveau tableau simplexe
@@ -111,11 +110,11 @@ while any(OPT*pentes > 0) % Y-a-t-il un chemin améliorant ?
     %
     GAMMA(indbeta,:) = GAMMA(indbeta,:) / GAMMA(indbeta,alpha);
     GAMMAMOINS = [GAMMA(1:indbeta-1,:) ; GAMMA(indbeta+1:m,:)];
-    GAMMAMOINS = GAMMAMOINS - GAMMAMOINS(:, alpha) * GAMMA(indbeta, :);
-    GAMMA = [GAMMAMOINS(1:indbeta-1,:) ; GAMMA(indbeta, :) ; GAMMAMOINS(indbeta:m-1,:)];
+    GAMMAMOINS = GAMMAMOINS - GAMMAMOINS(:,alpha)*GAMMA(indbeta,:);
+    GAMMA = [GAMMAMOINS(1:indbeta-1,:) ; GAMMA(indbeta,:) ; GAMMAMOINS(indbeta:m-1,:)];
     %
     z = c(JB)' * GAMMA(:,JN);
-    pentes = c(JN)'-z;
+    pentes = c(JN)' - z;
 end
 %
 % Il n'y a plus de chemin améliorant: on a trouvé une solution localement
