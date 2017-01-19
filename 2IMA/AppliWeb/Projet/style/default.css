@@ -1,4 +1,7 @@
-.main {
+html { box-sizing: border-box; font-family: 'Roboto', sans-serif;}
+*, *:before, *:after { box-sizing: inherit; font-family: inherit;}
+
+#main {
 	position: fixed;
 	top: 0;
 	bottom: 30px;
@@ -19,7 +22,7 @@
 	flex-wrap: nowrap;
 }
 
-.footer .timeBar {
+.footer #timeBar {
 	position: absolute;
 	height: 100%;
 	width: 0%;
@@ -37,7 +40,7 @@
 	padding: 0px 5px;
 }
 
-.overlay {
+#overlay-back {
 	z-index: 10;
 	position: fixed;
 	top: 0;
@@ -50,9 +53,34 @@
 	background-color: rgba(50,50,50,.5);
 }
 
-.connexion-panel {
+#overlay {
+	min-height: 50px;
+	min-width: 50px;
 	padding: 15px;
+}
+
+.logo-google{
+	position: relative;
+	height: 20px;
+	margin: 0 5px;
+	top: 2px;
+}
+
+#game-mode-panel {
+	display: flex;
+}
+
+.game-mode {
+	width: 150px;
 	text-align: center;
+	font-size: 28px;
+}
+.game-mode > i {
+	font-size: 56px;
+}
+
+.game-mode.clickable:active {
+	opacity: .6;
 }
 
 .chat-panel {
@@ -67,13 +95,17 @@
 	width: 100%;
 }
 
-.chat {
+.premium .chat-panel .ad {
+	display: none;
+}
+
+#chat {
 	flex: 1 1;
 	overflow-y: auto;
 	padding: 5px;
 }
 
-.chat .pseudo {
+#chat .pseudo {
 	font-weight: bold;
 }
 
@@ -96,7 +128,7 @@
 	transition: transform .4s ease;
 }
 
-.game-board {
+#game-board {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -116,7 +148,7 @@
 	transform: rotate(180deg);
 }
 
-.chat-opened > .game-board {
+.chat-opened > #game-board {
 	left: 300px;
 	transition: left .4s ease-out;
 }

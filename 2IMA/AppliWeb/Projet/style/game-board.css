@@ -9,12 +9,15 @@
 
 .tile {
 	float: left;
-	cursor: pointer;
 	transition: box-shadow .3s ease;
 	opacity: .2;
 }
 
-.tile-active {
+.tile-clickable {
+	cursor: pointer;
+}
+
+.tile-active, .tile-clickable:active {
 	opacity: 1;
 }
 

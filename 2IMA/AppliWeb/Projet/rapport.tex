@@ -1,0 +1,157 @@
+\documentclass[12pt]{article}
+
+\usepackage[top=3.5cm, bottom=3cm, left=2.5cm , right=2.5cm]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{graphicx}
+
+\title{Appli Web :\\ DecubX }
+\author{Kévin CARENOU \and Sacha VANLEENE \and Thibault MEUNIER \and Matthieu Perrier}
+\date{15 Janvier 2017}
+
+\pagestyle{fancy}
+\lhead{Appli Web}
+\rhead{DecubX}
+\rfoot{Page \thepage}
+\cfoot{}
+\lfoot{ENSEEIHT - IMA 2A 2017}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{page}{0}
+\thispagestyle{empty} % enlever numerotation de la page
+\begin{center}
+\includegraphics[scale=1]{logo.png}
+\end{center}
+
+\newpage
+
+
+\section*{Présentation de notre application}
+Notre projet s'intitule Décubx, à l'image d'un Agar.io c'est un jeu qui se joue sur un navigateur web.Le concept est assez simple, c'est un endless game basé sur la mémoire du joueur. Effectivement 4 cases sont affichées à l'écran, une séquence est jouée et l'utilisateur dispose d'un temps limité pour la reproduire. Si il réussi le serveur génére la suite de la séquence, la renvoie au joueur et ainsi de suite jusqu'à échec du joueur. Une fois la partie finis le score de la partie est enregistré afin que l'utilisateur puisse accéder à son historique de partie. Tout cela implique évidemment la gestion de comptes, utilisateurs , de base de données, nous préciserons cela plus tard...
+Image Jeu
+
+\renewcommand{\contentsname}{Sommaire}
+\tableofcontents
+\newpage
+
+
+
+\section{Architecture}
+Dans cette partie nous développerons les différents points techniques sur lesquels nous avons travaillé.
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+
+~~~~~~~~\includegraphics[scale=1]{diagramme.png}
+\newpage
+\subsection{Architecture client}
+Nous avons fait le choix de ne disposer que d'une seul et unique page dynamique, composé de scripts,fichiers CSS etc...L'accés aux différentes fonctionnalités est géré par des overlay sans changer de page donc. 
+\subsubsection{Communication avec le serveur}
+Premièrement nous avions réaliser une communication via servlet, or nous nous sommes rendus compte que ce n'étais absolument pas optimisé pour notre application. Effectivement, en utlisant la servlet nous étions obligé de renvoyer une page qui ne contennais, au final, qu'une très infime quantité d'information(Majoritairement une liste de chiffre).
+C'est pourquoi nous nous sommes orienté sur l'utilisation de Web Socket
+~\newline 
+Effectivement les Web Socket ont l'avantage : 
+\begin{itemize}
+\item Avoir une connexion billatéral persistente au contraire de l'utilisation de servlet
+\item De simplifier l'implémentation de la communication
+\item De clarifier la lecture
+\item D'optimiser les requêtes en temps réel car les données transférées sont plus légères.
+\end{itemize}
+~\newline
+Nous nous intérésserons désormais au fonctionnement de l'application côté client.
+\subsubsection{Fonctionnement}
+Comme expliqué précedemment, la règle de notre jeu est simple:
+~\newline
+Réussir à répeter la séquence envoyer par le serveur le plus de fois possible.
+~\newline
+C'est pourquoi nous nous sommes orienté sur une programmation orienté événementielle, effectivement nous utilisons : 
+\begin{itemize}
+\item L'utilisation des fonctions setTimeout/ClearTimeout afin de gérer : 
+\begin{itemize}
+\item Le temps d'affichage de chaque case
+\item Le temps laissé au joueur pour cliquer sur une case
+\end{itemize}
+\item Des listener, pour détécter les click de l'utilisateur
+\end{itemize}
+~\newline
+Nous nous attacherons par la suite à la conception de la partie serveur de notre application.
+
+\newpage
+\subsection{Architecture serveur}
+Dans cette partie , nous passerons en revue l'ensemble des points techniques proprent au développement du Backend.
+\subsubsection{Authentification}
+Notre authentification est directement gérée par Jbossa l'(aide de ses security realms ce qui permet de gérer différentes methodes d'authentification (Bqse de donnees, ldap, google et facebook, ...)
+De plus nous avons fait le choix d'utiliser un serveur Ldap (OpenDJ) contrairement à une base de données car mieux optimisé pour notre application. l'utilisqtion d'un ldap presente de nombreux avantages :
+\begin{itemize}
+\item Plus sécurisé, les mots de passe ne sont pas manipules directement et l'authentification par certificat est plus aisee.
+\item Information mieux architecturée ce qui implique des accés bien plus rapides et efficaces.
+\end{itemize}
+~\newline
+De plus nous disposons de plusieurs groupes d'utilisateurs egalement controlee par le module security integre a Jboss :
+\begin{itemize}
+\item Users : Compte basique accessible à tous.
+\item Premiums: Users ayant acheter (via Paypal) un accés Premium pour 1 mois leur permettant de ne plus être soumis aux publicites tout en garantissant un soutient financier.
+\item Admins: Utilisateur ayant le droit de modérer les gens dans le chat, supprimer des comptes etc... Toutefois pour le moment cela n'est pas implémenté mais le Backend est déjà opérationnel pour la mise en service.
+\end{itemize} 
+\subsubsection{WebSocket}
+Nous avons déjà éxpliqué pourquoi nous nous sommes tourné vers les WebSocket nous allons ici préciser leur utilisation dans notre implémentation. 
+Nous utilisons les WebSocket pour les fonctionnalités suivantes :
+\begin{itemize}
+\item Envoie et récéption de séquences
+\item Utilisation du chat
+\item Informations sur les joueurs (Meilleur score etc...)
+\end{itemize}
+~\newline 
+
+\subsubsection{Liens Ldab/Base de données}
+La notion d'utilisateur est définie pour le Ldap en effet c'est ici que sont stockés les informations personnelles tel que:
+\begin{itemize}
+\item Adresse email
+\item Nom, Prénom
+\item Mot de passe
+\end{itemize}
+~\newline
+Ceci est différent de la notion de joueur qui est une représentation de l'utilisateur dans une partie qui quand à elle sera stockée dans une base de données. On peut par exemple retenir la monnaie virtuelle accumulée au cours des parties. Le lien entre base de donnees et ldap se fait par l'intermediaire du pseudo du joueur, correspondant a l'uid du user ldap.
+
+
+\section{Liens avec des services externes}
+Nous avons décider d'ajouter à notre application plusieurs spécifictés modernes tel que : 
+~\newline
+\begin{itemize}
+\item La possibilité d'évoluer son compte au niveau de premium en utilisant Paypal.
+\item La connexion via un compte Google a été mise en place, evidemment l'inscription via un formulaire est également possible.
+\item L'ajout de son, lors de l'activation des différentes cases.
+\item L'utilisation de Adsense dans le but de générer de l'argent via les pubs. (Désactivé pour les utilisateurs premium).
+\end{itemize}
+\section{Répartition du travail}
+Nous avons fait le choix de séparer le développement de l'application en deux groupes :
+~\newline 
+\begin{itemize}
+\item La partie Client(FrontEnd) réalisée par Sacha et Kevin
+\item La partie Serveur(Backend) réalisée par Matthieu et Thibault
+\end{itemize}
+~\newline
+Evidemment même si le travail étais divisé en deux, nous avons beaucoup échangé tout au long du développement de notre application. En effet il est inenvisageable de développer une partie cliente et une partie serveur sans se mettre d'accord sur la manière de communiquer par exemple. C'est pourquoi, malgrés la division du travail, la cocneption à quand à elle été réalisée par l'ensemble du quadrinôme.
+\subsubsection{Utilisation de GitLab}
+Afin de mieux se répartir les tâches nous avons définis l'ensemble des tâches à réaliser, puis nous les avons trier par priorité. Chaque fois qu'un membre du groupe commencait ou finissait une tâche, il l'a mettait à jour sur le GitLab ce qui permettait aux autres membres du groupe de voir l'avancé du développement.
+\newpage
+\section{Annexes}
+\subsubsection{Exemple de GitLab}
+\includegraphics[scale=0.3]{gitlab.png}
+
+
+\end{document}

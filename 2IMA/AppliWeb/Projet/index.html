@@ -8,46 +8,82 @@
 		<link rel="stylesheet" href="style/general-classes.css" />
 		<link rel="stylesheet" href="style/game-board.css" />
 		<link rel="stylesheet" href="style/anim.css" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Pacifico" />
 		<script src="js/main.js"></script>
 		<script src="js/audiosynth.js"></script>
+		<!-- <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+		<script src="js/paypal.js"></script> -->
 		<title>Decubx</title>
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
 	</head>
 
 	<body>
-		<div class="overlay hidden">
-			<div class="connexion-panel card white-on-black">
-				<h1>Hello !</h1>
-				<input class="txt-input" type="text" placeholder="Username"/><br>
-				<input class="txt-input" type="password" placeholder="Password"/><br>
-				<button class="btn" onclick="connect()"/>Connect</button>
+		<div id="overlay-back">
+			<div id="overlay" class="card white-on-black">
+				<!-- Login -->
+				<div id="login-panel" class="center">
+					<h1 class="pacifico">Hello !</h1>
+					<div id="login-info">
+						<div id="login-error" class="error-text hidden">Your username or password is invalid.<br>Please try again.</div>
+						<div id="sign-up-successful" class="info-text hidden">You have successfully signed up.<br>Please log in.</div>
+						<div id="sign-up-error" class="error-text hidden">Username unavailable.<br>Please try again.</div>
+					</div>
+					<input class="txt-input" id="connexion-username" type="text" placeholder="Username" onkeypress="if(event.keyCode==13)login()"/><br>
+					<input class="txt-input" id="connexion-password" type="password" placeholder="Password" onkeypress="if(event.keyCode==13)login()"/><br>
+					<button class="btn" onclick="login()"/>Log in</button>
+					<button class="btn" onclick="signup()"/>Sign up</button>
+					<br><button class="btn" onclick=""/>Sign in with <img class="logo-google" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/></button>
+				</div>
+
+				<div id="game-mode-panel" class="hidden">
+					<div class="game-mode clickable" onclick="newGame({mode: 'solo'})"><i class="material-icons">person</i><br>Solo</div>
+					<div class="game-mode disabled"><i class="material-icons">group</i><br>Multi</div>
+					<div class="game-mode disabled"><i class="material-icons">gavel</i><br>Versus</div>
+				</div>
+
+				<div id="gameOver-panel" class="center hidden">
+					<h1 class="pacifico">Game Over</h1>
+					Score : <span id="score-gameOver"></span><br>
+					<button class="btn" onclick="showOverlayPanel('game-mode-panel')">Play again</button>
+				</div>
 			</div>
 		</div>
-		<main class="main chat-opened">
+		<main id="main" class="chat-opened">
 			<div class="chat-panel">
 				<div class="sidebar-switch clickable" onclick="switchChat()">
 					<i class="material-icons">keyboard_arrow_right</i>
 				</div>
 				<img class="ad" src="https://lh5.ggpht.com/rArexceEo8IgTctYUUrkhYn-5LQbbyDYHSDmdn7KTY9ZQt8dQfCBVf4zeTAa6xaHiGrJo3d1=w300-h250">
-				<div class="chat">
-					<!-- DTC random -->
-					<span class="pseudo">ManaRATZ</span> : Ça y est la colloc belge est rentré<br>
-					<span class="pseudo">ManaRATZ</span> : Et internet recommence a déconner,<br>
-					<span class="pseudo">ManaRATZ</span> : Plus de doute maintenant tout est lié,<br>
-					<span class="pseudo">ManaRATZ</span> : Son ordi un jour je vais exploser !<br>
-					<span class="pseudo">Onepiece1995</span> : Mets une frite sur une tapette à souris géante !
-				</div>
-				<input class="txt-input" type="text" placeholder="Your message ..."/>
+				<div id="paypal-button"></div>
+				<div id="chat"></div>
+				<input class="txt-input" id="chat-input" type="text" onkeypress="if(event.keyCode==13)sendMessage()" placeholder="Your message ..."/>
 			</div>
-			<div class="game-board game-2 theme1">
-				<div class="tile" id="1"></div>
-				<div class="tile" id="2"></div>
-				<div class="tile" id="3"></div>
-				<div class="tile" id="4"></div>
+			<div id="game-board" class="game-2 theme1">
+				<div class="tile" id="tile0"></div>
+				<div class="tile" id="tile1"></div>
+				<div class="tile" id="tile2"></div>
+				<div class="tile" id="tile3"></div>
 			</div>
 		</main>
 		<footer class="footer white-on-black">
-			<div class="timeBar"></div>
-			<div class="score-display">Score : <span id="score">8</span></div>
+			<div id="timeBar"></div>
+			<div class="score-display pacifico">Score : <span id="score">0</span></div>
 			<div class="settings clickable">
 				<i class="material-icons">settings</i>
 			</div>

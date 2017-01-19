@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}Syntaxe Textuelle}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Langage Game}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Metamodele et contraintes statiques}{3}{subsection.1.2}
+\contentsline {section}{\numberline {2}Syntaxe Graphique}{7}{section.2}
+\contentsline {subsection}{\numberline {2.1}Point de vue Territoire}{7}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Point de vue Interaction}{7}{subsection.2.2}
+\contentsline {section}{\numberline {3}Verification en PetriNet}{8}{section.3}
+\contentsline {subsection}{\numberline {3.1}Transformation vers Petrinet}{8}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Terminaison du jeu}{9}{subsection.3.2}
+\contentsline {section}{\numberline {4}Generation de code}{9}{section.4}
+\contentsline {subsection}{\numberline {4.1}Initialisation du jeu}{9}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Code et Metamodele}{9}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Execution}{9}{subsection.4.3}
