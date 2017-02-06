@@ -192,6 +192,10 @@ ruleCallByName env fexpr pexpr =
     in
         match value with
         | (ErrorValue _) as result -> result
+        | (FrozenValue (f, fEnv)) ->
+            match f with
+            | (FunctionNode (fName, fValue)) -> (value_of_expr fValue (pexr,env)::fEnv)
+            | _ -> (ErrorValue TypeMismatchError)
         | _ -> (ErrorValue TypeMismatchError)
 (* ========================================================*)
 and
