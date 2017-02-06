@@ -11,11 +11,13 @@ epsilon = epsilon0;
 mu = mu0;
 eta = etac0/mu0^alpha;
 
-nIter = 10;
+nIter = 100;
 
 k = 1;
 while k <= nIter
-    L = f(var(1), var(2), var(3)) + lambda'*c(var(1), var(2), var(3)) + mu/2*norm(c(var(1), var(2), var(3)))^2;
+    L = f(var(1), var(2), var(3)) + lambda'*c(var(1), var(2), var(3))...
+        + mu/2*c(var(1), var(2), var(3)).^2;
+    %    + mu/2*norm(c(var(1), var(2), var(3)))^2;
     [ t, x ] = newton(L, x);
     
     % Critere de convergence non satisfait
@@ -35,6 +37,7 @@ while k <= nIter
            eta = etac0/mu^beta;
        end
     end
+    disp(k)
 end
 
 end

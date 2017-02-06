@@ -16,7 +16,7 @@ lambda_max = -lambda(1) + ymax;
 %% Résolution de l'équation non lineaire
 syms l;
 phi = phi1(l, @(l)normS(qg, lambda, l), delta);
-x = newtonPlus(phi, lambda_min, lambda_max);
+[~, x] = newtonPlus(phi, lambda_min, lambda_max);
 
 %% Calcul de s
 s = 0;

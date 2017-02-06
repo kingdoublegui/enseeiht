@@ -6,7 +6,7 @@ function [t, x] = newton( f, x0 )
 
 t = -1;
 % nb iterations apres lesqulles on s'arrete
-nbIterations = 50;
+nbIterations = 20;
 
 x = x0;
 
@@ -26,7 +26,7 @@ testArret2 = false;
 testArret3 = false;
 testArret4 = false;
 
-while ~testArret4
+while ~testArret2
     % Calcul de d
     d = - H \ g;
     % Mise a jour des variables
