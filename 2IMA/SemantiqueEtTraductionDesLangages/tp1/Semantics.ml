@@ -23,7 +23,7 @@ and environment = (string * valueType) list
 
 (* ========================================================*)
 (* string_of_names : string list -> string *)
-(* Converti une liste de chaînes de caractères en une seule chaîne de caractères *)
+(* Convertit une liste de chaînes de caractères en une seule chaîne de caractères *)
 let string_of_names names =
 	List.fold_right (fun t tq -> t ^ " " ^ tq ) names "";;
 
@@ -101,8 +101,9 @@ and
 (* Fonction d'évaluation d'un let *)
 (* "let ident = bvalue in bin" *)
 ruleLet env ident bvalue bin = 
-(* A traiter*)
-     (ErrorValue UndefinedExpressionError)
+    match (value_of_expr bvalue env) with
+    | (ErrorValue _) as result -> result
+    | result -> value_of_expr bin ((ident, result)::env)
 (* ========================================================*)
 and 
 (* ruleBinary : environment -> binary -> ast- > ast -> valueType *)
@@ -166,24 +167,32 @@ and
 (* Fonction d'évaluation d'une conditionnelle *)
 (* "if cond then bthen else belse" *)
 ruleIf env cond bthen belse = 
-(* A traiter*)
-     (ErrorValue UndefinedExpressionError)
+    let value =
+        (value_of_expr cond env)
+    in
+        match value with
+        | (ErrorValue _) as result -> result
+        | (BooleanValue true) -> (value_of_expr bthen env)
+        | (BooleanValue false) -> (value_of_expr belse env)
+        | _ -> (ErrorValue TypeMismatchError)
 (* ========================================================*)
 and 
 (* ruleFunction : ast -> environment -> valueType *)
 (* Fonction d'évaluation d'une fonction *)
 ruleFunction expr env = 
-(* A traiter*)
-     (ErrorValue UndefinedExpressionError)
-
+    (FrozenValue (expr, env))
 (* Appel par nom *)
 (* ========================================================*)
 and
 (* ruleCallByName : environment -> ast -> ast -> valueType *)
 (* Fonction d'évaluation d'un appel de fonction avec passage de paramètre par nom*)
 ruleCallByName env fexpr pexpr = 
-(* A traiter*)
-     (ErrorValue UndefinedExpressionError)
+    let value =
+        (value_of_expr fexpr env)
+    in
+        match value with
+        | (ErrorValue _) as result -> result
+        | _ -> (ErrorValue TypeMismatchError)
 (* ========================================================*)
 and
 (* ruleCallByValue : environment -> ast -> ast -> valueType *)
