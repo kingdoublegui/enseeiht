@@ -22,11 +22,19 @@ architecture arch_test of test_additionneur is
   -- configuration pour indiquer quelle architecture de l'additionneur
   -- tester (si omis, le logiciel en choisit une)
   for a1: additionneur use entity work.additionneur(vue_flot);
+  for a2: additionneur use entity work.additionneur(vue_structurelle);
+  for a3: additionneur use entity work.additionneur(vue_comportementale);
   
   begin
 
    -- instantiations et connexions du composant à tester
    a1 : additionneur
+     port map(A, B, CarryIn, Sum, CarryOut);
+	
+   a2 : additionneur
+     port map(A, B, CarryIn, Sum, CarryOut);
+	
+   a3 : additionneur
      port map(A, B, CarryIn, Sum, CarryOut);
 
    -- valeurs données aux signaux en entrée
