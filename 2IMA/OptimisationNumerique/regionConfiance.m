@@ -8,10 +8,10 @@ t = 0;
 x =x0;
 
 delta = delta0;
-nbIterations = 50;
+nbIterations = 1000;
 k = 0;
 
-epsilon = 10^-3;
+epsilon = 10^-6;
 
 var = sym('x', [length(x) 1]);
  
@@ -20,7 +20,7 @@ hess = hessian(f, var);
 
 g = eval(subs(grad, var, x));
 H = eval(subs(hess, var, x));
-s = pasCauchy(g, H, delta);
+s = moreSorensen(g, H, delta);
 c = num2cell(x);
 
 testArret0 = false;
@@ -50,7 +50,7 @@ while (k < nbIterations) && ~testArret0
     
     g = eval(subs(grad, var, x));
     H = eval(subs(hess, var, x));
-    s = pasCauchy(g, H, delta);
+    s = moreSorensen(g, H, delta);
     c = num2cell(x);
     
     k = k+1;

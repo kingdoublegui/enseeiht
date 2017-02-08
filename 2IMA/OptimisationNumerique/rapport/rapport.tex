@@ -1,0 +1,276 @@
+\documentclass[12pt]{article}
+
+\usepackage[top=3.5cm, bottom=3cm, left=2.5cm , right=2.5cm]{geometry}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage{graphicx}
+\usepackage[german=guillemets]{csquotes}
+\usepackage{lmodern,blindtext}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\newcommand{\Matiere}{Optimisation Numerique}
+\newcommand{\titre}{Problemes d'Optimisation avec et sans Contraintes}
+
+\title{\Matiere:\\ \titre}
+\author{Thibault MEUNIER}
+\date{9 fevrier 2017}
+
+\pagestyle{fancy}
+\fancyhead[L]{\titre}
+\fancyhead[R]{\nouppercase{\leftmark}}
+\fancyfoot[L]{\Matiere}
+\fancyfoot[C]{Page \thepage}
+\fancyfoot[R]{ENSEEIHT - IMA 2A}
+
+\begin{document}
+\maketitle
+
+\setcounter{page}{0}
+\thispagestyle{empty} % enlever numerotation de la page de garde
+
+\newpage
+
+\renewcommand{\contentsname}{Sommaire}
+\tableofcontents
+\newpage
+
+\section{Algorithme de Newton local}
+La resolution d'un probleme lineaire est une operation simple. Ainsi, l'algorithme de Newton local consiste en l'approximation de la fonction a minimiser par son developpement lineaire à l'ordre 2. En resolvant le probleme lineaire, on trouve une solution au probleme initial.
+
+\subsection{Pertinence}
+L'algorithme de Newton presente un interet majeur qui est sa rapidite. En effet, l'approximation faite de la foncion a l'ordre 2 permet une convergence rapide vers un minima.\newline
+Il presente cependant un inconvenient majeur qui est une convergence non assuree, et le minima trouve n'est que local. Selon le point de depart choisi, l'algorithme peut tendre vers l'infini ou meme iterer autour d'un minima sans l'atteindre.\newline
+Par la suite nous essaierons de l'ameliorer pour tirer partie de ses proprietes de convergence rapide toute en assurant cette convergence.
+
+\subsection{Reponses aux questions}
+\paragraph{1.}
+La fonction $f_1$ est égale à son développement de Taylor à l'ordre 2. En une iteration on resout donc le systeme lineaire associe, avec pour solution le minimum de $f_1$.
+
+\paragraph{2.}
+L'algorithme peut ne pas converger pour certains points initiaux de $f_2$. En effet, comme explique precedemment, l'approximation de la fonction par son developpement a l'ordre 2 conduit a une fonction pouvant conduire dans le sens oppose a un minimum. Le systeme obtenue peut ne pas etre inversible.
+
+\subsection{Tests}
+\begin{flushright}
+\textit{Fichiers testsNewton.m}
+\end{flushright}
+\paragraph{}
+Soient $f_1$ et $f_2$ comme definie dans le sujet :
+	\[f_1(x) = 2(x_1 + x_2 + x_3 - 3)^2 + (x_1 - x_2)^2 + (x_2 - x_3)^2\]
+	\[f_2(x) = 100(x_2 - x_1^2)^2+(1-x_1)^2\]
+On effectue les tests suivants afin de valider l'algorithme ecrit. Chaque test cherche a minimiser $f$ en partant du point $x_0$.
+\begin{itemize}
+	\item $f=f_1,\quad x_0 = \left[\begin{array}{c}1\ 0\ 0\end{array}\right]^T$ 2 tours realises
+			\[x^* = \left[\begin{array}{c}1\ 1\ 1\end{array}\right]^T,\quad f_1(x^*) = 2.46*10^{-31} \approx 0\]
+	\item $f=f_1,\quad x_0 = \left[\begin{array}{c}10\ 3\ -2.2\end{array}\right]^T$ 2 tours realises
+			\[x^* = \left[\begin{array}{c}1\ 1\ 1\end{array}\right]^T,\quad f_1(x^*) = 1.77*10^{-30} \approx 0\]
+	\item $f=f_2,\quad x_0 = \left[\begin{array}{c}-1.2\ 1\end{array}\right]^T$ 8 tours realises
+			\[x^* = \left[\begin{array}{c}1\ 1\end{array}\right]^T,\quad f_2(x^*) = 4.94*10^{-30} \approx 0\]
+	\item $f=f_2,\quad x_0 = \left[\begin{array}{c}10\ 0\end{array}\right]^T$ 6 tours realises
+			\[x^* = \left[\begin{array}{c}1\ 1\end{array}\right]^T,\quad f_2(x^*) =  4.94*10^{-28} \approx 0\]
+	\item $f=f_2,\quad x_0 = \left[\begin{array}{c}0\ \frac{1}{200} + 10^{-12}\end{array}\right]^T$ non convergence
+	\newline En effet le point $x_0^* = \left[\begin{array}{c}0\ \frac{1}{200}\end{array}\right]^T$ est un point singulier de la hessienne de $f_2$. Un simple decalage de $10^{-12}$ ne permet pas un convergence franche du fait de la precision des calculs effectues.
+\end{itemize}
+
+\section{Regions de confiance : pas de Cauchy}
+Le principal defaut de l'algorithme de Newton est sa non convergence. L'algorithme des region de confiance se base donc sur ce dernier, qui fonctionne bien dans la plupart des situation, et s'attache a resoudre ce probleme de convergence. Pour ce faire, il met en place des regions dites "de confiance" permettant a l'algorithme d'evoluer sans difficulte. On diminue ou augmente la taille de cette region au fur et a mesure afin de trouver un minimum. L'algorithme beneficiera ainsi d'une vitesse de convergence quasiment quadratique.
+
+\subsection{Pertinence}
+L'avantage du pas de Cauchy est egalement son principal inconvenient. Il se base sa minimisation sur le calcul du gradient de la fonction en le point courant et choisie la direction de plus forte pente. Ainsi il effectue un calcul simple qui conduira en general vers le minimum, mais il peut aussi s'egarer et augmenter significativement le nombre d'iterations necessaires a la resolution du probleme de minimisation initial.
+
+\subsection{Reponses aux questions}
+\paragraph{1.}
+La fonction $f_1$ est égale à son développement de Taylor à l'ordre 2.
+Sur $f_1$, l'agorithme de Newton converge en une unique iteration car il minimise directement la quadratique. Avec l'assertion qu'il effectue, le pas de Cauchy effectue plusieurs pas avant de trouver le meme minimum local. Il aurait pu etre plus efficace sur des fonctions complexes.
+
+\paragraph{2.}
+On peut jouer sur differents parametres pour modifier optimiser l'execution de l'algorithme des regions de confiances :
+\begin{itemize}
+	\item $\Delta_{max}$ : rayon de confiance maximal
+	\item $\gamma_1$ et $\gamma_2$ : facteurs d'agrandissement et de reduction de la region de confiance
+	\item $\eta_1$ et $\eta_2$ : criteres d'agrandissement et de reduction de la region de confiance
+\end{itemize}
+
+\subsection{Tests}
+\begin{flushright}
+\textit{Fichiers testsCauchy.m}
+\end{flushright}
+\paragraph{}
+On teste le pas de Cauchy sur des fonctions de la forme
+	\[q(s) = s^Tg + \frac{1}{2}s^THs\]
+\begin{itemize}
+	\item $g = \left[\begin{array}{c}0\\0\end{array}\right],\quad H = \left[\begin{array}{cc}7&0\\0&2\end{array}\right], \Delta = 1$ donne: $s = \left[\begin{array}{c}0\\0\end{array}\right]$
+	\item $g = \left[\begin{array}{c}6\\2\end{array}\right],\quad H = \left[\begin{array}{cc}7&0\\0&2\end{array}\right], \Delta = 1$	donne $s = \left[\begin{array}{c}-0.9231\\-0.3077\end{array}\right]$
+	\item $g = \left[\begin{array}{c}-2\\1\end{array}\right],\quad H = \left[\begin{array}{cc}-2&0\\0&10\end{array}\right], \Delta = 1$ donne $s = \left[\begin{array}{c}0.8944\\-0.4472\end{array}\right]$
+\end{itemize}
+
+\section{Algorithme des Regions de Confiance}
+\subsection{Tests}
+\begin{flushright}
+\textit{Fichiers testsRegionConfiance.m}
+\end{flushright}
+\paragraph{}
+On effectue ces tests sur les fonctions $f_1$ et $f_2$ avec les paramètres suivants:
+	\[\eta_1 = 0.25, \eta_2 = 0.75, \gamma_1 = 0.5, \gamma_2 = 2, \Delta_0 = 2, \Delta_{max} = 10\times|x_0|\]
+\begin{itemize}
+	\item $f=f_1,\quad x_0 = \left[\begin{array}{c}1\ 0\ 0\end{array}\right]^T$ 35 tours realises
+			\[x^* = \left[\begin{array}{c}1\ 1\ 1\end{array}\right]^T,\quad f_1(x^*) = 1.97*10^{-11} \approx 0\]
+	\item $f=f_1,\quad x_0 = \left[\begin{array}{c}10\ 3\ -2.2\end{array}\right]^T$ 32 tours realises
+			\[x^* = \left[\begin{array}{c}1\ 1\ 1\end{array}\right]^T,\quad f_1(x^*) = 1.84*10^{-10} \approx 0\]
+	\item $f=f_2,\quad x_0 = \left[\begin{array}{c}-1.2\ 1\end{array}\right]^T$ 1000 tours realises
+			\[x^* = \left[\begin{array}{c}1\ 1\end{array}\right]^T,\quad f_2(x^*) = 8.86*10^{-4} \approx 0\]
+			On atteint ici le nombre maximum d'iterations autorises. La convergence est donc tres lente.
+	\item $f=f_2,\quad x_0 = \left[\begin{array}{c}-1.2\ 1\end{array}\right]^T$ 9 tours realises
+			\[x^* = \left[\begin{array}{c}0.99\ 0.98\end{array}\right]^T \approx \left[\begin{array}{c}1\ 1\end{array}\right]^T,\quad f_2(x^*) = 1.50^{-5} \approx 0\]
+		La pente etant faible, la solution fournie est approximative.
+	\item $f=f_2,\quad x_0 = \left[\begin{array}{c}0\ \frac{1}{200} + 10^{-12}\end{array}\right]^T$ 516 tours realises
+			\[x^* = \left[\begin{array}{c}1\ 1\end{array}\right]^T,\quad f_2(x^*) = 5.81*10^{-12} \approx 0\]
+			Comme attendu, l'algorithme converge sur un cas qu'il lui etait impossible de resoudre auparavant.
+\end{itemize}
+
+\section{Newton pour les equations non lineaires}
+L'algorithme suivant est un sous-probleme necessaire a la resolution de l'algorithme de More-Sorensen. Nous ne resoudrons donc pas toutes les equations lineaires mais celles de la forme : \[||s(\lambda)||^2 - \delta^2 = 0,\quad ||s(\lambda)||^2 = \sum{\frac{\alpha_i^2}{(\lambda + \beta_i)^2}}\]
+
+
+\subsection{Reponses aux questions}
+\paragraph{1.}
+On s'arrête lorsque $\lambda_{min}$ ou $\lambda_{max}$, bornes de l'intervalle au sein duquel on cherche la solution, verifie a peu pres l'equation (avec une precision de $\epsilon$).
+\paragraph{2.}
+Si l'utilisateur ne fournie pas de $\lambda_{min}$ ou de $\lambda_{max}$, on peut demarer avec un intervalle quelconque en augmentant sa taille au fur et a mesure. Tant $f(\lambda_{min}) * f(\lambda_{max}) > 0$, on double la taille de l'intervalle. Ceci presente l'interet de trouver rapidement un intervalle valide. On pourra par la suite affiner cet intervalle si necessaire en reduisant l'une ou l'autre des bornes.\newline
+Cette operation pourrait etre facilement implementee et surcharger l'implementation existante.
+
+\subsection{Tests}
+\begin{flushright}
+\textit{Fichiers testsNewtonPlus.m}
+\end{flushright}
+On s'interesse d'abord a la fonction $\phi_1$ definie comme suit
+	\[\phi_1(\lambda) = ||s(\lambda)||^2 - \delta^2,\quad ||s(\lambda)||^2 = \sum{\frac{\beta_i^2}{(\lambda_i + \lambda)^2}}\]
+\begin{itemize}
+	\item $\lambda = (2, 14), \quad \delta = 0.5$
+		\[\lambda = 3.5\]
+	\item $\lambda = (-38, 20), \quad \delta = 0.2$
+		\[\lambda = 20\]
+	\item $\lambda = (-38, 20),\quad \delta = 0.7$
+		\[\lambda = 1.4360\]
+\end{itemize}
+
+\section{Région de confiance : pas de Moré-Sorensen}
+\subsection{Pertinence}
+Le pas de Cauchy consistant principalement en la descente du gradient, ce qui peut conduire à une convergence lente vers la solution, le pas de Moré-Sorensen espère éviter cela en considérant une résolution du problème de Taylor à l'ordre 2 à l'intérieur de la région de confiance, donc en considérant des directions autres que celle donnée par le gradient.
+
+\subsection{Reponses aux questions}
+\paragraph{1.}
+Ici la décroissance obtenue est bien plus rapide en nombre d'itérations (facteur $10^2$) qu'avec le pas de Cauchy ce qui n'est guère étonnant puisque l'algorithme de Moré-Sorensen recherche à chaque itération une solution de la quadratique approchant la fonction tandis que celui de Cauchy se restreint aux déplacements selon le gradient de la fonction au point courant.
+
+\paragraph{2.}
+L'avantage de Moré-Sorensen sur Cauchy est donc qu'il cherche à entièrement minimiser la quadratique dans la région de confiance.
+L'inconvénient est que son déroulement requiert le calcul des valeurs propres de la Hessienne de la fonction à chaque itération, ce qui peut avoir un cout non négligeable pour des dimensions de l'espace de départ élevées.
+
+\subsection{Tests}
+\begin{flushright}
+\textit{Fichiers testsRegionConfiance.m}
+\end{flushright}
+\paragraph{}
+Concernant les test de l'algorithme de Moré-Sorensen, voici les résultats pour la version complète avec les paramètres suivants :
+	\[\eta_1 = 0.25, \eta_2 = 0.75, \gamma_1 = 0.2, \gamma_2 = 1.5, \Delta_0 = 2, \Delta_{max} = 10\times(|x_0|)\]
+\begin{itemize}
+	\item $f=f_1, \quad x_0 = \left[\begin{array}{c}1\ 0\ 0\end{array}\right]^T$ 1 tours realises
+			\[x^* = \left[\begin{array}{c}1\ 1\ 1\end{array}\right]^T,\quad f_1(x^*) = 3.08*10^{-31} \approx 0\]
+	\item $f=f_1, \quad x_0 = \left[\begin{array}{c}10\ 3\ -2.2\end{array}\right]^T$ 3 tours realises
+			\[x^* = \left[\begin{array}{c}1\ 1\ 1\end{array}\right]^T,\quad f_1(x^*) = 4.93*10^{-31} \approx 0\]
+	\item $f=f_2, \quad x_0 = \left[\begin{array}{c}-1.2\ 1\end{array}\right]^T$ 27 tours realises
+			\[x^* = \left[\begin{array}{c}1\ 1\end{array}\right]^T,\quad f_2(x^*) = 5.78*10^{-17} \approx 0\]
+	\item $f=f_2, \quad x_0 = \left[\begin{array}{c}10\ 0\end{array}\right]^T$ 47 tours realises
+			\[x^* = \left[\begin{array}{c}1\ 1\end{array}\right]^T ,\quad f_2(x^*) = 7.45^{-4} \approx 0\]
+	\item $f=f_2, \quad x_0 = \left[\begin{array}{c}0\ \frac{1}{200} + 10^{-12}\end{array}\right]^T$ 40 tours realises
+			\[x^* = \left[\begin{array}{c}1\ 1\end{array}\right]^T,\quad f_2(x^*) = 3.08*10^{-17} \approx 0\]
+\end{itemize}
+
+\section{Algorithme du Lagrangien augmenté}
+\subsection{Tests}
+\begin{flushright}
+\textit{Fichiers testOxx.m}
+\end{flushright}
+\paragraph{}
+Les tests de cet algorithme ont été ceux proposés par le sujet. Les résultats obtenus furent :
+\begin{itemize}
+	\item pour $f_1$ avec $x_0 = x_{c11}$ et la contrainte donnée, convergence en 25 tours :
+		\[x^* = \left[\begin{array}{c}0.5\\1.25\\0.5\end{array}\right],\quad f_1(x^*) = 2.25\]
+	\item pour $f_1$ avec $x_0 = x_{c12}$ et la contrainte donnée, convergence en 25 tours:
+		\[x^* = \left[\begin{array}{c}0.5\\1.25\\0.5\end{array}\right],\quad f_1(x^*) = 2.25\]
+	\item pour $f_2$ avec $x_0 = x_{c21}$ et la contrainte donnée, convergence en 38 tours:
+		\[x^* = \left[\begin{array}{c}0.9072\\0.8228\end{array}\right],\quad f_1(x^*) = 0.0086\]
+	\item pour $f_2$ avec $x_0 = x_{c22}$ et la contrainte donnée, convergence en 43 tours:
+		\[x^* = \left[\begin{array}{c}0.9072\\0.8228\end{array}\right],\quad f_1(x^*) = 0.0086\]
+\end{itemize}
+
+\subsection{Réponses aux questions}
+\paragraph{1.}
+La première remarque est que l'algorithme est plus long à converger que les précédents, ce qui se justifie puisqu'il fait plusieurs fois appel aux algorithme précédemment implémentés. De plus il semble que je n'ai pas réussi à atteindre un niveau de précision suffisant puisque l'un des critères d'arrêt (celui requierant que le lagrangien en $x^*$ soit nul) n'était vérifié que pour une valeur $\epsilon = 10^{-6}$. Cependant ceci était sans doute le fait d'approximation puisque je pouvais ensuite vérifier à la main que le valeur retournée par l'algorithme était bien celle recherchée. En particulier, les deux dernières itérations dans chacuns des cas étaient plus longues que les autres et le nombre d'itération de l'algorithme de Moré-Sorensen était atteint, bien que la solution retournée soit "bonne".
+
+On remarque ensuite que lorsque l'on démarre d'un point ne satisfaisant pas la contrainte, l'algorithme met plus de temps à converger (pour $f_2$) ce qui est certainement dû au fait qu'il a besoin de plus d'itérations pour rejoindre le domaine de la contrainte.
+
+Concernant $\lambda_k$, celui-ci n'est pas nul en sortie de l'algorithme (dans les 4 cas) ce que l'on peut intuiter puisque la solution du problème sans contrainte n'est pas dans le domaine défini par la contrainte. Il est cependant plus petit dans le cas de la fonction $f_2$ ce qui peut être dû au fait que la solution est proche de satisfaire la contrainte.
+
+$mu_k$, qui a été initialisé à 2, a lui une valeur très élevée (4096 pour les cas 1 et 2, 32768 pour le cas 3, et 16384 pour le cas 4) ce qui montre que l'algorithme est passé plusieurs fois par la phase de pénalisation car les contraintes n'étaient pas assez respectées au cours des itérations ($\tau$ ayant été ici mis à 2).
+
+\paragraph{2.}
+Pour des valeurs de $\tau$ de $(0.1, 0.5, 1.5, 2, 5)$ le nombre d'itérations réalisées était de :
+\begin{itemize}
+	\item Cas 1 :
+		\begin{itemize}
+			\item 10 rapides (résultat non solution)
+			\item 25 rapides (résultat non solution)
+			\item 30 (solution à $10^{-6}$)
+			\item 25 (solution à $10^{-6}$)
+			\item 15 (solution à $10^{-6}$)
+		\end{itemize}
+	\item Cas 2 :
+		\begin{itemize}
+			\item 10 rapides (résultat non solution)
+			\item 25 rapides (résultat non solution)
+			\item 29 rapides (solution à $10^{-6}$)
+			\item 25 (solution à $10^{-6}$)
+			\item 15 (solution à $10^{-4}$ près)
+		\end{itemize}
+	\item Cas 3 :
+		\begin{itemize}
+			\item 50000 rapides (limite de tours)
+			\item 50000 rapides (limite de tours)
+			\item 49 rapides (solution à $10^{-6}$)
+			\item 38 (solution à $10^{-6}$)
+			\item 18 (solution à $10^{-6}$)
+		\end{itemize}
+	\item Cas 4 :
+		\begin{itemize}
+			\item 50000 rapides (limite de tours)
+			\item 41 rapides (solution à $10^{-6}$)
+			\item 49 rapides (solution à $10^{-6}$)
+			\item 43 (solution à $10^{-6}$)
+			\item 21 (solution à $10^{-6}$)
+		\end{itemize}
+\end{itemize}
+On remarque que si une valeur faible de $\tau$ accélère la convergence de l'algorithme, elle conduit aussi à un résultat erroné. Quand $\tau$ est faible, chaque itération est effectuée très rapidement (les itérations dans l'application de l'algorithme sans contraintes sont peu nombreuses, certainement car alors $\epsilon_k$ n'est pas assez faible) et cela conduit aussi à une mauvaise solution.
+
+Si par contre $\tau$ est au dessus de 1 strictement alors l'algorithme converge vers la solution mais le nombre d'itérations des optimisations sans contraintes explosent régulièrement ce qui réduit certainement la précision du résultat final (arrêt à cause de stagnation ?).
+Peut être aurais-je dû à la fois permettre plus d'itérations pour l'optimisation sans contrainte et à la fois revoir mon critère d'arrêt sur stagnation de l'itérée $x_k$ pour ne pas le prendre en compte lorsque l'optimisation sans contrainte n'a pas pleinement réussie.
+
+La valeur de $tau$ qui a été la plus efficace dans mon cas, tant en terme de nombre d'itérations que de temps, fût $1.5$ (à l'exception du cas 1 pour lequel $2$ était légèrement mieux).
+
+\paragraph{3.}
+Cette partie concernant l'adaptation de l'algorithme precedent au probleme d'inegalite n'a pas ete traite. Il faudrait modifier l'algorithme pour determiner le signe du gradient des contraintes. On incluerait egalement les contraintes d'egalites en les traduisant par 2 inegalites.
+
+\newpage
+\section*{Conclusion}
+Ce projet fut tres interessant car il apporte un aspect concret a des problemes etudies en cours. Pouvoir confronter les connaissances et acquis a une implantation a permis de mieux les structurer.\newline
+Le faire par l'intermediaire de seance de TP dedies est un vrai plus, bien que les explications fournies etaient parfois difficiles a decryptees.
+
+
+\end{document}

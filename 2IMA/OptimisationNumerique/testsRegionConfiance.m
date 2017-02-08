@@ -18,11 +18,13 @@ x012 = [10; 3; -2.2];
 fprintf('# Vecteur : '); disp(x011');
 [t, resultat] = regionConfiance(@(x1, x2, x3) f1(x1, x2, x3), x011, delta, gamma1, gamma2, eta1, eta2);
 fprintf('- Resultat : '); disp(resultat');
+fprintf('- f : '); disp(f1(resultat(1), resultat(2), resultat(3))');
 fprintf('- Nombre d iterations : '); disp(t);
 
 fprintf('# Vecteur : '); disp(x012');
 [t, resultat] = regionConfiance(@(x1, x2, x3) f1(x1, x2, x3), x012, delta, gamma1, gamma2, eta1, eta2);
 fprintf('- Resultat : '); disp(resultat');
+fprintf('- f : '); disp(f1(resultat(1), resultat(2), resultat(3))');
 fprintf('- Nombre d iterations : '); disp(t);
 
 % Sur la fonction f2
@@ -34,17 +36,20 @@ x021 = [-1.2; 1];
 x022 = [10; 0];
 x023 = [0; 1/200 + 1e-12];
 
-% fprintf('# Vecteur : '); disp(x021');
-% [t, resultat] = regionConfiance(@(x1, x2) f2(x1, x2), x021, delta, gamma1, gamma2, eta1, eta2);
-% fprintf('- Resultat : '); disp(resultat');
-% fprintf('- Nombre d iterations : '); disp(t);
+fprintf('# Vecteur : '); disp(x021');
+[t, resultat] = regionConfiance(@(x1, x2) f2(x1, x2), x021, delta, gamma1, gamma2, eta1, eta2);
+fprintf('- Resultat : '); disp(resultat');
+fprintf('- f : '); disp(f2(resultat(1), resultat(2))');
+fprintf('- Nombre d iterations : '); disp(t);
 
 fprintf('# Vecteur : '); disp(x022');
 [t, resultat] = regionConfiance(@(x1, x2) f2(x1, x2), x022, delta, gamma1, gamma2, eta1, eta2);
 fprintf('- Resultat : '); disp(resultat');
+fprintf('- f : '); disp(f2(resultat(1), resultat(2))');
 fprintf('- Nombre d iterations : '); disp(t);
 
 fprintf('# Vecteur : '); disp(x023');
 [t, resultat] = regionConfiance(@(x1, x2) f2(x1, x2), x023, delta, gamma1, gamma2, eta1, eta2);
 fprintf('- Resultat : '); disp(resultat');
+fprintf('- f : '); disp(f2(resultat(1), resultat(2))');
 fprintf('- Nombre d iterations : '); disp(t);

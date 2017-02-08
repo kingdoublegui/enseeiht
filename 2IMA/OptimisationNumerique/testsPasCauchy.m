@@ -6,13 +6,12 @@ gamma1 = 1/2;
 gamma2 = 2;
 eta1 = 1/4;
 eta2 = 3/4;
-delta = 0.5;
+delta = 1;
 
 % Quadratique 1
 g1 = [0; 0];
 H1 = [7 0; 0 2];
-% Je ne teste plus e cas car laisse des warnings inutiles dans le terminal
-%pasCauchy(g1, H1, delta);
+pasCauchy(g1, H1, delta)
 
 % Quadratique 2
 g2 = [6; 2];
