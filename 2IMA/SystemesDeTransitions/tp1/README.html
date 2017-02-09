@@ -1,0 +1,29 @@
+<h1 id="le-problème-des-missionnaires-et-des-cannibales">Le problème des missionnaires et des cannibales</h1>
+<h2 id="objectif">Objectif</h2>
+<p><em>Modéliser le problème des missionnaires et des cannibales</em></p>
+<p>Trois missionnaires et trois cannibales sont sur la rive gauche d'un fleuve. Ils disposent d'une barque qui peut transporter deux personnes (rameur inclus). Si les cannibales se retrouvent en majorité absolue sur une rive, ils mangent les missionnaires présents sur cette rive. Les six peuvent-ils traverser le fleuve en sécurité (pour les missionnaires) ?</p>
+<p>Questions supplémentaires:</p>
+<ul>
+<li>Quatre missionnaires et trois cannibales ?</li>
+<li>Quatre missionnaires et quatre cannibales ?</li>
+<li>Quatre missionnaires, quatre cannibales et barque de capacité 3 ?</li>
+<li>Nouvelle transition : si tous les missionnaires sont sur la même rive avec un unique cannibale, ils peuvent jeter le cannibale aux crocodiles.</li>
+</ul>
+<p>Sont fournis comme inspiration : deux versions du problème de « l'homme, le loup, le mouton et le chou ».</p>
+<h2 id="mise-en-œuvre-avec-tla-toolbox">Mise en œuvre avec TLA Toolbox</h2>
+<p>Pour lancer TLA toolbox :</p>
+<ul>
+<li><p>se placer dans un nouveau répertoire (un sous-répertoire <code>workspace</code> y apparaîtra) et exécuter :</p>
+<p>/mnt/n7fs/tla/toolbox/toolbox</p></li>
+<li><code>File</code> &gt; <code>Open spec</code> pour éditer une spécification TLA+.</li>
+<li><code>TLC Model Checker</code> pour exécuter le vérificateur de modèle.</li>
+<li>Temporal Formula doit être la formule complète de la spécification à étudier;</li>
+<li>Ajouter dans <code>Invariants</code> des prédicats d'états P pour lesquels on veut vérifier []P ;</li>
+<li><p>Ajouter dans <code>Properties</code> des formules en logique temporelle ([]P, &lt;&gt;P, etc).</p></li>
+</ul>
+<h2 id="outils-en-ligne-de-commande">Outils en ligne de commande</h2>
+<p>Pour exécuter le vérificateur de modèle (« model checker »), il faut un fichier <code>.cfg</code> du même nom que le module à vérifier (cf les exemples) et faire :</p>
+<pre><code> java -classpath /mnt/n7fs/tla tlc2.TLC hlmc</code></pre>
+<p>Pour obtenir une jolie version imprimable :</p>
+<pre><code> java -classpath /mnt/n7fs/tla tla2tex.TLA -latexCommand pdflatex -shade hlmc.tla</code></pre>
+<p>qui engendre un fichier <code>hlmc.pdf</code>.</p>

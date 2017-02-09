@@ -1,0 +1,144 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.08 of 21 December 2015
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running in Model-Checking mode.
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file MC.tla
+Parsing file missionnairesEtCannibales.tla
+Parsing file /mnt/n7fs/tla/toolbox/plugins/org.lamport.tlatools_1.0.0.201512230951/tla2sany/StandardModules/TLC.tla
+Parsing file /mnt/n7fs/tla/toolbox/plugins/org.lamport.tlatools_1.0.0.201512230951/tla2sany/StandardModules/Naturals.tla
+Parsing file /mnt/n7fs/tla/toolbox/plugins/org.lamport.tlatools_1.0.0.201512230951/tla2sany/StandardModules/Integers.tla
+Parsing file /mnt/n7fs/tla/toolbox/plugins/org.lamport.tlatools_1.0.0.201512230951/tla2sany/StandardModules/Sequences.tla
+Semantic processing of module Naturals
+Semantic processing of module Integers
+Semantic processing of module Sequences
+Semantic processing of module TLC
+Semantic processing of module missionnairesEtCannibales
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2017-02-09 12:00:51)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2110:1 @!@!@
+Invariant TypeInvariant is violated.
+@!@!@ENDMSG 2110 @!@!@
+@!@!@STARTMSG 2121:1 @!@!@
+The behavior up to this point is:
+@!@!@ENDMSG 2121 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+1: <Initial predicate>
+/\ barque = "G"
+/\ misD = 0
+/\ misG = 3
+/\ canD = 0
+/\ canG = 3
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+2: <Action line 49, col 3 to line 57, col 13 of module missionnairesEtCannibales>
+/\ barque = "D"
+/\ misD = 0
+/\ misG = 3
+/\ canD = 2
+/\ canG = 1
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2217:4 @!@!@
+3: <Action line 71, col 3 to line 74, col 43 of module missionnairesEtCannibales>
+/\ barque = "D"
+/\ misD = 0
+/\ misG = 3
+/\ canD = 2
+/\ canG = 0
+
+@!@!@ENDMSG 2217 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2017-02-09 12:00:52
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 52, col 6 to line 52, col 22 of module missionnairesEtCannibales: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 53, col 6 to line 53, col 22 of module missionnairesEtCannibales: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 54, col 6 to line 54, col 22 of module missionnairesEtCannibales: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 55, col 6 to line 55, col 22 of module missionnairesEtCannibales: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 56, col 6 to line 56, col 18 of module missionnairesEtCannibales: 6
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 63, col 6 to line 63, col 22 of module missionnairesEtCannibales: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 64, col 6 to line 64, col 22 of module missionnairesEtCannibales: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 65, col 6 to line 65, col 22 of module missionnairesEtCannibales: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 66, col 6 to line 66, col 22 of module missionnairesEtCannibales: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 67, col 6 to line 67, col 18 of module missionnairesEtCannibales: 4
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 73, col 6 to line 73, col 19 of module missionnairesEtCannibales: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 74, col 18 to line 74, col 21 of module missionnairesEtCannibales: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 74, col 24 to line 74, col 27 of module missionnairesEtCannibales: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 74, col 30 to line 74, col 33 of module missionnairesEtCannibales: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 74, col 36 to line 74, col 41 of module missionnairesEtCannibales: 1
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 79, col 6 to line 79, col 19 of module missionnairesEtCannibales: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 80, col 18 to line 80, col 21 of module missionnairesEtCannibales: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 80, col 24 to line 80, col 27 of module missionnairesEtCannibales: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 80, col 30 to line 80, col 33 of module missionnairesEtCannibales: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 80, col 36 to line 80, col 41 of module missionnairesEtCannibales: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(4) at 2017-02-09 12:00:52: 12 states generated (3 157 s/min), 7 distinct states found (1 842 ds/min), 2 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2199:0 @!@!@
+12 states generated, 7 distinct states found, 2 states left on queue.
+@!@!@ENDMSG 2199 @!@!@
+@!@!@STARTMSG 2194:0 @!@!@
+The depth of the complete state graph search is 4.
+@!@!@ENDMSG 2194 @!@!@
+@!@!@STARTMSG 2186:0 @!@!@
+Finished in 00s at (2017-02-09 12:00:52)
+@!@!@ENDMSG 2186 @!@!@
