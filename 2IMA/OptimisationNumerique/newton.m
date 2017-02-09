@@ -19,7 +19,6 @@ x = x0;
 var = sym('x', [length(x) 1]);
 
 grad = gradient(f, var);
-disp(grad)
 g = eval(subs(grad, var, x));
 hess = hessian(f, var);
 H = eval(subs(hess, var, x));
