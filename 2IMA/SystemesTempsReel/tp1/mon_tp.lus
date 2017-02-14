@@ -28,3 +28,49 @@ node simu_counter(RAZ: bool) returns (T: bool)
 let
     T = counter(3, RAZ);
 tel ;
+
+node keep (X: bool; RAZ: bool) returns (Y: bool)
+let
+    Y = X -> (if RAZ then X else pre(Y));
+tel ;
+
+node valid_rythm(rythm: int) returns (Y: bool)
+let
+    Y = rythm > 0 and rythm <= 4;
+tel ;
+
+node metronome(rythm: int) returns (tic, tac, toc, tut: bool)
+var count: int;
+let
+    count = 1 -> if pre(count) = rythm then 1 else pre(count) + 1;
+    tic = count = 1 and valid_rythm(rythm);
+    tac = count = 2 and valid_rythm(rythm);
+    toc = count = 3 and valid_rythm(rythm);
+    tut = count = 4 and valid_rythm(rythm);
+tel ;
+
+node metronome2(rythm: int) returns (tic, tac, toc, tut: bool)
+let
+    tic = valid_rythm(rythm) -> (pre(tut) and rythm = 4)
+                             or (pre(toc) and rythm = 3)
+                             or (pre(tac) and rythm = 2)
+                             or (pre(tic) and rythm = 1);
+    tac = false -> pre(tic) and rythm >= 2;
+    toc = false -> pre(tac) and rythm >= 3;
+    tut = false -> pre(toc) and rythm >= 4;
+tel ;
+
+
+node metronome2(r1, r2, r3, r4: int) returns (tic, tac, toc, tut: bool)
+let
+    tic = (r1 and not (r2 or r3 or r4)) or
+          (r2 and not (r3 or r4)) or
+          (r3 and not r4)
+                         -> (pre(tut) and rythm = 4)
+                             or (pre(toc) and rythm = 3)
+                             or (pre(tac) and rythm = 2)
+                             or (pre(tic) and rythm = 1);
+    tac = false -> pre(tic) and rythm >= 2;
+    toc = false -> pre(tac) and rythm >= 3;
+    tut = false -> pre(toc) and rythm >= 4;
+tel ;
