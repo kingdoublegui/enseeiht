@@ -186,33 +186,44 @@ ruleFunction expr env =
 and
 (* ruleCallByName : environment -> ast -> ast -> valueType *)
 (* Fonction d'évaluation d'un appel de fonction avec passage de paramètre par nom*)
-ruleCallByName env fexpr pexpr = 
-    let value =
-        (value_of_expr fexpr env)
-    in
-        match value with
-        | (ErrorValue _) as result -> result
-        | (FrozenValue (f, fEnv)) ->
-            match f with
-            | (FunctionNode (fName, fValue)) -> (value_of_expr fValue (pexr,env)::fEnv)
-            | _ -> (ErrorValue TypeMismatchError)
-        | _ -> (ErrorValue TypeMismatchError)
+ruleCallByName env fexpr pexpr =
+  match (value_of_expr fexpr env) with
+  | (FrozenValue (fexpr,fenv)) ->
+    (match fexpr with
+    | (FunctionNode (fpar,fbody)) ->
+      (value_of_expr fbody ((fpar,(FrozenValue (pexpr,env)))::fenv))
+    | _ -> (ErrorValue TypeMismatchError))
+  | (ErrorValue _) as result -> result
+  | _ -> (ErrorValue TypeMismatchError)
 (* ========================================================*)
 and
 (* ruleCallByValue : environment -> ast -> ast -> valueType *)
 (* Fonction d'évaluation d'un appel de fonction avec passage de paramètre par valeur*)
 ruleCallByValue env fexpr pexpr = 
 (* Appel par valeur *)
-(* A traiter*)
-     (ErrorValue UndefinedExpressionError)
+  let pValue =
+     value_of_expr pexpr env
+   in
+     match pValue with
+     | (ErrorValue _) as result -> result
+     | _ ->
+    let fValue =
+          value_of_expr fexpr env
+        in
+         (match fValue with
+         | (FrozenValue ((FunctionNode (fpar,fbody)),fenv)) ->
+             (value_of_expr fbody ((fpar,pValue)::fenv))
+         | (ErrorValue _) as result -> result
+         | _ -> (ErrorValue TypeMismatchError)
+         )
+
 (* ========================================================*)
 and
 (* ruleLetrec : environment -> string -> ast- > ast -> valueType *)
 (* Fonction d'évaluation d'un let rec*)
 (* "letrec ident = bvalue in bin" *)
 ruleLetrec env ident bvalue bin = 
-(* A traiter*)
-     (ErrorValue UndefinedExpressionError)
+(value_of_expr bin ((ident,(FrozenValue ((LetrecNode (ident,bvalue,bvalue)),env)))::env))
 (* ========================================================*)
 and
 (* ruleTrue : valueType *)
