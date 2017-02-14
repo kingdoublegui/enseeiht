@@ -16,3 +16,15 @@ let
     P2 = rising_edge(not X) = falling_edge(X);
     Y = P1 and P2;
 tel ;
+
+node counter(const N: int ; RAZ: bool) returns (T: bool)
+var counter_state: int;
+let
+    counter_state = 0 -> if RAZ then 0 else if pre(counter_state) = N then N else pre(counter_state) + 1;
+    T = false -> counter_state = N;
+tel ;
+
+node simu_counter(RAZ: bool) returns (T: bool)
+let
+    T = counter(3, RAZ);
+tel ;
