@@ -1,4 +1,18 @@
-node EDGE (X: bool) returns (Y: bool)
+node rising_edge (X: bool) returns (Y: bool)
 let
     Y = X -> (X and not pre(X));
+tel ;
+
+
+node falling_edge (X: bool) returns (Y: bool)
+let
+    Y = not X -> (not X and pre(X));
+tel ;
+
+node verif(X: bool) returns (Y: bool)
+var P1, P2: bool;
+let
+    P1 = rising_edge(X) = falling_edge(not X);
+    P2 = rising_edge(not X) = falling_edge(X);
+    Y = P1 and P2;
 tel ;
