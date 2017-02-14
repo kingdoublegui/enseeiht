@@ -1,4 +1,5 @@
 (* Analyseur sémantique *)
+
 open Ast
 
 (* ===============================================*)
@@ -322,7 +323,7 @@ ruleUnit mem = (NullValue , mem)
 
 and 
 (* .............................................................................*)
-(*   ruleAccess : String -> memory -> environment  -> (ValueType * memory) ..*)
+(*   ruleInteger : String -> memory -> environment  -> (ValueType * memory) ..*)
 (* .............................................................................*)
 
 ruleInteger value mem = ((IntegerValue value), mem)
@@ -333,8 +334,15 @@ and
 (*      -> (ValueType * memory)                                                 *)
 (* .............................................................................*)
 
-(* ...............A COMPLETER .......................................*)
-ruleRead expr mem env = ((ErrorValue TypeMismatchError),mem)
+ruleRead expr mem env =
+    let (vexpr, mexpr) = value_of_expr (expr, mem) env
+    in match vexpr with
+        | (ErrorValue _) as result -> (result, mexpr)
+        | (ReferenceValue reference) ->
+            (match (lookforMem reference mexpr) with
+                | Found value -> (value, mexpr)
+                | NotFound -> (ErrorValue (UnknownReferenceError(reference)), mexpr))
+        | _ -> ((ErrorValue TypeMismatchError), mexpr)
 
 and
 (* .............................................................................*)
@@ -360,7 +368,9 @@ and
 (*       -> (ValueType * memory)                                                *)
 (* .............................................................................*)
 
-ruleReference expr mem env = ((ErrorValue TypeMismatchError),mem)
-(* ...............A COMPLETER .......................................*)
-
+ruleReference expr mem env =
+    let (vval,vmem) = (value_of_expr (expr,mem) env) 
+    in (match vval with
+        | (ErrorValue _) as result -> (result,vmem)
+        | _ -> let newRef = newReference() in (ReferenceValue newRef ,(newRef, vval)::vmem))
 ;;
