@@ -1,0 +1,27 @@
+Ce répertoire contient deux répertoires
+
+
+1. le répertoire dec7seg contient un composant fourni, décodeur 7 segments,
+qui est l'exemple sur lequel nous allons nous appuyer au cours de cette prise
+en main.
+
+Ce composant est décrit sous la forme de 3 fichiers :
+
+ - un fichier dec7seg.vhd qui décrit un composant qui convertit un
+   chiffre hexadécimal en 7 segments,
+ - un fichier Nexys4.vhd qui est le composant principal qui utilise
+   le composant précédent et le connecte à certains ports de la carte
+   (switchs, 7 segments, ...)
+ - un fichier Nexys4.ucf qui fait le lien entre les noms de ports de la carte
+   utilisés par le composant précédent et leurs noms réels sur la carte.
+
+Les deux derniers fichiers sont spécialement adaptés à l'exemple du décodeur 7
+segments.
+
+
+2. le répertoire config qui contient les deux fichiers Nexys4.vhd et
+Nexys4.ucf plus complets. 
+
+CE SONT CES DEUX FICHIERS À PARTIR DESQUELS VOUS DEVREZ PARTIR PAR LA SUITE
+QUAND VOUS COMMENCEREZ LE DÉVELOPPEMENT DE NOUVEAUX COMPOSANTS.
+
