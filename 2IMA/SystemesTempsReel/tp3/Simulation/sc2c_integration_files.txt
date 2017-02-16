@@ -1,0 +1,29 @@
+*****************************
+*** Generated KCG H files ***
+*****************************
+counter3.h
+counter2.h
+decounter.h
+counter.h
+kcg_types.h
+kcg_consts.h
+kcg_sensors.h
+
+*****************************
+*** Generated KCG C files ***
+*****************************
+counter3.c
+counter2.c
+decounter.c
+counter.c
+kcg_types.c
+kcg_consts.c
+
+*****************************
+*** Include Directories   ***
+*****************************
+.
+$(SCADE)
+C:\Program Files (x86)\Esterel Technologies\Esterel SCADE 6.2.1\SCADE Suite\include
+C:\Program Files (x86)\Esterel Technologies\Esterel SCADE 6.2.1\SCADE Suite\libraries\libmathext
+

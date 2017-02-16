@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<File xmlns="http://www.esterel-technologies.com/ns/scade/3" xmlns:ed="http://www.esterel-technologies.com/ns/scade/pragmas/editor/3" xmlns:kcg="http://www.esterel-technologies.com/ns/scade/pragmas/codegen/1">
+	<declarations>
+		<Operator kind="node" name="metronome">
+			<inputs>
+				<Variable name="rythm">
+					<type>
+						<NamedType>
+							<type>
+								<TypeRef name="int"/>
+							</type>
+						</NamedType>
+					</type>
+					<pragmas>
+						<ed:Variable oid="!ed/2396/218/143C/58a4129b9c0"/>
+					</pragmas>
+				</Variable>
+			</inputs>
+			<outputs>
+				<Variable name="tic">
+					<type>
+						<NamedType>
+							<type>
+								<TypeRef name="bool"/>
+							</type>
+						</NamedType>
+					</type>
+					<pragmas>
+						<ed:Variable oid="!ed/23b3/218/143C/58a412ba14f7"/>
+					</pragmas>
+				</Variable>
+				<Variable name="tac">
+					<type>
+						<NamedType>
+							<type>
+								<TypeRef name="bool"/>
+							</type>
+						</NamedType>
+					</type>
+					<pragmas>
+						<ed:Variable oid="!ed/23c7/218/143C/58a412bc7ec7"/>
+					</pragmas>
+				</Variable>
+				<Variable name="toc">
+					<type>
+						<NamedType>
+							<type>
+								<TypeRef name="bool"/>
+							</type>
+						</NamedType>
+					</type>
+					<pragmas>
+						<ed:Variable oid="!ed/23db/218/143C/58a412be5a20"/>
+					</pragmas>
+				</Variable>
+				<Variable name="tut">
+					<type>
+						<NamedType>
+							<type>
+								<TypeRef name="bool"/>
+							</type>
+						</NamedType>
+					</type>
+					<pragmas>
+						<ed:Variable oid="!ed/23ef/218/143C/58a412c1550b"/>
+					</pragmas>
+				</Variable>
+			</outputs>
+			<data>
+				<!-- Y = rythm > 0 and rythm <= 4; -->
+				<Equation>
+					<lefts>
+						<VariableRef name="Y"/>
+					</lefts>
+					<right>
+						<!-- rythm > 0 and rythm <= 4 -->
+						<NAryOp operator="and">
+							<operands>
+								<!-- rythm > 0 -->
+								<BinaryOp operator="&gt;">
+									<operands>
+										<IdExpression>
+											<path>
+												<ConstVarRef name="rythm"/>
+											</path>
+										</IdExpression>
+										<ConstValue value="0"/>
+									</operands>
+								</BinaryOp>
+								<!-- rythm <= 4 -->
+								<BinaryOp operator="&lt;=">
+									<operands>
+										<IdExpression>
+											<path>
+												<ConstVarRef name="rythm"/>
+											</path>
+										</IdExpression>
+										<ConstValue value="4"/>
+									</operands>
+								</BinaryOp>
+							</operands>
+						</NAryOp>
+					</right>
+					<pragmas>
+						<ed:Equation oid="!ed/2426/218/143C/58a413fd6fd1"/>
+					</pragmas>
+				</Equation>
+				<!-- count = (1) -> (if (pre count = rythm) then (1) else (pre count + 1)); -->
+				<Equation>
+					<lefts>
+						<VariableRef name="count"/>
+					</lefts>
+					<right>
+						<!-- (1) -> (if (pre count = rythm) then (1) else (pre count + 1)) -->
+						<InitOp>
+							<value>
+								<ListExpression>
+									<items>
+										<ConstValue value="1"/>
+									</items>
+								</ListExpression>
+							</value>
+							<flow>
+								<ListExpression>
+									<items>
+										<!-- if (pre count = rythm) then (1) else (pre count + 1) -->
+										<IfThenElseOp>
+											<if>
+												<!-- pre count = rythm -->
+												<BinaryOp operator="=">
+													<operands>
+														<!-- pre count -->
+														<PreOp>
+															<flow>
+																<ListExpression>
+																	<items>
+																		<IdExpression>
+																			<path>
+																				<ConstVarRef name="count"/>
+																			</path>
+																		</IdExpression>
+																	</items>
+																</ListExpression>
+															</flow>
+														</PreOp>
+														<IdExpression>
+															<path>
+																<ConstVarRef name="rythm"/>
+															</path>
+														</IdExpression>
+													</operands>
+												</BinaryOp>
+											</if>
+											<then>
+												<ListExpression>
+													<items>
+														<ConstValue value="1"/>
+													</items>
+												</ListExpression>
+											</then>
+											<else>
+												<ListExpression>
+													<items>
+														<!-- pre count + 1 -->
+														<NAryOp operator="+">
+															<operands>
+																<!-- pre count -->
+																<PreOp>
+																	<flow>
+																		<ListExpression>
+																			<items>
+																				<IdExpression>
+																					<path>
+																						<ConstVarRef name="count"/>
+																					</path>
+																				</IdExpression>
+																			</items>
+																		</ListExpression>
+																	</flow>
+																</PreOp>
+																<ConstValue value="1"/>
+															</operands>
+														</NAryOp>
+													</items>
+												</ListExpression>
+											</else>
+										</IfThenElseOp>
+									</items>
+								</ListExpression>
+							</flow>
+						</InitOp>
+					</right>
+					<pragmas>
+						<ed:Equation oid="!ed/2427/218/143C/58a413fd15da"/>
+					</pragmas>
+				</Equation>
+				<!-- tic = count = 1 and Y; -->
+				<Equation>
+					<lefts>
+						<VariableRef name="tic"/>
+					</lefts>
+					<right>
+						<!-- count = 1 and Y -->
+						<NAryOp operator="and">
+							<operands>
+								<!-- count = 1 -->
+								<BinaryOp operator="=">
+									<operands>
+										<IdExpression>
+											<path>
+												<ConstVarRef name="count"/>
+											</path>
+										</IdExpression>
+										<ConstValue value="1"/>
+									</operands>
+								</BinaryOp>
+								<IdExpression>
+									<path>
+										<ConstVarRef name="Y"/>
+									</path>
+								</IdExpression>
+							</operands>
+						</NAryOp>
+					</right>
+					<pragmas>
+						<ed:Equation oid="!ed/2428/218/143C/58a413fd214c"/>
+					</pragmas>
+				</Equation>
+				<!-- tac = count = 2 and Y; -->
+				<Equation>
+					<lefts>
+						<VariableRef name="tac"/>
+					</lefts>
+					<right>
+						<!-- count = 2 and Y -->
+						<NAryOp operator="and">
+							<operands>
+								<!-- count = 2 -->
+								<BinaryOp operator="=">
+									<operands>
+										<IdExpression>
+											<path>
+												<ConstVarRef name="count"/>
+											</path>
+										</IdExpression>
+										<ConstValue value="2"/>
+									</operands>
+								</BinaryOp>
+								<IdExpression>
+									<path>
+										<ConstVarRef name="Y"/>
+									</path>
+								</IdExpression>
+							</operands>
+						</NAryOp>
+					</right>
+					<pragmas>
+						<ed:Equation oid="!ed/2429/218/143C/58a413fd217f"/>
+					</pragmas>
+				</Equation>
+				<!-- toc = count = 3 and Y; -->
+				<Equation>
+					<lefts>
+						<VariableRef name="toc"/>
+					</lefts>
+					<right>
+						<!-- count = 3 and Y -->
+						<NAryOp operator="and">
+							<operands>
+								<!-- count = 3 -->
+								<BinaryOp operator="=">
+									<operands>
+										<IdExpression>
+											<path>
+												<ConstVarRef name="count"/>
+											</path>
+										</IdExpression>
+										<ConstValue value="3"/>
+									</operands>
+								</BinaryOp>
+								<IdExpression>
+									<path>
+										<ConstVarRef name="Y"/>
+									</path>
+								</IdExpression>
+							</operands>
+						</NAryOp>
+					</right>
+					<pragmas>
+						<ed:Equation oid="!ed/242a/218/143C/58a413fd27bc"/>
+					</pragmas>
+				</Equation>
+				<!-- tut = count = 4 and Y; -->
+				<Equation>
+					<lefts>
+						<VariableRef name="tut"/>
+					</lefts>
+					<right>
+						<!-- count = 4 and Y -->
+						<NAryOp operator="and">
+							<operands>
+								<!-- count = 4 -->
+								<BinaryOp operator="=">
+									<operands>
+										<IdExpression>
+											<path>
+												<ConstVarRef name="count"/>
+											</path>
+										</IdExpression>
+										<ConstValue value="4"/>
+									</operands>
+								</BinaryOp>
+								<IdExpression>
+									<path>
+										<ConstVarRef name="Y"/>
+									</path>
+								</IdExpression>
+							</operands>
+						</NAryOp>
+					</right>
+					<pragmas>
+						<ed:Equation oid="!ed/242b/218/143C/58a413fd7536"/>
+					</pragmas>
+				</Equation>
+			</data>
+			<pragmas>
+				<ed:Operator oid="!ed/237f/218/143C/58a4128e51fe" xmlns="http://www.esterel-technologies.com/ns/scade/pragmas/editor/3">
+					<diagrams>
+						<TextDiagram name="diagram_metronome_1" landscape="true" format="A4 (210 297)" oid="!ed/23f5/218/143C/58a412e961f2">
+							<presentationElements>
+								<FlowTE presentable="!ed/2426/218/143C/58a413fd6fd1"/>
+								<FlowTE presentable="!ed/2427/218/143C/58a413fd15da"/>
+								<FlowTE presentable="!ed/2428/218/143C/58a413fd214c"/>
+								<FlowTE presentable="!ed/2429/218/143C/58a413fd217f"/>
+								<FlowTE presentable="!ed/242a/218/143C/58a413fd27bc"/>
+								<FlowTE presentable="!ed/242b/218/143C/58a413fd7536"/>
+							</presentationElements>
+						</TextDiagram>
+					</diagrams>
+				</ed:Operator>
+			</pragmas>
+		</Operator>
+	</declarations>
+</File>

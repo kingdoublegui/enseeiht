@@ -1,0 +1,70 @@
+$**************  SCADETOC Version 6.2.1 (build i10) **************
+** Generation date: 2017-02-15T09:24:59
+** Command: scade -code "H:\enseeiht\2IMA\SystemesTempsReel\tp3\tp_scade.etp" -node counter3 -conf Simulation -build
+*************************************************************$
+*** Generated Files Information (GENFIL): KCG- Generated files
+ ~kcg.log
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\kcg.log, line 0, character 0
+ ~kcg_s2c_config.txt
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\kcg_s2c_config.txt, line 0, character 0
+ ~kcg_trace.xml
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\kcg_trace.xml, line 0, character 0
+ ~kcg_metrics.txt
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\kcg_metrics.txt, line 0, character 0
+ ~counter3.c
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter3.c, line 0, character 0
+ ~counter2.c
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter2.c, line 0, character 0
+ ~decounter.c
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\decounter.c, line 0, character 0
+ ~counter.c
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter.c, line 0, character 0
+ ~counter3.h
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter3.h, line 0, character 0
+ ~counter2.h
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter2.h, line 0, character 0
+ ~decounter.h
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\decounter.h, line 0, character 0
+ ~counter.h
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter.h, line 0, character 0
+ ~kcg_types.h
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\kcg_types.h, line 0, character 0
+ ~kcg_consts.h
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\kcg_consts.h, line 0, character 0
+ ~kcg_sensors.h
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\kcg_sensors.h, line 0, character 0
+ ~kcg_types.c
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\kcg_types.c, line 0, character 0
+ ~kcg_consts.c
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\kcg_consts.c, line 0, character 0
+*** Generated Files Information (GENFIL): Simulator Generated files
+ ~counter3_type.h
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter3_type.h, line 0, character 0
+ ~counter3_type.c
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter3_type.c, line 0, character 0
+ ~counter3_mapping.h
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter3_mapping.h, line 0, character 0
+ ~counter3_mapping.c
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter3_mapping.c, line 0, character 0
+ ~counter3_interface.h
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter3_interface.h, line 0, character 0
+ ~counter3_interface.c
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter3_interface.c, line 0, character 0
+ ~counter3_dll.c
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter3_dll.c, line 0, character 0
+*** Generated Files Information (GENFIL): Build Generated files
+ ~Makefile
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\Makefile, line 0, character 0
+ ~counter3.dll
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter3.dll, line 0, character 0
+ ~counter3.exe
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\counter3.exe, line 0, character 0
+*** Generated Files Information (GENFIL): Code Generator Generated files
+ ~sc2c.log
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\sc2c.log, line 0, character 0
+ ~sc2c_integration_files.txt
+  at file H:\enseeiht\2IMA\SystemesTempsReel\tp3\Simulation\sc2c_integration_files.txt, line 0, character 0
+$**************  SCADETOC Version 6.2.1 (build i10) **************
+** Generation date: 2017-02-15T09:25:07
+** sc2c.log
+*************************************************************$
