@@ -1,0 +1,13 @@
+Instruction Ocaml : 
+
+(*permet d'exporter le graphe sous forme de script, dans un fichier .dot*)
+dot_output nom_du_graphe "nom_du_fichier.dot";;
+
+
+
+Instruction console :
+
+#permet de convertir le fichier .dot en un fichier .ps, visualisable à partir de evince
+dot nom_du_fichier.dot -Tps -o nom_du_fichier.ps
+evince nom_du_fichier.ps &
+
