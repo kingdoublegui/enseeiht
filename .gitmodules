@@ -1,2 +1,4 @@
 [submodule "2IMA/SystemesConcurrents/Projet/linda"]
 	url = git@github.com:thibmeu/enseeiht-linda.git
+[submodule "1TR"]
+	url = git@github.com:thibmeu/enseeiht-1TR.git
