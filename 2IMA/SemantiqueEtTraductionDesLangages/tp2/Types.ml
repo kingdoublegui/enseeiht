@@ -236,27 +236,51 @@ ruleLetrec ident bvalue bin env =
 
 and
 (* ...............A COMPLETER .......................................*)
-ruleFunction par body env = ErrorType
+ruleFunction par body env =
+    let typepar = newVariable () in
+    (FunctionType (typepar, type_of_expr body ((par, typepar)::env)))
 
 and 
 (* ...............A COMPLETER .......................................*)
-ruleCall fct par env = ErrorType
+ruleCall fct par env =
+    let typefct = (type_of_expr fct env) in
+    let typepar = (type_of_expr par env) in
+    (match typefct with
+        | FunctionType (typep, typebody) -> 
+                let ut,ur = unify typepar typep in
+                (if (ur) then typebody else ErrorType)
+        | _ -> ErrorType)
+
 
 and
 (* ...............A COMPLETER .......................................*)
-ruleRef expr env = ErrorType
+ruleRef expr env = 
+    let typeexpr = (type_of_expr expr env) in
+        ReferenceType(typeexpr)
 
 and
 (* ...............A COMPLETER .......................................*)
-ruleRead expr env = ErrorType
+ruleRead expr env = 
+    let typeexpr = (type_of_expr expr env) in
+    (match typeexpr with
+        | ReferenceType(typeref) -> typeref
+        | _ -> ErrorType)
 
 and
 (* ...............A COMPLETER .......................................*)
-ruleWrite left right env = ErrorType
+ruleWrite left right env = 
+  let typeleft = (type_of_expr left env) in
+  let typeright = (type_of_expr right env) in
+  let ut,ur = unify typeleft (ReferenceType(typeright)) in
+    (if (ur) then UnitType else ErrorType)
 
 and
 (* ...............A COMPLETER .......................................*)
-ruleSequence left right env = ErrorType
+ruleSequence left right env =
+  let typeleft = (type_of_expr left env) in
+  let typeright = (type_of_expr right env) in
+  let ut,ur = unify typeleft UnitType in
+    (if (ur) then typeright else ErrorType)
 
 (* ...........fin des regles d'inference..........................................*)
 ;;
