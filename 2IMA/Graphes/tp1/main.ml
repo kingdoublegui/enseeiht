@@ -1,9 +1,20 @@
 open Graph.Pack.Graph;;
 
+let sommet_aleatoire g =
+    fold_vertex (fun v _ -> Some v) g None;;
+
+let rec marquage g v =
+    Mark.set v 1;
+    iter_succ (marquage g) g v;;
+
 let est_connexe g =
-    let rec dfs g v =
-        Mark.set v 1;
-        fold_succ (fun v mark -> if (Mark.get v ~= 1) then mark = mark+1;(dfs g v)) g
+    match sommet_aleatoire g with
+    | None -> true
+    | Some v ->
+            Mark.clear g;
+            marquage g v;
+            fold_vertex (fun v b -> (b && Mark.get v == 1)) g true;;
+
 
 let est_degre_pair g v =
     (out_degree g v) mod 2 == 0 ;;
