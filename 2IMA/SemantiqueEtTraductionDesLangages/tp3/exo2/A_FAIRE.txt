@@ -1,0 +1,53 @@
+Grammaires Attribuées : Outil EGG.
+Construction de l'arbre abstrait pour le langage Bloc.
+
+Objectif : Utiliser le générateur de compilateur EGG pour compléter
+la sémantique attribuée de construction de l'arbre abstrait présenté
+en cours pour les expressions, en ajoutant d'abord les couples aux
+expressions, puis en ajoutant les instructions et les blocs tels
+qu'ils ont été étudiés en TD.
+
+Rappel : La documentation est dans 'egg5.pdf'
+
+Nous mettons à votre disposition les classes représentant l'AST.
+La commande make produit également la documentation au format JavaDoc
+dans le répertoire doc. Celle-ci est incomplète. Seule les interfaces
+XxxFactory sont détaillées.
+
+I) Etudier les fichiers Bloc.egg et Main.java et tester la
+construction de l'arbre abstrait pour les expressions.
+
+Nous ajoutons les couples (construction et destruction) :
+
+F -> < E, E >
+F -> fst F
+F -> snd F
+
+II.a) Sur papier, trouver les attributs et actions sémantiques nécessaire  
+à la réalisation du traitement souhaité : la construction de l'arbre abstrait. 
+ 
+II.b) A l'aide d'EGG, implanter la solution précédente. Les règles  
+sont en commentaires à la fin du fichier Bloc.egg.  
+ 
+Nous ajoutons ensuite les instructions et blocs.
+
+Pour mémoire, voici la grammaire naturelle que nous avons exploitée en TD :
+
+B -> { LI }
+LI -> I LI
+LI ->
+I -> T id = E ;
+I -> id = E ;
+I -> if ( E ) B else B
+I -> if ( E ) B
+I -> while ( E ) B
+I -> print E ;
+
+Le fichier Bloc.egg contient la grammaire transformée en LL(1).
+
+III.a) Sur papier, trouver les attributs et actions sémantiques nécessaire 
+à la réalisation du traitement souhaité : la construction de l'arbre abstrait. 
+
+III.b) A l'aide d'EGG, implanter la solution précédente. Les règles 
+sont en commentaires à la fin du fichier Bloc.egg. 
+
