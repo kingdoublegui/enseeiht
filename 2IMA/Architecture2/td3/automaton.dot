@@ -1,0 +1,9 @@
+digraph finite_state_machine {
+    rankdir=fifo
+    size="20"
+    node [shape = circle];
+    fifo_vide -> fifo_entre_les_deux [ label = "write='1'" ];
+    fifo_entre_les_deux -> fifo_vide [ label = "nb_elt=1\nwrite='0'\nread='1'" ];
+    fifo_entre_les_deux -> fifo_pleine [ label = "nb_elt=taille-1\nwrite='1'\nread='0'" ];
+    fifo_pleine -> fifo_entre_les_deux [ label = "write=''0\nread='1'" ];
+}
