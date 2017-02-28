@@ -2,26 +2,50 @@ option auto= true;
 option version = 0.0.1 ;
 option k=1;
 
-syn val : DOUBLE for S ; 
+syn val : DOUBLE  for S ;
+syn val : DOUBLE  for I ;
+syn p   : INTEGER for I ;
+syn val : DOUBLE  for SI ;
+syn p   : INTEGER for SI ;
 
 sugar  point  is    "\.";
 term   chiffre  is  "[0-9]";
 space      separateur       is    "[\r\n\t ]+" ;
 
 S -> I point I #val ;
-
 #val{
 local
 do
-  S^val := 0 ;
+  S^val := I^val + Math.pow(10, -1*I1^p)*I1^val ;
 end
 }
 
 
-I -> chiffre SI ;
+I -> chiffre SI #val;
+#val{
+local
+do
+  I^val :=  Math.pow(10, SI^p)*Integer.parseInt(chiffre^txt) + SI^val ;
+  I^p   :=  SI^p+1 ;
+end
+}
 
-SI -> chiffre SI ;
+SI -> chiffre SI #val;
+#val{
+local
+do
+  SI^val :=  Math.pow(10, SI1^p)*Integer.parseInt(chiffre^txt) + SI1^val ;
+  SI^p   :=  SI1^p + 1 ;
+end
+}
 
-SI -> ;
+SI -> #val;
+#val{
+local
+do
+  SI^val := 0 ;
+  SI^p   :=  0 ;
+end
+}
 
 end
