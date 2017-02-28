@@ -13,12 +13,12 @@ inh factory	: BlockFactory for Bloc, Instruction,
     		  	       SuiteConditionnelle, Instructions, Expression, Condition,
 			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type ;  
 syn ast		: Expression for Programme ; 
-syn ast		: Expression for Expression, Condition, SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur ;
+syn ast		: Expression for Bloc, Expression, Condition, SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur ;
 syn ast		: Type for Type ;
 syn bin_op	: BinaryOperator for Additif, Multiplicatif, Comparatif;
 
 space  separateur				is    "[\n\r\t ]+";
-space  commentaire			is    "\/\/.*\n";
+space  commentaire		    	is    "\/\/.*\n";
 sugar  accolade_ouvrante		is    "\{";  
 sugar  accolade_fermante		is    "\}";  
 sugar  crochet_ouvrant			is    "\[";  
@@ -34,23 +34,23 @@ sugar  point_virgule			is    ";";
 sugar  virgule					is    ",";
 sugar  affectation				is    "=";
 sugar  egalite					is    "==";
-sugar  addition				is    "\+";
+sugar  addition			    	is    "\+";
 sugar  soustraction				is    "\-";
 sugar  ou						is    "\|\|";  
 sugar  multiplication			is    "\*";
-sugar  division				is    "/";
+sugar  division		    		is    "/";
 sugar  modulo					is    "%";
-sugar  negation				is    "\!";
+sugar  negation			    	is    "\!";
 sugar  et						is    "&&";  
-sugar  vrai					is    "true";
-sugar  faux					is    "false";
+sugar  vrai				    	is    "true";
+sugar  faux				    	is    "false";
 sugar  si						is    "if";
 sugar  sinon					is    "else";
 sugar  afficher					is    "print";
-sugar  tant_que				is    "while";
+sugar  tant_que			    	is    "while";
 sugar  premier					is    "fst";
 sugar  second					is    "snd";
-sugar  type_int				is    "int";
+sugar  type_int			    	is    "int";
 sugar  type_bool				is    "bool";
 sugar  enregistrement			is    "struct";
 term   entier					is    "[0-9]+";
@@ -61,19 +61,24 @@ term   identificateur_type		is    "[A-Z][a-zA-Z0-9_]*";
 -- Remplacera la règle suivante pour pouvoir traiter les instructions
 -- Programme -> identificateur Bloc ;
 
-Programme -> identificateur #inh Expression #ast ;
+Programme -> identificateur #inh Bloc #ast ;
 #inh {
 do
-   Expression^factory := new BlockFactoryImpl();
+   Bloc^factory := new BlockFactoryImpl();
 end
 }
 #ast {
 do
-   Programme^ast := Expression^ast;
+   Programme^ast := Bloc^ast;
 end
 }
 
-Bloc -> accolade_ouvrante Instructions accolade_fermante ;
+Bloc -> accolade_ouvrante Instructions accolade_fermante #ast;
+#ast {
+do
+   Bloc^ast := Instructions^ast;
+end
+}
 
 Type -> type_bool #ast ;
 #ast {
@@ -272,10 +277,26 @@ do
 end  
 }
 
--- Facteur -> inferieur Expression virgule Expression superieur ;  
+Facteur -> inferieur Expression virgule Expression superieur #ast ;
+#ast {
+do
+   Facteur^ast := Facteur^factory.createCouple(Expression^ast, Expression1^ast);
+end
+}
  
--- Facteur -> premier Facteur ;  
+Facteur -> premier Facteur #ast ;
+#ast {
+do
+   Facteur^ast := Facteur^factory.createFirst(Facteur1^ast);
+end
+}
  
--- Facteur -> second Facteur ;  
+Facteur -> second Facteur #ast ;
+#ast {
+do
+   Facteur^ast := Facteur^factory.createSecond(Facteur1^ast);
+end
+}
+  
 
 end
