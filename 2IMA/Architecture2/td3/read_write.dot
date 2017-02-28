@@ -1,0 +1,13 @@
+digraph structs {
+    node [shape=ellipse];
+    memoire [label="<f0> |<f1> 3 |<f2> ", shape=record];
+    p_ecriture;
+    p_lecture;
+    u_ecriture [shape=plaintext];
+    i_lec [shape=plaintext];
+    data_in [label="data_in : 7", shape=rectangle]
+    data_out [label="data_out : 3", shape=rectangle]
+    u_ecriture -> memoire;
+    i_lec -> memoire;
+    data_in -> memoire [label="fifo(i_ecr) <= data_in"];
+}
