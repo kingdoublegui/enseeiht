@@ -1,0 +1,27 @@
+option auto= true;
+option version = 0.0.1 ;
+option k=1;
+
+syn val : DOUBLE for S ; 
+
+sugar  point  is    "\.";
+term   chiffre  is  "[0-9]";
+space      separateur       is    "[\r\n\t ]+" ;
+
+S -> I point I #val ;
+
+#val{
+local
+do
+  S^val := 0 ;
+end
+}
+
+
+I -> chiffre SI ;
+
+SI -> chiffre SI ;
+
+SI -> ;
+
+end

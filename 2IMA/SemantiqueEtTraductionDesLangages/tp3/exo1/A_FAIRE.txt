@@ -1,0 +1,20 @@
+Grammaires Attribuées : Outil EGG.
+
+Objectif : Apprendre à utiliser le générateur de compilateur EGG
+présenté en cours, pour écrire des grammaires attribuées avec Java.
+La documentation est dans 'egg5.pdf'
+
+
+Pour prendre en main l'outil, un premier exercice consiste à calculer
+la valeur d'un double en lisant le nombre caractère par caractère.
+La grammaire est la suivante :
+S -> I . I
+I -> c SI
+SI -> c SI
+SI -> 
+où c est un chiffre.
+
+1) Sur papier, trouver les attributs et actions sémantiques nécessaire
+à la réalisation du traitement souhaité.
+
+2) A l'aide d'EGG, implanter la solution précédente.
