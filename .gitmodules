@@ -2,3 +2,5 @@
 	url = git@github.com:thibmeu/enseeiht-linda.git
 [submodule "1TR"]
 	url = git@github.com:thibmeu/enseeiht-1TR.git
+[submodule "2IMA/Graphes/Projet"]
+	url = git@github.com:thibmeu/enseeiht-Projet-Graphe.git
