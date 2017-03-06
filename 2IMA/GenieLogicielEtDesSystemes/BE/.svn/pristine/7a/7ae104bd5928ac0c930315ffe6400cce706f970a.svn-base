@@ -1,3 +1,0 @@
-net PetriNet Simple2
-pl pl1 (1)
-tr tr1 -> pl1
