@@ -4,3 +4,5 @@
 	url = git@github.com:thibmeu/enseeiht-1TR.git
 [submodule "2IMA/Graphes/Projet"]
 	url = git@github.com:thibmeu/enseeiht-Projet-Graphe.git
+[submodule "2IMA/Architecture2/Projet"]
+	url = git@github.com:thibmeu/enseeiht-Projet-VHDL.git
