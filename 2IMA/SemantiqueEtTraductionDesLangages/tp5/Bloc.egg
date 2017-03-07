@@ -1,0 +1,351 @@
+----------------------------------------------- -*- text -*-
+-- Langage BLOC : Bloc, Instruction et Expression façon C/Java/...
+-- Sémantique : Construction de l'arbre abstrait et gestion de la
+--                      table des symboles. 
+-----------------------------------------------
+option auto= true;
+option version = 0.0.1 ;
+option k=1;
+
+
+inh gauche	: Expression for SuiteCondition, SuiteTerme, SuiteFacteur;
+inh factory	: BlockFactory for Bloc, Instruction,
+    		  	       SuiteConditionnelle, Instructions, Expression, Condition,
+			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type ;  
+syn ast     : Block for Bloc, Programme;
+syn ast		: Expression for Expression, Condition, SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur ;
+syn ast		: Type for Type;
+syn ast		: Instruction for Instruction;
+syn ast     : List<Instruction> for Instructions;
+syn ast     : Block for SuiteConditionnelle;
+syn bin_op	: BinaryOperator for Additif, Multiplicatif, Comparatif;
+
+space  separateur				is    "[\n\r\t ]+";
+space  commentaire		    	is    "\/\/.*\n";
+sugar  accolade_ouvrante		is    "\{";  
+sugar  accolade_fermante		is    "\}";  
+sugar  crochet_ouvrant			is    "\[";  
+sugar  crochet_fermant			is    "\]";  
+sugar  parenthese_ouvrante		is    "\(";
+sugar  parenthese_fermante		is    "\)";
+sugar  inferieur				is    "\<";  
+sugar  superieur				is    "\>";  
+sugar  inferieur_egal			is    "\<=";  
+sugar  superieur_egal			is    "\>=";  
+sugar  point					is    "\.";  
+sugar  point_virgule			is    ";";  
+sugar  virgule					is    ",";
+sugar  affectation				is    "=";
+sugar  egalite					is    "==";
+sugar  addition			    	is    "\+";
+sugar  soustraction				is    "\-";
+sugar  ou						is    "\|\|";  
+sugar  multiplication			is    "\*";
+sugar  division		    		is    "/";
+sugar  modulo					is    "%";
+sugar  negation			    	is    "\!";
+sugar  et						is    "&&";  
+sugar  vrai				    	is    "true";
+sugar  faux				    	is    "false";
+sugar  si						is    "if";
+sugar  sinon					is    "else";
+sugar  afficher					is    "print";
+sugar  tant_que			    	is    "while";
+sugar  premier					is    "fst";
+sugar  second					is    "snd";
+sugar  type_int			    	is    "int";
+sugar  type_bool				is    "bool";
+sugar  enregistrement			is    "struct";
+term   entier					is    "[0-9]+";
+term   identificateur			is    "[a-z][a-zA-Z0-9_]*"; 
+term   identificateur_type		is    "[A-Z][a-zA-Z0-9_]*"; 
+
+
+-- Remplacera la règle suivante pour pouvoir traiter les instructions
+-- Programme -> identificateur Bloc ;
+
+Programme -> identificateur #inh Bloc #ast ;
+#inh {
+do
+   Bloc^factory := new BlockFactoryImpl();
+end
+}
+#ast {
+do
+   Programme^ast := Bloc^ast;
+end
+}
+
+Bloc -> accolade_ouvrante Instructions accolade_fermante #ast;
+#ast {
+do
+   Bloc^ast := Bloc^factory.createBlock(Instructions^ast);
+end
+}
+
+Type -> type_bool #ast ;
+#ast {
+do
+   Type^ast := Type^factory.createBooleanType();  
+end
+}
+
+Type -> type_int  #ast ;
+#ast {
+do
+   Type^ast := Type^factory.createIntegerType(); 
+end
+}
+
+Type -> inferieur Type virgule Type superieur  #ast;
+#ast {
+do
+    Type^ast := Type^factory.createCoupleType(Type1^ast, Type2^ast);
+end
+}
+
+Instructions -> #ast;
+#ast {
+do
+    Instructions^ast := new ArrayList<Instruction>();
+end
+}
+
+Instructions -> Instruction Instructions #ast;
+#ast {
+do
+    Instructions1^ast.add(Instruction^ast);
+    Instructions^ast := Instructions1^ast;
+end
+}
+
+Instruction -> Type identificateur affectation Expression point_virgule #ast;
+#ast {
+do
+    Instruction^ast := Instruction^factory.createVariableDeclaration(identificateur^txt, Type^ast, Expression^ast);
+end
+}
+
+Instruction -> identificateur affectation Expression point_virgule #ast;
+#ast {
+do
+    Instruction^ast := Instruction^factory.createAssignment(identificateur^txt, Expression^ast);
+end
+}
+
+Instruction -> si parenthese_ouvrante Expression parenthese_fermante Bloc SuiteConditionnelle #ast;
+#ast {
+do
+    Instruction^ast := Instruction^factory.createConditional(Expression^ast, Bloc^ast, SuiteConditionnelle^ast);
+end
+}
+
+SuiteConditionnelle -> #ast;
+#ast {
+do
+    SuiteConditionnelle^ast := SuiteConditionnelle^factory.createBlock();
+end
+}
+
+SuiteConditionnelle ->sinon Bloc #ast;
+#ast {
+do
+    SuiteConditionnelle^ast := Bloc^ast;
+end
+}
+
+Instruction -> tant_que parenthese_ouvrante Expression parenthese_fermante Bloc #ast;
+#ast {
+do
+    Instruction^ast := Instruction^factory.createRepetition(Expression^ast, Bloc^ast);
+end
+}
+
+Instruction -> afficher parenthese_ouvrante Expression parenthese_fermante point_virgule #ast;
+#ast {
+do
+    Instruction^ast := Instruction^factory.createPrinter(Expression^ast);
+end
+}
+
+Expression -> Condition #inh SuiteCondition #ast ;
+#inh {
+do
+   SuiteCondition^gauche := Condition^ast ;
+end 
+}
+#ast {
+do
+    Expression^ast := SuiteCondition^ast;
+end 
+}
+
+SuiteCondition -> Comparatif Condition #ast ;
+#ast {
+do
+	SuiteCondition^ast :=
+	SuiteCondition^factory.createBinaryExpression(
+	SuiteCondition^gauche,
+	Comparatif^bin_op,
+	Condition^ast);
+end 
+}
+
+SuiteCondition -> #ast ;
+#ast {
+do
+   SuiteCondition^ast := SuiteCondition^gauche;
+end 
+}
+
+Comparatif -> egalite #texte;
+#texte {
+do
+   Comparatif^bin_op := BinaryOperator.Equals;
+end
+}
+
+Condition -> Terme #ast_inh SuiteTerme #ast_syn ;
+#ast_inh {
+do 
+   SuiteTerme^gauche := Terme^ast; 
+end 
+}
+
+#ast_syn {
+do
+   Condition^ast := SuiteTerme^ast; 
+end
+}
+
+SuiteTerme -> Additif Terme #ast_inh SuiteTerme #ast_syn ;  
+#ast_inh {
+do
+   SuiteTerme1^gauche := SuiteTerme^factory.createBinaryExpression(
+      SuiteTerme^gauche,  
+      Additif^bin_op,  
+      Terme^ast);  
+end 
+}
+
+#ast_syn {
+do 
+   SuiteTerme^ast := SuiteTerme1^ast; 
+end 
+}
+
+SuiteTerme -> #ast ;
+#ast {
+do
+   SuiteTerme^ast := SuiteTerme^gauche;
+end
+}
+
+Additif -> addition #ast;  
+#ast { 
+do  
+   Additif^bin_op := BinaryOperator.Add;  
+end  
+}
+  
+Terme -> Facteur #ast_inh SuiteFacteur #ast_syn ;
+#ast_inh {
+do 
+   SuiteFacteur^gauche := Facteur^ast; 
+end 
+}
+
+#ast_syn {
+do
+   Terme^ast := SuiteFacteur^ast; 
+end
+}
+
+SuiteFacteur -> Multiplicatif Facteur #ast_inh SuiteFacteur #ast_syn ;  
+#ast_inh {
+do 
+   SuiteFacteur1^gauche := SuiteFacteur^factory.createBinaryExpression(
+      SuiteFacteur^gauche,  
+      Multiplicatif^bin_op,  
+      Facteur^ast);  
+end 
+}
+
+#ast_syn {
+do 
+   SuiteFacteur^ast := SuiteFacteur1^ast; 
+end 
+}
+ 
+SuiteFacteur -> #ast;  
+#ast {
+do
+   SuiteFacteur^ast := SuiteFacteur^gauche;
+end
+}
+
+Multiplicatif -> multiplication #ast; 
+#ast {
+do 
+   Multiplicatif^bin_op := BinaryOperator.Multiply; 
+end 
+}
+
+Facteur -> parenthese_ouvrante Expression parenthese_fermante #ast;  
+#ast { 
+do  
+   Facteur^ast := Expression^ast;  
+end  
+}
+ 
+Facteur -> entier #ast;
+#ast {
+do
+    Facteur^ast := Facteur^factory.createIntegerValue(entier^txt); 
+end
+}
+
+Facteur -> vrai #ast;
+#ast {
+do
+    Facteur^ast := Facteur^factory.createBooleanValue(true);  
+end
+}
+
+Facteur -> faux #ast;
+#ast {
+do
+    Facteur^ast := Facteur^factory.createBooleanValue(false);  
+end
+}
+
+Facteur -> identificateur #ast ;  
+#ast { 
+do  
+   Facteur^ast := Facteur^factory.createVariableUse(identificateur^txt);  
+end  
+}
+
+Facteur -> inferieur Expression virgule Expression superieur #ast ;
+#ast {
+do
+   Facteur^ast := Facteur^factory.createCouple(Expression^ast, Expression1^ast);
+end
+}
+ 
+Facteur -> premier Facteur #ast ;
+#ast {
+do
+   Facteur^ast := Facteur^factory.createFirst(Facteur1^ast);
+end
+}
+ 
+Facteur -> second Facteur #ast ;
+#ast {
+do
+   Facteur^ast := Facteur^factory.createSecond(Facteur1^ast);
+end
+}
+  
+
+end

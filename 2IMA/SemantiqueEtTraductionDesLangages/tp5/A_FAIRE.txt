@@ -1,0 +1,83 @@
+Grammaires Attribuées : Outil EGG.
+Gestion de la table des symboles pour le langage Bloc.
+
+Objectif : Utiliser le générateur de compilateur EGG pour compléter
+la sémantique attribuée de gestion de la table des symboles présentée
+en cours pour les expressions, en ajoutant d'abord les couples aux
+expressions, puis en ajoutant les instructions et les blocs tels
+qu'ils ont été étudiés en TD.
+
+Rappel : La documentation est dans 'egg5.pdf'
+
+Nous mettons à votre disposition les classes représentant la table des
+symboles (interface Scope et HierarchicalScope, classe SymbolTable).
+La commande make produit également la documentation au format JavaDoc
+dans le répertoire doc. Celle-ci est incomplète. Seule les interfaces
+XxxFactory, Scope, HierarchicalScope sont détaillées.
+
+L'objectif est de compléter les travaux réalisés dans la séance
+précédente.
+
+Nous ajoutons à la grammaire la définition des constantes :
+
+Instruction -> constante Type identificateur affectation Valeur point_virgule ;
+
+et nous introduisons explicitement un non-terminal pour regrouper
+les valeurs :
+
+Facteur -> Valeur #ast;
+#ast {
+do
+   Facteur^ast := Valeur^ast;
+end
+}
+ 
+Valeur -> entier #ast;
+#ast {
+do
+    Valeur^ast := Valeur^factory.createIntegerValue(entier^txt); 
+end
+}
+
+Valeur -> vrai #ast;
+#ast {
+do
+    Valeur^ast := Valeur^factory.createBooleanValue(true);  
+end
+}
+
+Valeur -> faux #ast;
+#ast {
+do
+    Valeur^ast := Valeur^factory.createBooleanValue(false);  
+end
+}
+
+I) Copier le fichier Bloc.egg de la séance précédente dans le 
+répertoire courant. Il ne faut pas copier le fichier Bloc.ecf car 
+les fichiers du packetage fr.n7.stl ont changés.
+
+II) Modifier le fichier Bloc.egg (de la séance précédente) pour y ajouter
+la définition des constantes et modifier la représentation des valeurs.
+Il faut bien sûr ajouter le traitement nécessaire à l'analyse 
+lexicale ("const" est un nouveau mot clé du langage) ainsi que le traitement
+sémantique associé (et donc les attributs et actions nécessaires).
+
+III) Terminer la construction de l'arbre abstrait étudiée dans le TP
+précédent et implanter simultanéement la construction de la table des
+symboles.
+
+Au niveau de l'instruction d'affectation et de l'expression
+d'accès à une variable, vous établirez dans le noeud de l'arbre
+abstrait le lien avec le noeud de définition de la variable. Pour
+cela, vous utiliserez les opérations de la fabrique prenant en
+paramètre des VariableDefinition :
+
+	public Expression createVariableUse(VariableDeclaration _declaration);
+
+	public Instruction createAssignment(VariableDeclaration _declaration, Expression _value);
+
+Au niveau de l'expression d'accès à une constante, vous renverrez le
+noeud de l'arbre abstrait correspondant à la valeur associée à la
+constante. Ce noeud se trouve dans la partie valeur de ConstantDeclaration.
+
