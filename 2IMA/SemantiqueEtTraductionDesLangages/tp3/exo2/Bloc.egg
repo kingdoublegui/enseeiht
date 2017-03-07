@@ -12,9 +12,12 @@ inh gauche	: Expression for SuiteCondition, SuiteTerme, SuiteFacteur;
 inh factory	: BlockFactory for Bloc, Instruction,
     		  	       SuiteConditionnelle, Instructions, Expression, Condition,
 			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type ;  
-syn ast		: Expression for Programme ; 
-syn ast		: Expression for Bloc, Expression, Condition, SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur ;
-syn ast		: Type for Type ;
+syn ast     : Block for Bloc, Programme;
+syn ast		: Expression for Expression, Condition, SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur ;
+syn ast		: Type for Type;
+syn ast		: Instruction for Instruction;
+syn ast     : List<Instruction> for Instructions;
+syn ast     : Block for SuiteConditionnelle;
 syn bin_op	: BinaryOperator for Additif, Multiplicatif, Comparatif;
 
 space  separateur				is    "[\n\r\t ]+";
@@ -76,7 +79,7 @@ end
 Bloc -> accolade_ouvrante Instructions accolade_fermante #ast;
 #ast {
 do
-   Bloc^ast := Instructions^ast;
+   Bloc^ast := Bloc^factory.createBlock(Instructions^ast);
 end
 }
 
@@ -101,23 +104,69 @@ do
 end
 }
 
-Instructions -> ;
+Instructions -> #ast;
+#ast {
+do
+    Instructions^ast := new ArrayList<Instruction>();
+end
+}
 
-Instructions -> Instruction Instructions ;
+Instructions -> Instruction Instructions #ast;
+#ast {
+do
+    Instructions1^ast.add(Instruction^ast);
+    Instructions^ast := Instructions1^ast;
+end
+}
 
-Instruction -> Type identificateur affectation Expression point_virgule ;
+Instruction -> Type identificateur affectation Expression point_virgule #ast;
+#ast {
+do
+    Instruction^ast := Instruction^factory.createVariableDeclaration(identificateur^txt, Type^ast, Expression^ast);
+end
+}
 
-Instruction -> identificateur affectation Expression point_virgule ;
+Instruction -> identificateur affectation Expression point_virgule #ast;
+#ast {
+do
+    Instruction^ast := Instruction^factory.createAssignment(identificateur^txt, Expression^ast);
+end
+}
 
-Instruction -> si parenthese_ouvrante Expression parenthese_fermante Bloc SuiteConditionnelle ;
+Instruction -> si parenthese_ouvrante Expression parenthese_fermante Bloc SuiteConditionnelle #ast;
+#ast {
+do
+    Instruction^ast := Instruction^factory.createConditional(Expression^ast, Bloc^ast, SuiteConditionnelle^ast);
+end
+}
 
-SuiteConditionnelle -> ;
+SuiteConditionnelle -> #ast;
+#ast {
+do
+    SuiteConditionnelle^ast := SuiteConditionnelle^factory.createBlock();
+end
+}
 
-SuiteConditionnelle ->sinon Bloc ;
+SuiteConditionnelle ->sinon Bloc #ast;
+#ast {
+do
+    SuiteConditionnelle^ast := Bloc^ast;
+end
+}
 
-Instruction -> tant_que parenthese_ouvrante Expression parenthese_fermante Bloc ;
+Instruction -> tant_que parenthese_ouvrante Expression parenthese_fermante Bloc #ast;
+#ast {
+do
+    Instruction^ast := Instruction^factory.createRepetition(Expression^ast, Bloc^ast);
+end
+}
 
-Instruction -> afficher parenthese_ouvrante Expression parenthese_fermante point_virgule ;
+Instruction -> afficher parenthese_ouvrante Expression parenthese_fermante point_virgule #ast;
+#ast {
+do
+    Instruction^ast := Instruction^factory.createPrinter(Expression^ast);
+end
+}
 
 Expression -> Condition #inh SuiteCondition #ast ;
 #inh {
