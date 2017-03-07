@@ -1,9 +1,0 @@
-net PetriNet Saisons
-pl Ete (0)
-pl Automne (0)
-pl Hiver (1)
-pl Printemps (0)
-tr 21_Juin Printemps -> Ete
-tr 21_Septembre Ete -> Automne
-tr 21_Decembre Automne -> Hiver
-tr 20_Mars Hiver -> Printemps
