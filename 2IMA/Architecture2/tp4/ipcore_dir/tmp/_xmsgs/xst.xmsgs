@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="HDLCompiler" num="443" delta="new" >"/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/c_compare_v11_0/c_compare_eq_ne.vhd" Line 155: Function <arg fmt="%s" index="1">fn_round_to_nearest_lut</arg> does not always return a value.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="443" delta="new" >"/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/c_compare_v11_0/c_compare_carry_structure.vhd" Line 195: Function <arg fmt="%s" index="1">fn_determine_imp</arg> does not always return a value.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="443" delta="new" >"/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/c_mux_bit_v11_0/c_mux_bit_v11_0_xst.vhd" Line 249: Function <arg fmt="%s" index="1">fn_use_reg_sync_ctrls</arg> does not always return a value.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/c_counter_binary_v11_0/c_counter_binary_v11_0_legacy.vhd" Line 714: Assignment to <arg fmt="%s" index="1">sclr_reg</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/c_counter_binary_v11_0/c_counter_binary_v11_0_legacy.vhd" Line 719: Assignment to <arg fmt="%s" index="1">sset_reg</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/c_counter_binary_v11_0/c_counter_binary_v11_0_legacy.vhd" Line 720: Assignment to <arg fmt="%s" index="1">sinit_reg</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="1127" delta="new" >"/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/c_counter_binary_v11_0/c_counter_binary_v11_0_legacy.vhd" Line 730: Assignment to <arg fmt="%s" index="1">load_cei</arg> ignored, since the identifier is never used
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="746" delta="new" >"/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/c_addsub_v11_0/c_addsub_v11_0_lut6_legacy.vhd" Line 1077: Range is empty (null range)
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/c_addsub_v11_0/c_addsub_v11_0_legacy.vhd" Line 282: Net &lt;<arg fmt="%s" index="1">c_in_i</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/c_counter_binary_v11_0/c_counter_binary_v11_0_legacy.vhd" Line 603: Net &lt;<arg fmt="%s" index="1">ce_i</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/c_counter_binary_v11_0/c_counter_binary_v11_0_legacy.vhd" Line 606: Net &lt;<arg fmt="%s" index="1">sset_i</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/c_counter_binary_v11_0/c_counter_binary_v11_0_legacy.vhd" Line 607: Net &lt;<arg fmt="%s" index="1">sinit_i</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/c_counter_binary_v11_0/c_counter_binary_v11_0_legacy.vhd" Line 615: Net &lt;<arg fmt="%s" index="1">load_i</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="634" delta="new" >"/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/c_counter_binary_v11_0/c_counter_binary_v11_0_legacy.vhd" Line 617: Net &lt;<arg fmt="%s" index="1">l_i[1]</arg>&gt; does not have a driver.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/mnt/nosave/tmeunier/enseeiht/2IMA/Architecture2/tp4/ipcore_dir/tmp/_cg/_dbg/compteur.vhd</arg>&quot; line <arg fmt="%s" index="2">114</arg>: Output port &lt;<arg fmt="%s" index="3">thresh0</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">U0</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+<msg type="info" file="Xst" num="2169" delta="new" >HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+</msg>
+
+</messages>
+
