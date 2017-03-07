@@ -44,7 +44,7 @@ architecture trois_process of fifo is
   -- on compte de 0 à taille - 1
   -- nb + 1 quand nb = taille - 1 nous fera passer à 0 : cela ne pause pas de problème
   -- on sera dans l'état fifo_pleine et une lecture refera passer nb à taille -1
-  signal nb : std_logic_vector(3 downto 0); 
+  signal nb : std_logic_vector(3 downto 0);
                                             
 begin
 
@@ -100,6 +100,31 @@ begin
 
   end process;
 
--- COMPLÉTEZ AVEC LE PROCESS DE LECTURE ET CELUI D'ÉCRITURE
+	p_ecriture : process(clk, rst)
+	begin
+		if (rst = '1') then
+			i_ecr <= 0;
+			la_fifo <= (others => (others => 'U'));
+		elsif (rising_edge(clk)) then
+			if (wr_en = '1' and (etat /= fifo_pleine or rd_en = '1')) then
+				la_fifo(i_ecr) <= din;
+				i_ecr <= (i_ecr+1) mod taille;
+			end if;
+		end if;
+	end process;
+	
+	p_lecture : process(clk, rst)
+	begin
+		if (rst = '1') then
+			i_lec <= 0;
+			dout <= (others =>  '0');
+		elsif (rising_edge(clk)) then
+			if (rd_en = '1' and etat /= fifo_vide) then
+				dout <= la_fifo(i_lec);
+				i_lec <= (i_lec+1) mod taille;
+			end if;
+		end if;
+	end process;
+	
 
 end trois_process;

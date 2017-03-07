@@ -106,10 +106,27 @@ p_ecriture : process(clk, reset)
 	begin
 		if (reset = '0') then
 			i_ecr := 0;
-			la_fifo <= (others => (others => ' '));
+			la_fifo <= (others => (others => 'U'));
 		elsif (rising_edge(clk)) then
 			if (write = '1' and (etat /= fifo_pleine or read = '1)') then
-				memoire(i_lec) <= data_in;
-				i_ecr := (iecr+1) mod taille;
+				la_fifo(i_ecr) <= data_in;
+				i_ecr := (i_ecr+1) mod taille;
 			end if;
+		end if;
+end process;
+```
+
+```
+p_lecture : process(clk, reset)
+begin
+	if (reset = '1') then
+		i_lec := 0;
+		data_out <= (others =>  '0');
+	elsif (rising_edge(clk)) then
+		if (read = '1' and etat /= fifo_vide) then
+			data_out <= la_fifo(i_lec);
+			i_lec := (i_lec+1) mod taille;
+		end if;
+	end if;
+end process;
 ```

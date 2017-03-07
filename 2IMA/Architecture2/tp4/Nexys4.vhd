@@ -5,12 +5,18 @@ use IEEE.std_logic_unsigned.all;
 
 entity Nexys4 is
   port (
-    -- les 4 switchs utilisés
-    swt : in std_logic_vector (3 downto 0);
+    -- les 16 switchs
+    swt : in std_logic_vector (15 downto 0);
     -- les anodes pour sélectionner l'afficheur 7 segments
     an : out std_logic_vector (7 downto 0);
-    -- afficheur 7 segments (7 segments + point décimal)
-    ssg : out std_logic_vector (7 downto 0)
+    -- afficheur 7 segments (point décimal compris, segment 7)
+    ssg : out std_logic_vector (7 downto 0);
+    -- horloge
+    mclk : in std_logic;
+    -- les 5 boutons noirs
+    btnC, btnU, btnL, btnR, btnD : in std_logic;
+    -- les 16 leds
+    led : out std_logic_vector (15 downto 0)
   );
 end Nexys4;
 
@@ -24,12 +30,30 @@ architecture synthesis of Nexys4 is
     );
   end component ;
 
+COMPONENT diviseurClk1Hz
+	PORT(
+		clk : IN std_logic;
+		reset : IN std_logic;          
+		nclk : OUT std_logic
+		);
+	END COMPONENT;
+	
 begin
 
-  -- premier 7-segments sélectionné
-  an(7 downto 0) <= (0 => '0', others => '1');
+  -- convention afficheur 7 segments 0 => allumé, 1 => éteint
+  ssg <= (others => '1');
+  -- aucun afficheur sélectionné
+  an(7 downto 0) <= (others => '1');
+  -- 16 leds éteintes
+  led(15 downto 0) <= (others => '0');
 
   dec7seg0 : dec7seg
     port map (swt(3 downto 0), ssg);
+	 
+	Inst_diviseurClk1Hz: diviseurClk1Hz PORT MAP(
+		clk => mclk,
+		reset => ,
+		nclk => 
+	);
 
 end synthesis;
