@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Config file for EGG Grammar  -->
+
+  <egg
+      module="false"
+      lang="java"
+      scanner="jlex"
+      gen="egg"
+      typage="false"
+      so="false"
+      dst="false"
+      main="true"
+  >
+    <import    lib="java.util.*"/>
+    <import    lib="fr.n7.stl.block.ast.*"/>
+    <import    lib="fr.n7.stl.block.ast.impl.*"/>
+    <import    lib="fr.n7.stl.util.*"/>
+  </egg>

@@ -1,0 +1,16 @@
+# Output products list for <compteur>
+compteur/doc/c_counter_binary_v11_0_readme.txt
+compteur/doc/c_counter_binary_v11_0_vinfo.html
+compteur/doc/ds215_counter.pdf
+compteur.asy
+compteur.gise
+compteur.ngc
+compteur.sym
+compteur.vhd
+compteur.vho
+compteur.xco
+compteur.xise
+compteur_flist.txt
+compteur_xmdf.tcl
+core_resources.txt
+gui_latency.txt

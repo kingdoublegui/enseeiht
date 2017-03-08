@@ -41,7 +41,7 @@ I -> id = E ;
 I -> if ( E ) B else B
 I -> if ( E ) B
 I -> while ( E ) B
-I -> print E ;
+I -> print ( E ) ;
 
 Le fichier Bloc.egg contient la grammaire transformée en LL(1).
 

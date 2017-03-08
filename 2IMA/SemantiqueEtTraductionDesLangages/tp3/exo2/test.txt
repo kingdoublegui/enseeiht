@@ -1,1 +1,4 @@
-test <2 , 3>
+test {
+    int x = 2;
+    print (x);
+}

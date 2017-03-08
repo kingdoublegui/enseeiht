@@ -1,0 +1,1624 @@
+!SESSION 2017-03-08 10:24:33.970 -----------------------------------------------
+eclipse.buildId=1.5.2
+java.version=1.8.0_121
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=fr_FR
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.lamport.tla.toolbox.jclouds 4 0 2017-03-08 10:24:36.308
+!MESSAGE FrameworkEvent ERROR
+!STACK 0
+org.osgi.framework.BundleException: Could not resolve module: org.lamport.tla.toolbox.jclouds [199]
+  Bundle was not resolved because of a uses contraint violation.
+  org.osgi.service.resolver.ResolutionException: Uses constraint violation. Unable to resolve resource org.lamport.tla.toolbox.jclouds [osgi.identity; osgi.identity="org.lamport.tla.toolbox.jclouds"; type="osgi.bundle"; version:Version="1.0.0.201512230951"; singleton:="true"] because it is exposed to package 'javax.inject' from resources javax.inject [osgi.identity; osgi.identity="javax.inject"; type="osgi.bundle"; version:Version="1.0.0.v20091030"] and org.apache.servicemix.bundles.javax-inject [osgi.identity; osgi.identity="org.apache.servicemix.bundles.javax-inject"; type="osgi.bundle"; version:Version="1.0.0.2"] via two dependency chains.
+
+Chain 1:
+  org.lamport.tla.toolbox.jclouds [osgi.identity; osgi.identity="org.lamport.tla.toolbox.jclouds"; type="osgi.bundle"; version:Version="1.0.0.201512230951"; singleton:="true"]
+    require: (osgi.wiring.bundle=org.eclipse.core.runtime)
+     |
+    provide: osgi.wiring.bundle: org.eclipse.core.runtime
+  javax.inject [osgi.identity; osgi.identity="javax.inject"; type="osgi.bundle"; version:Version="1.0.0.v20091030"]
+
+Chain 2:
+  org.lamport.tla.toolbox.jclouds [osgi.identity; osgi.identity="org.lamport.tla.toolbox.jclouds"; type="osgi.bundle"; version:Version="1.0.0.201512230951"; singleton:="true"]
+    require: (&(osgi.wiring.bundle=jclouds-core)(bundle-version>=1.7.3))
+     |
+    provide: osgi.wiring.bundle; bundle-version:Version="1.9.1"; osgi.wiring.bundle="jclouds-core"
+  jclouds-core [osgi.identity; osgi.identity="jclouds-core"; type="osgi.bundle"; version:Version="1.9.1"]
+    import: (osgi.wiring.package=javax.inject)
+     |
+    export: osgi.wiring.package: javax.inject
+  org.apache.servicemix.bundles.javax-inject [osgi.identity; osgi.identity="org.apache.servicemix.bundles.javax-inject"; type="osgi.bundle"; version:Version="1.0.0.2"]
+	at org.eclipse.osgi.container.Module.start(Module.java:434)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1582)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.incStartLevel(ModuleContainer.java:1562)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.doContainerStartLevel(ModuleContainer.java:1533)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1476)
+	at org.eclipse.osgi.container.ModuleContainer$ContainerStartLevel.dispatchEvent(ModuleContainer.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+
+!ENTRY org.eclipse.osgi 4 0 2017-03-08 10:24:36.315
+!MESSAGE Bundle initial@reference:file:plugins/org.lamport.tla.toolbox.jclouds_1.0.0.201512230951.jar was not resolved.
+
+!ENTRY org.lamport.tla.toolbox.product.standalone 1 -1 2017-03-08 10:24:36.475
+!MESSAGE TLA+ Toolbox started without arguments.
+
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2017-03-08 10:24:37.059
+!MESSAGE Unable to create class 'org.eclipse.e4.ui.swt.internal.gtk.DarkThemeProcessor' from bundle '91'
+!STACK 0
+org.eclipse.e4.core.di.InjectionException: java.lang.NullPointerException
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:68)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:898)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.inject(InjectorImpl.java:121)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.internalMake(InjectorImpl.java:345)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.make(InjectorImpl.java:278)
+	at org.eclipse.e4.core.contexts.ContextInjectionFactory.make(ContextInjectionFactory.java:186)
+	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.createFromBundle(ReflectionContributionFactory.java:107)
+	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.doCreate(ReflectionContributionFactory.java:73)
+	at org.eclipse.e4.ui.internal.workbench.ReflectionContributionFactory.create(ReflectionContributionFactory.java:50)
+	at org.eclipse.e4.ui.internal.workbench.ModelAssembler.runProcessor(ModelAssembler.java:252)
+	at org.eclipse.e4.ui.internal.workbench.ModelAssembler.runProcessors(ModelAssembler.java:219)
+	at org.eclipse.e4.ui.internal.workbench.ModelAssembler.processModel(ModelAssembler.java:82)
+	at org.eclipse.e4.ui.internal.workbench.ResourceHandler.loadMostRecentModel(ResourceHandler.java:259)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.loadApplicationModel(E4Application.java:397)
+	at org.eclipse.e4.ui.internal.workbench.swt.E4Application.createE4Workbench(E4Application.java:254)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:620)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.lamport.tla.toolbox.Application.start(Application.java:77)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1488)
+Caused by: java.lang.NullPointerException
+	at org.eclipse.e4.ui.swt.internal.gtk.DarkThemeProcessor.intialize(DarkThemeProcessor.java:58)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:56)
+	... 32 more
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2017-03-08 10:24:37.062
+!MESSAGE Unable to create processor org.eclipse.e4.ui.swt.internal.gtk.DarkThemeProcessor from org.eclipse.e4.ui.css.swt.theme
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:25:00.982
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:25:01.110
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:25:01.426
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:25:01.585
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:25:01.657
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:25:02.170
+!MESSAGE Added a parse result listener.There are now 1 listeners.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:48:31.275
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:48:31.395
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:48:45.689
+!MESSAGE Open handler invoked on Model_1
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:48:46.393
+!MESSAGE No source for jeton___Model_1.launch found.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:48:46.509
+!MESSAGE Finished open handler
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:49:59.380
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:49:59.536
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:50:58.187
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:50:58.373
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:51:33.296
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:51:33.424
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:51:40.340
+!MESSAGE Open handler invoked on Model_1
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:51:40.383
+!MESSAGE Finished open handler
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:51:59.854
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:52:00.046
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:52:00.264
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:52:00.275
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:52:00.285
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:52:00.363
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:52:00.366
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:52:00.424
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:52:00.478
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:52:01.520
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:52:01.653
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:52:02.710
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:52:02.769
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:52:03.775
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:52:03.809
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:53:31.816
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:53:32.602
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:53:32.642
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:53:36.428
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:53:36.598
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:53:36.601
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:53:36.604
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:53:36.630
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:53:36.632
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:53:36.746
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:53:36.788
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:53:37.793
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:53:37.843
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:53:38.914
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:53:38.945
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:12.519
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:12.750
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:56:12.868
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:56:12.871
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:56:12.874
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:56:12.914
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:56:12.919
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:13.018
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:13.068
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:14.081
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:14.115
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:33.841
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:33.994
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:56:34.140
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:56:34.143
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:56:34.145
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:56:34.154
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:56:34.167
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:34.290
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:34.325
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:34.795
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:34.831
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:35.844
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:35.881
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:36.936
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:56:36.971
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:58:14.739
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:58:14.895
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:58:28.855
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:58:29.024
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:58:29.027
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 10:58:29.030
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:58:29.047
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 10:58:29.050
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:58:29.173
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:58:29.207
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:58:30.496
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:58:30.534
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:58:31.593
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 10:58:31.643
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:17.811
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:17.932
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:21.475
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:00:21.649
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:00:21.652
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:00:21.654
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:00:21.673
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:00:21.675
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:21.798
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:21.835
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:23.183
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:23.211
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:36.145
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:36.527
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:36.567
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:39.994
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:00:40.170
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:00:40.173
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:00:40.175
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:00:40.180
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:00:40.183
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:40.319
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:40.355
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:41.093
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:41.118
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:42.174
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:42.325
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:42.509
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:00:42.541
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:01:05.503
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:01:05.550
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:01:09.083
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:01:09.280
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:01:09.282
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:01:09.286
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:01:09.302
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:01:09.305
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:01:09.428
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:01:09.460
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:01:10.286
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:01:10.323
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:01:11.377
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:01:11.413
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:01:15.092
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:01:15.130
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:02:57.167
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:02:57.271
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:00.725
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:03:00.882
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:03:00.885
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:03:00.888
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:03:00.895
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:03:00.898
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:01.031
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:01.061
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:02.119
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:02.154
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:03.207
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:03.286
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:06.414
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:06.447
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:11.869
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:12.178
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:12.204
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:13.414
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:03:13.575
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:03:13.578
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:03:13.581
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:03:13.591
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:03:13.594
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:13.725
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:13.751
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:14.066
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:14.117
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:15.123
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:15.172
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:20.801
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:03:20.840
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:07:54.212
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:07:54.328
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:35.030
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:35.168
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:37.593
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:09:37.770
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:09:37.773
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:09:37.775
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:09:37.791
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:09:37.794
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:37.916
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:37.948
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:39.031
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:39.068
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:40.073
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:40.100
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:45.534
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:45.568
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:52.344
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:52.384
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:54.705
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:09:54.867
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:09:54.869
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:09:54.872
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:09:54.890
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:09:54.893
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:55.016
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:55.052
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:55.444
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:55.480
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:56.535
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:09:56.567
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:10:05.495
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:10:05.647
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:10:05.649
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:10:05.652
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:10:05.682
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:10:05.684
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:10:05.797
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:10:05.823
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:10:06.196
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:10:06.241
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:10:07.296
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:10:07.424
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:17:21.918
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:17:22.012
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:17:25.869
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:17:25.895
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:20:08.984
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:20:09.085
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:20:11.377
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:20:11.402
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:21:02.870
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:21:02.894
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:21:48.584
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:21:48.661
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:22:09.472
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:22:09.498
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:23:26.276
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:23:26.362
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:23:39.336
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:23:39.365
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:24:09.658
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:24:09.692
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:25:33.940
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:25:34.061
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:26:03.764
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:26:03.791
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:27:36.728
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:27:36.843
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:27:49.482
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:27:49.512
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:27:52.240
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:27:52.272
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:27:56.334
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:27:56.372
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:31:30.198
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:31:30.312
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:31:55.371
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:31:55.426
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:31:57.551
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:31:57.751
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:31:57.761
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:31:57.764
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:31:57.775
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:31:57.777
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:31:57.914
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:31:57.949
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:31:58.106
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:31:58.139
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:31:58.553
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:31:58.600
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:31:59.605
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:31:59.643
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:32:29.966
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:32:30.154
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:32:30.346
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 1, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:32:30.348
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:32:30.351
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:32:30.364
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 1 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:32:30.367
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:32:30.494
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:32:30.520
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:32:30.969
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:32:31.003
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:32:32.007
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:32:32.040
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:33:13.367
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:33:13.405
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:33:18.343
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:33:18.374
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:33:37.548
+!MESSAGE Open handler invoked on Model_1
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:33:37.569
+!MESSAGE Finished open handler
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:35:34.010
+!MESSAGE Spec build invoked on jeton ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:35:34.112
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:36:42.840
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.tla
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:36:43.062
+!MESSAGE Removed a parse result listener.There are now 0 listeners.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:36:43.183
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:36:43.254
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:36:43.323
+!MESSAGE Added a parse result listener.There are now 1 listeners.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:36:44.016
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:36:44.043
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 2 0 2017-03-08 11:37:13.557
+!MESSAGE BUG: no specObject
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:37:33.154
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:37:33.206
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:37:51.350
+!MESSAGE Open handler invoked on Model_1
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:37:51.501
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:37:51.588
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:37:51.737
+!MESSAGE No source for jeton_boolean___Model_1.launch found.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:37:51.827
+!MESSAGE Finished open handler
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:38:00.037
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.tla
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:38:00.322
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:38:00.345
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:38:55.881
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.tla
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:38:56.270
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:38:56.302
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:38:56.709
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:38:56.870
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 2, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:38:56.873
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:38:56.876
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:38:56.886
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 2 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:38:56.889
+!MESSAGE The source jeton_boolean___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:38:56.893
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:38:57.711
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:38:57.759
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:38:58.768
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:38:58.803
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:38:59.857
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:38:59.903
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:09.044
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.tla
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:09.208
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:39:09.359
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 2, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:39:09.361
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:39:09.364
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:39:09.379
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 2 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:39:09.381
+!MESSAGE The source jeton_boolean___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:39:09.383
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:09.529
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:09.565
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:09.961
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:09.997
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:10.240
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:10.267
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:22.514
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:22.545
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:29.843
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:39:30.000
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 2, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:39:30.003
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:39:30.005
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:39:30.051
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 2 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:39:30.053
+!MESSAGE The source jeton_boolean___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:39:30.056
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:30.618
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:30.660
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:31.715
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:31.748
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:50.807
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:50.838
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:52.533
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:39:52.691
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 2, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:39:52.694
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:39:52.696
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:39:52.703
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 2 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:39:52.705
+!MESSAGE The source jeton_boolean___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:39:52.708
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:52.840
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:52.867
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:53.339
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:53.381
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:53.548
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:53.678
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:54.762
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:39:54.919
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:01.261
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.tla
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:01.688
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:01.715
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:02.587
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:40:02.735
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 2, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:40:02.737
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:40:02.740
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:40:02.746
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 2 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:40:02.748
+!MESSAGE The source jeton_boolean___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:40:02.750
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:02.884
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:02.913
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:03.390
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:03.418
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:04.473
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:04.506
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:05.560
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:05.593
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:25.546
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:25.573
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:32.543
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:32.574
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:38.944
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:40:39.130
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 2, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:40:39.137
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:40:39.140
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:40:39.156
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 2 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:40:39.159
+!MESSAGE The source jeton_boolean___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:40:39.165
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:39.281
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:39.309
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:39.698
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:39.720
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:40.724
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:40:40.755
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:44:01.124
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:44:01.225
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:45:13.690
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:45:13.793
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:47:23.070
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:47:23.178
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:47:27.263
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:47:27.293
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:47:42.684
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:47:42.708
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:47:47.190
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:47:47.217
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:47:51.142
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:47:51.170
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:48:15.120
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:48:15.156
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:50:22.441
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:50:22.582
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:54:23.368
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:54:23.506
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:55:22.962
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:55:22.996
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:57:08.885
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:57:09.024
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:58:28.110
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:58:28.205
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:58:31.523
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:58:31.550
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:58:34.163
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:58:34.198
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:58:41.660
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:58:41.847
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 2, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:58:41.850
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:58:41.853
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:58:41.859
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 2 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:58:41.861
+!MESSAGE The source jeton_boolean___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:58:41.864
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:58:42.004
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:58:42.035
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:58:43.601
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:58:43.637
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:59:22.324
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:59:22.379
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:59:26.403
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:59:26.587
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 2, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:59:26.590
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 11:59:26.592
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:59:26.629
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 2 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:59:26.631
+!MESSAGE The source jeton_boolean___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 11:59:26.633
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:59:28.095
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 11:59:28.126
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 12:00:23.434
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 12:00:23.597
+!MESSAGE Resulting status is:  error 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 12:00:30.972
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 12:00:31.021
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 12:00:32.709
+!MESSAGE footFileName = /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.tla
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 12:00:32.900
+!MESSAGE TLC ARGUMENTS: [-fpbits, 0, -workers, 2, -tool, MC, -fp, 0, -config, MC.cfg, -coverage, 3, -checkpoint, 15, -metadir, /mnt/nosave/tmeunier/enseeiht/2IMA/SystemesDeTransitions/tp2/jeton_boolean.toolbox/Model_1]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 12:00:32.903
+!MESSAGE JAVA VM ARGUMENTS: [-Dtlc2.tool.fp.FPSet.impl=tlc2.tool.fp.MSBDiskFPSet, -Xmx1491m]
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc 1 0 2017-03-08 12:00:32.906
+!MESSAGE Nested JVM used for model checker is: /usr/lib/jvm/java-8-oracle/jre
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 12:00:32.939
+!MESSAGE TLCOutputSourceRegistry for model checking maintains 2 sources.
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 12:00:32.941
+!MESSAGE The source jeton_boolean___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox.tool.tlc.ui 1 -1 2017-03-08 12:00:32.944
+!MESSAGE The source jeton___Model_1.launch has 4 prio and 1 listeners
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 12:00:33.049
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 12:00:33.079
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 12:00:34.147
+!MESSAGE Spec build invoked on jeton_boolean ...
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 12:00:34.178
+!MESSAGE Resulting status is:  parsed 
+... build invocation finished.
+
+!ENTRY org.lamport.tla.toolbox 1 -1 2017-03-08 12:00:40.842
+!MESSAGE Removed a parse result listener.There are now 0 listeners.
