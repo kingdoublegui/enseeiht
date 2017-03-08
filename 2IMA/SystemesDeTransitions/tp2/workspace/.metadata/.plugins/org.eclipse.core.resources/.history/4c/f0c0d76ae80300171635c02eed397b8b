@@ -55,7 +55,6 @@ sortir(i) ==
   /\ etat[i] = Eating
   /\ etat' = [ etat EXCEPT ![i] = Thinking ]
 \*  /\ UNCHANGED jeton
-\*  Pour avoir de l'equite faible
   /\ jeton' = (i+1)%N
 
 bouger(i) ==
@@ -63,7 +62,6 @@ bouger(i) ==
   /\ etat[i] # Eating
   /\ jeton' = (i+1)%N
   /\ UNCHANGED etat
-\*  Pour avoir de l'equite faible
   /\ etat[i] # Hungry
 
 Next ==

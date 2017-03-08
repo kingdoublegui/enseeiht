@@ -21,7 +21,7 @@ VARIABLES
 
 TypeInvariant ==
    [] (/\ etat \in [ Processus -> {Hungry,Thinking,Eating} ]
-       /\ jeton \in Processus)
+       /\ jeton \in [ Processus -> BOOLEAN ])
 
 ExclMutuelle == [] (\A i,j \in Processus : etat[i] = Eating /\ etat[j] = Eating => i = j)
 
@@ -38,7 +38,7 @@ Sanity ==
 
 Init ==
  /\ etat = [ i \in Processus |-> Thinking ]
- /\ jeton \in Processus
+ /\ \E i \in Processus jeton = [ j \in Processus -> j = i ]
 
 demander(i) ==
   /\ etat[i] = Thinking

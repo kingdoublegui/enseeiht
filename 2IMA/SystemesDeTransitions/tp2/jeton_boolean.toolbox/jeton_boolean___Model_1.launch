@@ -8,7 +8,6 @@
 <intAttribute key="distributedFPSetCount" value="0"/>
 <stringAttribute key="distributedNetworkInterface" value="147.127.133.193"/>
 <stringAttribute key="distributedTLC" value="off"/>
-<stringAttribute key="distributedTLCScript" value=""/>
 <stringAttribute key="distributedTLCVMArgs" value=""/>
 <intAttribute key="fpBits" value="0"/>
 <intAttribute key="fpIndex" value="1"/>
@@ -26,11 +25,11 @@
 <listAttribute key="modelCorrectnessProperties">
 <listEntry value="1TypeInvariant"/>
 <listEntry value="1ExclMutuelle"/>
-<listEntry value="1Sanity"/>
 <listEntry value="1VivaciteIndividuelle"/>
 <listEntry value="1VivaciteGlobale"/>
 <listEntry value="1JetonVaPartout"/>
-<listEntry value="0JetonUnique"/>
+<listEntry value="1JetonUnique"/>
+<listEntry value="1Sanity"/>
 </listAttribute>
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
@@ -41,12 +40,12 @@
 <listAttribute key="modelParameterDefinitions"/>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
-<intAttribute key="numberOfWorkers" value="1"/>
+<intAttribute key="numberOfWorkers" value="2"/>
 <booleanAttribute key="recover" value="false"/>
 <stringAttribute key="result.mail.address" value=""/>
 <intAttribute key="simuAril" value="-1"/>
 <intAttribute key="simuDepth" value="100"/>
 <intAttribute key="simuSeed" value="-1"/>
-<stringAttribute key="specName" value="jeton"/>
+<stringAttribute key="specName" value="jeton_boolean"/>
 <stringAttribute key="view" value=""/>
 </launchConfiguration>

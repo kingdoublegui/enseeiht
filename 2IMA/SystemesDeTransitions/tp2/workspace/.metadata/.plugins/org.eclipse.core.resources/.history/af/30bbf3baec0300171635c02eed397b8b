@@ -1,4 +1,4 @@
----------------- MODULE jeton ----------------
+---------------- MODULE jeton_boolean ----------------
 \* Time-stamp: <07 mar 2013 15:49 queinnec@enseeiht.fr>
 
 (* Algorithme d'exclusion mutuelle à base de jeton. *)
@@ -17,11 +17,13 @@ Eating == "E"
 
 VARIABLES
   etat,
-  jeton
+  jeton,
+  reseau
 
 TypeInvariant ==
    [] (/\ etat \in [ Processus -> {Hungry,Thinking,Eating} ]
-       /\ jeton \in Processus)
+       /\ jeton \in [ Processus -> BOOLEAN ])
+       /\ reseau \in [ Processus -> BOOLEAN ]
 
 ExclMutuelle == [] (\A i,j \in Processus : etat[i] = Eating /\ etat[j] = Eating => i = j)
 
@@ -29,42 +31,55 @@ VivaciteIndividuelle == \A i \in Processus : etat[i] = Hungry ~> etat[i] = Eatin
 
 VivaciteGlobale == (\E i \in Processus : etat[i] = Hungry) ~> (\E j \in Processus : etat[j] = Eating)
 
-JetonVaPartout == \A i \in Processus : [] <> (jeton = i)
+JetonVaPartout == \A i \in Processus : [] <> (jeton[i])
+
+JetonUnique == [](Cardinality({i \in Processus : jeton[i]}) = 1)
 
 Sanity ==
-  [] (\A i \in Processus : etat[i] = Eating => jeton = i)
+  [] (\A i \in Processus : etat[i] = Eating => jeton[i])
 
 ----------------------------------------------------------------
 
 Init ==
  /\ etat = [ i \in Processus |-> Thinking ]
- /\ jeton \in Processus
+ /\ \E i \in Processus : jeton = [ j \in Processus |-> j = i ]
+ /\ reseau = [ i \in Processus |-> FALSE ]
 
 demander(i) ==
   /\ etat[i] = Thinking
   /\ etat' = [ etat EXCEPT ![i] = Hungry ]
-  /\ UNCHANGED jeton
+  /\ UNCHANGED jeton, reseau
 
 entrer(i) ==
   /\ etat[i] = Hungry
-  /\ jeton = i
+  /\ jeton[i]
   /\ etat' = [ etat EXCEPT ![i] = Eating ]
-  /\ UNCHANGED jeton
+  /\ UNCHANGED jeton, reseau
 
 sortir(i) ==
   /\ etat[i] = Eating
   /\ etat' = [ etat EXCEPT ![i] = Thinking ]
 \*  /\ UNCHANGED jeton
 \*  Pour avoir de l'equite faible
-  /\ jeton' = (i+1)%N
+  /\ jeton' = [jeton EXCEPT ![i] = FALSE, ![(i+1)%N] = TRUE]
 
 bouger(i) ==
-  /\ jeton = i
+  /\ jeton[i]
   /\ etat[i] # Eating
-  /\ jeton' = (i+1)%N
+  /\ jeton' = [jeton EXCEPT ![i] = FALSE, ![(i+1)%N] = TRUE]
   /\ UNCHANGED etat
 \*  Pour avoir de l'equite faible
   /\ etat[i] # Hungry
+  
+envoyer(i) ==
+  /\ etat[i] = Thinking
+  /\ jeton[i]
+  /\ jeton' = [jeton EXCEPT ![i] = FALSE]
+  /\ TRUE
+
+recevoir(i) ==
+  /\ jeton' = [jeton EXCEPT ![i] = TRUE]
+  /\ TRUE
 
 Next ==
  \E i \in Processus :
@@ -84,3 +99,4 @@ Spec ==
  /\ Fairness
 
 ================
+

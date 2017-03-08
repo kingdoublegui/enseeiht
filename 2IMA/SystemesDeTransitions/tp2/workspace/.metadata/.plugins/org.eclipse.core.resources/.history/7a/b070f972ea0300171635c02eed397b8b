@@ -21,7 +21,7 @@ VARIABLES
 
 TypeInvariant ==
    [] (/\ etat \in [ Processus -> {Hungry,Thinking,Eating} ]
-       /\ jeton \in Processus)
+       /\ jeton \in [ Processus -> BOOLEAN ])
 
 ExclMutuelle == [] (\A i,j \in Processus : etat[i] = Eating /\ etat[j] = Eating => i = j)
 
@@ -29,7 +29,9 @@ VivaciteIndividuelle == \A i \in Processus : etat[i] = Hungry ~> etat[i] = Eatin
 
 VivaciteGlobale == (\E i \in Processus : etat[i] = Hungry) ~> (\E j \in Processus : etat[j] = Eating)
 
-JetonVaPartout == \A i \in Processus : [] <> (jeton = i)
+JetonVaPartout == \A i \in Processus : [] <> (jeton[i])
+
+JetonUnique == [](Cardinality(\A i \in Processus : jeton[i]) = 1)
 
 Sanity ==
   [] (\A i \in Processus : etat[i] = Eating => jeton = i)
@@ -38,7 +40,7 @@ Sanity ==
 
 Init ==
  /\ etat = [ i \in Processus |-> Thinking ]
- /\ jeton \in Processus
+ /\ \E i \in Processus : jeton = [ j \in Processus |-> j = i ]
 
 demander(i) ==
   /\ etat[i] = Thinking
@@ -47,7 +49,7 @@ demander(i) ==
 
 entrer(i) ==
   /\ etat[i] = Hungry
-  /\ jeton = i
+  /\ jeton[i]
   /\ etat' = [ etat EXCEPT ![i] = Eating ]
   /\ UNCHANGED jeton
 
@@ -56,7 +58,7 @@ sortir(i) ==
   /\ etat' = [ etat EXCEPT ![i] = Thinking ]
 \*  /\ UNCHANGED jeton
 \*  Pour avoir de l'equite faible
-  /\ jeton' = (i+1)%N
+  /\ jeton' = [jeton EXCEPT ![i] = FALSE, ![(i+1)%N] = TRUE]
 
 bouger(i) ==
   /\ jeton = i

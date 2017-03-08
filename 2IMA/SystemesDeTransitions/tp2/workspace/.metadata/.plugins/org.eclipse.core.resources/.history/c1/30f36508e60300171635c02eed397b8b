@@ -29,7 +29,7 @@ VivaciteIndividuelle == \A i \in Processus : etat[i] = Hungry ~> etat[i] = Eatin
 
 VivaciteGlobale == (\E i \in Processus : etat[i] = Hungry) ~> (\E j \in Processus : etat[j] = Eating)
 
-JetonVaPartout == \A i \in Processus : [] <> (jeton = i)
+JetonVaPartout == TRUE
 
 Sanity ==
   [] (\A i \in Processus : etat[i] = Eating => jeton = i)
@@ -54,17 +54,13 @@ entrer(i) ==
 sortir(i) ==
   /\ etat[i] = Eating
   /\ etat' = [ etat EXCEPT ![i] = Thinking ]
-\*  /\ UNCHANGED jeton
-\*  Pour avoir de l'equite faible
-  /\ jeton' = (i+1)%N
+  /\ UNCHANGED jeton
 
 bouger(i) ==
   /\ jeton = i
   /\ etat[i] # Eating
   /\ jeton' = (i+1)%N
   /\ UNCHANGED etat
-\*  Pour avoir de l'equite faible
-  /\ etat[i] # Hungry
 
 Next ==
  \E i \in Processus :
