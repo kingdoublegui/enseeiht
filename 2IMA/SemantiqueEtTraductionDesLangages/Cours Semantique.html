@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cours Semantique</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><h1 id="semantique-et-traduction-des-langages">Semantique et Traduction des Langages</h1>
+
+<p><div class="toc">
+<ul>
+<li><a href="#semantique-et-traduction-des-langages">Semantique et Traduction des Langages</a><ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#architecture-generale">Architecture generale</a><ul>
+<li><a href="#presentation">Presentation</a></li>
+<li><a href="#analyse-structure-programme">Analyse Structure Programme</a></li>
+<li><a href="#analyse-signification-programme">Analyse Signification Programme</a></li>
+<li><a href="#definitions">Definitions</a></li>
+<li><a href="#comment-organiser-linformation">Comment organiser l’information</a></li>
+</ul>
+</li>
+<li><a href="#lapproche-xml">L’approche XML</a></li>
+<li><a href="#documents-xml">Documents XML</a></li>
+</ul>
+</li>
+<li><a href="#representation-des-langages">Representation des Langages</a><ul>
+<li><a href="#rappels">Rappels</a></li>
+<li><a href="#verification-de-langages">Verification de Langages</a><ul>
+<li><a href="#exemple-execution-c">Exemple execution C</a></li>
+</ul>
+</li>
+<li><a href="#definition-formelle">Definition formelle</a></li>
+<li><a href="#semantiques-formelles">Semantiques formelles</a><ul>
+<li><a href="#semantique-operationnelle">Semantique operationnelle</a></li>
+<li><a href="#semantique-denotationnelle">Semantique denotationnelle</a></li>
+<li><a href="#semantique-translationelle">Semantique translationelle</a></li>
+<li><a href="#semantique-par-axiomatique">Semantique par axiomatique</a></li>
+</ul>
+</li>
+<li><a href="#coherence-des-formes">Coherence des formes</a></li>
+</ul>
+</li>
+<li><a href="#interpretation-semantique-operationnelle">Interpretation - Semantique Operationnelle</a><ul>
+<li><a href="#procedure-decriture-dune-semantique">Procedure d’ecriture d’une semantique</a><ul>
+<li><a href="#etape-1">Etape 1</a></li>
+<li><a href="#etape-2">Etape 2</a><ul>
+<li><a href="#definition-des-valeurs">Definition des valeurs</a></li>
+<li><a href="#definition-des-regles-de-calcul">Definition des regles de calcul</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#erreurs">Erreurs</a></li>
+<li><a href="#semantique-a-petit-pas">Semantique a petit pas</a></li>
+</ul>
+</li>
+<li><a href="#typage-semantique-axiomatique">Typage, Semantique axiomatique</a><ul>
+<li><ul>
+<li><a href="#etape-1-1">Etape 1</a></li>
+<li><a href="#etape-2-1">Etape 2</a></li>
+<li><a href="#etape-3">Etape 3</a></li>
+</ul>
+</li>
+<li><a href="#cas-du-typage">Cas du typage</a><ul>
+<li><a href="#etape-2-2">Etape 2</a></li>
+<li><a href="#etape-2-3">Etape 2</a></li>
+<li><a href="#etape-3-1">Etape 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#semantique-attribuee-grammaire-attribuee">Semantique attribuee, Grammaire attribuee</a><ul>
+<li><a href="#conception-dune-semantique">Conception d’une semantique</a><ul>
+<li><a href="#etape-1-2">Etape 1</a></li>
+<li><a href="#etape-2-4">Etape 2</a></li>
+<li><a href="#etape-3-2">Etape 3</a></li>
+</ul>
+</li>
+<li><a href="#avantage-grammaire-attribuee">Avantage Grammaire attribuee</a></li>
+<li><a href="#methode-pour-definir-semantique-attribuee">Methode pour definir semantique attribuee</a><ul>
+<li><a href="#etape-1-3">Etape 1</a></li>
+<li><a href="#etape-2-5">Etape 2</a></li>
+<li><a href="#etape-3-3">Etape 3</a></li>
+<li><a href="#etape-4">Etape 4</a></li>
+<li><a href="#etape-5">Etape 5</a></li>
+<li><a href="#etat-de-lart-actuel">Etat de l’art actuel</a></li>
+</ul>
+</li>
+<li><a href="#arbres-abstraits">Arbres abstraits</a></li>
+<li><a href="#table-de-symboles-espace-de-noms">Table de symboles - Espace de noms</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</p>
+
+
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Informatique: Science du traitement de l’information <br>
+Computer Science: Science de la “machine a caculer”</p>
+
+
+
+<h3 id="architecture-generale">Architecture generale</h3>
+
+
+
+<h4 id="presentation">Presentation</h4>
+
+<ul>
+<li>Information brute: on cherche un commentaire avec une ligne commancant par “//”</li>
+<li>Par bloc: on divise le texte brut en mot, sous mot, … <br>
+<script type="math/tex" id="MathJax-Element-1">\Rightarrow</script> structure d’un outil</li>
+</ul>
+
+
+
+<div class="flow-chart"><svg height="418.75000190734863" version="1.1" width="152.13333129882812" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; top: -0.316681px;"><desc>Created with Raphaël 2.1.2</desc><defs><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block"></path><marker id="raphael-marker-endblock33-obj10" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj11" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj12" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj13" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker></defs><rect x="0" y="0" width="93.0999984741211" height="39.35000038146973" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="st" transform="matrix(1,0,0,1,30.5167,4)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="stt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,30.5167,4)"><tspan dy="5.375">Programme</tspan></text><rect x="0" y="0" width="121.05000305175781" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="lex" transform="matrix(1,0,0,1,16.5417,97.35)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="lext" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,16.5417,97.35)"><tspan dy="5.375">Analyse Lexicale</tspan></text><rect x="0" y="0" width="140.4000015258789" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="syn" transform="matrix(1,0,0,1,6.8667,190.7)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="synt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,6.8667,190.7)"><tspan dy="5.375">Analyse Syntaxique</tspan></text><rect x="0" y="0" width="146.13333129882812" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="sem" transform="matrix(1,0,0,1,4,284.05)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="semt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,4,284.05)"><tspan dy="5.375">Analyse Semantique</tspan></text><rect x="0" y="0" width="78.04999923706055" height="39.35000038146973" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="e" transform="matrix(1,0,0,1,38.0417,377.4)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="et" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,38.0417,377.4)"><tspan dy="5.375">Resultats</tspan><tspan dy="18" x="10"></tspan></text><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M77.06666564941406,43.35000038146973C77.06666564941406,43.35000038146973,77.06666564941406,83.00410032272339,77.06666564941406,94.35043946607038" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj10)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M77.06666564941406,136.70000076293945C77.06666564941406,136.70000076293945,77.06666564941406,176.35410070419312,77.06666564941406,187.7004398475401" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj11)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M77.06666564941406,230.05000114440918C77.06666564941406,230.05000114440918,77.06666564941406,269.70410108566284,77.06666564941406,281.05044022900984" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj12)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M77.06666564941406,323.4000015258789C77.06666564941406,323.4000015258789,77.06666564941406,363.05410146713257,77.06666564941406,374.40044061047956" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj13)" font-family="sans-serif" font-weight="normal"></path></svg></div>
+
+
+
+<h4 id="analyse-structure-programme">Analyse Structure Programme</h4>
+
+
+
+<div class="flow-chart"><svg height="232.05000114440918" version="1.1" width="152.13333129882812" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; top: -0.916687px;"><desc>Created with Raphaël 2.1.2</desc><defs><marker id="raphael-marker-endblock33-obj20" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj21" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker></defs><rect x="0" y="0" width="121.05000305175781" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="lex" transform="matrix(1,0,0,1,16.5417,4)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="lext" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,16.5417,4)"><tspan dy="5.375">Analyse Lexicale</tspan></text><rect x="0" y="0" width="106.71666717529297" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="syn" transform="matrix(1,0,0,1,23.7083,97.35)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="synt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,23.7083,97.35)"><tspan dy="5.375">Unite Lexicale</tspan></text><rect x="0" y="0" width="146.13333129882812" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="sem" transform="matrix(1,0,0,1,4,190.7)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="semt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,4,190.7)"><tspan dy="5.375">Analyse Semantique</tspan><tspan dy="18" x="10"></tspan></text><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M77.06666564941406,43.35000038146973C77.06666564941406,43.35000038146973,77.06666564941406,83.00410032272339,77.06666564941406,94.35043946607038" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj20)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M77.06666564941406,136.70000076293945C77.06666564941406,136.70000076293945,77.06666564941406,176.35410070419312,77.06666564941406,187.7004398475401" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj21)" font-family="sans-serif" font-weight="normal"></path></svg></div>
+
+
+
+<h4 id="analyse-signification-programme">Analyse Signification Programme</h4>
+
+
+
+<div class="flow-chart"><svg height="63.349998474121094" version="1.1" width="548.458324432373" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; top: -0.81665px;"><desc>Created with Raphaël 2.1.2</desc><defs><marker id="raphael-marker-endblock33-obj28" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj29" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker></defs><rect x="0" y="0" width="145.41665649414062" height="57.349998474121094" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="inf" transform="matrix(1,0,0,1,4.3583,4)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="28.674999237060547" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="inft" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,4.3583,4)"><tspan dy="-3.625">Information</tspan><tspan dy="18" x="10">           Table des Symboles</tspan></text><rect x="0" y="0" width="146.13333129882812" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="sem" transform="matrix(1,0,0,1,203.775,13)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="semt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,203.775,13)"><tspan dy="5.375">Analyse Semantique</tspan><tspan dy="18" x="10"></tspan></text><rect x="0" y="0" width="138.96666717529297" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="ges" transform="matrix(1,0,0,1,407.4917,13)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="gest" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,407.4917,13)"><tspan dy="5.375">Gestion des erreurs</tspan></text><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M149.77499389648438,32.67499923706055C149.77499389648438,32.67499923706055,189.42909383773804,32.67499923706055,200.77543298108503,32.67499923706055" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj28)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M349.9083251953125,32.67499923706055C349.9083251953125,32.67499923706055,392.6770505004215,32.67499923706055,404.4969228259546,32.67499923706055" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj29)" font-family="sans-serif" font-weight="normal"></path></svg></div>
+
+
+
+<h4 id="definitions">Definitions</h4>
+
+<ul>
+<li>Caractere/Symbole : Unite elementaire d’information</li>
+<li>Unite lexicale (lexeme, mot) : Sequence de caracteres</li>
+<li>Unite syntaxique (arbre syntaxique, synteme, arbre) : Arbre d’unite lexicale</li>
+<li>Unite semantique diverse</li>
+</ul>
+
+
+
+<h4 id="comment-organiser-linformation">Comment organiser l’information</h4>
+
+<p><script type="math/tex" id="MathJax-Element-2">\rightarrow</script> Semantique la plus simple possible: Role de l’arbre abstrait</p>
+
+<ul>
+<li>Objectif: Exploitation de l’information</li>
+<li>Regle: Choisir le bon niveau de precision</li>
+<li>Unite lexicale: Bloc elementaire d’information pertinente</li>
+<li>Unite syntaxique: Element structurant de l’information</li>
+</ul>
+
+
+
+<h3 id="lapproche-xml">L’approche XML</h3>
+
+<p>Document bien forme: Structure arborescente <br>
+Document valide: Respect arborescence specifique (DTD, Schema, …)</p>
+
+
+
+<h3 id="documents-xml">Documents XML</h3>
+
+<p>Lien <a href="https://en.wikipedia.org/wiki/Xml">Wikipedia</a></p>
+
+
+
+<h2 id="representation-des-langages">Representation des Langages</h2>
+
+
+
+<h3 id="rappels">Rappels</h3>
+
+<ul>
+<li>Expressions regulieres</li>
+<li>Grammaire</li>
+<li>…</li>
+</ul>
+
+
+
+<h3 id="verification-de-langages">Verification de Langages</h3>
+
+<p>Outils qui exploitent les langages (interpretation, verification, traduction) jouent un role essentiel en Informatique –&gt; contraintes fortes qualite</p>
+
+<blockquote>
+  <h4 id="exemple-execution-c">Exemple execution C</h4>
+  
+  <pre class="prettyprint"><code class="language-c hljs ">(i++) + (- -i)</code></pre>
+  
+  <p>L’ordre  d’evaluation importe. De gauche a droite ou de droite a gauche donnent des resultats differents.</p>
+</blockquote>
+
+<p><strong>Probleme</strong> : Pas de definition suffisamment precise du langage <br>
+Meme si elle est assez precise mais qu’elle est ecrite en langage naturelle, il est difficile pour une langage complexe d’etre sur que le typage va bien detecter les erreurs souhaitees. <br>
+–&gt; Il faut donc une definition formelle.</p>
+
+
+
+<h3 id="definition-formelle">Definition formelle</h3>
+
+<p>Sous la forme de programmes:</p>
+
+<ul>
+<li>Interprete de reference</li>
+<li>Compilateur de reference</li>
+<li>…</li>
+</ul>
+
+<p>En utilisant des methodes formelles :</p>
+
+<ul>
+<li>coherence de la definition, chaque cas n’est traite qu’une fois</li>
+<li>completude de la definition, chaque cas est traite au moins une fois</li>
+<li>generation automatique des outils de reference, teste la specification pour la valider</li>
+</ul>
+
+
+
+<h3 id="semantiques-formelles">Semantiques formelles</h3>
+
+
+
+<h4 id="semantique-operationnelle">Semantique operationnelle</h4>
+
+<p><strong>Definition</strong>: Decrit l’execution d’un programme du langage. Utilise le langage comme support. <br>
+L’algorithme qui manipule les donnees du langage pour faire le calcul correspond a l’execution du programme. Il interprete. <br>
+Cette semantique est assez <em>proche du langage</em>, est <em>facile a lire</em>, mais n’est <em>pas assez abstraite</em> quand le langage est complexe.</p>
+
+
+
+<h4 id="semantique-denotationnelle">Semantique denotationnelle</h4>
+
+<p><strong>Definition</strong>: Decrit l’execution par traduction ddans un langage mathematique abstrait suffisament eloigne du langage considere. Il se compose de :</p>
+
+<ul>
+<li><em>λ-calcul</em></li>
+<li><em>Arithmetique</em></li>
+<li><em>theorie point fixe</em></li>
+</ul>
+
+<p>Cette semantique est <em>difficile a faire</em>, <em>difficile a lire</em>, <em>inadaptee aux outils</em></p>
+
+
+
+<h4 id="semantique-translationelle">Semantique translationelle</h4>
+
+<p><strong>Definition</strong>: traduction vers un langage informatique plus proche. <br>
+On a ainsi:</p>
+
+<ul>
+<li>un <em>gain en simplicite et en lisibilite</em></li>
+<li>une <em>perte en abstraction</em></li>
+</ul>
+
+<blockquote>
+  <p><strong>En pratique</strong></p>
+  
+  <p>On fait le choix d’un noyau du langage. On traduit ensuite vers ce noyau. Puis on donne la semantique du noyau. <br>
+  La complexite est ainsi maitrisee.</p>
+  
+  <blockquote>
+    <p><strong>Exemple</strong>: FeatherWeight Java <br>
+    La traduction se fait en plusieurs etapes <br>
+    Java –&gt; JVM –&gt; Processeur</p>
+  </blockquote>
+</blockquote>
+
+
+
+<h4 id="semantique-par-axiomatique">Semantique par axiomatique</h4>
+
+<p><strong>Definition</strong>: Description des mecaniques de preuves de proprietes pour les programmes de ce langage</p>
+
+<blockquote>
+  <p><strong>Exemple</strong>: Typage, Definitions derivables, Logique de Hoore</p>
+</blockquote>
+
+
+
+<h3 id="coherence-des-formes">Coherence des formes</h3>
+
+<p>On cherche a montrer que ces formes sont coherentes. Il y a donc la possibilite de faire une preuve.</p>
+
+<blockquote>
+  <p><strong>Exemple</strong>: CompCert, compilateur C optimiseur developpe en <a href="https://en.wikipedia.org/wiki/Coq">Coq</a></p>
+</blockquote>
+
+
+
+<h2 id="interpretation-semantique-operationnelle">Interpretation - Semantique Operationnelle</h2>
+
+<blockquote>
+  <p><strong>Exemple</strong>: MiniML</p>
+  
+  <ul>
+  <li><p><strong>Syntaxe cours</strong></p>
+  
+  <blockquote>
+    <p><script type="math/tex" id="MathJax-Element-3">E \rightarrow cte</script> <br>
+    <script type="math/tex" id="MathJax-Element-4">E \rightarrow E\ opBin\ E</script> <br>
+    <script type="math/tex" id="MathJax-Element-5">E \rightarrow E\ opUn\ E</script> <br>
+    <script type="math/tex" id="MathJax-Element-6">E \rightarrow (E)</script> <br>
+    <script type="math/tex" id="MathJax-Element-7">E \rightarrow identificateur</script></p>
+  </blockquote></li>
+  <li><p><strong>Syntaxe TD</strong></p>
+  
+  <blockquote>
+    <p><script type="math/tex" id="MathJax-Element-8">E \rightarrow let\ identificateur=E\ in\ E</script> <br>
+    <script type="math/tex" id="MathJax-Element-9">E \rightarrow function\  identificateur \rightarrow E</script> <br>
+    <script type="math/tex" id="MathJax-Element-10">E \rightarrow (E\ E)</script> : appel de fonction (fonction puis parametres) <br>
+    <script type="math/tex" id="MathJax-Element-11">E \rightarrow if\ E\ then\ E\ else\ E</script> <br>
+    <script type="math/tex" id="MathJax-Element-12">E \rightarrow let\ sec\ identificateur=E\ in\ E</script> <br>
+    <strong>Probleme</strong>: grammaire ambigue</p>
+  </blockquote></li>
+  </ul>
+</blockquote>
+
+<p>Afin de simplifier ces differentes grammaire, on utilise un arbre abstrait (AST) <br>
+Structure de donnee contenant les informations necessaires a la definition de l’interprete.</p>
+
+
+
+<pre class="prettyprint"><code class="language-ocaml hljs "><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">ast</span> =</span> BinaryNode <span class="hljs-keyword">of</span> ast * binary * ast
+                | UnaryNode  <span class="hljs-keyword">of</span> unary * ast
+                | IntegerNode  <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span>
+                | TrueNode  | FalseNode
+                | ...</code></pre>
+
+
+
+<h3 id="procedure-decriture-dune-semantique">Procedure d’ecriture d’une semantique</h3>
+
+
+
+<h4 id="etape-1">Etape 1</h4>
+
+<p>Analyseur lexical/syntaxique qui construit l’arbre abstrait.</p>
+
+<blockquote>
+  <p><strong>Exemple</strong>: role de Xtext</p>
+</blockquote>
+
+
+
+<h4 id="etape-2">Etape 2</h4>
+
+<p>Calculer la valeur d’une expression</p>
+
+
+
+<h5 id="definition-des-valeurs">Definition des valeurs</h5>
+
+
+
+<pre class="prettyprint"><code class="language-ocaml hljs "><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">value</span> <span class="hljs-title">Type</span> =</span> IntegerValue <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span>
+                | BooleanValue <span class="hljs-keyword">of</span> <span class="hljs-built_in">bool</span>
+                | ErrorValue <span class="hljs-keyword">of</span> errorType
+
+<span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">errorType</span> =</span> TypeMismatchError
+               | UnbenoumIndentError
+               | RuntimeError</code></pre>
+
+
+
+<h5 id="definition-des-regles-de-calcul">Definition des regles de calcul</h5>
+
+
+
+<pre class="prettyprint"><code class="language-ocaml hljs "><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> value_of_expression expression env = 
+<span class="hljs-keyword">match</span> expression <span class="hljs-keyword">with</span>
+    <span class="hljs-comment">(* Definition de la notion de constante *)</span>
+    | TrueNode -&gt; (BooleanValue <span class="hljs-keyword">true</span>)
+    | FalseNode -&gt; (BooleanValue <span class="hljs-keyword">false</span>)
+    | (IntegerNode v) -&gt; (IntegerValue v)
+    | (UnaryNode op par) -&gt;
+        <span class="hljs-comment">(* Propagation des erreurs *)</span>
+        <span class="hljs-keyword">match</span> (value_of_expression par) <span class="hljs-keyword">with</span>
+        | (ErrorValue en) -&gt; (ErrorValue en)
+        | (BooleanValue b) -&gt;
+            <span class="hljs-keyword">match</span> op <span class="hljs-keyword">with</span>
+            | Negate -&gt; (BooleanValue (not b))
+            | Opposite -&gt; (ErrorValue TypeMismatchError)</code></pre>
+
+<p><strong>Probleme</strong>: toutes les regles d’evaluation sont surchargees dans une fonction</p>
+
+<p>Notation plus abstraite pour separer les differents cas: regles de deduction <br>
+Jugement: <script type="math/tex" id="MathJax-Element-13">\gamma \vdash e \Rightarrow v</script> dans l’environnement <script type="math/tex" id="MathJax-Element-14">\gamma</script> l’expression <script type="math/tex" id="MathJax-Element-15">e</script> s’evalue avec la valeur <script type="math/tex" id="MathJax-Element-16">v</script></p>
+
+<p>Annexes: </p>
+
+<blockquote>
+  <p><script type="math/tex" id="MathJax-Element-17">\gamma \vdash boolean \Rightarrow boolean</script> <br>
+  <script type="math/tex" id="MathJax-Element-18">\gamma \vdash integer(v) \Rightarrow integer(v)</script></p>
+</blockquote>
+
+<p><script type="math/tex" id="MathJax-Element-19">op</script> est une operation predefinie de calcul sur les valeurs. Table de verite pour les boolean, arithmetique, … <br>
+<script type="math/tex" id="MathJax-Element-20">\gamma \vdash integer(v) \Rightarrow integer(v),\ v \in dom(op),\ r=op(v)</script> <br>
+<script type="math/tex" id="MathJax-Element-21">\gamma \vdash op\ e \Rightarrow r</script></p>
+
+
+
+<h3 id="erreurs">Erreurs</h3>
+
+<table>
+<thead>
+<tr>
+  <th align="center">Erreur</th>
+  <th>Caracteristique</th>
+  <th>Classification</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td align="center"><strong><script type="math/tex" id="MathJax-Element-22">\bot_{undef}</script></strong></td>
+  <td>identificateur non defini</td>
+  <td>Analyse Statique</td>
+</tr>
+<tr>
+  <td align="center"><strong><script type="math/tex" id="MathJax-Element-23">\bot_{type}</script></strong></td>
+  <td>incompatibilite des types</td>
+  <td>Analyse Statique</td>
+</tr>
+<tr>
+  <td align="center"><strong><script type="math/tex" id="MathJax-Element-24">\bot_{runtime}</script></strong></td>
+  <td>erreurs de calcul : division par zeros, depassement de capacite</td>
+  <td>Execution</td>
+</tr>
+<tr>
+  <td align="center"></td>
+  <td>gestion des ressources : memoire, temps de calcul, stockage, affichage</td>
+  <td></td>
+</tr>
+<tr>
+  <td align="center"></td>
+  <td>securite</td>
+  <td></td>
+</tr>
+</tbody></table>
+
+
+<p><strong>Analyse statique</strong>: sans executer le programme</p>
+
+<p>Remarque: <script type="math/tex" id="MathJax-Element-25">\gamma \vdash e \Rightarrow v</script> s’appelle une semantique a grand pas (big step semantics). Passage de l’expression a sa valeur en 1 etape.</p>
+
+
+
+<h3 id="semantique-a-petit-pas">Semantique a petit pas</h3>
+
+<blockquote>
+  <p><strong>Exemple</strong> <br>
+  <script type="math/tex" id="MathJax-Element-26">\vdash 2 \Rightarrow 2 \ \ \vdash 3 \Rightarrow 3</script> <br>
+  <script type="math/tex" id="MathJax-Element-27">\vdash 1 \Rightarrow 1 \ \ \vdash 2\times3 \Rightarrow 6</script> <br>
+  <script type="math/tex" id="MathJax-Element-28">\vdash 1+2\times3 \Rightarrow 7</script></p>
+</blockquote>
+
+
+
+<pre class="prettyprint"><code class=" hljs glsl">tant que <span class="hljs-built_in">exp</span>≠val faire
+    <span class="hljs-built_in">exp</span> := etape(expr)
+fait</code></pre>
+
+<p><script type="math/tex; mode=display" id="MathJax-Element-29"><exp, env> \rightarrow <exp', env></script><script type="math/tex; mode=display" id="MathJax-Element-30"><exp_0, env_0> \rightarrow <exp_1, env_1> \rightarrow ...  \rightarrow <exp_n, env_n></script> <br>
+Cette semantique est similaire au systeme de transition.</p>
+
+
+
+<p><script type="math/tex; mode=display" id="MathJax-Element-31">\frac{<e_1, \gamma> \rightarrow <e_1', \gamma'>}{<e_1\mathbin{\!/\mkern-5mu/\!}e_2, \gamma> \rightarrow <e_1'\mathbin{\!/\mkern-5mu/\!}e_2, \gamma'>}</script></p>
+
+
+
+<p><script type="math/tex; mode=display" id="MathJax-Element-32"><\mathrm{if}\ true\ \mathrm{then}\ e_1\ \mathrm{else}\ e_2, \gamma>\rightarrow <e_1, \gamma></script><script type="math/tex; mode=display" id="MathJax-Element-33"><\mathrm{if}\ false\ \mathrm{then}\ e_1\ \mathrm{else}\ e_2, \gamma>\rightarrow <e_2, \gamma></script></p>
+
+
+
+<p><script type="math/tex; mode=display" id="MathJax-Element-34">\frac{e_1 \notin \mathrm{valeur}\ <e_1, \gamma> \rightarrow <e_1', \gamma'>}{<\mathrm{if}\ e_1\ \mathrm{then}\ e_2\ \mathrm{else}\ e_3, \gamma>\rightarrow <\mathrm{if}\ e_1'\ \mathrm{then}\ e_2\ \mathrm{else}\ e_3, \gamma'>}</script></p>
+
+<p>La semantique a petit pas possede un plus grand nombre de regles, mais au detriment d’une gestion plus complexe de l’environnement. <br>
+Selon le langage, on utilise la semantique la plus adaptee.</p>
+
+
+
+<h2 id="typage-semantique-axiomatique">Typage, Semantique axiomatique</h2>
+
+<p><strong>Objectif</strong>: Decrire comment prouver des proprietes de programmes</p>
+
+<p>Peut etre generique: Preuve de n’importe quelle propriete: Logique de Hoore pour langages imperatifs <br>
+<script type="math/tex; mode=display" id="MathJax-Element-35">\mathrm{jugement: } \left\{ \phi \right\}\mathrm{P}\left\{ \psi \right\}</script> <br>
+<script type="math/tex" id="MathJax-Element-36">\phi</script> et <script type="math/tex" id="MathJax-Element-37">\psi</script> decrivent l’eat de la memoire. <br>
+<script type="math/tex; mode=display" id="MathJax-Element-38">\frac{\left\{ \psi\land C \right\}\mathrm{P}\left\{ \phi \right\}}{\left\{ \phi \right\} \mathrm{while}\ C\ \mathrm{do}\ P\ \mathrm{od}\ \left\{ \phi\land \neg C \right\}}\ \phi\ \mathrm{invariant}</script></p>
+
+<p>Peut etre specifique a certaines proprietes.</p>
+
+<blockquote>
+  <p><strong>Exemple</strong> : Absence de certaines erreurs a l’execution <br>
+  <script type="math/tex" id="MathJax-Element-39">\forall e, \forall v\ \mathrm{si}\ \vdash e \Rightarrow v\ \mathrm{alors}\ v \neq \bot</script> <br>
+  Langage sans erreurs: quasiement impossible ou sans interet pratique <br>
+  <script type="math/tex" id="MathJax-Element-40">\forall e, \forall v,\ \mathrm{si}\ \vdash \phi\left(e\right) \mathrm{et} \vdash e \Rightarrow v\ \mathrm{alors}\ v \neq \bot</script> <br>
+  <script type="math/tex" id="MathJax-Element-41">e</script> est bien typee et ne contient pas de variables non definie</p>
+</blockquote>
+
+<p><strong>Question</strong>: Comment construire <script type="math/tex" id="MathJax-Element-42">\phi\left(e\right)</script> selon l’erreur que l’on veut eliminer?</p>
+
+
+
+<h4 id="etape-1-1">Etape 1</h4>
+
+<p>Distinguer dans les regles de semantique, celles qui peuvent faire apparaitre l’erreur que l’on souhaite eliminer.</p>
+
+<blockquote>
+  <p><strong>Exemple</strong> <br>
+  Pour les variables non definies: <script type="math/tex; mode=display" id="MathJax-Element-43">\frac{x \notin \gamma}{\gamma \vdash x \Rightarrow \bot_{undef}}</script></p>
+</blockquote>
+
+<p>Il faut donc prouver dans <script type="math/tex" id="MathJax-Element-44">\phi\left(e\right)</script> que <script type="math/tex" id="MathJax-Element-45">x\notin \gamma</script> ne peut pas se produire <br>
+<script type="math/tex" id="MathJax-Element-46">\gamma \vdash e\ : OK/KO</script> <br>
+<script type="math/tex; mode=display" id="MathJax-Element-47">\frac{x \notin \gamma}{\gamma \vdash x : KO}\ \ \frac{x \in \gamma}{\gamma \vdash x : OK}</script></p>
+
+
+
+<h4 id="etape-2-1">Etape 2</h4>
+
+<p>Definir un jugement de verification <br>
+<script type="math/tex" id="MathJax-Element-48">\gamma \vdash e\ : OK/KO</script></p>
+
+<blockquote>
+  <p><strong>Exemple</strong> <br>
+  Typage <script type="math/tex" id="MathJax-Element-49">\gamma \vdash e : \delta</script> <br>
+  <script type="math/tex" id="MathJax-Element-50">\delta</script> est le type de <script type="math/tex" id="MathJax-Element-51">e</script> peut etre <script type="math/tex" id="MathJax-Element-52">OK</script> avec type ou <script type="math/tex" id="MathJax-Element-53">KO</script> si erreur de type</p>
+</blockquote>
+
+
+
+<h4 id="etape-3">Etape 3</h4>
+
+<p>Adapter les regles d’evaluation a la preuve de cette propriete. <br>
+<script type="math/tex" id="MathJax-Element-54">\rightarrow</script> Definir une execution abstraite <br>
+Il s’agit de l’interpretation abstraite (UE Certification Logiciel, Cours Verification par Analyse Statique). CF travaux de Patric Courot</p>
+
+
+
+<p><script type="math/tex; mode=display" id="MathJax-Element-55">\frac{\gamma \vdash \mathrm{par} \Rightarrow \mathrm{val}\ \mathrm{val}\in dom\left(\mathrm{op}\right)\ \mathrm{res}=\mathrm{op}\left(\mathrm{val}\right)}{\gamma \vdash \mathrm{op\ par} \Rightarrow \mathrm{res}}</script><script type="math/tex; mode=display" id="MathJax-Element-56">\frac{\gamma \vdash \mathrm{par} \Rightarrow \mathrm{val}\ \mathrm{val}\in dom\left(\mathrm{op}\right)}{\gamma \vdash \mathrm{op\ par} \Rightarrow \bot_{type}}</script></p>
+
+<p>Plus de sens : fusion des deux regles.</p>
+
+
+
+<p><script type="math/tex; mode=display" id="MathJax-Element-57">\frac{\gamma \vdash \mathrm{par} : OK}{\gamma \vdash \mathrm{op\ par} : OK}</script><script type="math/tex; mode=display" id="MathJax-Element-58">\frac{\gamma \vdash \mathrm{par} : KO}{\gamma \vdash \mathrm{op\ par} : KO}</script><script type="math/tex; mode=display" id="MathJax-Element-59">\frac{\gamma \vdash \mathrm{par} : \bot}{\gamma \vdash \mathrm{op\ par} : \bot}</script> <br>
+Toutes sont identiques donc fusionnee</p>
+
+
+
+<p><script type="math/tex; mode=display" id="MathJax-Element-60">\frac{\gamma \vdash e_1 : OK\ \gamma \vdash e_2 : OK\ \gamma \vdash e_3 : OK}{\gamma \vdash \mathrm{if}\ e_1\ \mathrm{then}\ e_2\ \mathrm{else}\ e_3 : OK}</script><script type="math/tex; mode=display" id="MathJax-Element-61">\frac{\exists i \in \left\{1,2,3\right\}\ \gamma \vdash e_i : KO}{\gamma \vdash \mathrm{if}\ e_1\ \mathrm{then}\ e_2\ \mathrm{else}\ e_3 : KO}</script></p>
+
+<p>Faisons desormais une seule regle.</p>
+
+<blockquote>
+  <p><strong>Remarque</strong> <br>
+  La partie <script type="math/tex" id="MathJax-Element-62">KO</script> peut etre representee comme le complementaire de la partie <script type="math/tex" id="MathJax-Element-63">OK</script>, il suffit donc de decrire la partie <script type="math/tex" id="MathJax-Element-64">OK</script></p>
+</blockquote>
+
+
+
+<p><script type="math/tex; mode=display" id="MathJax-Element-65">\gamma \vdash \mathrm{fun}\ x \rightarrow e \Rightarrow \left<\mathrm{fun}\ x \rightarrow e, \gamma\right></script> <br>
+On va transferer a la definition de la fonciton. Ceci va touours donner le meme resultat. <br>
+<script type="math/tex; mode=display" id="MathJax-Element-66">\frac{\gamma_{eval} \vdash e_1 \Rightarrow\left<\mathrm{fun}\ x \rightarrow e_3, \gamma_{def}\right>\ \gamma_{eval} \vdash e_2 \Rightarrow \mathrm{val}\ \gamma_{def} \cup\left\{x\rightarrow \mathrm{val}\right\} \vdash e_3 \Rightarrow \mathrm{res}}{}</script> <br>
+Peut-on le faire en une seule fois au lieu de le refaire a chaque appel de fonction.</p>
+
+<blockquote>
+  <p><em>Definition de fonction</em> <br>
+  <script type="math/tex; mode=display" id="MathJax-Element-67">\frac{\gamma \cup \left\{x\right\} \vdash e : OK}{\gamma \vdash \mathrm{fun}\ x\rightarrow e : OK}</script> <br>
+  <em>Appel de fonction</em> <br>
+  <script type="math/tex; mode=display" id="MathJax-Element-68">\frac{\gamma \vdash e_1 : OK\ \gamma \vdash e_2 : OK}{\gamma \vdash \left(e_1,e_2\right) : OK}</script></p>
+</blockquote>
+
+
+
+<p><script type="math/tex; mode=display" id="MathJax-Element-69">\frac{\gamma \cup \left\{f \vdash \left<\mathrm{let\ rec}\ f=e_1\ \mathrm{in}\ e_2, \gamma\right>\right\} \vdash e_2 \Rightarrow v}{\gamma \vdash \mathrm{let\ rec}\ f=e_1\ \mathrm{in}\ e_2 \Rightarrow v}</script><script type="math/tex; mode=display" id="MathJax-Element-70">\frac{f \in \gamma_{eval}\ \gamma_eval\left(f\right) = \left<e,\gamma_{def}\right>\ \gamma_{def} \vdash e \Rightarrow v}{\gamma_{eval} \vdash f \Rightarrow v}</script><script type="math/tex; mode=display" id="MathJax-Element-71">\frac{\gamma \cup \left\{f\right\} \vdash e_1 : OK\ \gamma \cup \left\{f\right\}\vdash e_2 : OK}{\gamma \vdash \mathrm{let\ rec}\ f=e_1\ \mathrm{in}\ e_2 : OK}</script></p>
+
+<p>En Caml:</p>
+
+
+
+<pre class="prettyprint"><code class="language-ocaml hljs "><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> def_of_expr expr env = 
+    <span class="hljs-keyword">match</span> expr <span class="hljs-keyword">with</span>
+        | IntegerNode(-) -&gt;  <span class="hljs-keyword">true</span>
+        | UnaryNode(-, par) -&gt; (def_of_expr par)</code></pre>
+
+
+
+<h3 id="cas-du-typage">Cas du typage</h3>
+
+<p>Un type est un regroupement de valeurs compatibles vis a vis des erreurs de typage <script type="math/tex" id="MathJax-Element-72">\bot_{type}</script>.</p>
+
+
+
+<h4 id="etape-2-2">Etape 2</h4>
+
+<p>Reperer les regles qui font apparaitre les erreurs de type <br>
+<script type="math/tex; mode=display" id="MathJax-Element-73">\frac{\gamma \vdash \mathrm{par} \Rightarrow \mathrm{val}\ \mathrm{val}\notin dom\left(\mathrm{op}\right)}{\gamma \vdash \mathrm{op\ par} \Rightarrow \bot_{type}}</script><script type="math/tex; mode=display" id="MathJax-Element-74">\frac{\gamma \vdash e_1 \mathrm{val}\ \mathrm{val} \notin \left\{true, false\right\}}{\gamma \vdash \mathrm{if}\ e_1\ \mathrm{then}\ e_2\ \mathrm{else}\ e_3 \Rightarrow \bot_{type}}</script></p>
+
+<blockquote>
+  <p><strong>Dans ce cas</strong> <br>
+  <script type="math/tex" id="MathJax-Element-75">\delta ::=\mathrm{bool\ |\ int\ |}\ \delta\rightarrow \delta</script> <br>
+  <strong>Valeur associees</strong> <br>
+  <script type="math/tex" id="MathJax-Element-76">\left[\mathrm{bool}\right] = \left\{true, false, \bot_{runtime}\right\}</script> <br>
+  <script type="math/tex" id="MathJax-Element-77">\left[\mathrm{int}\right] = \mathbb{Z} \cup \left\{\bot_{runtime}\right\}</script></p>
+</blockquote>
+
+
+
+<h4 id="etape-2-3">Etape 2</h4>
+
+<p>Jugement du typage <script type="math/tex" id="MathJax-Element-78">\sigma \vdash expr : \delta</script> <br>
+<script type="math/tex" id="MathJax-Element-79">\left\{x_i, \delta_i\right\}</script> l’environnement associe un type a chaque variable</p>
+
+
+
+<h4 id="etape-3-1">Etape 3</h4>
+
+<p>Construire les regles de typage a partir des regles d’evaluation</p>
+
+
+
+<h2 id="semantique-attribuee-grammaire-attribuee">Semantique attribuee, Grammaire attribuee</h2>
+
+<p><strong>Objectif</strong>: Methode de conception d’outils semantiques et formalisme de description de ces outils pour les generer automatiquement</p>
+
+
+
+<div class="flow-chart"><svg height="792.1500034332275" version="1.1" width="219.5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; top: -0.583008px;"><desc>Created with Raphaël 2.1.2</desc><defs><marker id="raphael-marker-endblock33-obj48" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj49" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj50" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj51" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj52" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj53" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj54" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj55" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker></defs><rect x="0" y="0" width="131.8000030517578" height="39.35000038146973" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="en" transform="matrix(1,0,0,1,44.85,4)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="ent" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,44.85,4)"><tspan dy="5.375">Flux de caracteres</tspan></text><rect x="0" y="0" width="121.05000305175781" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="lex" transform="matrix(1,0,0,1,50.225,97.35)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="lext" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,50.225,97.35)"><tspan dy="5.375">Analyse Lexicale</tspan></text><rect x="0" y="0" width="159.75" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="syn" transform="matrix(1,0,0,1,30.875,190.7)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="synt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,30.875,190.7)"><tspan dy="5.375">Flux d'Unites Lexicales</tspan></text><rect x="0" y="0" width="140.4000015258789" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="sem" transform="matrix(1,0,0,1,40.55,284.05)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="semt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,40.55,284.05)"><tspan dy="5.375">Analyse Syntaxique</tspan></text><rect x="0" y="0" width="126.06666564941406" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="as" transform="matrix(1,0,0,1,47.7167,377.4)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="ast" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,47.7167,377.4)"><tspan dy="5.375">Arbre Syntaxique</tspan></text><rect x="0" y="0" width="213.5" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="caa" transform="matrix(1,0,0,1,4,470.75)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="caat" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,4,470.75)"><tspan dy="5.375">Construction de l'Arbre Abstrait</tspan></text><rect x="0" y="0" width="146.8499984741211" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="ast" transform="matrix(1,0,0,1,37.325,564.1)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="astt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,37.325,564.1)"><tspan dy="5.375">Abstract Syntax Tree</tspan></text><rect x="0" y="0" width="65.86666488647461" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="typ" transform="matrix(1,0,0,1,77.8167,657.45)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="typt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,77.8167,657.45)"><tspan dy="5.375">Typage</tspan></text><rect x="0" y="0" width="107.43333435058594" height="39.35000038146973" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="so" transform="matrix(1,0,0,1,57.0333,750.8)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="sot" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,57.0333,750.8)"><tspan dy="5.375">Interpretation</tspan><tspan dy="18" x="10"></tspan></text><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M110.75,43.35000038146973C110.75,43.35000038146973,110.75,83.00410032272339,110.75,94.35043946607038" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj48)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M110.75,136.70000076293945C110.75,136.70000076293945,110.75,176.35410070419312,110.75,187.7004398475401" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj49)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M110.75,230.05000114440918C110.75,230.05000114440918,110.75,269.70410108566284,110.75,281.05044022900984" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj50)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M110.75,323.4000015258789C110.75,323.4000015258789,110.75,363.05410146713257,110.75,374.40044061047956" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj51)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M110.75,416.75000190734863C110.75,416.75000190734863,110.75,456.4041018486023,110.75,467.7504409919493" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj52)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M110.75,510.10000228881836C110.75,510.10000228881836,110.75,549.754102230072,110.75,561.100441373419" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj53)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M110.75,603.4500026702881C110.75,603.4500026702881,110.75,643.1041026115417,110.75,654.4504417548887" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj54)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M110.75,696.8000030517578C110.75,696.8000030517578,110.75,736.4541029930115,110.75,747.8004421363585" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj55)" font-family="sans-serif" font-weight="normal"></path></svg></div>
+
+<p>La grammaire ainsi produite n’est pas <script type="math/tex" id="MathJax-Element-80">LL(1)</script>. <br>
+Il faudrait donc l’adapter de la maniere suivante:</p>
+
+<table>
+<thead>
+<tr>
+  <th><script type="math/tex" id="MathJax-Element-81">E \rightarrow T \quad S_T</script></th>
+  <th><script type="math/tex" id="MathJax-Element-82">T \rightarrow F \quad S_F</script></th>
+</tr>
+</thead>
+<tbody><tr>
+  <td><script type="math/tex" id="MathJax-Element-83">T \rightarrow + T \quad S_T</script></td>
+  <td><script type="math/tex" id="MathJax-Element-84">S_F \rightarrow x F \quad S_F</script></td>
+</tr>
+<tr>
+  <td><script type="math/tex" id="MathJax-Element-85">T \rightarrow \Lambda</script></td>
+  <td><script type="math/tex" id="MathJax-Element-86">S_F \rightarrow \Lambda</script></td>
+</tr>
+</tbody></table>
+
+
+<p>Avec une grammaire <script type="math/tex" id="MathJax-Element-87">LL(1)</script>, l’arbre syntaxique est difficile a exploiter directement. Il est necessaire de construire l’arbre abstrait avant d’ecrire les etapes suivantes de semantique.</p>
+
+<blockquote>
+  <p><strong>Bilan</strong> <br>
+  L’arbre syntaxique est produie de l’arbre abstrit, les etapes suivantes manipulent larbre syntaxique, sinon il faudrait une etape de construction de l’arbre abstrait.</p>
+</blockquote>
+
+<p>Des lors, pour obtenir la semantique, on procede ainsi:</p>
+
+
+
+<div class="flow-chart"><svg height="168.21250104904175" version="1.1" width="149.26667022705078" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; top: -0.700195px;"><desc>Created with Raphaël 2.1.2</desc><defs><marker id="raphael-marker-endblock33-obj60" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker></defs><rect x="0" y="0" width="143.26667022705078" height="39.35000038146973" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="an" transform="matrix(1,0,0,1,4,13.8375)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="ant" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,4,13.8375)"><tspan dy="5.375">Analyse de la Forme</tspan></text><path style="font-family: sans-serif; font-weight: normal;" fill="#ffffff" stroke="#000000" d="M23.881250381469727,14.756250143051147L0,29.512500286102295L47.76250076293945,59.02500057220459L95.5250015258789,29.512500286102295L47.76250076293945,0L0,29.512500286102295" stroke-width="2" font-family="sans-serif" font-weight="normal" id="ar" class="flowchart" transform="matrix(1,0,0,1,27.8708,107.1875)"></path><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="28.881250381469727" y="29.512500286102295" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="art" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,27.8708,107.1875)"><tspan dy="5.374998569488525">Arbre</tspan></text><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M75.63333511352539,53.18750047683716C75.63333511352539,53.18750047683716,75.63333511352539,92.84160041809082,75.63333511352539,104.18793956143782" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj60)" font-family="sans-serif" font-weight="normal"></path></svg></div>
+
+<p>La definition d’une semantique s’appuie donc sur une structure d’arbre (plus generalement de <a href="https://fr.wikipedia.org/wiki/Arbre_enracin%C3%A9"><em>graphe enracine</em></a>)</p>
+
+<blockquote>
+  <p><strong>Definition</strong>: Graphe enracinee <br>
+  Il existe un noeud du graphe a partir duquel on peut atteindre tous les autres noeuds <br>
+  Le graphe est connexe, et donc il existe un arbre de recouverment dont la racine est le noeud considere.</p>
+</blockquote>
+
+<p>La semantique peut etre definie comme une caracteristique, une propriete de cet arbre. En particulier, de la racine de l’arbre.</p>
+
+<blockquote>
+  <p><strong>Exemple</strong></p>
+  
+  <table>
+<thead>
+<tr>
+  <th align="center">Semantique souhaitee</th>
+  <th align="center">Arbre</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td align="center">type</td>
+  <td align="center">expression</td>
+</tr>
+<tr>
+  <td align="center">valeur</td>
+  <td align="center">expression</td>
+</tr>
+</tbody></table>
+
+</blockquote>
+
+<p>On cherche alors</p>
+
+<blockquote>
+  <p><strong>Definition</strong>: Attribut semantique <br>
+  Information semantiques associees aux noeuds de l’arbre</p>
+</blockquote>
+
+
+
+<pre class="prettyprint"><code class="language-ocaml hljs ">+ <span class="hljs-class"><span class="hljs-keyword">type</span> =</span> <span class="hljs-built_in">int</span>   valeur = <span class="hljs-number">7</span> = <span class="hljs-number">1</span>+<span class="hljs-number">6</span>
+└─── <span class="hljs-number">1</span> <span class="hljs-class"><span class="hljs-keyword">type</span> =</span> <span class="hljs-built_in">int</span>   valeur = <span class="hljs-number">1</span>
+└─── x <span class="hljs-class"><span class="hljs-keyword">type</span> =</span> <span class="hljs-built_in">int</span>   valeur = <span class="hljs-number">6</span> = <span class="hljs-number">2</span>x3
+│   └─── <span class="hljs-number">2</span> <span class="hljs-class"><span class="hljs-keyword">type</span> =</span> <span class="hljs-built_in">int</span>   valeur = <span class="hljs-number">2</span>
+│   └─── <span class="hljs-number">3</span> <span class="hljs-class"><span class="hljs-keyword">type</span> =</span> <span class="hljs-built_in">int</span>   valeur = <span class="hljs-number">3</span></code></pre>
+
+<p>Il s’agit d’un arbre decore/attribue ce qui correspond moralement a un arbre syntaxique/abstrait avec la valeurs des attributs semantiques.</p>
+
+
+
+<h3 id="conception-dune-semantique">Conception d’une semantique</h3>
+
+
+
+<h4 id="etape-1-2">Etape 1</h4>
+
+<ol>
+<li>Prendre exemples sous la forme d’arbres.</li>
+<li>Decorer ces exemples.</li>
+</ol>
+
+
+
+<h4 id="etape-2-4">Etape 2</h4>
+
+<ol>
+<li>Identifier pour chaque noeud les relations entre ses attributs semantiques et les attribus semantiques de ses fils et de son pere. <br>
+<script type="math/tex" id="MathJax-Element-88">\Rightarrow</script> dependance entre les valeurs des attributs</li>
+<li>Identifier les regles de calculs</li>
+</ol>
+
+
+
+<p><script type="math/tex; mode=display" id="MathJax-Element-89">\frac{\gamma \vdash e_1 \Rightarrow v_1\ \gamma \vdash e_2 \Rightarrow v_2}{\gamma \vdash e_1+e_2 \Rightarrow v_1 \Rightarrow v_1+v_2}</script></p>
+
+<p>Noeud addition:</p>
+
+
+
+<pre class="prettyprint"><code class="language-ocaml hljs "><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">ast</span> =</span>
+    BinaryExpression <span class="hljs-keyword">of</span> ast*binary*ast
+<span class="hljs-keyword">match</span> exp <span class="hljs-keyword">with</span>
+    | BinaryExpression(e1, Addition, e2) -&gt;
+        <span class="hljs-keyword">let</span> v1 = (value_of_expr e1) <span class="hljs-keyword">in</span>
+        <span class="hljs-keyword">let</span> v2 = (value_of_expr e2) <span class="hljs-keyword">in</span></code></pre>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">class Addition {
+    <span class="hljs-javadoc">/**
+     * gauche: correspond a e1
+     * droite: correspond a e2
+     */</span>
+    <span class="hljs-keyword">private</span> Expression gauche, droite;
+
+    <span class="hljs-javadoc">/**
+     * gauche.value(): correspond a v1
+     * droite.value(): correspond a v2
+     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">value</span>() {
+        <span class="hljs-keyword">return</span> gauche.value() + droite.value();
+    }
+}</code></pre>
+
+<p>Choix d’une forme plus abstraite que les programmes : <strong>equations semantiques</strong> associees aux noeuds de l’arbre.</p>
+
+<p>Pour cela, nous utiliserons la grammaire la plus simple possible des expressions: <script type="math/tex" id="MathJax-Element-90">E \rightarrow E_1 + E_2</script> (<script type="math/tex" id="MathJax-Element-91">E_1</script>, <script type="math/tex" id="MathJax-Element-92">E_2</script> fils de <script type="math/tex" id="MathJax-Element-93">E</script>) <br>
+On a donc la relation suivantes entre les attributs semantiques de <script type="math/tex" id="MathJax-Element-94">E</script>, <script type="math/tex" id="MathJax-Element-95">E_1</script>, <script type="math/tex" id="MathJax-Element-96">E_2</script>: <script type="math/tex" id="MathJax-Element-97">E\cdot\mathrm{valeur} \rightarrow E_1\cdot\mathrm{valeur} + E_2\cdot\mathrm{valeur}</script></p>
+
+
+
+<h4 id="etape-3-2">Etape 3</h4>
+
+<ol>
+<li>Pour chaque noeud de l’arbre, ecrire une regle de production qui fait apparaitre les fils du noeud telle que l’arbre abstrait et l’arbre syntaxique soient isomorphes structurellement.</li>
+<li>Ecrire les equations semantiques liant les valeurs des attributs semantiques du noeud et de ses fils.</li>
+</ol>
+
+<blockquote>
+  <p><strong>Exemple</strong></p>
+  
+  <ul>
+  <li><script type="math/tex" id="MathJax-Element-98">E \rightarrow E_1 \times E_2</script> <br>
+  <script type="math/tex" id="MathJax-Element-99">E\cdot\mathrm{valeur} \rightarrow E_1\cdot\mathrm{valeur} \times E_2\cdot\mathrm{valeur}</script></li>
+  <li><script type="math/tex" id="MathJax-Element-100">E \rightarrow - E_1</script> <br>
+  <script type="math/tex" id="MathJax-Element-101">E\cdot\mathrm{valeur} \rightarrow - E_1\cdot\mathrm{valeur}</script></li>
+  <li><script type="math/tex" id="MathJax-Element-102">E \rightarrow \mathrm{constante}</script> Unite lexicale correspondant a une chaine de caractere. Attribut predefini: texte <br>
+  <script type="math/tex" id="MathJax-Element-103">E\cdot\mathrm{valeur} \rightarrow \mathrm{conversionTexteEntier}\left( \mathrm{constante} \cdot \mathrm{texte}\right)</script></li>
+  </ul>
+</blockquote>
+
+<p>On arrive ainsi a la definition suivante</p>
+
+<blockquote>
+  <p><strong>Definition</strong>: Grammaire attribuee <br>
+  <script type="math/tex" id="MathJax-Element-104">\left( A, V, S, \left\{ X_i \rightarrow \alpha_i \right\} \right)</script> <br>
+  <script type="math/tex" id="MathJax-Element-105">A</script>: alphabet terminaux avec attribut <script type="math/tex" id="MathJax-Element-106">\mathrm{texte}</script> <br>
+  <script type="math/tex" id="MathJax-Element-107">V</script>: non terminaux <br>
+  <script type="math/tex" id="MathJax-Element-108">S \in V</script>: axiome <br>
+  <script type="math/tex" id="MathJax-Element-109">X_i \rightarrow \alpha_i</script>: regles de production</p>
+</blockquote>
+
+<p>Chaque non terminal possede des attributs semantiques. <br>
+Chaque regle de production possede des equations semantiques.</p>
+
+<blockquote>
+  <p><strong>Remarque</strong> <br>
+  Touts les generateurs d’analyseurs syntaxiques exploitent des grammaires attribuees. Les equations sont ecrites dans le langage genere.</p>
+</blockquote>
+
+<p><strong>Probleme</strong>: La grammaire sera contrainte par les outils d’analyse syntaxique (<script type="math/tex" id="MathJax-Element-110">LR</script> opur <em>Yacc</em>, <script type="math/tex" id="MathJax-Element-111">LL</script> pour <em>ANTLR</em>).</p>
+
+<table>
+<thead>
+<tr>
+  <th align="center">Avec ambiguite</th>
+  <th align="center">Sans ambiguite</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td align="center"><script type="math/tex; mode=display" id="MathJax-Element-112">E \rightarrow E_1 + E_2</script><script type="math/tex; mode=display" id="MathJax-Element-113">E\cdot\mathrm{valeur} \rightarrow E_1\cdot\mathrm{valeur} + E_2\cdot\mathrm{valeur}</script></td>
+  <td align="center"><script type="math/tex; mode=display" id="MathJax-Element-114">E \rightarrow E_1 + T</script><script type="math/tex; mode=display" id="MathJax-Element-115">E\cdot\mathrm{valeur} \rightarrow E_1\cdot\mathrm{valeur} + T\cdot\mathrm{valeur}</script></td>
+</tr>
+</tbody></table>
+
+
+<p>Ensuite, li faut encore passer a une version <script type="math/tex" id="MathJax-Element-116">LL(1)</script>. <br>
+<script type="math/tex; mode=display" id="MathJax-Element-117">E \rightarrow + T \quad S_T</script><script type="math/tex; mode=display" id="MathJax-Element-118">S_T\cdot\mathrm{valeur\_heritee} \rightarrow T\cdot\mathrm{valeur}</script><script type="math/tex; mode=display" id="MathJax-Element-119">S_T \rightarrow + T \quad S_{T_1}</script><script type="math/tex; mode=display" id="MathJax-Element-120">S_{T_1}\cdot\mathrm{valeur\_heritee} \rightarrow S_T\cdot\mathrm{valeur\_heritee} + T\cdot\mathrm{valeur}</script><script type="math/tex; mode=display" id="MathJax-Element-121">S_T \rightarrow \Lambda</script><script type="math/tex; mode=display" id="MathJax-Element-122">S_T\cdot\mathrm{valeur} = S_T\cdot\mathrm{valeur\_heritee}</script> <br>
+Cette version est clairement trop complexe. <br>
+La <strong>solution</strong> est de faire une grammaire attribuee pour construire l’arbre abstrait puis exploiter l’arbre abstrait ensuite.</p>
+
+<p>Grammaire S-attribuee. On calcule de bas en haut selon un processus simple. Les attributs sont dit synthetises.</p>
+
+
+
+<pre class="prettyprint"><code class="language-ocaml hljs ">E valeur = <span class="hljs-number">7</span> = <span class="hljs-number">1</span>+<span class="hljs-number">6</span>
+└─── E valeur = <span class="hljs-number">1</span>
+│   └─── T valeur = <span class="hljs-number">1</span>
+│   │   └─── F valeur = <span class="hljs-number">1</span>
+└─── +
+└─── T valeur = <span class="hljs-number">6</span> = <span class="hljs-number">2</span>x3
+│   └─── T valeur = <span class="hljs-number">2</span>
+│   │   └─── F valeur = <span class="hljs-number">2</span>
+│   └─── x
+│   └─── F valeur = <span class="hljs-number">3</span></code></pre>
+
+<blockquote>
+  <p><strong>Definition</strong>  <br>
+  2 natures pour des attributs semantiques</p>
+  
+  <ul>
+  <li>herites: calcul de haut en bas: parents <script type="math/tex" id="MathJax-Element-123">\rightarrow</script> fils</li>
+  <li>synthetises: calcul de bas en haut: fils <script type="math/tex" id="MathJax-Element-124">\rightarrow</script> parents</li>
+  </ul>
+  
+  <p>On declare ainsi l’ecriture de la grammaire. Cela impose des contraintes sur la forme des equations. <br>
+  La valeur d’un attribut heritee est calculee pour les noeuds fils. <br>
+  <script type="math/tex" id="MathJax-Element-125">E \rightarrow T \quad S_T</script> <br>
+  <script type="math/tex" id="MathJax-Element-126">S_T \cdot \mathrm{valeur\_heritee} = T \cdot \mathrm{valeur}</script> partie droite: fils de <script type="math/tex" id="MathJax-Element-127">E</script> <br>
+  <script type="math/tex" id="MathJax-Element-128">E \cdot \mathrm{valeur} = S_T \cdot \mathrm{valeur}</script> partie gauche: noeud lui-meme <br>
+  La valeur d’un attribut est calculee pour le noeud lui meme.</p>
+</blockquote>
+
+<p>Le outils de la familles <script type="math/tex" id="MathJax-Element-129">LR</script> (Yacc et Compagnie) ne peuvent traiter que des grammaire S-attribuees (attributs synthetises). Les outils de la famille <script type="math/tex" id="MathJax-Element-130">LL</script> peuvent traiter des grammaires L-attribuees (attributs synthetises et herites).</p>
+
+<blockquote>
+  <p>Attribut semantique: valeur pour <script type="math/tex" id="MathJax-Element-131">E</script> <br>
+  <script type="math/tex" id="MathJax-Element-132">E \rightarrow \mathrm{ident}</script> <br>
+  Si <script type="math/tex" id="MathJax-Element-133">\mathrm{ident}\cdot{texte} \in \gamma(\mathrm{ident}\cdot\mathrm{texte})</script> <br>
+  alors <script type="math/tex" id="MathJax-Element-134">E\cdot\mathrm{valeur}=\gamma(\mathrm{ident}\cdot\mathrm{texte})</script> <br>
+  alors <script type="math/tex" id="MathJax-Element-135">E\cdot\mathrm{valeur}=\mathrm{Erreur}(\mathrm{Ident Not Defined})</script> <br>
+  Il s’agit d’un attribut semantique : environnement pour E</p>
+</blockquote>
+
+
+
+<h3 id="avantage-grammaire-attribuee">Avantage Grammaire attribuee</h3>
+
+<p>Notation generale pour specifier/ implanter des semantiques. <br>
+<script type="math/tex" id="MathJax-Element-136">E \rightarrow E_1 + E_2</script> <br>
+1. <script type="math/tex" id="MathJax-Element-137">E_1 \cdot \mathrm{env} = E \cdot \mathrm{env}</script> <em>avant <script type="math/tex" id="MathJax-Element-138">E_1</script> car initialise attribut heritee <script type="math/tex" id="MathJax-Element-139">\mathrm{env}</script></em> <br>
+2. <script type="math/tex" id="MathJax-Element-140">E_2 \cdot \mathrm{env} = E \cdot \mathrm{env}</script> <em>avant <script type="math/tex" id="MathJax-Element-141">E_2</script> car initialise attribut heritee <script type="math/tex" id="MathJax-Element-142">\mathrm{env}</script></em> <br>
+3. <script type="math/tex" id="MathJax-Element-143">E \cdot \mathrm{val} = E_1 \cdot \mathrm{val} + E_2 \cdot \mathrm{val}</script> <em>apres <script type="math/tex" id="MathJax-Element-144">E_1</script> car utilise  <script type="math/tex" id="MathJax-Element-145">E_1 \cdot \mathrm{val}</script></em> et <em>apres <script type="math/tex" id="MathJax-Element-146">E_2</script> car utilise  <script type="math/tex" id="MathJax-Element-147">E_2 \cdot \mathrm{val}</script></em></p>
+
+<blockquote>
+  <p><strong>Definition</strong>: Schema de Traduction sequencement des equations <br>
+  Ordre dans lequel il faut executer les equations semantiques</p>
+</blockquote>
+
+
+
+<h3 id="methode-pour-definir-semantique-attribuee">Methode pour definir semantique attribuee</h3>
+
+
+
+<h4 id="etape-1-3">Etape 1</h4>
+
+<p>Identifier les informations disponibles pour calculer semantique</p>
+
+<ul>
+<li>attribut semantiques des terminaux (feuille arbre) (synthetises)</li>
+<li>attributs semantqieus herites par la racine de l’arbre <br>
+<script type="math/tex" id="MathJax-Element-148">S \rightarrow E</script> attribut herite pour <script type="math/tex" id="MathJax-Element-149">S</script> environnement <br>
+<script type="math/tex" id="MathJax-Element-150">E\rightarrow \mathrm{constante}</script> attribut synthetise pour <script type="math/tex" id="MathJax-Element-151">\mathrm{constante}</script> texte</li>
+</ul>
+
+<p>Identifier les informations calculees par <br>
++ semantique <br>
++ attributs synthetises pour racine</p>
+
+
+
+<h4 id="etape-2-5">Etape 2</h4>
+
+<p>Identifier les intermediaires de calcul <br>
+attributs de chaque noeud de l’arbre <br>
++ attribut herite pour <script type="math/tex" id="MathJax-Element-152">E</script>: environnement <br>
++ attribut synthetise pour <script type="math/tex" id="MathJax-Element-153">E</script>: valeur</p>
+
+<p>Pour cela, on utilise des exemples simples mais representatifs. Ils ont pour but d’illustrer les differents noeuds possibles dans l’arbre: au moins appliquer chaque regle de production</p>
+
+<blockquote>
+  <p><strong>Exemple</strong>: <script type="math/tex" id="MathJax-Element-154">x+2\times(3)</script></p>
+</blockquote>
+
+
+
+<h4 id="etape-3-3">Etape 3</h4>
+
+<p>Ecrire les equations semantiques <br>
+<script type="math/tex" id="MathJax-Element-155">E \rightarrow E_1 \times E_2</script> <br>
+<script type="math/tex" id="MathJax-Element-156">E \cdot \mathrm{val} = E_1 \cdot \mathrm{val} E_2 \cdot \mathrm{val}</script></p>
+
+
+
+<h4 id="etape-4">Etape 4</h4>
+
+<p>Annoter les regles de production avec l’ordre de calcul des equations <br>
+Ordre de calcul des equations</p>
+
+
+
+<h4 id="etape-5">Etape 5</h4>
+
+<p>Implanter la semantique attribuee avec un outil</p>
+
+<ul>
+<li>Si travail sur arbre abstrait une fonciton de parcours de l’arbre abstrait</li>
+</ul>
+
+
+
+<pre class="prettyprint"><code class="language-ocaml hljs "><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> value_of_expr expr env =
+    <span class="hljs-keyword">match</span> expr <span class="hljs-keyword">with</span>
+    | BinaryNode (left, op, right) -&gt;
+    ... <span class="hljs-comment">(* equations semantiques *)</span></code></pre>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">class Addition extends {
+
+    <span class="hljs-javadoc">/**
+     * equations semantiques
+     */</span>
+    <span class="hljs-keyword">int</span> value(Environnement env) {
+        <span class="hljs-keyword">return</span> left.value() + right.value();
+    }
+}</code></pre>
+
+<ul>
+<li>si travail sur arbre syntacique: outil generateur d’analyseur syntaxique</li>
+<li>famille <script type="math/tex" id="MathJax-Element-448">LR</script> (Yacc, Lison, OcamlYacc, …) <em>uniquement des attributs synthetises</em></li>
+</ul>
+
+<blockquote>
+  <p><strong>en Yacc (actions code C)</strong></p>
+  
+  <pre class="prettyprint"><code class="language-yacc hljs tex"><span class="hljs-comment">%%</span>
+E : E PLUS E <span class="hljs-command">\{</span><span class="hljs-command">\$</span><span class="hljs-command">\$</span> = <span class="hljs-command">\$</span>1 + <span class="hljs-command">\$</span>3;<span class="hljs-special">}</span>
+| INTEGER  <span class="hljs-special">{</span><span class="hljs-command">\$</span><span class="hljs-command">\$</span> = atoi(<span class="hljs-command">\$</span>1);<span class="hljs-special">}</span></code></pre>
+</blockquote>
+
+<p></p><ul> <br>
+<li>famille <script type="math/tex" id="MathJax-Element-449">LL</script> (ANTLR, EGG) <br></li></ul><p></p>
+
+<blockquote>
+  <p>Grammaire <script type="math/tex" id="MathJax-Element-450">L</script>-attribuee: calcul des actions de gauche a droite <br>
+  calcul des actions de gauche a droite <br>
+  attributs herite et sunthetises <br>
+  <strong>MAIS</strong> grammaire <script type="math/tex" id="MathJax-Element-451">LL</script> <br>
+   <br>
+   + pas de recursivite a gauche <br>
+   factorisationa gauche <br>
+   <script type="math/tex" id="MathJax-Element-452">E \rightarrow T \ S_T</script> <br>
+   <script type="math/tex" id="MathJax-Element-453">S_T \cdot \mathrm{valeur} = T \cdot \mathrm{valeur}</script> <br>
+   <script type="math/tex" id="MathJax-Element-454">E \cdot \mathrm{valeur} = S_T \cdot \mathrm{valeur}</script> <br>
+   <script type="math/tex" id="MathJax-Element-455">T \rightarrow F \ S_F</script> <br>
+   <script type="math/tex" id="MathJax-Element-456">S_F \cdot \mathrm{valeur\_heritee} = F \cdot \mathrm{valeur}</script> <br>
+   <script type="math/tex" id="MathJax-Element-457">T \cdot \mathrm{valeur} = S_F \cdot \mathrm{valeur}</script> <br>
+   <script type="math/tex" id="MathJax-Element-458">S_T \rightarrow + T \ S_{T_1}</script> <br>
+   <script type="math/tex" id="MathJax-Element-459">S_{T_1} \cdot \mathrm{valeur\_heritee} = S_T \cdot \mathrm{valeur\_heritee} + T \cdot \mathrm{valeur}</script> <br>
+   <script type="math/tex" id="MathJax-Element-460">S_T \cdot \mathrm{valeur} = S_{T_1} \cdot \mathrm{valeur}</script> <br>
+   <script type="math/tex" id="MathJax-Element-461">S_T \rightarrow \Omega</script> <br>
+   <script type="math/tex" id="MathJax-Element-462">S_T \cdot \mathrm{valeur} = S_T \cdot \mathrm{valeur\_heritee}</script>
+  </p>
+</blockquote>
+
+
+<h4 id="etat-de-lart-actuel">Etat de l’art actuel</h4>
+
+Generateur analyseur syntaxique avec grammaire attribuee pour construire un arbre abstrait avec l’outil *EGG*
+Puis exploitation de l’arbre abstrait en *Java*
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="arbres-abstraits">Arbres abstraits</h3>
+
+
+
+<blockquote>
+  <p><strong>Objectif</strong>: modele de donnes des informations necessaires pour implanter la semantique</p>
+  
+  <blockquote>
+    <p><strong>Remarque</strong>: dans le cas d’un generateur de code, tout est necessaire</p>
+  </blockquote>
+  
+  <p><script type="math/tex" id="MathJax-Element-361">\mathrm{ast}</script>: attributs synthetises pour <script type="math/tex" id="MathJax-Element-362">E</script> et <script type="math/tex" id="MathJax-Element-363">S</script> <br>
+  <script type="math/tex" id="MathJax-Element-364">S \rightarrow E</script> <script type="math/tex" id="MathJax-Element-365">S \cdot \mathrm{ast} \rightarrow E \cdot \mathrm{ast}</script> <br>
+  <script type="math/tex" id="MathJax-Element-366">E \rightarrow E_1 + E_2</script> <script type="math/tex" id="MathJax-Element-367"> E \cdot \mathrm{ast} = E  \cdot \mathrm{factory}\cdot \mathrm{createFactoryExpression}\left(E_1 \cdot \mathrm{ast}, addition, E_2  \cdot \mathrm{ast}\right)</script> <br>
+  <script type="math/tex" id="MathJax-Element-368">E \rightarrow \left( E_1 \right)</script> <script type="math/tex" id="MathJax-Element-369">E \cdot \mathrm{ast} \rightarrow \left( E_1  \cdot \mathrm{ast}\right)</script> <br>
+  <script type="math/tex" id="MathJax-Element-370">E \rightarrow \mathrm{constante}</script> <script type="math/tex" id="MathJax-Element-371"> E \cdot \mathrm{ast} = E  \cdot \mathrm{factory}\cdot \mathrm{createIntegerValue}\left(\mathrm{cst}: \mathrm{texte}\right)</script> <br>
+   <script type="math/tex" id="MathJax-Element-372">\mathrm{factory}</script>: attribut herite pour <script type="math/tex" id="MathJax-Element-373">E</script> et <script type="math/tex" id="MathJax-Element-374">S</script> <br>
+   <em>EGG</em> permet l’heritage automatiqe des attributs herites qui ne sont pas modifies explicitement</p>
+</blockquote>
+
+Arbre abstrait contenant juste les informations necesssaires pour la semantique
+
+
+
+<blockquote>
+  <p><strong>Exemple</strong>: verification definition des identificateurs</p>
+</blockquote>
+
+Information necessaire: liste des identificateurs definis et utilises
+
+
+
+<blockquote>
+  <p><strong>Exemple</strong></p>
+  
+  <pre class="prettyprint"><code class="language-ocaml hljs ">{ <span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>;
+print i+<span class="hljs-number">1</span>;
+}</code></pre>
+</blockquote>
+
+Pour eviter de rechercher plusieurs fois la declaration d’une variation a chacune de ses utilisations, il serait utile de construire un lien entre utilisation et declaration.
+On partage ainsi certaine parties de l’arbre abstrait complet.
+Le graphe abstrait est constitue de l’abre abstrait et des liens entre declarations et utilisations.
+
+Lors de la construction de ce graphe abstrait (que l’on nomme toujours arbre) pour chaque utilisation d’une variable, il faudra retrouver la declaration associee et construire le lien.
+Pour eviter de parcourir a chaque recherche la structure d’ordre, nous utilisaons une table de symboles qui collecte les definitions.
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="table-de-symboles-espace-de-noms">Table de symboles - Espace de noms</h3>
+
+
+
+<blockquote>
+  <p><strong>Definition</strong>: Table des symboles <br>
+  Structure de donnees qui associe a chaque identifiacteur sa definition</p>
+</blockquote>
+
+Il peut y avoir differentes categories d’identificateurs (paquetage, interface, classe, …)
+
+
+<blockquote>
+  <p><strong>Remarque</strong> <br>
+  Un identificateur peuvent avoir des regles d’utilisations differentes. <br>
+  <em>Peut-on utiliser un identificateur pour des definitions de natures differentes?</em></p>
+  
+  <blockquote>
+    <p><strong>Exemples</strong></p>
+    
+    <ul>
+    <li>Utiliser un meme identificateur pour une interface et une classe? <br>
+    En <code>Java</code> non sauf si ils sont dans des paquetages differents.</li>
+    <li>utiliser un meme identificateur pour un paquetage et un attribut? <br>
+    En <code>Java</code> on ne sait pas</li>
+    <li>utiliser un meme identificateur pour un attribut, un parametre, une variable locale? <br>
+    En <code>Java</code> oui</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+Les regles d’utilisation des identifications (de reutilisation souvent), de visibilite (lorsque nous utilisons un identificateur, quelle est la definition referencee) font partie de la semantique statique du langage.
+
+
+
+<blockquote>
+  <p><strong>Exemple</strong> <br>
+  Une definition de classe Java est visible dans son paquetage de definition et dans les elements qui importent le paquetage ou cette classe.</p>
+</blockquote>
+
+Un **espace de noms** est donc un groupe d’identificateurs ayant une meme portee, une meme visibilite.
+
+
+
+<blockquote>
+  <p><strong>Exemple</strong> <br>
+  paquetage Java ayant un espace de nom pour interface, classe, enumeration <br>
+  classe Java ayant un espace de nom pour attributs, methodes, constructeurs, parametres.</p>
+</blockquote>
+
+Une table des symboles est une structure de donnees qui permet de gerer les espaces de noms.
+
+**Question**: Comment gerer une table de symboles pour le langage suivant
+`class X {int a; void m(boolean a) {float a; if (…) char a;}}
+
+<ul>
+<li>Reponse 1: Gerer comme une pile et depiler en sortant de l’espace de nom</li>
+<li>Reponse 2: Imbriquer les espaces de noms</li>
+</ul>
+
+<blockquote>
+  <p>Espace nom classe</p>
+  
+  <blockquote>
+    <p>XXX: Espace de nom des attributs, methodes, constructeurs</p>
+    
+    <blockquote>
+      <p>a <br>
+      m</p>
+      
+      <blockquote>
+        <p>Espace de nom des parametres <br>
+        a <br>
+        bloc : espace de nom des variables locales</p>
+        
+        <blockquote>
+          <p>a</p>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<p>La recherche dans un espace de nom, table des symboles commence dans l’espace courant puis rtemonte recursivement dans les espaces englobants jusqu’a la racine de cette hierarchie (en Java les paquetages).</p>
+
+<blockquote>
+  <p><strong>Probleme</strong></p>
+  
+  <pre class="prettyprint"><code class="language-java hljs ">{<span class="hljs-keyword">int</span> a; <span class="hljs-keyword">boolean</span> a;};</code></pre>
+  
+  <p>Interdit en Java car lors de l’analyse d’une nouvelle definition, on recherche si elle existe deja et on signale une erreur de redefinition.</p>
+</blockquote>
+
+<p>On a donc 2 methodes de recherhce</p>
+
+<ul>
+<li>Une locale a l’espace de noms</li>
+<li>Une globale a la hierarchie d’espace de noms.</li>
+</ul>
+
+<p>Chercher global si chercher local alors succes sinon englobant chercher global.</p>
+
+<blockquote>
+  <p><strong>Exemple</strong> <br>
+  <script type="math/tex" id="MathJax-Element-375">E \rightarrow E\ \mathrm{op}\ E</script> <br>
+  <script type="math/tex" id="MathJax-Element-376">E \rightarrow \mathrm{op}\ E</script> <br>
+  <script type="math/tex" id="MathJax-Element-377">E \rightarrow \mathrm{constante}</script> <br>
+  <script type="math/tex" id="MathJax-Element-378">E \rightarrow \left( E \right)</script> <br>
+  <script type="math/tex" id="MathJax-Element-379">E \rightarrow \mathrm{ident}</script></p>
+</blockquote>
+
+<p>Objet de la gestion de la table des symboles:</p>
+
+<ul>
+<li>Verifier qu’une variable est bien definie</li>
+<li>Acceder a sa definition</li>
+</ul>
+
+<p>Donnee en entree: table des symboles attributs herite pour <script type="math/tex" id="MathJax-Element-380">E</script> <br>
+Action semantique : transmission de la table des symboles. <br>
+<script type="math/tex" id="MathJax-Element-381">E \rightarrow E_1\ \mathrm{op}\ E_2</script> devient <script type="math/tex" id="MathJax-Element-382">E_1\cdot \mathrm{tds}=E\cdot \mathrm{tds}</script> et <script type="math/tex" id="MathJax-Element-383">E_2\cdot \mathrm{tds}=E\cdot \mathrm{tds}</script> <br>
+<script type="math/tex" id="MathJax-Element-384">E \rightarrow \mathrm{op}\ E_1</script> devient <script type="math/tex" id="MathJax-Element-385">E_1\cdot \mathrm{tds}=E\cdot \mathrm{tds}</script> <br>
+<script type="math/tex" id="MathJax-Element-386">E \rightarrow \left( E_1 \right)</script> devient <script type="math/tex" id="MathJax-Element-387">E_1\cdot \mathrm{tds}=E\cdot \mathrm{tds}</script></p>
+
+<blockquote>
+  <p><em>EGG</em> automatise l’heritage</p>
+</blockquote>
+
+
+
+<div class="flow-chart"><svg height="575.0999956130981" version="1.1" width="148.5500030517578" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; top: 0.866669px;"><desc>Created with Raphaël 2.1.2</desc><defs><marker id="raphael-marker-endblock33-obj378" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj379" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj380" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj381" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj382" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker></defs><rect x="0" y="0" width="93.0999984741211" height="39.35000038146973" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="pg" transform="matrix(1,0,0,1,28.725,13)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="pgt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,28.725,13)"><tspan dy="5.375">Programme</tspan></text><rect x="0" y="0" width="135.38333129882812" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="lx" transform="matrix(1,0,0,1,7.5833,115.35)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="lxt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,7.5833,115.35)"><tspan dy="5.375">Lexical Syntaxique</tspan></text><rect x="0" y="0" width="142.5500030517578" height="57.349998474121094" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="aa" transform="matrix(1,0,0,1,4,208.7)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="28.674999237060547" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="aat" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,4,208.7)"><tspan dy="-3.625">Arbre abstrait</tspan><tspan dy="18" x="10">Table des Symboles</tspan></text><rect x="0" y="0" width="65.86666488647461" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="ty" transform="matrix(1,0,0,1,42.3417,329.05)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="tyt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,42.3417,329.05)"><tspan dy="5.375">Typage</tspan></text><rect x="0" y="0" width="138.96666717529297" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="am" transform="matrix(1,0,0,1,5.7917,431.4)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="amt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,5.7917,431.4)"><tspan dy="5.375">Allocation Memoire</tspan></text><rect x="0" y="0" width="140.4000015258789" height="39.35000038146973" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="gc" transform="matrix(1,0,0,1,5.075,533.75)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="gct" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,5.075,533.75)"><tspan dy="5.375">Generation de code</tspan><tspan dy="18" x="10"></tspan></text><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M75.2750015258789,52.34999942779541C75.2750015258789,52.34999942779541,75.2750015258789,99.8336555922424,75.2750015258789,112.35376024497745" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj378)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M75.2750015258789,154.69999885559082C75.2750015258789,154.69999885559082,75.2750015258789,194.35409879684448,75.2750015258789,205.70043794019148" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj379)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M75.2750015258789,266.0499973297119C75.2750015258789,266.0499973297119,75.2750015258789,313.5336534941589,75.2750015258789,326.053758146894" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj380)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M75.2750015258789,368.3999967575073C75.2750015258789,368.3999967575073,75.2750015258789,415.8836529219543,75.2750015258789,428.4037575746894" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj381)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M75.2750015258789,470.74999618530273C75.2750015258789,470.74999618530273,75.2750015258789,518.2336523497497,75.2750015258789,530.7537570024848" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj382)" font-family="sans-serif" font-weight="normal"></path></svg></div>
+
+<h4 id="representation-des-types">Representation des types</h4>
+
+<p><img src="https://github.com/thibmeu/enseeiht/raw/master/2IMA/SemantiqueEtTraductionDesLangages/typage.png" alt="Typage" title=""></p>
+
+<ul>
+<li><strong>merge</strong>: plus petite borne superieure de 2 type dans la relation de sous-typage</li>
+</ul>
+
+<h4 id="calcul-des-types-les-valeurs-ont-un-type">Calcul des types: les valeurs ont un type</h4>
+
+<p>Verification du bon typage: les instructions manipulent des valeurs, il faut verifier les compatibilites des types des valeurs manipulees</p>
+
+<ul>
+<li>affectations</li>
+<li>passage de parametres</li>
+</ul>
+
+<p>Il existe <strong>differentes</strong> forme de typage. Le typage est une approximation de l’execution</p>
+
+<ul>
+<li><strong>Type reel</strong>: type de creation de la valeur</li>
+<li><strong>Type apparent</strong>: type declare/calcule des variables</li>
+</ul>
+
+<pre class="prettyprint"><code class="language-java hljs ">Point p = condition ? (<span class="hljs-keyword">new</span> PointNomme()) : (<span class="hljs-keyword">new</span> PointColore());</code></pre>
+
+<blockquote>
+  <p><strong>Cas des faux positifs</strong></p>
+  
+  <pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">if</span> (condition) {
+  (condition ? (<span class="hljs-keyword">new</span> PointNomme()) : (<span class="hljs-keyword">new</span> PointColore())).getNom();
+}</code></pre>
+  
+  <p>Rejet par le compilateur alors qu’il n’y a pas d’erreurs. A cause de l’approximation introduit par le typage, il peut apparaitre des “<em>faux positif</em>” (erreur imaginaires) dectecte lors du typage.</p>
+</blockquote>
+
+<p>Il faut donc faire un compromis entre la correction du typage et la limitation des “<em>faux positifs</em>”</p>
+
+<ul>
+<li><strong>typage fort</strong>: aucune erreur a l’execution</li>
+<li><strong>typage faible</strong>: aucun faux positif <script type="math/tex" id="MathJax-Element-505">\rightarrow</script> verification a l’execution</li>
+<li><strong>typage statique</strong>: avant execution</li>
+<li><strong>typage dynamique</strong>: pendant l’execution</li>
+<li><strong>typage intermediare</strong>: typage “<em>souple</em>“, on fait un peu des deux</li>
+</ul>
+
+
+
+<h4 id="polymorphisme">Polymorphisme</h4>
+
+<blockquote>
+  <p><strong>Definition</strong> <br>
+  Autoriser une forme de melange des types pour faciliter la programmation, rendre le langage plus expressif</p>
+</blockquote>
+
+<p>On denombre plusieurs sortes de polymorphismes:</p>
+
+<ul>
+<li><strong>universel</strong>: infinite de type compatible <script type="math/tex" id="MathJax-Element-537">\rightarrow</script> similarite dans la representation des valeurs <br>
+<ul><li><em>parametrique</em>: variables de type / genericite</li>
+<li><em>sous typage</em>: introduit une relarion de compatibilite (ordre partiel)</li></ul></li>
+<li><strong>ad hoc</strong>: nombre fini de types compatibles <script type="math/tex" id="MathJax-Element-538">\rightarrow</script> format des donnees heterogenes et fonction de conversion <br>
+<ul><li><em>coercition</em>: foncitons de conversion d’un type a l’autre</li>
+<li><em>surcharge</em>: nombre fini de definition d’un meme symbole</li></ul></li>
+</ul>
+
+
+
+<h4 id="relation-de-compatibilite-et-effets-de-bords">Relation de compatibilite et effets de bords</h4>
+
+<blockquote>
+  <p><strong>Rappel</strong> <br>
+  La compatibilite est la fait qu’un type reel soit compatible avec le type apparent</p>
+</blockquote>
+
+<ul>
+<li><strong>checkType</strong> de affectation <br>
+<script type="math/tex" id="MathJax-Element-2922">T_G\ x_G;</script> <br>
+<script type="math/tex" id="MathJax-Element-2923">T_D\ x_D;</script> <br>
+<script type="math/tex" id="MathJax-Element-2924">x_G=x_D; \quad T_D \leq T_G</script></li>
+<li><strong>checkType</strong> de appel de fonction <br>
+<script type="math/tex" id="MathJax-Element-2925">T_R\ f(T_P);</script> <br>
+<script type="math/tex" id="MathJax-Element-2926">x_G=f(x_D);</script> <br>
+<script type="math/tex" id="MathJax-Element-2927">T_D\ x_D</script> <br>
+<script type="math/tex" id="MathJax-Element-2928">T_D \leq T_P</script> <br>
+<script type="math/tex" id="MathJax-Element-2929">T_G \leq T_R</script></li>
+</ul>
+
+<p><script type="math/tex; mode=display" id="MathJax-Element-2775">\frac{\sigma \vdash x : T_G\ \sigma \vdash E : T_D \ T_D \leq T_G}{\sigma \vdash x=E}</script><script type="math/tex; mode=display" id="MathJax-Element-2776">\frac{\sigma \vdash f : T_P \rightarrow T_R \ \sigma \vdash E : T_E \ T_E \leq T_P}{\sigma \vdash f\left(E\right):T_R}</script></p>
+
+<blockquote>
+  <p><strong>Remarque</strong> <br>
+  Les fonctions sont des valeurs donc il y a une compatibilite de type sur les fonctions</p>
+</blockquote>
+
+<p><script type="math/tex" id="MathJax-Element-2777">f: T_{P_1} \rightarrow T_{R_1}</script> <br>
+<script type="math/tex" id="MathJax-Element-2778">g: T_{P_2} \rightarrow T_{R_2}</script> <br>
+<script type="math/tex" id="MathJax-Element-2779">f=g;</script> <br>
+<script type="math/tex" id="MathJax-Element-2780">x_G=f\left(x_D\right);</script> <br>
+<script type="math/tex" id="MathJax-Element-2781">T_{P_2} \rightarrow T_{R_2} \leq T_{P_1} \rightarrow T_{R_1}</script> <br>
+<script type="math/tex" id="MathJax-Element-2782">T_D \leq T_{P_1}</script> <br>
+<script type="math/tex" id="MathJax-Element-2783">T_{R_1} \leq T_G</script></p>
+
+<blockquote>
+  <p><strong>Remarque</strong> <br>
+  1. Tous les parametres que <script type="math/tex" id="MathJax-Element-2784">f</script> accepte doivent etre acceptes par <script type="math/tex" id="MathJax-Element-2785">g</script>: <script type="math/tex" id="MathJax-Element-2786">T_{P_1} \leq T_{P_2}</script>. <br>
+   Par transitivite: <script type="math/tex" id="MathJax-Element-2787">T_D \leq T_{P_1} \land T_{P_1} \leq T_{P_2} \Rightarrow T_D \leq T_{P_2}</script> <br>
+  2. Tous les resultats de <script type="math/tex" id="MathJax-Element-2788">g</script> doivent etre compatibles avec les resultats de <script type="math/tex" id="MathJax-Element-2789">f</script>: <script type="math/tex" id="MathJax-Element-2790">T_{R_2} \leq T_{R_1}</script> <br>
+  Par transitivite: <script type="math/tex" id="MathJax-Element-2791">T_{P_2} \rightarrow T_{R_2} \leq T_{P_1} \rightarrow T_{R_1}</script></p>
+</blockquote>
+
+<h4 id="contravariance-du-sous-typage-des-fonctions">Contravariance du sous typage des fonctions</h4>
+
+<p><script type="math/tex" id="MathJax-Element-2814">T_{P_2} \rightarrow T_{R_2} \leq T_{P_1} \rightarrow T_{R_1} \Leftrightarrow T_{P_1} \leq T_{P_2} \land T_{R_2} \leq T_{R_1}</script></p>
+
+<p>Redefinition des methodes:</p>
+
+<pre class="prettyprint"><code class="language-java hljs ">class Point {
+    <span class="hljs-keyword">boolean</span> equals(Point);
+}
+class PointColore extends Point {
+    <span class="hljs-keyword">boolean</span> equals(Point <span class="hljs-comment">/*PointColore*/</span>);
+    <span class="hljs-comment">/* On aurait aime mettre le equals pour des pointcolores mais le typage impose de mettre Point --&gt; instanceof*/</span>
+}</code></pre>
+
+<blockquote>
+  <p><strong>Plantage historique de Java</strong></p>
+  
+  <pre class="prettyprint"><code class="language-java hljs ">PointColore tabC[] = <span class="hljs-keyword">new</span> PointColore[<span class="hljs-number">10</span>];
+Point tab[] = tabC;
+tab[<span class="hljs-number">0</span>] = <span class="hljs-keyword">new</span> PointColore(...);
+(tab[<span class="hljs-number">0</span>]).getCouleur();
+<span class="hljs-comment">/* Dans les versions actuelles de Java la ligne suivante leve une ClassCastException grace a un typage souple */</span>
+tab[<span class="hljs-number">0</span>] = <span class="hljs-keyword">new</span> Point(...);
+tabC[<span class="hljs-number">0</span>].getCouleur();</code></pre>
+  
+  <p>Les createurs du langage avait defini le sous typage des tableaux ainsi <br>
+  <script type="math/tex" id="MathJax-Element-4168">\mathrm{PointColore}\left[\right] \leq \mathrm{Point}\left[\right]</script> <br>
+  Pour resoudre ce probleme, Java est passe a une typage statique moins contraignant et a une verification statique a l’execution.</p>
+</blockquote>
+
+<p><script type="math/tex" id="MathJax-Element-4169">T_G\ tabG\left[\right];</script> <br>
+<script type="math/tex" id="MathJax-Element-4170">T_D\ tabD\left[\right];</script> <br>
+<script type="math/tex" id="MathJax-Element-4171">tabG=tabD; \quad T_D\left[\right] \leq T_G\left[\right]</script> <br>
+<script type="math/tex" id="MathJax-Element-4172">tabG\left[0\right] = v;</script> <br>
+<script type="math/tex" id="MathJax-Element-4173">r = tabG\left[0\right];</script> <br>
+<script type="math/tex" id="MathJax-Element-4174">T_V \leq T_G \leq T_D</script>: transitivite pour la correction des affectations (ecriture) <br>
+<script type="math/tex" id="MathJax-Element-4175">T_D \leq T_G \leq T_R</script>: transitivite pour la correction des lectures</p>
+
+<p><script type="math/tex" id="MathJax-Element-4176">T_D\left[\right] \leq T_G\left[\right] \Leftrightarrow T_D=T_G</script></p>
+
+<blockquote>
+  <p><strong>Remarque</strong>: pointeur = tableau a une case <br>
+  <script type="math/tex" id="MathJax-Element-4177">T_D\ast \leq T_G\ast \Leftrightarrow T_D=T_G</script></p>
+  
+  <p><strong>Attention</strong>: Cela ne veut pas dire qu’il est interdit de manipuler des adresses. Le probleme est lie a la lecture et ecriture dans une zone memoire a travers deux adresses de type different. Il n’y a aucun probleme a faire des acces en lecture seule.</p>
+</blockquote>
+
+<h3 id="travaux-pratiques">Travaux pratiques</h3>
+
+<p>L’ensemble des travaux pratiques est disponible sur Github a l’adresse suivante: <a href="https://github.com/thibmeu/enseeiht/tree/master/2IMA/SemantiqueEtTraductionDesLangages">TP Semantique des traducitons des langages</a>. Les fichiers de corrections sont donnes a titre indicatif et peuvent ne pas s’averer complets.</p></div></body>
+</html>

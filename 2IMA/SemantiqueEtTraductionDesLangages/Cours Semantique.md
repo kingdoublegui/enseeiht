@@ -596,10 +596,10 @@ class Addition extends {
 
 > **en Yacc (actions code C)**
 > ```yacc
-%%
-E : E PLUS E {$$ = $1 + $3;}
-| INTEGER  {$$ = atoi($1);}
-```
+> %%
+> E : E PLUS E \{\$\$ = \$1 + \$3;}
+> | INTEGER  {\$\$ = atoi(\$1);}
+> ```
 
 + famille $LL$ (ANTLR, EGG)
 > Grammaire $L$-attribuee: calcul des actions de gauche a droite
@@ -738,6 +738,150 @@ $E \rightarrow \mathrm{op}\ E_1$ devient $E_1\cdot \mathrm{tds}=E\cdot \mathrm{t
 $E \rightarrow \left( E_1 \right)$ devient $E_1\cdot \mathrm{tds}=E\cdot \mathrm{tds}$
 
 > *EGG* automatise l'heritage
+
+```flow
+pg=>start: Programme
+lx=>operation: Lexical Syntaxique
+aa=>operation: Arbre abstrait
+Table des Symboles
+ty=>operation: Typage
+am=>operation: Allocation Memoire
+gc=>end: Generation de code
+
+pg->lx->aa->ty->am->gc
+```
+
+#### Representation des types
+
+![Typage](https://github.com/thibmeu/enseeiht/raw/master/2IMA/SemantiqueEtTraductionDesLangages/typage.png)
+
++ **merge**: plus petite borne superieure de 2 type dans la relation de sous-typage
+
+#### Calcul des types: les valeurs ont un type
+
+Verification du bon typage: les instructions manipulent des valeurs, il faut verifier les compatibilites des types des valeurs manipulees
+
++ affectations
++ passage de parametres
+
+Il existe **differentes** forme de typage. Le typage est une approximation de l'execution
+
++ **Type reel**: type de creation de la valeur
++ **Type apparent**: type declare/calcule des variables
+```java
+Point p = condition ? (new PointNomme()) : (new PointColore());
+```
+
+> **Cas des faux positifs**
+> ```java
+> if (condition) {
+> 	(condition ? (new PointNomme()) : (new PointColore())).getNom();
+> }
+> ```
+> Rejet par le compilateur alors qu'il n'y a pas d'erreurs. A cause de l'approximation introduit par le typage, il peut apparaitre des "*faux positif*" (erreur imaginaires) dectecte lors du typage.
+
+Il faut donc faire un compromis entre la correction du typage et la limitation des "*faux positifs*"
+ 
++ **typage fort**: aucune erreur a l'execution
++ **typage faible**: aucun faux positif $\rightarrow$ verification a l'execution
++ **typage statique**: avant execution
++ **typage dynamique**: pendant l'execution
++ **typage intermediare**: typage "*souple*", on fait un peu des deux
+
+#### Polymorphisme
+> **Definition**
+> Autoriser une forme de melange des types pour faciliter la programmation, rendre le langage plus expressif
+
+On denombre plusieurs sortes de polymorphismes:
+
++ **universel**: infinite de type compatible $\rightarrow$ similarite dans la representation des valeurs
+	+ *parametrique*: variables de type / genericite
+	+ *sous typage*: introduit une relarion de compatibilite (ordre partiel)
++ **ad hoc**: nombre fini de types compatibles $\rightarrow$ format des donnees heterogenes et fonction de conversion
+	+ *coercition*: foncitons de conversion d'un type a l'autre
+	+ *surcharge*: nombre fini de definition d'un meme symbole
+
+#### Relation de compatibilite et effets de bords
+> **Rappel**
+> La compatibilite est la fait qu'un type reel soit compatible avec le type apparent
+
++ **checkType** de affectation
+$T_G\ x_G;$
+$T_D\ x_D;$
+$x_G=x_D; \quad T_D \leq T_G$
++ **checkType** de appel de fonction
+$T_R\ f(T_P);$
+$x_G=f(x_D);$
+$T_D\ x_D$
+$T_D \leq T_P$
+$T_G \leq T_R$
+
+$$\frac{\sigma \vdash x : T_G\ \sigma \vdash E : T_D \ T_D \leq T_G}{\sigma \vdash x=E}$$$$\frac{\sigma \vdash f : T_P \rightarrow T_R \ \sigma \vdash E : T_E \ T_E \leq T_P}{\sigma \vdash f\left(E\right):T_R}$$
+
+> **Remarque**
+> Les fonctions sont des valeurs donc il y a une compatibilite de type sur les fonctions
+
+$f: T_{P_1} \rightarrow T_{R_1}$
+$g: T_{P_2} \rightarrow T_{R_2}$
+$f=g;$
+$x_G=f\left(x_D\right);$
+$T_{P_2} \rightarrow T_{R_2} \leq T_{P_1} \rightarrow T_{R_1}$
+$T_D \leq T_{P_1}$
+$T_{R_1} \leq T_G$
+
+> **Remarque**
+> 1. Tous les parametres que $f$ accepte doivent etre acceptes par $g$: $T_{P_1} \leq T_{P_2}$.
+ Par transitivite: $T_D \leq T_{P_1} \land T_{P_1} \leq T_{P_2} \Rightarrow T_D \leq T_{P_2}$
+> 2. Tous les resultats de $g$ doivent etre compatibles avec les resultats de $f$: $T_{R_2} \leq T_{R_1}$
+Par transitivite: $T_{P_2} \rightarrow T_{R_2} \leq T_{P_1} \rightarrow T_{R_1}$
+
+#### Contravariance du sous typage des fonctions
+$T_{P_2} \rightarrow T_{R_2} \leq T_{P_1} \rightarrow T_{R_1} \Leftrightarrow T_{P_1} \leq T_{P_2} \land T_{R_2} \leq T_{R_1}$
+
+Redefinition des methodes:
+```java
+class Point {
+	boolean equals(Point);
+}
+class PointColore extends Point {
+	boolean equals(Point /*PointColore*/);
+	/* On aurait aime mettre le equals pour des pointcolores mais le typage impose de mettre Point --> instanceof*/
+}
+```
+
+> **Plantage historique de Java**
+> ```java
+> PointColore tabC[] = new PointColore[10];
+> Point tab[] = tabC;
+> tab[0] = new PointColore(...);
+> (tab[0]).getCouleur();
+> /* Dans les versions actuelles de Java la ligne suivante leve une ClassCastException grace a un typage souple */
+> tab[0] = new Point(...);
+> tabC[0].getCouleur();
+> ```
+> Les createurs du langage avait defini le sous typage des tableaux ainsi
+> $\mathrm{PointColore}\left[\right] \leq \mathrm{Point}\left[\right]$
+> Pour resoudre ce probleme, Java est passe a une typage statique moins contraignant et a une verification statique a l'execution.
+
+$T_G\ tabG\left[\right];$
+$T_D\ tabD\left[\right];$
+$tabG=tabD; \quad T_D\left[\right] \leq T_G\left[\right]$
+$tabG\left[0\right] = v;$
+$r = tabG\left[0\right];$
+$T_V \leq T_G \leq T_D$: transitivite pour la correction des affectations (ecriture)
+$T_D \leq T_G \leq T_R$: transitivite pour la correction des lectures
+
+$T_D\left[\right] \leq T_G\left[\right] \Leftrightarrow T_D=T_G$
+
+> **Remarque**: pointeur = tableau a une case
+> $T_D\ast \leq T_G\ast \Leftrightarrow T_D=T_G$
+>
+> **Attention**: Cela ne veut pas dire qu'il est interdit de manipuler des adresses. Le probleme est lie a la lecture et ecriture dans une zone memoire a travers deux adresses de type different. Il n'y a aucun probleme a faire des acces en lecture seule.
+
+
+### Travaux pratiques
+L'ensemble des travaux pratiques est disponible sur Github a l'adresse suivante: [TP Semantique des traducitons des langages](https://github.com/thibmeu/enseeiht/tree/master/2IMA/SemantiqueEtTraductionDesLangages). Les fichiers de corrections sont donnes a titre indicatif et peuvent ne pas s'averer complets.
+
 
 [1]: https://en.wikipedia.org/wiki/Coq
 [2]: https://en.wikipedia.org/wiki/Xml
