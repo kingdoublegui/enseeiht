@@ -19,6 +19,7 @@ LEX_Bloc scanner;
 	}
 int [] sync= new int[0];
   BlockFactory att_factory;
+  SymbolTable att_tds;
   boolean att_eval;
   Block att_ast;
   LEX_Bloc att_scanner;
@@ -26,27 +27,35 @@ int [] sync= new int[0];
 
 	//declaration
 	T_Bloc x_2 = new T_Bloc(scanner ) ;
-	S_Instructions_Bloc x_3 = new S_Instructions_Bloc(scanner,att_eval) ;
-	T_Bloc x_4 = new T_Bloc(scanner ) ;
+	S_Instructions_Bloc x_4 = new S_Instructions_Bloc(scanner,att_eval) ;
+	T_Bloc x_5 = new T_Bloc(scanner ) ;
 	//appel
-if  (att_eval)	  action_auto_inh_1(x_3);
+if  (att_eval)	  action_auto_inh_1(x_4);
 	x_2.analyser(LEX_Bloc.token_accolade_ouvrante);
-	x_3.analyser() ;
-	x_4.analyser(LEX_Bloc.token_accolade_fermante);
-if  (att_eval)	  action_ast_1(x_3);
+if  (att_eval)	  action_inh_1(x_4);
+	x_4.analyser() ;
+	x_5.analyser(LEX_Bloc.token_accolade_fermante);
+if  (att_eval)	  action_ast_1(x_4);
   }
-private void action_ast_1(S_Instructions_Bloc x_3) throws Exception {
+private void action_ast_1(S_Instructions_Bloc x_4) throws Exception {
 try {
 // instructions
-this.att_ast=this.att_factory.createBlock(x_3.att_ast);
-}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Bloc -> accolade_ouvrante Instructions accolade_fermante #ast ;"});
+this.att_ast=this.att_factory.createBlock(x_4.att_ast);
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Bloc -> accolade_ouvrante #inh Instructions accolade_fermante #ast ;"});
 }
   }
-private void action_auto_inh_1(S_Instructions_Bloc x_3) throws Exception {
+private void action_auto_inh_1(S_Instructions_Bloc x_4) throws Exception {
 try {
 // instructions
-x_3.att_factory=this.att_factory;
-}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Bloc -> accolade_ouvrante Instructions accolade_fermante #ast ;"});
+x_4.att_factory=this.att_factory;
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Bloc -> accolade_ouvrante #inh Instructions accolade_fermante #ast ;"});
+}
+  }
+private void action_inh_1(S_Instructions_Bloc x_4) throws Exception {
+try {
+// instructions
+x_4.att_tds= new SymbolTable(this.att_tds);
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#inh","Bloc -> accolade_ouvrante #inh Instructions accolade_fermante #ast ;"});
 }
   }
   public void analyser () throws Exception {

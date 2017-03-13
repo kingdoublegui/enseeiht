@@ -19,6 +19,7 @@ LEX_Bloc scanner;
 	}
 int [] sync= new int[0];
   BlockFactory att_factory;
+  SymbolTable att_tds;
   boolean att_eval;
   Block att_ast;
   LEX_Bloc att_scanner;
@@ -43,6 +44,7 @@ private void action_auto_inh_12(S_Bloc_Bloc x_3) throws Exception {
 try {
 // instructions
 x_3.att_factory=this.att_factory;
+x_3.att_tds=this.att_tds;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","SuiteConditionnelle -> sinon Bloc #ast ;"});
 }
   }

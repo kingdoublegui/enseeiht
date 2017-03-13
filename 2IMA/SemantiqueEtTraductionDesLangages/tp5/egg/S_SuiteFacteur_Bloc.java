@@ -19,6 +19,7 @@ LEX_Bloc scanner;
 	}
 int [] sync= new int[0];
   BlockFactory att_factory;
+  SymbolTable att_tds;
   boolean att_eval;
   Expression att_ast;
   Expression att_gauche;
@@ -62,6 +63,8 @@ try {
 // instructions
 x_3.att_factory=this.att_factory;
 x_5.att_factory=this.att_factory;
+x_3.att_tds=this.att_tds;
+x_5.att_tds=this.att_tds;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","SuiteFacteur -> Multiplicatif Facteur #ast_inh SuiteFacteur1 #ast_syn ;"});
 }
   }

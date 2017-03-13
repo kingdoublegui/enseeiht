@@ -19,6 +19,7 @@ LEX_Bloc scanner;
 	}
 int [] sync= new int[0];
   BlockFactory att_factory;
+  SymbolTable att_tds;
   boolean att_eval;
   Value att_ast;
   LEX_Bloc att_scanner;

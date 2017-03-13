@@ -12,6 +12,9 @@ inh gauche	: Expression for SuiteCondition, SuiteTerme, SuiteFacteur;
 inh factory	: BlockFactory for Bloc, Instruction,
     		  	       SuiteConditionnelle, Instructions, Expression, Condition,
 			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type, Valeur ;  
+inh tds     : SymbolTable for  Bloc, Instruction,
+    		  	       SuiteConditionnelle, Instructions, Expression, Condition,
+			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type, Valeur ;
 syn ast     : Block for Bloc, Programme;
 syn ast     : Value for Valeur;
 syn ast		: Expression for Expression, Condition, SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur ;
@@ -70,6 +73,7 @@ Programme -> identificateur #inh Bloc #ast ;
 #inh {
 do
    Bloc^factory := new BlockFactoryImpl();
+   Bloc^tds := new SymbolTable();
 end
 }
 #ast {
@@ -78,7 +82,12 @@ do
 end
 }
 
-Bloc -> accolade_ouvrante Instructions accolade_fermante #ast;
+Bloc -> accolade_ouvrante #inh Instructions accolade_fermante #ast ;
+#inh {
+do
+   Instructions^tds :=  new SymbolTable(Bloc^tds);
+end
+}
 #ast {
 do
    Bloc^ast := Bloc^factory.createBlock(Instructions^ast);
@@ -121,24 +130,73 @@ do
 end
 }
 
-Instruction -> Type identificateur affectation Expression point_virgule #ast;
+Instruction -> Type identificateur affectation #inh Expression point_virgule #ast;
+#inh {
+local
+    d: Declaration;
+do
+    d := Instruction^factory.createVariableDeclaration(identificateur^txt, Type^ast, null);
+    if (Instruction^tds.contains(d.getName())) then
+        error(Bloc_unexpected_token, identificateur^txt);
+    else
+        Instruction^tds.register(d);
+    end
+end
+}
 #ast {
 do
     Instruction^ast := Instruction^factory.createVariableDeclaration(identificateur^txt, Type^ast, Expression^ast);
 end
 }
 
-Instruction -> constante Type identificateur affectation Valeur point_virgule #ast;
+Instruction -> constante Type identificateur affectation #inh Valeur point_virgule #ast;
+#inh {
+local
+    d: Declaration;
+do
+    d := Instruction^factory.createConstantDeclaration(identificateur^txt, Type^ast, null);
+    if (Instruction^tds.contains(d.getName())) then
+        error(Bloc_unexpected_token, identificateur^txt);
+    else
+        Instruction^tds.register(d);
+    end
+end
+}
 #ast {
 do
     Instruction^ast := Instruction^factory.createConstantDeclaration(identificateur^txt, Type^ast, Valeur^ast);
 end
 }
 
-Instruction -> identificateur affectation Expression point_virgule #ast;
-#ast {
+Instruction -> identificateur affectation #inh Expression point_virgule #ast;
+#inh {
+local
+    opd: Optional<Declaration>;
+    d: Declaration;
 do
-    Instruction^ast := Instruction^factory.createAssignment(identificateur^txt, Expression^ast);
+    if (!Instruction^tds.knows(identificateur^txt)) then
+        error(Bloc_unexpected_token, identificateur^txt);
+    else
+        opd := Instruction^tds.get(identificateur^txt);
+        d := opd.get();
+        match  d
+        with ConstantDeclaration then
+            error(Bloc_expected_token, "ConstanteDeclaration", "VariableDeclaration");
+        end
+    end
+end
+}
+#ast {
+local
+    opd: Optional<Declaration>;
+    d: Declaration;
+do
+    opd := Instruction^tds.get(identificateur^txt);
+    d := opd.get();
+    match d
+    with VariableDeclaration then
+        Instruction^ast := Instruction^factory.createAssignment(d, Expression^ast);
+    end
 end
 }
 

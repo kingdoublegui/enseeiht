@@ -36,6 +36,7 @@ private void action_inh_0(T_Bloc x_2, S_Bloc_Bloc x_4) throws Exception {
 try {
 // instructions
 x_4.att_factory= new BlockFactoryImpl();
+x_4.att_tds= new SymbolTable();
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#inh","Programme -> identificateur #inh Bloc #ast ;"});
 }
   }

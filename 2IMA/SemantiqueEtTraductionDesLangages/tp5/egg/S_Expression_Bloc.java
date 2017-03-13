@@ -19,6 +19,7 @@ LEX_Bloc scanner;
 	}
 int [] sync= new int[0];
   BlockFactory att_factory;
+  SymbolTable att_tds;
   boolean att_eval;
   Expression att_ast;
   LEX_Bloc att_scanner;
@@ -46,6 +47,8 @@ try {
 // instructions
 x_2.att_factory=this.att_factory;
 x_4.att_factory=this.att_factory;
+x_2.att_tds=this.att_tds;
+x_4.att_tds=this.att_tds;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Expression -> Condition #inh SuiteCondition #ast ;"});
 }
   }

@@ -19,6 +19,7 @@ LEX_Bloc scanner;
 	}
 int [] sync= new int[0];
   BlockFactory att_factory;
+  SymbolTable att_tds;
   boolean att_eval;
   Expression att_ast;
   LEX_Bloc att_scanner;
@@ -95,6 +96,7 @@ private void action_auto_inh_30(S_Facteur_Bloc x_3) throws Exception {
 try {
 // instructions
 x_3.att_factory=this.att_factory;
+x_3.att_tds=this.att_tds;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Facteur -> premier Facteur1 #ast ;"});
 }
   }
@@ -109,6 +111,7 @@ private void action_auto_inh_31(S_Facteur_Bloc x_3) throws Exception {
 try {
 // instructions
 x_3.att_factory=this.att_factory;
+x_3.att_tds=this.att_tds;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Facteur -> second Facteur1 #ast ;"});
 }
   }
@@ -123,6 +126,7 @@ private void action_auto_inh_32(S_Valeur_Bloc x_2) throws Exception {
 try {
 // instructions
 x_2.att_factory=this.att_factory;
+x_2.att_tds=this.att_tds;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Facteur -> Valeur #ast ;"});
 }
   }
@@ -137,6 +141,7 @@ private void action_auto_inh_27(S_Expression_Bloc x_3) throws Exception {
 try {
 // instructions
 x_3.att_factory=this.att_factory;
+x_3.att_tds=this.att_tds;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Facteur -> parenthese_ouvrante Expression parenthese_fermante #ast ;"});
 }
   }
@@ -152,6 +157,8 @@ try {
 // instructions
 x_3.att_factory=this.att_factory;
 x_5.att_factory=this.att_factory;
+x_3.att_tds=this.att_tds;
+x_5.att_tds=this.att_tds;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Facteur -> inferieur Expression virgule Expression1 superieur #ast ;"});
 }
   }
