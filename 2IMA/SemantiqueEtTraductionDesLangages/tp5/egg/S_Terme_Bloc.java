@@ -22,19 +22,19 @@ int [] sync= new int[0];
   boolean att_eval;
   Expression att_ast;
   LEX_Bloc att_scanner;
-  private void regle22() throws Exception {
+  private void regle23() throws Exception {
 
 	//declaration
 	S_Facteur_Bloc x_2 = new S_Facteur_Bloc(scanner,att_eval) ;
 	S_SuiteFacteur_Bloc x_4 = new S_SuiteFacteur_Bloc(scanner,att_eval) ;
 	//appel
-if  (att_eval)	  action_auto_inh_22(x_2, x_4);
+if  (att_eval)	  action_auto_inh_23(x_2, x_4);
 	x_2.analyser() ;
-if  (att_eval)	  action_ast_inh_22(x_2, x_4);
+if  (att_eval)	  action_ast_inh_23(x_2, x_4);
 	x_4.analyser() ;
-if  (att_eval)	  action_ast_syn_22(x_2, x_4);
+if  (att_eval)	  action_ast_syn_23(x_2, x_4);
   }
-private void action_auto_inh_22(S_Facteur_Bloc x_2, S_SuiteFacteur_Bloc x_4) throws Exception {
+private void action_auto_inh_23(S_Facteur_Bloc x_2, S_SuiteFacteur_Bloc x_4) throws Exception {
 try {
 // instructions
 x_2.att_factory=this.att_factory;
@@ -42,14 +42,14 @@ x_4.att_factory=this.att_factory;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Terme -> Facteur #ast_inh SuiteFacteur #ast_syn ;"});
 }
   }
-private void action_ast_syn_22(S_Facteur_Bloc x_2, S_SuiteFacteur_Bloc x_4) throws Exception {
+private void action_ast_syn_23(S_Facteur_Bloc x_2, S_SuiteFacteur_Bloc x_4) throws Exception {
 try {
 // instructions
 this.att_ast=x_4.att_ast;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast_syn","Terme -> Facteur #ast_inh SuiteFacteur #ast_syn ;"});
 }
   }
-private void action_ast_inh_22(S_Facteur_Bloc x_2, S_SuiteFacteur_Bloc x_4) throws Exception {
+private void action_ast_inh_23(S_Facteur_Bloc x_2, S_SuiteFacteur_Bloc x_4) throws Exception {
 try {
 // instructions
 x_4.att_gauche=x_2.att_ast;
@@ -57,6 +57,6 @@ x_4.att_gauche=x_2.att_ast;
 }
   }
   public void analyser () throws Exception {
-    regle22 () ;
+    regle23 () ;
   }
   }

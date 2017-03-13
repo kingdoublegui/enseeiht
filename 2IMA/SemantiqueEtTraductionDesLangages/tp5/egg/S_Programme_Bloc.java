@@ -49,7 +49,7 @@ this.att_ast=x_4.att_ast;
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_identificateur : // 54
+      case LEX_Bloc.token_identificateur : // 56
         regle0 () ;
       break ;
       default :

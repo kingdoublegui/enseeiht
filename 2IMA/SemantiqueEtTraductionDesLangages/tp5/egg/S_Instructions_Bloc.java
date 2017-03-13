@@ -65,28 +65,31 @@ this.att_ast=x_3.att_ast;
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_accolade_fermante : // 20
+      case LEX_Bloc.token_accolade_fermante : // 21
         regle5 () ;
       break ;
-      case LEX_Bloc.token_type_bool : // 51
+      case LEX_Bloc.token_type_bool : // 52
         regle6 () ;
       break ;
-      case LEX_Bloc.token_type_int : // 50
+      case LEX_Bloc.token_type_int : // 51
         regle6 () ;
       break ;
-      case LEX_Bloc.token_inferieur : // 25
+      case LEX_Bloc.token_inferieur : // 26
         regle6 () ;
       break ;
-      case LEX_Bloc.token_identificateur : // 54
+      case LEX_Bloc.token_constante : // 53
         regle6 () ;
       break ;
-      case LEX_Bloc.token_si : // 44
+      case LEX_Bloc.token_identificateur : // 56
         regle6 () ;
       break ;
-      case LEX_Bloc.token_tant_que : // 47
+      case LEX_Bloc.token_si : // 45
         regle6 () ;
       break ;
-      case LEX_Bloc.token_afficher : // 46
+      case LEX_Bloc.token_tant_que : // 48
+        regle6 () ;
+      break ;
+      case LEX_Bloc.token_afficher : // 47
         regle6 () ;
       break ;
       default :

@@ -47,12 +47,13 @@ public class LEX_Bloc extends LEXICAL4  {
  public static final int token_et = 32 ;
  public static final int token_enregistrement = 33 ;
  public static final int token_premier = 34 ;
- public static final int token_commentaire = 35 ;
- public static final int token_crochet_ouvrant = 36 ;
- public static final int token_inferieur_egal = 37 ;
- public static final int token_division = 38 ;
- public static final int token_modulo = 39 ;
-  static final int token_autre = 40 ;
+ public static final int token_constante = 35 ;
+ public static final int token_commentaire = 36 ;
+ public static final int token_crochet_ouvrant = 37 ;
+ public static final int token_inferieur_egal = 38 ;
+ public static final int token_division = 39 ;
+ public static final int token_modulo = 40 ;
+  static final int token_autre = 41 ;
   public static final String[][] tokenImages = {
 	{"<EOF>"} ,{"tant_que"},
 {"accolade_ouvrante"},
@@ -88,6 +89,7 @@ public class LEX_Bloc extends LEXICAL4  {
 {"et"},
 {"enregistrement"},
 {"premier"},
+{"constante"},
     {"commentaire"} ,
 {"crochet_ouvrant"},
 {"inferieur_egal"},

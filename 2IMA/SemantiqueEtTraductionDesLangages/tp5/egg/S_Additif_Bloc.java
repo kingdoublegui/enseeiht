@@ -21,15 +21,15 @@ int [] sync= new int[0];
   boolean att_eval;
   LEX_Bloc att_scanner;
   BinaryOperator att_bin_op;
-  private void regle21() throws Exception {
+  private void regle22() throws Exception {
 
 	//declaration
 	T_Bloc x_2 = new T_Bloc(scanner ) ;
 	//appel
 	x_2.analyser(LEX_Bloc.token_addition);
-if  (att_eval)	  action_ast_21();
+if  (att_eval)	  action_ast_22();
   }
-private void action_ast_21() throws Exception {
+private void action_ast_22() throws Exception {
 try {
 // instructions
 this.att_bin_op=BinaryOperator.Add;
@@ -37,6 +37,6 @@ this.att_bin_op=BinaryOperator.Add;
 }
   }
   public void analyser () throws Exception {
-    regle21 () ;
+    regle22 () ;
   }
   }

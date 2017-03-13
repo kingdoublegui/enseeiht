@@ -11,8 +11,9 @@ option k=1;
 inh gauche	: Expression for SuiteCondition, SuiteTerme, SuiteFacteur;
 inh factory	: BlockFactory for Bloc, Instruction,
     		  	       SuiteConditionnelle, Instructions, Expression, Condition,
-			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type ;  
+			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type, Valeur ;  
 syn ast     : Block for Bloc, Programme;
+syn ast     : Value for Valeur;
 syn ast		: Expression for Expression, Condition, SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur ;
 syn ast		: Type for Type;
 syn ast		: Instruction for Instruction;
@@ -55,6 +56,7 @@ sugar  premier					is    "fst";
 sugar  second					is    "snd";
 sugar  type_int			    	is    "int";
 sugar  type_bool				is    "bool";
+sugar  constante                is    "const";
 sugar  enregistrement			is    "struct";
 term   entier					is    "[0-9]+";
 term   identificateur			is    "[a-z][a-zA-Z0-9_]*"; 
@@ -123,6 +125,13 @@ Instruction -> Type identificateur affectation Expression point_virgule #ast;
 #ast {
 do
     Instruction^ast := Instruction^factory.createVariableDeclaration(identificateur^txt, Type^ast, Expression^ast);
+end
+}
+
+Instruction -> constante Type identificateur affectation Valeur point_virgule #ast;
+#ast {
+do
+    Instruction^ast := Instruction^factory.createConstantDeclaration(identificateur^txt, Type^ast, Valeur^ast);
 end
 }
 
@@ -297,27 +306,6 @@ do
    Facteur^ast := Expression^ast;  
 end  
 }
- 
-Facteur -> entier #ast;
-#ast {
-do
-    Facteur^ast := Facteur^factory.createIntegerValue(entier^txt); 
-end
-}
-
-Facteur -> vrai #ast;
-#ast {
-do
-    Facteur^ast := Facteur^factory.createBooleanValue(true);  
-end
-}
-
-Facteur -> faux #ast;
-#ast {
-do
-    Facteur^ast := Facteur^factory.createBooleanValue(false);  
-end
-}
 
 Facteur -> identificateur #ast ;  
 #ast { 
@@ -347,5 +335,32 @@ do
 end
 }
   
+Facteur -> Valeur #ast;
+#ast {
+do
+   Facteur^ast := Valeur^ast;
+end
+}
+ 
+Valeur -> entier #ast;
+#ast {
+do
+    Valeur^ast := Valeur^factory.createIntegerValue(entier^txt); 
+end
+}
+
+Valeur -> vrai #ast;
+#ast {
+do
+    Valeur^ast := Valeur^factory.createBooleanValue(true);
+end
+}
+
+Valeur -> faux #ast;
+#ast {
+do
+    Valeur^ast := Valeur^factory.createBooleanValue(false);
+end
+}
 
 end

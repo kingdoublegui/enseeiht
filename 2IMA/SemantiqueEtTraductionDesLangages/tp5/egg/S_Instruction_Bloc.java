@@ -22,24 +22,7 @@ int [] sync= new int[0];
   boolean att_eval;
   Instruction att_ast;
   LEX_Bloc att_scanner;
-  private void regle12() throws Exception {
-
-	//declaration
-	T_Bloc x_2 = new T_Bloc(scanner ) ;
-	T_Bloc x_3 = new T_Bloc(scanner ) ;
-	S_Expression_Bloc x_4 = new S_Expression_Bloc(scanner,att_eval) ;
-	T_Bloc x_5 = new T_Bloc(scanner ) ;
-	S_Bloc_Bloc x_6 = new S_Bloc_Bloc(scanner,att_eval) ;
-	//appel
-if  (att_eval)	  action_auto_inh_12(x_4, x_6);
-	x_2.analyser(LEX_Bloc.token_tant_que);
-	x_3.analyser(LEX_Bloc.token_parenthese_ouvrante);
-	x_4.analyser() ;
-	x_5.analyser(LEX_Bloc.token_parenthese_fermante);
-	x_6.analyser() ;
-if  (att_eval)	  action_ast_12(x_4, x_6);
-  }
-  private void regle9() throws Exception {
+  private void regle10() throws Exception {
 
 	//declaration
 	T_Bloc x_2 = new T_Bloc(scanner ) ;
@@ -49,16 +32,16 @@ if  (att_eval)	  action_ast_12(x_4, x_6);
 	S_Bloc_Bloc x_6 = new S_Bloc_Bloc(scanner,att_eval) ;
 	S_SuiteConditionnelle_Bloc x_7 = new S_SuiteConditionnelle_Bloc(scanner,att_eval) ;
 	//appel
-if  (att_eval)	  action_auto_inh_9(x_4, x_6, x_7);
+if  (att_eval)	  action_auto_inh_10(x_4, x_6, x_7);
 	x_2.analyser(LEX_Bloc.token_si);
 	x_3.analyser(LEX_Bloc.token_parenthese_ouvrante);
 	x_4.analyser() ;
 	x_5.analyser(LEX_Bloc.token_parenthese_fermante);
 	x_6.analyser() ;
 	x_7.analyser() ;
-if  (att_eval)	  action_ast_9(x_4, x_6, x_7);
+if  (att_eval)	  action_ast_10(x_4, x_6, x_7);
   }
-  private void regle8() throws Exception {
+  private void regle9() throws Exception {
 
 	//declaration
 	T_Bloc x_2 = new T_Bloc(scanner ) ;
@@ -66,12 +49,31 @@ if  (att_eval)	  action_ast_9(x_4, x_6, x_7);
 	S_Expression_Bloc x_4 = new S_Expression_Bloc(scanner,att_eval) ;
 	T_Bloc x_5 = new T_Bloc(scanner ) ;
 	//appel
-if  (att_eval)	  action_auto_inh_8(x_2, x_4);
+if  (att_eval)	  action_auto_inh_9(x_2, x_4);
 	x_2.analyser(LEX_Bloc.token_identificateur);
 	x_3.analyser(LEX_Bloc.token_affectation);
 	x_4.analyser() ;
 	x_5.analyser(LEX_Bloc.token_point_virgule);
-if  (att_eval)	  action_ast_8(x_2, x_4);
+if  (att_eval)	  action_ast_9(x_2, x_4);
+  }
+  private void regle8() throws Exception {
+
+	//declaration
+	T_Bloc x_2 = new T_Bloc(scanner ) ;
+	S_Type_Bloc x_3 = new S_Type_Bloc(scanner,att_eval) ;
+	T_Bloc x_4 = new T_Bloc(scanner ) ;
+	T_Bloc x_5 = new T_Bloc(scanner ) ;
+	S_Valeur_Bloc x_6 = new S_Valeur_Bloc(scanner,att_eval) ;
+	T_Bloc x_7 = new T_Bloc(scanner ) ;
+	//appel
+if  (att_eval)	  action_auto_inh_8(x_3, x_4, x_6);
+	x_2.analyser(LEX_Bloc.token_constante);
+	x_3.analyser() ;
+	x_4.analyser(LEX_Bloc.token_identificateur);
+	x_5.analyser(LEX_Bloc.token_affectation);
+	x_6.analyser() ;
+	x_7.analyser(LEX_Bloc.token_point_virgule);
+if  (att_eval)	  action_ast_8(x_3, x_4, x_6);
   }
   private void regle7() throws Exception {
 
@@ -90,7 +92,7 @@ if  (att_eval)	  action_auto_inh_7(x_2, x_3, x_5);
 	x_6.analyser(LEX_Bloc.token_point_virgule);
 if  (att_eval)	  action_ast_7(x_2, x_3, x_5);
   }
-  private void regle13() throws Exception {
+  private void regle14() throws Exception {
 
 	//declaration
 	T_Bloc x_2 = new T_Bloc(scanner ) ;
@@ -99,29 +101,61 @@ if  (att_eval)	  action_ast_7(x_2, x_3, x_5);
 	T_Bloc x_5 = new T_Bloc(scanner ) ;
 	T_Bloc x_6 = new T_Bloc(scanner ) ;
 	//appel
-if  (att_eval)	  action_auto_inh_13(x_4);
+if  (att_eval)	  action_auto_inh_14(x_4);
 	x_2.analyser(LEX_Bloc.token_afficher);
 	x_3.analyser(LEX_Bloc.token_parenthese_ouvrante);
 	x_4.analyser() ;
 	x_5.analyser(LEX_Bloc.token_parenthese_fermante);
 	x_6.analyser(LEX_Bloc.token_point_virgule);
-if  (att_eval)	  action_ast_13(x_4);
+if  (att_eval)	  action_ast_14(x_4);
   }
-private void action_ast_9(S_Expression_Bloc x_4, S_Bloc_Bloc x_6, S_SuiteConditionnelle_Bloc x_7) throws Exception {
+  private void regle13() throws Exception {
+
+	//declaration
+	T_Bloc x_2 = new T_Bloc(scanner ) ;
+	T_Bloc x_3 = new T_Bloc(scanner ) ;
+	S_Expression_Bloc x_4 = new S_Expression_Bloc(scanner,att_eval) ;
+	T_Bloc x_5 = new T_Bloc(scanner ) ;
+	S_Bloc_Bloc x_6 = new S_Bloc_Bloc(scanner,att_eval) ;
+	//appel
+if  (att_eval)	  action_auto_inh_13(x_4, x_6);
+	x_2.analyser(LEX_Bloc.token_tant_que);
+	x_3.analyser(LEX_Bloc.token_parenthese_ouvrante);
+	x_4.analyser() ;
+	x_5.analyser(LEX_Bloc.token_parenthese_fermante);
+	x_6.analyser() ;
+if  (att_eval)	  action_ast_13(x_4, x_6);
+  }
+private void action_ast_9(T_Bloc x_2, S_Expression_Bloc x_4) throws Exception {
 try {
 // instructions
-this.att_ast=this.att_factory.createConditional(x_4.att_ast, x_6.att_ast, x_7.att_ast);
-}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Instruction -> si parenthese_ouvrante Expression parenthese_fermante Bloc SuiteConditionnelle #ast ;"});
+this.att_ast=this.att_factory.createAssignment(x_2.att_txt, x_4.att_ast);
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Instruction -> identificateur affectation Expression point_virgule #ast ;"});
 }
   }
-private void action_auto_inh_8(T_Bloc x_2, S_Expression_Bloc x_4) throws Exception {
+private void action_ast_14(S_Expression_Bloc x_4) throws Exception {
+try {
+// instructions
+this.att_ast=this.att_factory.createPrinter(x_4.att_ast);
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Instruction -> afficher parenthese_ouvrante Expression parenthese_fermante point_virgule #ast ;"});
+}
+  }
+private void action_auto_inh_8(S_Type_Bloc x_3, T_Bloc x_4, S_Valeur_Bloc x_6) throws Exception {
+try {
+// instructions
+x_3.att_factory=this.att_factory;
+x_6.att_factory=this.att_factory;
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Instruction -> constante Type identificateur affectation Valeur point_virgule #ast ;"});
+}
+  }
+private void action_auto_inh_9(T_Bloc x_2, S_Expression_Bloc x_4) throws Exception {
 try {
 // instructions
 x_4.att_factory=this.att_factory;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Instruction -> identificateur affectation Expression point_virgule #ast ;"});
 }
   }
-private void action_auto_inh_9(S_Expression_Bloc x_4, S_Bloc_Bloc x_6, S_SuiteConditionnelle_Bloc x_7) throws Exception {
+private void action_auto_inh_10(S_Expression_Bloc x_4, S_Bloc_Bloc x_6, S_SuiteConditionnelle_Bloc x_7) throws Exception {
 try {
 // instructions
 x_4.att_factory=this.att_factory;
@@ -138,14 +172,6 @@ x_5.att_factory=this.att_factory;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Instruction -> Type identificateur affectation Expression point_virgule #ast ;"});
 }
   }
-private void action_auto_inh_12(S_Expression_Bloc x_4, S_Bloc_Bloc x_6) throws Exception {
-try {
-// instructions
-x_4.att_factory=this.att_factory;
-x_6.att_factory=this.att_factory;
-}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Instruction -> tant_que parenthese_ouvrante Expression parenthese_fermante Bloc #ast ;"});
-}
-  }
 private void action_ast_7(S_Type_Bloc x_2, T_Bloc x_3, S_Expression_Bloc x_5) throws Exception {
 try {
 // instructions
@@ -153,57 +179,68 @@ this.att_ast=this.att_factory.createVariableDeclaration(x_3.att_txt, x_2.att_ast
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Instruction -> Type identificateur affectation Expression point_virgule #ast ;"});
 }
   }
-private void action_auto_inh_13(S_Expression_Bloc x_4) throws Exception {
+private void action_auto_inh_13(S_Expression_Bloc x_4, S_Bloc_Bloc x_6) throws Exception {
+try {
+// instructions
+x_4.att_factory=this.att_factory;
+x_6.att_factory=this.att_factory;
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Instruction -> tant_que parenthese_ouvrante Expression parenthese_fermante Bloc #ast ;"});
+}
+  }
+private void action_ast_8(S_Type_Bloc x_3, T_Bloc x_4, S_Valeur_Bloc x_6) throws Exception {
+try {
+// instructions
+this.att_ast=this.att_factory.createConstantDeclaration(x_4.att_txt, x_3.att_ast, x_6.att_ast);
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Instruction -> constante Type identificateur affectation Valeur point_virgule #ast ;"});
+}
+  }
+private void action_auto_inh_14(S_Expression_Bloc x_4) throws Exception {
 try {
 // instructions
 x_4.att_factory=this.att_factory;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Instruction -> afficher parenthese_ouvrante Expression parenthese_fermante point_virgule #ast ;"});
 }
   }
-private void action_ast_8(T_Bloc x_2, S_Expression_Bloc x_4) throws Exception {
+private void action_ast_10(S_Expression_Bloc x_4, S_Bloc_Bloc x_6, S_SuiteConditionnelle_Bloc x_7) throws Exception {
 try {
 // instructions
-this.att_ast=this.att_factory.createAssignment(x_2.att_txt, x_4.att_ast);
-}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Instruction -> identificateur affectation Expression point_virgule #ast ;"});
+this.att_ast=this.att_factory.createConditional(x_4.att_ast, x_6.att_ast, x_7.att_ast);
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Instruction -> si parenthese_ouvrante Expression parenthese_fermante Bloc SuiteConditionnelle #ast ;"});
 }
   }
-private void action_ast_12(S_Expression_Bloc x_4, S_Bloc_Bloc x_6) throws Exception {
+private void action_ast_13(S_Expression_Bloc x_4, S_Bloc_Bloc x_6) throws Exception {
 try {
 // instructions
 this.att_ast=this.att_factory.createRepetition(x_4.att_ast, x_6.att_ast);
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Instruction -> tant_que parenthese_ouvrante Expression parenthese_fermante Bloc #ast ;"});
 }
   }
-private void action_ast_13(S_Expression_Bloc x_4) throws Exception {
-try {
-// instructions
-this.att_ast=this.att_factory.createPrinter(x_4.att_ast);
-}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Instruction -> afficher parenthese_ouvrante Expression parenthese_fermante point_virgule #ast ;"});
-}
-  }
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_type_bool : // 51
+      case LEX_Bloc.token_type_bool : // 52
         regle7 () ;
       break ;
-      case LEX_Bloc.token_type_int : // 50
+      case LEX_Bloc.token_type_int : // 51
         regle7 () ;
       break ;
-      case LEX_Bloc.token_inferieur : // 25
+      case LEX_Bloc.token_inferieur : // 26
         regle7 () ;
       break ;
-      case LEX_Bloc.token_identificateur : // 54
+      case LEX_Bloc.token_constante : // 53
         regle8 () ;
       break ;
-      case LEX_Bloc.token_si : // 44
+      case LEX_Bloc.token_identificateur : // 56
         regle9 () ;
       break ;
-      case LEX_Bloc.token_tant_que : // 47
-        regle12 () ;
+      case LEX_Bloc.token_si : // 45
+        regle10 () ;
       break ;
-      case LEX_Bloc.token_afficher : // 46
+      case LEX_Bloc.token_tant_que : // 48
         regle13 () ;
+      break ;
+      case LEX_Bloc.token_afficher : // 47
+        regle14 () ;
       break ;
       default :
         	   scanner._interrompre(IProblem.Syntax, scanner.getBeginLine(), IBlocMessages.id_Bloc_unexpected_token,BlocMessages.Bloc_unexpected_token,new String[]{scanner.fenetre[0].getNom()});

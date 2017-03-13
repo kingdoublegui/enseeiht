@@ -87,13 +87,13 @@ this.att_ast=this.att_factory.createCoupleType(x_3.att_ast, x_5.att_ast);
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_type_bool : // 51
+      case LEX_Bloc.token_type_bool : // 52
         regle2 () ;
       break ;
-      case LEX_Bloc.token_type_int : // 50
+      case LEX_Bloc.token_type_int : // 51
         regle3 () ;
       break ;
-      case LEX_Bloc.token_inferieur : // 25
+      case LEX_Bloc.token_inferieur : // 26
         regle4 () ;
       break ;
       default :
