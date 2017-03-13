@@ -1,8 +1,12 @@
 [submodule "2IMA/SystemesConcurrents/Projet/linda"]
+    path = 2IMA/SystemesConcurrents/Projet/linda
 	url = git@github.com:thibmeu/enseeiht-linda.git
 [submodule "1TR"]
+    path = 1TR
 	url = git@github.com:thibmeu/enseeiht-1TR.git
 [submodule "2IMA/Graphes/Projet"]
+    path = 2IMA/Graphes/Projet
 	url = git@github.com:thibmeu/enseeiht-Projet-Graphe.git
 [submodule "2IMA/Architecture2/Projet"]
+    path = 2IMA/Architecture2/Projet
 	url = git@github.com:thibmeu/enseeiht-Projet-VHDL.git
