@@ -1,0 +1,329 @@
+Grammaires Attribuées : Outil EGG.
+Vérification et calcul de type pour le langage Bloc.
+
+Objectif : Implanter la sémantique du typage du langage Bloc par un
+parcours de l'arbre abstrait construit dans les séances précédentes.
+Il s'agit d'abord de compléter la sémantique du typage présentée
+en cours pour les expressions, en ajoutant d'abord les couples aux
+expressions, puis en ajoutant les instructions et les blocs, les types
+nommés et les enregistrements tels qu'ils ont été étudiés en TD.
+
+Rappel : La documentation est dans 'egg5.pdf'
+
+Nous mettons à votre disposition les classes représentant l'arbre
+abstrait, la table des symboles (interface Scope et HierarchicalScope,
+classe SymbolTable) et les types.
+
+La commande make produit également la documentation au format JavaDoc
+dans le répertoire doc. Celle-ci est incomplète. Seule les interfaces
+XxxFactory, Scope, HierarchicalScope sont détaillées.
+
+L'objectif est de compléter les travaux réalisés dans la séance
+précédente.
+
+
+============================================================
+
+
+I) Copier le fichier Bloc.egg de la séance précédente dans le 
+répertoire courant. Il ne faut pas copier le fichier Bloc.ecf car 
+les fichiers du packetage fr.n7.stl ont changés. 
+
+
+============================================================
+
+
+II) Nous modifions la syntaxe pour la création de valeur couple pour
+éviter les conflits LL(1) avec les opérateurs étendus. 
+
+Pour cela, supprimer la règle :
+
+-- Facteur -> inferieur Expression virgule Expression superieur #ast ;  
+-- #ast { 
+-- do  
+--    Facteur^ast := Facteur^factory.createCouple(Expression^ast, Expression1^ast);   
+-- end  
+-- }
+
+
+============================================================
+
+
+III) Ajouter à la grammaire les opérateurs unaires et binaires
+manquant.  Il faut bien sûr ajouter le traitement nécessaire à l'analyse 
+lexicale ("\!=" est un nouvel opérateur binaire) ainsi que le traitement 
+sémantique associé (et donc les attributs et actions nécessaires) :
+
+Comparatif -> different #texte;  
+#texte {  
+do  
+   Comparatif^bin_op := BinaryOperator.Different;   
+end  
+}
+  
+Comparatif -> inferieur #texte;  
+#texte {  
+do  
+   Comparatif^bin_op := BinaryOperator.Lesser;   
+end  
+}
+  
+Comparatif -> inferieur_egal #texte;  
+#texte {  
+do  
+   Comparatif^bin_op := BinaryOperator.LesserOrEqual;   
+end  
+}
+  
+Comparatif -> superieur #texte;  
+#texte {   
+do  
+   Comparatif^bin_op := BinaryOperator.Greater;    
+end  
+}
+   
+Comparatif -> superieur_egal #texte;  
+#texte {   
+do  
+   Comparatif^bin_op := BinaryOperator.GreaterOrEqual;    
+end  
+}
+
+Additif -> soustraction #ast;  
+#ast {  
+do  
+   Additif^bin_op := BinaryOperator.Substract;   
+end  
+}
+   
+Additif -> ou #ast;  
+#ast {  
+do  
+   Additif^bin_op := BinaryOperator.Or;   
+end  
+}
+
+Multiplicatif -> division #ast; 
+#ast { 
+do 
+   Multiplicatif^bin_op := BinaryOperator.Divide;  
+end 
+}
+ 
+Multiplicatif -> modulo #ast; 
+#ast {  
+do 
+   Multiplicatif^bin_op := BinaryOperator.Modulo;   
+end 
+}
+  
+Multiplicatif -> et #ast; 
+#ast {  
+do 
+   Multiplicatif^bin_op := BinaryOperator.And;   
+end 
+}
+
+Facteur -> soustraction Facteur #ast ;  
+#ast { 
+do  
+   Facteur^ast := Facteur ^factory.createUnaryExpression(UnaryOperator.Opposite,Facteur1^ast);  
+end  
+}
+ 
+Facteur -> negation Facteur #ast ;  
+#ast { 
+do  
+   Facteur^ast := Facteur ^factory. createUnaryExpression(UnaryOperator.Negate,Facteur1^ast);  
+end  
+}
+
+
+============================================================
+
+
+IV) Ajouter à la grammaire la définition de noms de type et leur
+utilisation. Il faut bien sûr ajouter le traitement nécessaire à l'analyse 
+lexicale ("typedef" est un nouveau mot clé du langage) ainsi que le traitement 
+sémantique associé (et donc les attributs (dont il faut au besoin changer le 
+nom) et actions nécessaires)  :
+
+Instruction -> typedef Type identificateur_type point_virgule #ast ;
+#ast {
+local 
+   v : TypeDeclaration ; 
+do 
+   if Instruction^scope.contains(identificateur_type^txt) then 
+      error(B_00, identificateur_type^txt); 
+   else
+      v := Instruction^factory.createTypeDeclaration(identificateur_type^txt,Type^ast); 
+      Instruction^scope.register(v);
+      Instruction^bloc.add(v); 
+      Instruction^ast := v; 
+   end 
+end 
+}
+
+Type -> identificateur_type #ast ;
+#ast {
+local
+   d : Optional<Declaration>;
+   t : Declaration;
+do
+   -- Si l'identificateur de type est connu
+   if Type^scope.knows(identificateur_type^txt) then
+      -- Lecture dans la table des symboles
+      d := Type^scope.get(identificateur_type^txt);
+      -- Si celle-ci a renvoyé un élément
+      if (d.isPresent()) then
+         -- Accès à cet élément
+         t := d.get();
+         match t
+	 -- Si c'est un type, il est renvoyé
+         with TypeDeclaration then Type^ast := t.getType();
+         -- Sinon une erreur est signalée
+         else
+            error(BLOC_not_a_type,identificateur_type^txt);
+         end
+      -- Sinon une erreur est signalée
+      else
+         error(BLOC_undefined_ident,identificateur_type^txt);
+      end
+   -- Sinon une erreur est signalée
+   else
+      error(BLOC_undefined_ident,identificateur_type^txt);
+   end
+end
+}
+
+
+A partir de cette séance, vous modifierez les classes Java fournies  
+pour implanter les actions sémantiques liées au typage, c'est-à-dire  
+les méthodes getType() pour les expressions et checkType() pour les  
+blocs et instructions. 
+
+Implanter la sémantique de synthèse et vérification du typage.  
+Il s'agit d'implanter les actions sémantiques equalsTo, compatibleWith  
+et merge des différents noeuds Type de l'arbre abstrait; getType des différents  
+noeuds Expression de l'arbre abstrait, et les actions sémantiques  
+checkType des différents Instruction et Bloc de l'arbre abstrait. 
+ 
+Le programme principal a été modifié pour appeler la sémantique de 
+vérification des types : 
+
+      System.out.println("AST :"+bloc.get_ast()); 
+      if (bloc.get_ast().checkType()) {
+	  System.out.println( "Correctement typé." ); 
+      } else {
+	  System.out.println( "Mal typé." ); 
+      }
+
+
+============================================================
+
+V) Ajouter à la grammaire la définition de type enregistrement et leur
+utilisation dans les expressions et instructions :
+
+-- Type enregistrement composé de champs
+Type -> enregistrement identificateur_type accolade_ouvrante #inh Champs accolade_fermante #ast ;
+global
+t : RecordType;
+#inh {
+do
+   if (Type^scope.contains( identificateur_type^txt)) then
+      error(BLOC_already_defined,identificateur_type^txt);
+   else
+      t := Type^factory.createRecordType( identificateur_type^txt );
+      Type^scope.register( t );
+   end
+end
+}
+
+#ast {
+do
+   -- Création d'un noeud type Enregistrement initialisé avec les champs
+   t.addAll(Champs^champs);
+   Type^ast := t; 
+end 
+}
+
+Champs -> Champ Champs #champs;  
+#champs { 
+local  
+   champs : LinkedList<FieldDeclaration>;  
+do  
+   champs :=  Champs1^champs;  
+   champs.addFirst(Champ^champ);  
+   Champs^champs := champs;  
+end  
+}
+ 
+Champs -> #champs;  
+#champs { 
+do  
+   Champs^champs := new LinkedList<FieldDeclaration>();  
+end  
+}
+ 
+Champ -> Type identificateur point_virgule #ast;
+#ast { 
+do  
+   Champ^champ := Champ^factory.createFieldDeclaration( identificateur^txt, Type^ast);  
+end  
+}
+
+Implanter la sémantique de synthèse et vérification du typage. 
+Il s'agit d'implanter les actions sémantiques equalsTo, compatibleWith 
+et merge des différents noeuds Type de l'arbre abstrait; getType des différents 
+noeuds Expression de l'arbre abstrait, et les actions sémantiques 
+checkType des différents Instruction et Bloc de l'arbre abstrait. 
+
+
+============================================================
+
+
+VI) Ajouter également à la grammaire l'expression permettant de construire des
+séquences de valeurs qui permettra de créer les couples (syntaxe { E, E})
+et d'initialiser les enregistrements puis les tableaux :
+
+Facteur -> accolade_ouvrante Expressions accolade_fermante #ast ;
+#ast {
+do
+   Facteur^ast := Facteur^factory.createSequence( Expressions^expressions );
+end
+}
+
+Expressions -> Expression SuiteExpressions #ast ;
+#ast {
+do 
+   SuiteExpressions^expressions.addFirst(Expression^ast); 
+   Expressions^expressions := SuiteExpressions^expressions; 
+end 
+}
+
+SuiteExpressions -> virgule Expression SuiteExpressions #ast ;
+#ast {
+do 
+   SuiteExpressions1^expressions.addFirst(Expression^ast); 
+   SuiteExpressions^expressions := SuiteExpressions1^expressions; 
+end 
+}
+
+SuiteExpressions -> #ast ;
+#ast {
+do
+   SuiteExpressions^expressions := new LinkedList<Expression>();
+end
+}
+
+Implanter la sémantique de synthèse et vérification du typage. 
+Il s'agit d'implanter les actions sémantiques :
+- equalsTo, compatibleWith et merge des différents noeuds Type de
+   l'arbre abstrait;
+- getType des différents noeuds Expression de l'arbre abstrait,
+- checkType des différents Instruction et Bloc de l'arbre abstrait. 
+
+
+============================================================
+
+

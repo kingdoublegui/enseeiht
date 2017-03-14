@@ -366,9 +366,21 @@ end
 }
 
 Facteur -> identificateur #ast ;  
-#ast { 
-do  
-   Facteur^ast := Facteur^factory.createVariableUse(identificateur^txt);  
+#ast {
+local
+    opd : Optional<Declaration>;
+    d : Declaration;
+do 
+    if (!Facteur^tds.knows(identificateur^txt)) then
+        error(P_01, identificateur^txt);
+    else
+        opd := Facteur^tds.get(identificateur^txt);
+        d := opd.get();
+        match d 
+            with VariableDeclaration then Facteur^ast := Facteur^factory.createVariableUse(d);
+            with ConstantDeclaration then Facteur^ast := d.getValue();
+        end
+    end
 end  
 }
 

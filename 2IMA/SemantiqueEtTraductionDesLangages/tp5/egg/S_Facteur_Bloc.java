@@ -117,8 +117,25 @@ x_3.att_tds=this.att_tds;
   }
 private void action_ast_28(T_Bloc x_2) throws Exception {
 try {
+// locales
+Optional<Declaration> loc_opd;
+Declaration loc_d;
 // instructions
-this.att_ast=this.att_factory.createVariableUse(x_2.att_txt);
+if ((!(this.att_tds.knows(x_2.att_txt)))){
+att_scanner._interrompre(IProblem.Semantic, att_scanner.getBeginLine(), IBlocMessages.id_P_01, BlocMessages.P_01,new Object[]{""+x_2.att_txt});
+
+}
+else {
+loc_opd=this.att_tds.get(x_2.att_txt);
+loc_d=loc_opd.get();
+if (loc_d instanceof VariableDeclaration ){
+this.att_ast=this.att_factory.createVariableUse(((VariableDeclaration)loc_d));
+}
+else if (loc_d instanceof ConstantDeclaration ){
+this.att_ast=((ConstantDeclaration)loc_d).getValue();
+}
+
+}
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Facteur -> identificateur #ast ;"});
 }
   }

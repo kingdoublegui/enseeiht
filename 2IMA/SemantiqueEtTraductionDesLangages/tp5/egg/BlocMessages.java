@@ -17,5 +17,6 @@ public class BlocMessages extends NLS {
 
   public static  String Bloc_unexpected_token;
   public static  String Bloc_expected_token;
+  public static  String P_01;
   public static  String Bloc_expected_eof;
   }
