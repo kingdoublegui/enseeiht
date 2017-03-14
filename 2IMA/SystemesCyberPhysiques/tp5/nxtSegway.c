@@ -97,7 +97,8 @@ TASK(pendule) {
 
   case(CONTROL_MODE):
 
-    /* A completer */
+    float* etat = estimateur(getMotorAngle(), getGyro(0), delta_t());
+    nxt_motors_set_command(controleur(etat));
 
     break;
 
@@ -147,4 +148,19 @@ ISR(isr_button_right)
 {
     ecrobot_status_monitor("isr_button_right");   
 
+}
+
+float[4] estimateur(float thetam, float dpsi, float pas, float theta_ancien, float psi_ancien) {
+    float psi = dpsi*pas+psi_ancien;
+    float theta = thetam + psi;
+    float dtheta = (theta-theta_ancien)/pas;
+    return {theta, psi, dtheta, dpsi};
+}
+
+float controlleur(float[] etat) {
+    float theta  = etat[0];
+    float psi    = etat[1];
+    float dtheta = etat[2];
+    float dpsi   = etat[3];
+    return 0.67*theta + 19.9053*psi + 1.0747*dtheta + 1.9614*dpsi;
 }
