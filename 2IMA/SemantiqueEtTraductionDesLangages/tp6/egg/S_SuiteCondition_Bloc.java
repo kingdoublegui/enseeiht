@@ -66,28 +66,34 @@ x_3.att_tds=this.att_tds;
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_egalite : // 35
+      case LEX_Bloc.token_egalite : // 39
         regle18 () ;
       break ;
-      case LEX_Bloc.token_different : // 34
+      case LEX_Bloc.token_different : // 38
         regle18 () ;
       break ;
-      case LEX_Bloc.token_inferieur : // 26
+      case LEX_Bloc.token_inferieur : // 30
         regle18 () ;
       break ;
-      case LEX_Bloc.token_inferieur_egal : // 28
+      case LEX_Bloc.token_inferieur_egal : // 32
         regle18 () ;
       break ;
-      case LEX_Bloc.token_superieur : // 27
+      case LEX_Bloc.token_superieur : // 31
         regle18 () ;
       break ;
-      case LEX_Bloc.token_superieur_egal : // 29
+      case LEX_Bloc.token_superieur_egal : // 33
         regle18 () ;
       break ;
-      case LEX_Bloc.token_point_virgule : // 31
+      case LEX_Bloc.token_point_virgule : // 35
         regle19 () ;
       break ;
-      case LEX_Bloc.token_parenthese_fermante : // 25
+      case LEX_Bloc.token_parenthese_fermante : // 29
+        regle19 () ;
+      break ;
+      case LEX_Bloc.token_virgule : // 36
+        regle19 () ;
+      break ;
+      case LEX_Bloc.token_accolade_fermante : // 25
         regle19 () ;
       break ;
       default :

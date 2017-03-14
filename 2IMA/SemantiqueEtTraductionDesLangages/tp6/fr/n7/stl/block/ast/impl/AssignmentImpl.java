@@ -19,9 +19,7 @@ public class AssignmentImpl implements Instruction {
 
 	private VariableDeclaration declaration;
 	private Expression value;
-	// <REMOVE>
-//	private String name;
-	// </REMOVE>
+	private String name;
 	private Expression assignable;
 
 	/**
@@ -35,12 +33,10 @@ public class AssignmentImpl implements Instruction {
 		this.value = _value;
 	}
 
-// <REMOVE>
-//	public AssignmentImpl(String _name, Expression _value) {
-//		this.name = _name;
-//		this.value = _value;
-//	}
-// </REMOVE>
+    public AssignmentImpl(String _name, Expression _value) {
+		this.name = _name;
+		this.value = _value;
+	}
 
 	/**
 	 * Create an assignment instruction implementation from the assignable expression
@@ -68,10 +64,7 @@ public class AssignmentImpl implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException( "checkType is undefined in AssignmentImpl.");
-		// <REMOVE>
-		// return this.value.getType().compatibleWith(this.declaration.getType());
-		// </REMOVE>
+		return this.value.getType().compatibleWith(this.declaration.getType());
 	}
 
 	/* (non-Javadoc)

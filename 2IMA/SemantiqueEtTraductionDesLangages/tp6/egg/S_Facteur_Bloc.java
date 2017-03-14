@@ -77,6 +77,19 @@ if  (att_eval)	  action_auto_inh_42(x_3);
 	x_3.analyser() ;
 if  (att_eval)	  action_ast_42(x_3);
   }
+  private void regle53() throws Exception {
+
+	//declaration
+	T_Bloc x_2 = new T_Bloc(scanner ) ;
+	S_Expressions_Bloc x_3 = new S_Expressions_Bloc(scanner,att_eval) ;
+	T_Bloc x_4 = new T_Bloc(scanner ) ;
+	//appel
+if  (att_eval)	  action_auto_inh_53(x_3);
+	x_2.analyser(LEX_Bloc.token_accolade_ouvrante);
+	x_3.analyser() ;
+	x_4.analyser(LEX_Bloc.token_accolade_fermante);
+if  (att_eval)	  action_ast_53(x_3);
+  }
   private void regle45() throws Exception {
 
 	//declaration
@@ -143,6 +156,13 @@ this.att_ast=this.att_factory.createUnaryExpression(UnaryOperator.Negate, x_3.at
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Facteur -> negation Facteur1 #ast ;", e });
 }
   }
+private void action_ast_53(S_Expressions_Bloc x_3) throws Exception {
+try {
+// instructions
+this.att_ast=this.att_factory.createSequence(x_3.att_expressions);
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Facteur -> accolade_ouvrante Expressions accolade_fermante #ast ;", e });
+}
+  }
 private void action_ast_43(S_Facteur_Bloc x_3) throws Exception {
 try {
 // instructions
@@ -180,6 +200,14 @@ x_3.att_tds=this.att_tds;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Facteur -> negation Facteur1 #ast ;", e });
 }
   }
+private void action_auto_inh_53(S_Expressions_Bloc x_3) throws Exception {
+try {
+// instructions
+x_3.att_factory=this.att_factory;
+x_3.att_tds=this.att_tds;
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Facteur -> accolade_ouvrante Expressions accolade_fermante #ast ;", e });
+}
+  }
 private void action_auto_inh_43(S_Facteur_Bloc x_3) throws Exception {
 try {
 // instructions
@@ -214,32 +242,35 @@ x_2.att_tds=this.att_tds;
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_parenthese_ouvrante : // 24
+      case LEX_Bloc.token_parenthese_ouvrante : // 28
         regle29 () ;
       break ;
-      case LEX_Bloc.token_identificateur : // 58
+      case LEX_Bloc.token_identificateur : // 62
         regle30 () ;
       break ;
-      case LEX_Bloc.token_soustraction : // 37
+      case LEX_Bloc.token_soustraction : // 41
         regle41 () ;
       break ;
-      case LEX_Bloc.token_negation : // 42
+      case LEX_Bloc.token_negation : // 46
         regle42 () ;
       break ;
-      case LEX_Bloc.token_premier : // 50
+      case LEX_Bloc.token_premier : // 54
         regle43 () ;
       break ;
-      case LEX_Bloc.token_second : // 51
+      case LEX_Bloc.token_second : // 55
         regle44 () ;
       break ;
-      case LEX_Bloc.token_entier : // 57
+      case LEX_Bloc.token_entier : // 61
         regle45 () ;
       break ;
-      case LEX_Bloc.token_vrai : // 44
+      case LEX_Bloc.token_vrai : // 48
         regle45 () ;
       break ;
-      case LEX_Bloc.token_faux : // 45
+      case LEX_Bloc.token_faux : // 49
         regle45 () ;
+      break ;
+      case LEX_Bloc.token_accolade_ouvrante : // 24
+        regle53 () ;
       break ;
       default :
         	   scanner._interrompre(IProblem.Syntax, scanner.getBeginLine(), IBlocMessages.id_Bloc_unexpected_token,BlocMessages.Bloc_unexpected_token,new String[]{scanner.fenetre[0].getNom()});

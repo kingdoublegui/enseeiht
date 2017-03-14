@@ -65,40 +65,43 @@ this.att_ast=x_3.att_ast;
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_type_bool : // 53
+      case LEX_Bloc.token_type_bool : // 57
         regle12 () ;
       break ;
-      case LEX_Bloc.token_type_int : // 52
+      case LEX_Bloc.token_type_int : // 56
         regle12 () ;
       break ;
-      case LEX_Bloc.token_inferieur : // 26
+      case LEX_Bloc.token_inferieur : // 30
         regle12 () ;
       break ;
-      case LEX_Bloc.token_identificateur_type : // 59
+      case LEX_Bloc.token_identificateur_type : // 63
         regle12 () ;
       break ;
-      case LEX_Bloc.token_constante : // 54
+      case LEX_Bloc.token_enregistrement : // 59
         regle12 () ;
       break ;
-      case LEX_Bloc.token_identificateur : // 58
+      case LEX_Bloc.token_constante : // 58
         regle12 () ;
       break ;
-      case LEX_Bloc.token_si : // 46
+      case LEX_Bloc.token_identificateur : // 62
         regle12 () ;
       break ;
-      case LEX_Bloc.token_tant_que : // 49
+      case LEX_Bloc.token_si : // 50
         regle12 () ;
       break ;
-      case LEX_Bloc.token_afficher : // 48
+      case LEX_Bloc.token_tant_que : // 53
         regle12 () ;
       break ;
-      case LEX_Bloc.token_typedef : // 56
+      case LEX_Bloc.token_afficher : // 52
         regle12 () ;
       break ;
-      case LEX_Bloc.token_accolade_fermante : // 21
+      case LEX_Bloc.token_typedef : // 60
         regle12 () ;
       break ;
-      case LEX_Bloc.token_sinon : // 47
+      case LEX_Bloc.token_accolade_fermante : // 25
+        regle12 () ;
+      break ;
+      case LEX_Bloc.token_sinon : // 51
         regle13 () ;
       break ;
       default :

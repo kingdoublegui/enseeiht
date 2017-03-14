@@ -49,12 +49,9 @@ public class ConditionalImpl implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException( "checkType is undefined in ConditionalImpl.");
-		// <REMOVE>
-		// return this.condition.getType().compatibleWith(AtomicType.BooleanType) 
-		//		&& this.thenBranch.checkType() 
-		//		&& (this.elseBranch.isPresent()?this.elseBranch.get().checkType():true);
-		// </REMOVE>
+		return this.condition.getType().compatibleWith(AtomicType.BooleanType) 
+				&& this.thenBranch.checkType() 
+				&& (this.elseBranch.isPresent()?this.elseBranch.get().checkType():true);
 	}
 
 	/* (non-Javadoc)

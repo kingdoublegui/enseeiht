@@ -335,34 +335,37 @@ x_6.att_tds=this.att_tds;
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_type_bool : // 53
+      case LEX_Bloc.token_type_bool : // 57
         regle8 () ;
       break ;
-      case LEX_Bloc.token_type_int : // 52
+      case LEX_Bloc.token_type_int : // 56
         regle8 () ;
       break ;
-      case LEX_Bloc.token_inferieur : // 26
+      case LEX_Bloc.token_inferieur : // 30
         regle8 () ;
       break ;
-      case LEX_Bloc.token_identificateur_type : // 59
+      case LEX_Bloc.token_identificateur_type : // 63
         regle8 () ;
       break ;
-      case LEX_Bloc.token_constante : // 54
+      case LEX_Bloc.token_enregistrement : // 59
+        regle8 () ;
+      break ;
+      case LEX_Bloc.token_constante : // 58
         regle9 () ;
       break ;
-      case LEX_Bloc.token_identificateur : // 58
+      case LEX_Bloc.token_identificateur : // 62
         regle10 () ;
       break ;
-      case LEX_Bloc.token_si : // 46
+      case LEX_Bloc.token_si : // 50
         regle11 () ;
       break ;
-      case LEX_Bloc.token_tant_que : // 49
+      case LEX_Bloc.token_tant_que : // 53
         regle14 () ;
       break ;
-      case LEX_Bloc.token_afficher : // 48
+      case LEX_Bloc.token_afficher : // 52
         regle15 () ;
       break ;
-      case LEX_Bloc.token_typedef : // 56
+      case LEX_Bloc.token_typedef : // 60
         regle16 () ;
       break ;
       default :

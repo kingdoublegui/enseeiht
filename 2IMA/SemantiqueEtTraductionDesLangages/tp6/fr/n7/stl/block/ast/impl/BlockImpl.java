@@ -36,22 +36,20 @@ public class BlockImpl implements Block {
 	 */
 	private Optional<Block> context;
 	
-	//<REMOVE>
 	/**
 	 * Subset of instructions corresponding to variable declarations in the same order.
 	 */
-	// private List<VariableDeclaration> variables;
+	private List<VariableDeclaration> variables;
 
 	/**
 	 * Subset of instructions corresponding to constant declarations in the same order.
 	 */	
-	// private List<ConstantDeclaration> constants;
+	private List<ConstantDeclaration> constants;
 
 	/**
 	 * Subset of instructions corresponding to type declarations in the same order.
 	 */
-	// private List<TypeDeclaration> types;
-	// </REMOVE>
+	private List<TypeDeclaration> types;
 
 	/**
 	 * Constructor for a block contained in a _context block.
@@ -60,11 +58,9 @@ public class BlockImpl implements Block {
 	public BlockImpl(Block _context) {
 		assert( _context != null);
 		this.instructions = new LinkedList<Instruction>();
-		// <REMOVE>
-		// this.variables = new LinkedList<VariableDeclaration>();
-		// this.constants = new LinkedList<ConstantDeclaration>();
-		// this.types = new LinkedList<TypeDeclaration>();
-		// </REMOVE>
+		this.variables = new LinkedList<VariableDeclaration>();
+		this.constants = new LinkedList<ConstantDeclaration>();
+		this.types = new LinkedList<TypeDeclaration>();
 		if (_context == null) {
 			this.context = Optional.empty();
 		} else {
@@ -77,11 +73,9 @@ public class BlockImpl implements Block {
 	 */
 	public BlockImpl() {
 		this.instructions = new LinkedList<Instruction>();
-		// <REMOVE>
-		// this.variables = new LinkedList<VariableDeclaration>();
-		// this.constants = new LinkedList<ConstantDeclaration>();
-		// this.types = new LinkedList<TypeDeclaration>();
-		// </REMOVE>
+		this.variables = new LinkedList<VariableDeclaration>();
+		this.constants = new LinkedList<ConstantDeclaration>();
+		this.types = new LinkedList<TypeDeclaration>();
 		this.context = Optional.empty();
 	}
 
@@ -91,31 +85,27 @@ public class BlockImpl implements Block {
 	@Override
 	public void add(Instruction _instruction) {
 		this.instructions.add(_instruction);
-		// <REMOVE>
-//		if (_instruction instanceof Declaration) {
-//			this.register((Declaration)_instruction);
-//		}
-		// </REMOVE>
+		if (_instruction instanceof Declaration) {
+			this.register((Declaration)_instruction);
+		}
 	}
 
-	// <REMOVE>
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.Scope#register(fr.n7.stl.block.ast.Declaration)
 	 */
-//	@Override
-//	public void register(Declaration _declaration) {
-//		if (_declaration instanceof VariableDeclaration) {
-//			this.variables.add((VariableDeclaration)_declaration);
-//		} else {
-//			if (_declaration instanceof ConstantDeclaration) {
-//				this.constants.add((ConstantDeclaration) _declaration);
-//			} else {
-//				if (_declaration instanceof TypeDeclaration) {
-//					this.types.add((TypeDeclaration) _declaration);
-//				}
-//			}
-//		}
-//	}
+	public void register(Declaration _declaration) {
+		if (_declaration instanceof VariableDeclaration) {
+			this.variables.add((VariableDeclaration)_declaration);
+		} else {
+			if (_declaration instanceof ConstantDeclaration) {
+				this.constants.add((ConstantDeclaration) _declaration);
+			} else {
+				if (_declaration instanceof TypeDeclaration) {
+					this.types.add((TypeDeclaration) _declaration);
+				}
+			}
+		}
+	}
 
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.HierarchicalScope#knows(java.lang.String)
@@ -215,14 +205,11 @@ public class BlockImpl implements Block {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException("Semantics checkType is undefined in BlockImpl.");
-		// <REMOVE>
-		// boolean _result = true;
-		// for (Instruction _instruction : this.instructions) {
-		// 	_result = _result & _instruction.checkType();
-		// }
-		// return _result;
-		// </REMOVE>
+		boolean _result = true;
+		for (Instruction _instruction : this.instructions) {
+			_result = _result & _instruction.checkType();
+		}
+		return _result;
 	}
 
 	/* (non-Javadoc)

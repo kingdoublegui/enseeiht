@@ -114,22 +114,22 @@ this.att_bin_op=BinaryOperator.Greater;
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_egalite : // 35
+      case LEX_Bloc.token_egalite : // 39
         regle20 () ;
       break ;
-      case LEX_Bloc.token_different : // 34
+      case LEX_Bloc.token_different : // 38
         regle31 () ;
       break ;
-      case LEX_Bloc.token_inferieur : // 26
+      case LEX_Bloc.token_inferieur : // 30
         regle32 () ;
       break ;
-      case LEX_Bloc.token_inferieur_egal : // 28
+      case LEX_Bloc.token_inferieur_egal : // 32
         regle33 () ;
       break ;
-      case LEX_Bloc.token_superieur : // 27
+      case LEX_Bloc.token_superieur : // 31
         regle34 () ;
       break ;
-      case LEX_Bloc.token_superieur_egal : // 29
+      case LEX_Bloc.token_superieur_egal : // 33
         regle35 () ;
       break ;
       default :

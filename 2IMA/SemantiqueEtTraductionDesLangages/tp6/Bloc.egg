@@ -10,10 +10,10 @@ option k=1;
 
 inh gauche	: Expression for SuiteCondition, SuiteTerme, SuiteFacteur;
 inh factory	: BlockFactory for Bloc, Instruction,
-    		  	       SuiteConditionnelle, Instructions, Expression, Condition,
+    		  	       SuiteConditionnelle, Instructions, Expression, Condition, Champ, Champs, Expressions, SuiteExpressions,
 			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type, Valeur ;  
 inh tds     : SymbolTable for  Bloc, Instruction,
-    		  	       SuiteConditionnelle, Instructions, Expression, Condition,
+    		  	       SuiteConditionnelle, Instructions, Expression, Condition, Champ, Champs, Expressions, SuiteExpressions,
 			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type, Valeur ;
 syn ast     : Block for Bloc, Programme;
 syn ast     : Value for Valeur;
@@ -23,6 +23,9 @@ syn ast		: Instruction for Instruction;
 syn ast     : List<Instruction> for Instructions;
 syn ast     : Block for SuiteConditionnelle;
 syn bin_op	: BinaryOperator for Additif, Multiplicatif, Comparatif;
+syn champs  : LinkedList<FieldDeclaration> for Champs;
+syn champ   : FieldDeclaration for Champ;
+syn expressions: LinkedList<Expression> for Expressions, SuiteExpressions;
 
 space  separateur				is    "[\n\r\t ]+";
 space  commentaire		    	is    "\/\/.*\n";
@@ -563,6 +566,82 @@ Valeur -> faux #ast;
 #ast {
 do
     Valeur^ast := Valeur^factory.createBooleanValue(false);
+end
+}
+
+Type -> enregistrement identificateur_type accolade_ouvrante #inh Champs accolade_fermante #ast ;
+global
+t : RecordType;
+#inh {
+do
+   if (Type^tds.contains( identificateur_type^txt)) then
+      error(Bloc_already_defined,identificateur_type^txt);
+   else
+      t := Type^factory.createRecordType( identificateur_type^txt );
+      Type^tds.register( t );
+   end
+end
+}
+#ast {
+do
+   -- Création d'un noeud type Enregistrement initialisé avec les champs
+   t.addAll(Champs^champs);
+   Type^ast := t; 
+end 
+}
+
+Champs -> Champ Champs #champs;  
+#champs { 
+local  
+   champs : LinkedList<FieldDeclaration>;  
+do  
+   champs :=  Champs1^champs;  
+   champs.addFirst(Champ^champ);  
+   Champs^champs := champs;  
+end  
+}
+ 
+Champs -> #champs;  
+#champs { 
+do  
+   Champs^champs := new LinkedList<FieldDeclaration>();  
+end  
+}
+
+Champ -> Type identificateur point_virgule #ast;
+#ast { 
+do  
+   Champ^champ := Champ^factory.createFieldDeclaration(identificateur^txt, Type^ast); 
+end  
+}
+
+Facteur -> accolade_ouvrante Expressions accolade_fermante #ast ;
+#ast {
+do
+   Facteur^ast := Facteur^factory.createSequence( Expressions^expressions );
+end
+}
+
+Expressions -> Expression SuiteExpressions #ast ;
+#ast {
+do 
+   SuiteExpressions^expressions.addFirst(Expression^ast); 
+   Expressions^expressions := SuiteExpressions^expressions; 
+end 
+}
+
+SuiteExpressions -> virgule Expression SuiteExpressions #ast ;
+#ast {
+do 
+   SuiteExpressions1^expressions.addFirst(Expression^ast); 
+   SuiteExpressions^expressions := SuiteExpressions1^expressions; 
+end 
+}
+
+SuiteExpressions -> #ast ;
+#ast {
+do
+   SuiteExpressions^expressions := new LinkedList<Expression>();
 end
 }
 

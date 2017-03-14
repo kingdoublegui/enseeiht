@@ -80,28 +80,19 @@ public class VariableDeclarationImpl implements VariableDeclaration {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException("Semantics checkType is undefined in VariableDeclarationImpl.");
-		// <REMOVE>
-		// return this.value.getType().compatibleWith(this.type);
-		// </REMOVE>
+		return this.value.getType().compatibleWith(this.type);
 	}
 
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException("Semantics allocateMemory is undefined in VariableDeclarationImpl.");
-		// <REMOVE>
-		// this.register = _register;
-		// this.offset = _offset;
-		// return this.type.length();
-		// </REMOVE>
+		this.register = _register;
+		this.offset = _offset;
+		return this.type.length();
 	}
 
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode is undefined in VariableDeclarationImpl.");
-		// <REMOVE>
-		// return this.value.getCode(_factory);
-		// </REMOVE>
+		return this.value.getCode(_factory);
 	}
 
 }

@@ -55,7 +55,6 @@ public class ConstantDeclarationImpl implements ConstantDeclaration {
 	 */
 	@Override
 	public boolean checkType() {
-		// throw new SemanticsUndefinedException( "checkType is undefined in ConstantDeclarationImpl.");
 		return this.value.getType().compatibleWith(this.type);
 	}
 

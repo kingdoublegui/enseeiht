@@ -78,37 +78,43 @@ this.att_ast=this.att_gauche;
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_addition : // 36
+      case LEX_Bloc.token_addition : // 40
         regle22 () ;
       break ;
-      case LEX_Bloc.token_soustraction : // 37
+      case LEX_Bloc.token_soustraction : // 41
         regle22 () ;
       break ;
-      case LEX_Bloc.token_ou : // 38
+      case LEX_Bloc.token_ou : // 42
         regle22 () ;
       break ;
-      case LEX_Bloc.token_egalite : // 35
+      case LEX_Bloc.token_egalite : // 39
         regle23 () ;
       break ;
-      case LEX_Bloc.token_different : // 34
+      case LEX_Bloc.token_different : // 38
         regle23 () ;
       break ;
-      case LEX_Bloc.token_inferieur : // 26
+      case LEX_Bloc.token_inferieur : // 30
         regle23 () ;
       break ;
-      case LEX_Bloc.token_inferieur_egal : // 28
+      case LEX_Bloc.token_inferieur_egal : // 32
         regle23 () ;
       break ;
-      case LEX_Bloc.token_superieur : // 27
+      case LEX_Bloc.token_superieur : // 31
         regle23 () ;
       break ;
-      case LEX_Bloc.token_superieur_egal : // 29
+      case LEX_Bloc.token_superieur_egal : // 33
         regle23 () ;
       break ;
-      case LEX_Bloc.token_point_virgule : // 31
+      case LEX_Bloc.token_point_virgule : // 35
         regle23 () ;
       break ;
-      case LEX_Bloc.token_parenthese_fermante : // 25
+      case LEX_Bloc.token_parenthese_fermante : // 29
+        regle23 () ;
+      break ;
+      case LEX_Bloc.token_virgule : // 36
+        regle23 () ;
+      break ;
+      case LEX_Bloc.token_accolade_fermante : // 25
         regle23 () ;
       break ;
       default :

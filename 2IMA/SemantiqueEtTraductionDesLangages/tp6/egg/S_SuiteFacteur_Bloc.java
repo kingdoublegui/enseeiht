@@ -78,49 +78,55 @@ this.att_ast=x_5.att_ast;
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_multiplication : // 39
+      case LEX_Bloc.token_multiplication : // 43
         regle26 () ;
       break ;
-      case LEX_Bloc.token_division : // 40
+      case LEX_Bloc.token_division : // 44
         regle26 () ;
       break ;
-      case LEX_Bloc.token_modulo : // 41
+      case LEX_Bloc.token_modulo : // 45
         regle26 () ;
       break ;
-      case LEX_Bloc.token_et : // 43
+      case LEX_Bloc.token_et : // 47
         regle26 () ;
       break ;
-      case LEX_Bloc.token_addition : // 36
+      case LEX_Bloc.token_addition : // 40
         regle27 () ;
       break ;
-      case LEX_Bloc.token_soustraction : // 37
+      case LEX_Bloc.token_soustraction : // 41
         regle27 () ;
       break ;
-      case LEX_Bloc.token_ou : // 38
+      case LEX_Bloc.token_ou : // 42
         regle27 () ;
       break ;
-      case LEX_Bloc.token_egalite : // 35
+      case LEX_Bloc.token_egalite : // 39
         regle27 () ;
       break ;
-      case LEX_Bloc.token_different : // 34
+      case LEX_Bloc.token_different : // 38
         regle27 () ;
       break ;
-      case LEX_Bloc.token_inferieur : // 26
+      case LEX_Bloc.token_inferieur : // 30
         regle27 () ;
       break ;
-      case LEX_Bloc.token_inferieur_egal : // 28
+      case LEX_Bloc.token_inferieur_egal : // 32
         regle27 () ;
       break ;
-      case LEX_Bloc.token_superieur : // 27
+      case LEX_Bloc.token_superieur : // 31
         regle27 () ;
       break ;
-      case LEX_Bloc.token_superieur_egal : // 29
+      case LEX_Bloc.token_superieur_egal : // 33
         regle27 () ;
       break ;
-      case LEX_Bloc.token_point_virgule : // 31
+      case LEX_Bloc.token_point_virgule : // 35
         regle27 () ;
       break ;
-      case LEX_Bloc.token_parenthese_fermante : // 25
+      case LEX_Bloc.token_parenthese_fermante : // 29
+        regle27 () ;
+      break ;
+      case LEX_Bloc.token_virgule : // 36
+        regle27 () ;
+      break ;
+      case LEX_Bloc.token_accolade_fermante : // 25
         regle27 () ;
       break ;
       default :

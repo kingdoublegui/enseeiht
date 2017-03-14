@@ -71,13 +71,13 @@ this.att_ast=this.att_factory.createIntegerValue(x_2.att_txt);
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_entier : // 57
+      case LEX_Bloc.token_entier : // 61
         regle46 () ;
       break ;
-      case LEX_Bloc.token_vrai : // 44
+      case LEX_Bloc.token_vrai : // 48
         regle47 () ;
       break ;
-      case LEX_Bloc.token_faux : // 45
+      case LEX_Bloc.token_faux : // 49
         regle48 () ;
       break ;
       default :

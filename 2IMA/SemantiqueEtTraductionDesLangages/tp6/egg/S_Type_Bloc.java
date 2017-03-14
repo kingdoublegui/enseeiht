@@ -23,6 +23,7 @@ int [] sync= new int[0];
   boolean att_eval;
   Type att_ast;
   LEX_Bloc att_scanner;
+  RecordType glob_49_t;
   private void regle2() throws Exception {
 
 	//declaration
@@ -63,6 +64,32 @@ if  (att_eval)	  action_ast_4(x_3, x_5);
 	//appel
 	x_2.analyser(LEX_Bloc.token_identificateur_type);
 if  (att_eval)	  action_ast_5(x_2);
+  }
+  private void regle49() throws Exception {
+
+	//declaration
+	T_Bloc x_2 = new T_Bloc(scanner ) ;
+	T_Bloc x_3 = new T_Bloc(scanner ) ;
+	T_Bloc x_4 = new T_Bloc(scanner ) ;
+	S_Champs_Bloc x_6 = new S_Champs_Bloc(scanner,att_eval) ;
+	T_Bloc x_7 = new T_Bloc(scanner ) ;
+	//appel
+if  (att_eval)	  action_auto_inh_49(x_3, x_6);
+	x_2.analyser(LEX_Bloc.token_enregistrement);
+	x_3.analyser(LEX_Bloc.token_identificateur_type);
+	x_4.analyser(LEX_Bloc.token_accolade_ouvrante);
+if  (att_eval)	  action_inh_49(x_3, x_6);
+	x_6.analyser() ;
+	x_7.analyser(LEX_Bloc.token_accolade_fermante);
+if  (att_eval)	  action_ast_49(x_3, x_6);
+  }
+private void action_ast_49(T_Bloc x_3, S_Champs_Bloc x_6) throws Exception {
+try {
+// instructions
+glob_49_t.addAll(x_6.att_champs);
+this.att_ast=glob_49_t;
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Type -> enregistrement identificateur_type accolade_ouvrante #inh Champs accolade_fermante #ast ;", e });
+}
   }
 private void action_ast_5(T_Bloc x_2) throws Exception {
 try {
@@ -112,11 +139,33 @@ this.att_ast=this.att_factory.createBooleanType();
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Type -> type_bool #ast ;", e });
 }
   }
+private void action_auto_inh_49(T_Bloc x_3, S_Champs_Bloc x_6) throws Exception {
+try {
+// instructions
+x_6.att_factory=this.att_factory;
+x_6.att_tds=this.att_tds;
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Type -> enregistrement identificateur_type accolade_ouvrante #inh Champs accolade_fermante #ast ;", e });
+}
+  }
 private void action_ast_3() throws Exception {
 try {
 // instructions
 this.att_ast=this.att_factory.createIntegerType();
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Type -> type_int #ast ;", e });
+}
+  }
+private void action_inh_49(T_Bloc x_3, S_Champs_Bloc x_6) throws Exception {
+try {
+// instructions
+if ((this.att_tds.contains(x_3.att_txt))){
+att_scanner._interrompre(IProblem.Semantic, att_scanner.getBeginLine(), IBlocMessages.id_Bloc_already_defined, BlocMessages.Bloc_already_defined,new Object[]{""+x_3.att_txt});
+
+}
+else {
+glob_49_t=this.att_factory.createRecordType(x_3.att_txt);
+this.att_tds.register(glob_49_t);
+}
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#inh","Type -> enregistrement identificateur_type accolade_ouvrante #inh Champs accolade_fermante #ast ;", e });
 }
   }
 private void action_ast_4(S_Type_Bloc x_3, S_Type_Bloc x_5) throws Exception {
@@ -129,17 +178,20 @@ this.att_ast=this.att_factory.createCoupleType(x_3.att_ast, x_5.att_ast);
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_type_bool : // 53
+      case LEX_Bloc.token_type_bool : // 57
         regle2 () ;
       break ;
-      case LEX_Bloc.token_type_int : // 52
+      case LEX_Bloc.token_type_int : // 56
         regle3 () ;
       break ;
-      case LEX_Bloc.token_inferieur : // 26
+      case LEX_Bloc.token_inferieur : // 30
         regle4 () ;
       break ;
-      case LEX_Bloc.token_identificateur_type : // 59
+      case LEX_Bloc.token_identificateur_type : // 63
         regle5 () ;
+      break ;
+      case LEX_Bloc.token_enregistrement : // 59
+        regle49 () ;
       break ;
       default :
         	   scanner._interrompre(IProblem.Syntax, scanner.getBeginLine(), IBlocMessages.id_Bloc_unexpected_token,BlocMessages.Bloc_unexpected_token,new String[]{scanner.fenetre[0].getNom()});

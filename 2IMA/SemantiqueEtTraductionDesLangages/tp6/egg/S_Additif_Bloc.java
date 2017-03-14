@@ -69,13 +69,13 @@ this.att_bin_op=BinaryOperator.Add;
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_addition : // 36
+      case LEX_Bloc.token_addition : // 40
         regle24 () ;
       break ;
-      case LEX_Bloc.token_soustraction : // 37
+      case LEX_Bloc.token_soustraction : // 41
         regle36 () ;
       break ;
-      case LEX_Bloc.token_ou : // 38
+      case LEX_Bloc.token_ou : // 42
         regle37 () ;
       break ;
       default :
