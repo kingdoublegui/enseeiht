@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="lallocation-de-ressources">L'allocation de ressources</h1>
+<p><em>Objectif : étudier le problème de l'allocation de ressources</em></p>
+<p>Énoncé du problème : on considère le problème de l'allocation de ressources. Il y a M ressources, critiques (non partegeables) et identiques (leur identité n'a pas d'importance). Les actions possibles sont :</p>
+<ul>
+<li>allouer(p) : alloue p ressources disponibles, qui cessent donc d'être disponibles. L'action est fausse (impossible) s'il n'y a pas au moins p ressources disponibles.</li>
+<li>libérer(q) : rend disponibles q ressources.</li>
+</ul>
+<p>Les processus respectent un bon comportement qui est décrit par :</p>
+<pre><code>{ \E n \in 1..M : allouer(n); libérer(n) }*</code></pre>
+<p>c'est-à-dire :</p>
+<ul>
+<li>un processus ne dépose pas de nouvelle demande tant que sa requête n'a pas été satisfaite et qu'il n'a pas libéré les ressources obtenues;</li>
+<li>un processus ne libère pas de ressources sans en avoir;</li>
+<li>le nombre de ressources libérées correspond au nombre de ressources obtenues.</li>
+</ul>
+<p><em>On ne se préoccupe d'abord pas de ce bon comportement.</em></p>
+<h3 id="modélisation-abstraite">Modélisation abstraite</h3>
+<p>-- fournie --</p>
+<h3 id="modélisation-concrète">Modélisation concrète</h3>
+<p>-- partiellement fournie --</p>
+<p>Objectif : étudier des propriétés de vivacité comme « toute demande est finalement satisfaite ».</p>
+<p>Pour cela, les actions deviennent :</p>
+<ul>
+<li>demander(i,p) : le processus i demande p ressources;</li>
+<li>obtenir(i) : vraie (possible) si la demande du processus i est satisfaite;</li>
+<li>liberer(i,q) : le processsus i rend q ressources</li>
+</ul>
+<p>À faire :</p>
+<ol style="list-style-type: decimal">
+<li>compléter le modèle y compris le bon comportement</li>
+<li>compléter la spécification en terme de sûreté :</li>
+</ol>
+<ul>
+<li>le nombre de ressources allouées est toujours inférieur à M;</li>
+<li>plus précisément : le nombre de ressources allouées + le nombre de ressources non allouées est toujours égal à M.</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>compléter la spécification en terme de vivacité telle qu'on la souhaiterait :</li>
+</ol>
+<ul>
+<li>absence d'interblocage : certaines demandes finissent par être satisfaites ;</li>
+<li>absence de famine : toute demande finit par être satisfaite.</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>ces propriétés sont-elles vérifiées ? Avec quel type d'équité ?</li>
+</ol>
+<h3 id="absence-de-famine-file-dattente">Absence de famine (file d'attente)</h3>
+<p>Introduire une FIFO pour garantir l'absence de famine. Cette solution ne doit utiliser que l'équité faible.</p>
+<p>On utilisera pour le codage le module <code>Sequences</code>.</p>
+<h3 id="absence-de-famine-ascenseur">Absence de famine (ascenseur)</h3>
+<p>Une autre solution pour garantir l'absence de famine est la technique de l'ascenseur : à un instant, il existe un valeur seuil sous lequel les requêtes sont ignorées. Quand une requête supérieure ou égale au seuil peut être allouée (assez de ressources), le seuil monte. Quand il n'y a pas de requête au-dessus du seuil, le seuil est remis à 0.</p>
+</body>
+</html>

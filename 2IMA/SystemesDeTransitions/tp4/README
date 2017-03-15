@@ -1,0 +1,72 @@
+
+L'allocation de ressources
+==========================
+
+*Objectif : étudier le problème de l'allocation de ressources*
+
+Énoncé du problème : on considère le problème de l'allocation de ressources.
+Il y a M ressources, critiques (non partegeables) et identiques (leur
+identité n'a pas d'importance). Les actions possibles sont :
+
+ - allouer(p) : alloue p ressources disponibles, qui cessent donc d'être
+   disponibles. L'action est fausse (impossible) s'il n'y a pas au moins p
+   ressources disponibles.
+ - libérer(q) : rend disponibles q ressources.
+
+Les processus respectent un bon comportement qui est décrit par :
+
+    { \E n \in 1..M : allouer(n); libérer(n) }*
+
+c'est-à-dire :
+
+- un processus ne dépose pas de nouvelle demande tant que sa requête n'a pas
+  été satisfaite et qu'il n'a pas libéré les ressources obtenues;
+- un processus ne libère pas de ressources sans en avoir;
+- le nombre de ressources libérées correspond au nombre de ressources
+   obtenues.
+
+*On ne se préoccupe d'abord pas de ce bon comportement.*
+
+### Modélisation abstraite
+-- fournie --
+
+### Modélisation concrète
+
+-- partiellement fournie --  
+
+Objectif : étudier des propriétés de vivacité comme « toute demande est
+finalement satisfaite ».
+
+Pour cela, les actions deviennent :
+
+- demander(i,p) : le processus i demande p ressources;
+- obtenir(i)    : vraie (possible) si la demande du processus i est satisfaite;
+- liberer(i,q)  : le processsus i rend q ressources
+
+À faire :
+
+1. compléter le modèle y compris le bon comportement
+2. compléter la spécification en terme de sûreté :
+   - le nombre de ressources allouées est toujours inférieur à M;
+   - plus précisément : le nombre de ressources allouées + le nombre de
+     ressources non allouées est toujours égal à M.
+3. compléter la spécification en terme de vivacité telle qu'on la souhaiterait :
+   - absence d'interblocage : certaines demandes finissent par être
+     satisfaites ;
+   - absence de famine : toute demande finit par être satisfaite.
+4. ces propriétés sont-elles vérifiées ? Avec quel type d'équité ?
+
+### Absence de famine (file d'attente)
+
+Introduire une FIFO pour garantir l'absence de famine. Cette solution ne
+doit utiliser que l'équité faible.
+
+On utilisera pour le codage le module `Sequences`.
+
+### Absence de famine (ascenseur)
+
+Une autre solution pour garantir l'absence de famine est la technique de
+l'ascenseur : à un instant, il existe un valeur seuil sous lequel les
+requêtes sont ignorées. Quand une requête supérieure ou égale au seuil peut
+être allouée (assez de ressources), le seuil monte. Quand il n'y a pas de
+requête au-dessus du seuil, le seuil est remis à 0.
