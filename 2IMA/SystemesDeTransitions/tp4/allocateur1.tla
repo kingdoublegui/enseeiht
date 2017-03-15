@@ -3,7 +3,7 @@
 
 (* Version concrète de l'allocation de ressources. *)
 
-EXTENDS Naturals
+EXTENDS Naturals, Sequences
 
 CONSTANT
    M,    \* nbre de ressources
@@ -12,9 +12,10 @@ CONSTANT
 VARIABLES
   nbDispo,
   demande,
-  satisfait
+  satisfait,
+  attente
 
-vars == << nbDispo, demande, satisfait >>
+vars == << nbDispo, demande, satisfait, attente >>
 
 TypeInvariant ==
   [] (/\ nbDispo \in 0..M
@@ -29,7 +30,18 @@ SommeDemande[S \in SUBSET (0..N-1) ] ==
 
 (* XXXX Autres propriétés temporelles de sûreté ??? *)
 
+MaxRessource ==
+    SommeDemande[{i \in 0..N-1 : satisfait[i]}] + nbDispo = M
+
+Surete ==
+    /\ MaxRessource
+
 (* XXXX Autres propriétés temporelles de vivacité ??? *)
+VivaciteFaible ==
+    (\E i \in 0..N-1 : demande[i] # 0) ~> (\E j \in 0..N-1 : satisfait[j])
+
+VivaciteForte ==
+    \A i \in 0..N-1 : demande[i] # 0 ~> satisfait[i]
 
 ----------------------------------------------------------------
 
@@ -37,12 +49,33 @@ Init ==
    /\ nbDispo = M
    /\ demande = [ i \in 0..N-1 |-> 0 ]
    /\ satisfait = [ i \in 0..N-1 |-> FALSE ]
+   /\ attente = <<>>
 
-demander(i,p) == /\ TRUE \* TODO
+demander(i,p) ==
+    /\ demande[i] = 0
+    /\ p <= M
+    /\ demande' = [demande EXCEPT ![i] = p]
+    /\ attente' = Append(attente, i)
+    /\ UNCHANGED <<nbDispo, satisfait>>
 
-obtenir(i) == /\ TRUE  \* TODO
+obtenir(i) ==
+    /\ Len(attente) > 0
+    /\ i = Head(attente)
+    /\ demande[i] > 0
+    /\ demande[i] <= nbDispo
+    /\ satisfait[i] = FALSE
+    /\ attente' = Tail(attente)
+    /\ nbDispo' = nbDispo - demande[i]
+    /\ satisfait' = [satisfait EXCEPT ![i] = TRUE]
+    /\ UNCHANGED demande
 
-liberer(i,q) == /\ TRUE \* TODO
+liberer(i,q) ==
+    /\ demande[i] = q
+    /\ satisfait[i]
+    /\ demande' = [demande EXCEPT ![i] = 0]
+    /\ nbDispo' = nbDispo + q
+    /\ satisfait' = [satisfait EXCEPT ![i] = FALSE]
+    /\ UNCHANGED attente
 
 Next ==
  \E i \in 0..N-1 : \E p \in 1..M :
@@ -50,7 +83,10 @@ Next ==
     \/ obtenir(i)
     \/ liberer(i,p)
 
-Fairness == TRUE \* TODO
+Fairness == \A i \in 0..N-1 :
+              \A p \in 1..M :
+              /\ WF_vars (obtenir(i))
+              /\ WF_vars (liberer(i, p))
 
 Spec ==
  /\ Init

@@ -5,8 +5,9 @@
 <stringAttribute key="configurationName" value="Model_1"/>
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
-<booleanAttribute key="distributedTLC" value="false"/>
-<stringAttribute key="distributedTLCScript" value=""/>
+<intAttribute key="distributedFPSetCount" value="0"/>
+<stringAttribute key="distributedNetworkInterface" value="147.127.133.169"/>
+<stringAttribute key="distributedTLC" value="off"/>
 <stringAttribute key="distributedTLCVMArgs" value=""/>
 <intAttribute key="fpBits" value="0"/>
 <intAttribute key="fpIndex" value="1"/>
@@ -18,6 +19,7 @@
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
 <stringAttribute key="modelBehaviorVars" value="nbDispo"/>
+<stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="true"/>
 <listAttribute key="modelCorrectnessInvariants"/>
 <listAttribute key="modelCorrectnessProperties">
@@ -32,8 +34,9 @@
 <listAttribute key="modelParameterDefinitions"/>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
-<intAttribute key="numberOfWorkers" value="1"/>
+<intAttribute key="numberOfWorkers" value="2"/>
 <booleanAttribute key="recover" value="false"/>
+<stringAttribute key="result.mail.address" value=""/>
 <intAttribute key="simuAril" value="-1"/>
 <intAttribute key="simuDepth" value="100"/>
 <intAttribute key="simuSeed" value="-1"/>
