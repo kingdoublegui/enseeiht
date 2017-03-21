@@ -207,7 +207,7 @@ public class BlockImpl implements Block {
 	public boolean checkType() {
 		boolean _result = true;
 		for (Instruction _instruction : this.instructions) {
-			_result = _result & _instruction.checkType();
+			_result = _result && _instruction.checkType();
 		}
 		return _result;
 	}
