@@ -21,62 +21,62 @@ int [] sync= new int[0];
   boolean att_eval;
   LEX_Bloc att_scanner;
   BinaryOperator att_bin_op;
-  private void regle37() throws Exception {
+  private void regle42() throws Exception {
 
 	//declaration
 	T_Bloc x_2 = new T_Bloc(scanner ) ;
 	//appel
 	x_2.analyser(LEX_Bloc.token_ou);
-if  (att_eval)	  action_ast_37();
+if  (att_eval)	  action_ast_42();
   }
-  private void regle36() throws Exception {
+  private void regle41() throws Exception {
 
 	//declaration
 	T_Bloc x_2 = new T_Bloc(scanner ) ;
 	//appel
 	x_2.analyser(LEX_Bloc.token_soustraction);
-if  (att_eval)	  action_ast_36();
+if  (att_eval)	  action_ast_41();
   }
-  private void regle24() throws Exception {
+  private void regle27() throws Exception {
 
 	//declaration
 	T_Bloc x_2 = new T_Bloc(scanner ) ;
 	//appel
 	x_2.analyser(LEX_Bloc.token_addition);
-if  (att_eval)	  action_ast_24();
+if  (att_eval)	  action_ast_27();
   }
-private void action_ast_36() throws Exception {
-try {
-// instructions
-this.att_bin_op=BinaryOperator.Substract;
-}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Additif -> soustraction #ast ;", e });
-}
-  }
-private void action_ast_37() throws Exception {
-try {
-// instructions
-this.att_bin_op=BinaryOperator.Or;
-}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Additif -> ou #ast ;", e });
-}
-  }
-private void action_ast_24() throws Exception {
+private void action_ast_27() throws Exception {
 try {
 // instructions
 this.att_bin_op=BinaryOperator.Add;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Additif -> addition #ast ;", e });
 }
   }
+private void action_ast_41() throws Exception {
+try {
+// instructions
+this.att_bin_op=BinaryOperator.Substract;
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Additif -> soustraction #ast ;", e });
+}
+  }
+private void action_ast_42() throws Exception {
+try {
+// instructions
+this.att_bin_op=BinaryOperator.Or;
+}catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#ast","Additif -> ou #ast ;", e });
+}
+  }
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_addition : // 40
-        regle24 () ;
+      case LEX_Bloc.token_addition : // 43
+        regle27 () ;
       break ;
-      case LEX_Bloc.token_soustraction : // 41
-        regle36 () ;
+      case LEX_Bloc.token_soustraction : // 44
+        regle41 () ;
       break ;
-      case LEX_Bloc.token_ou : // 42
-        regle37 () ;
+      case LEX_Bloc.token_ou : // 45
+        regle42 () ;
       break ;
       default :
         	   scanner._interrompre(IProblem.Syntax, scanner.getBeginLine(), IBlocMessages.id_Bloc_unexpected_token,BlocMessages.Bloc_unexpected_token,new String[]{scanner.fenetre[0].getNom()});

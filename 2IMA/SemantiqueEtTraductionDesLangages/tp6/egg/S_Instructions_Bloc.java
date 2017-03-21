@@ -68,40 +68,40 @@ this.att_ast=x_3.att_ast;
   public void analyser () throws Exception {
     scanner.lit ( 1 ) ;
     switch ( scanner.fenetre[0].code ) {
-      case LEX_Bloc.token_accolade_fermante : // 25
+      case LEX_Bloc.token_accolade_fermante : // 28
         regle6 () ;
       break ;
-      case LEX_Bloc.token_type_bool : // 57
+      case LEX_Bloc.token_type_bool : // 60
         regle7 () ;
       break ;
-      case LEX_Bloc.token_type_int : // 56
+      case LEX_Bloc.token_type_int : // 59
         regle7 () ;
       break ;
-      case LEX_Bloc.token_inferieur : // 30
+      case LEX_Bloc.token_inferieur : // 33
         regle7 () ;
       break ;
-      case LEX_Bloc.token_identificateur_type : // 63
+      case LEX_Bloc.token_identificateur_type : // 66
         regle7 () ;
       break ;
-      case LEX_Bloc.token_enregistrement : // 59
+      case LEX_Bloc.token_enregistrement : // 62
         regle7 () ;
       break ;
-      case LEX_Bloc.token_constante : // 58
+      case LEX_Bloc.token_constante : // 61
         regle7 () ;
       break ;
-      case LEX_Bloc.token_identificateur : // 62
+      case LEX_Bloc.token_identificateur : // 65
         regle7 () ;
       break ;
-      case LEX_Bloc.token_si : // 50
+      case LEX_Bloc.token_si : // 53
         regle7 () ;
       break ;
-      case LEX_Bloc.token_tant_que : // 53
+      case LEX_Bloc.token_tant_que : // 56
         regle7 () ;
       break ;
-      case LEX_Bloc.token_afficher : // 52
+      case LEX_Bloc.token_afficher : // 55
         regle7 () ;
       break ;
-      case LEX_Bloc.token_typedef : // 60
+      case LEX_Bloc.token_typedef : // 63
         regle7 () ;
       break ;
       default :
