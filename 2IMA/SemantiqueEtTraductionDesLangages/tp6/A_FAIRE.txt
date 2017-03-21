@@ -154,11 +154,10 @@ local
    v : TypeDeclaration ; 
 do 
    if Instruction^scope.contains(identificateur_type^txt) then 
-      error(B_00, identificateur_type^txt); 
+      error(BLOC_already_defined, identificateur_type^txt); 
    else
       v := Instruction^factory.createTypeDeclaration(identificateur_type^txt,Type^ast); 
       Instruction^scope.register(v);
-      Instruction^bloc.add(v); 
       Instruction^ast := v; 
    end 
 end 
@@ -174,20 +173,14 @@ do
    if Type^scope.knows(identificateur_type^txt) then
       -- Lecture dans la table des symboles
       d := Type^scope.get(identificateur_type^txt);
-      -- Si celle-ci a renvoyé un élément
-      if (d.isPresent()) then
-         -- Accès à cet élément
-         t := d.get();
-         match t
+      -- Accès à cet élément
+      t := d.get();
+      match t
 	 -- Si c'est un type, il est renvoyé
          with TypeDeclaration then Type^ast := t.getType();
          -- Sinon une erreur est signalée
-         else
-            error(BLOC_not_a_type,identificateur_type^txt);
-         end
-      -- Sinon une erreur est signalée
       else
-         error(BLOC_undefined_ident,identificateur_type^txt);
+            error(BLOC_not_a_type,identificateur_type^txt);
       end
    -- Sinon une erreur est signalée
    else
@@ -200,13 +193,15 @@ end
 A partir de cette séance, vous modifierez les classes Java fournies  
 pour implanter les actions sémantiques liées au typage, c'est-à-dire  
 les méthodes getType() pour les expressions et checkType() pour les  
-blocs et instructions. 
+blocs et instructions, ainsi que les méthodes de comparaisons des
+types equalsTo et compatibleWith, et de composition de types merge. 
 
 Implanter la sémantique de synthèse et vérification du typage.  
-Il s'agit d'implanter les actions sémantiques equalsTo, compatibleWith  
-et merge des différents noeuds Type de l'arbre abstrait; getType des différents  
-noeuds Expression de l'arbre abstrait, et les actions sémantiques  
-checkType des différents Instruction et Bloc de l'arbre abstrait. 
+Il s'agit d'implanter les actions sémantiques :
+- equalsTo, compatibleWith et merge des différents noeuds Type de
+   l'arbre abstrait;
+- getType des différents noeuds Expression de l'arbre abstrait,
+- checkType des différents Instruction et Bloc de l'arbre abstrait. 
  
 Le programme principal a été modifié pour appeler la sémantique de 
 vérification des types : 
@@ -271,6 +266,112 @@ do
    Champ^champ := Champ^factory.createFieldDeclaration( identificateur^txt, Type^ast);  
 end  
 }
+
+=== à la place de Instruction -> identificateur affectation Expression point_virgule ===
+
+Instruction -> Affectable affectation Expression point_virgule #ast ;
+#ast {
+do
+      Instruction^ast := Instruction^factory.createAssignment( Affectable^ast, Expression^ast);  
+ end
+}
+
+Affectable -> identificateur #inh SuiteAffectable #ast ;
+#inh {
+local
+   o : Optional<Declaration>;
+   d : Declaration;
+do
+   if (Affectable^scope.knows(identificateur^txt)) then
+      o := Affectable^scope.get(identificateur^txt);
+      d := o.get();
+      match d
+      with VariableDeclaration then SuiteAffectable^support := Affectable^factory.createVariableAssignment( d );
+      with ConstantDeclaration then error(BLOC_not_a_variable, identificateur^txt);
+      end
+   else
+      error(BLOC_undefined_ident, identificateur^txt);
+   end
+end
+}
+
+#ast {
+do
+   Affectable^ast := SuiteAffectable^ast;
+end
+}
+
+SuiteAffectable -> #ast ;
+
+#ast { 
+do  
+   SuiteAffectable^ast := SuiteAffectable^support;  
+end  
+}
+ 
+SuiteAffectable -> point identificateur #inh SuiteAffectable #ast;
+
+#inh {
+do
+   SuiteAffectable1^support := SuiteAffectable^factory.createFieldAssignment(SuiteAffectable^support,identificateur^txt);
+end
+}
+
+#ast { 
+do  
+   SuiteAffectable^ast := SuiteAffectable1^ast;  
+end  
+}
+
+=== à la place de Facteur -> identificateur ===
+
+Facteur -> identificateur #inh Acces #ast ;
+#inh {
+local
+   f : Optional<Declaration>;
+   d : Declaration;
+do
+   if (Facteur^scope.knows(identificateur^txt)) then
+      f := Facteur^scope.get(identificateur^txt);
+      d := f.get();
+      match d
+      with ConstantDeclaration then Acces^support := d.getValue();
+      with VariableDeclaration then Acces^support := Facteur^factory.createVariableUse(d);
+      end
+   else
+      error(BLOC_undefined_ident, identificateur^txt);
+   end
+end
+}
+
+#ast {
+do
+   Facteur^ast := Acces^ast;
+end
+}
+
+Acces -> #ast ;
+
+#ast { 
+do  
+   Acces^ast := Acces^support;  
+end  
+}
+ 
+Acces -> point identificateur #inh Acces #ast;
+
+#inh {
+do
+   Acces1^support := Acces^factory.createFieldAccess(Acces^support,identificateur^txt);
+end
+}
+
+#ast { 
+do  
+   Acces^ast := Acces1^ast;  
+end  
+}
+ 
 
 Implanter la sémantique de synthèse et vérification du typage. 
 Il s'agit d'implanter les actions sémantiques equalsTo, compatibleWith 

@@ -23,20 +23,20 @@ int [] sync= new int[0];
   boolean att_eval;
   LEX_Bloc att_scanner;
   FieldDeclaration att_champ;
-  private void regle52() throws Exception {
+  private void regle57() throws Exception {
 
 	//declaration
 	S_Type_Bloc x_2 = new S_Type_Bloc(scanner,att_eval) ;
 	T_Bloc x_3 = new T_Bloc(scanner ) ;
 	T_Bloc x_4 = new T_Bloc(scanner ) ;
 	//appel
-if  (att_eval)	  action_auto_inh_52(x_2, x_3);
+if  (att_eval)	  action_auto_inh_57(x_2, x_3);
 	x_2.analyser() ;
 	x_3.analyser(LEX_Bloc.token_identificateur);
 	x_4.analyser(LEX_Bloc.token_point_virgule);
-if  (att_eval)	  action_ast_52(x_2, x_3);
+if  (att_eval)	  action_ast_57(x_2, x_3);
   }
-private void action_auto_inh_52(S_Type_Bloc x_2, T_Bloc x_3) throws Exception {
+private void action_auto_inh_57(S_Type_Bloc x_2, T_Bloc x_3) throws Exception {
 try {
 // instructions
 x_2.att_factory=this.att_factory;
@@ -44,7 +44,7 @@ x_2.att_tds=this.att_tds;
 }catch(RuntimeException e) {	   att_scanner._interrompre(IProblem.Internal,att_scanner.getBeginLine(),ICoreMessages.id_EGG_runtime_error, CoreMessages.EGG_runtime_error,new Object[] { "Bloc", "#auto_inh","Champ -> Type identificateur point_virgule #ast ;", e });
 }
   }
-private void action_ast_52(S_Type_Bloc x_2, T_Bloc x_3) throws Exception {
+private void action_ast_57(S_Type_Bloc x_2, T_Bloc x_3) throws Exception {
 try {
 // instructions
 this.att_champ=this.att_factory.createFieldDeclaration(x_3.att_txt, x_2.att_ast);
@@ -52,6 +52,6 @@ this.att_champ=this.att_factory.createFieldDeclaration(x_3.att_txt, x_2.att_ast)
 }
   }
   public void analyser () throws Exception {
-    regle52 () ;
+    regle57 () ;
   }
   }

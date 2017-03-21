@@ -1,0 +1,23 @@
+<!-- EDF_P  Earlieast Deadline First Preemptive  -->
+
+
+<SIMULATION duration="120">
+
+    <!--	<SCHED className="storm.Schedulers.EDF_P_Scheduler"> </SCHED>   -->
+    <SCHED className="storm.Schedulers.FP_P_FIFO_Scheduler"> </SCHED>
+    <!--    <SCHED className="storm.Schedulers.RR_Scheduler"> </SCHED>  -->
+<!--	<SCHED className="EDF_mien_Scheduler"> </SCHED>  -->
+	
+	<CPUS>
+        <CPU className="storm.Processors.CT11MPCore" name ="CPU A" id="1"></CPU> 
+        <CPU className="storm.Processors.CT11MPCore" name ="CPU B" id="2"></CPU> 
+	</CPUS>
+	
+	<TASKS>
+		<TASK className="storm.Tasks.PTask_NAM" name ="PTASK T1" id="1" period="10" activationDate="0" WCET="4"  priority="1" deadline="10"> </TASK>
+		<TASK className="storm.Tasks.PTask_NAM" name ="PTASK T2" id="2" period="9" activationDate="2" WCET="3"  priority="5" deadline="9"> </TASK>
+		<TASK className="storm.Tasks.PTask_NAM" name ="PTASK T3" id="3" period="6" activationDate="4" WCET="2"  priority="10" deadline="6"> </TASK>	
+		<TASK className="storm.Tasks.PTask_NAM" name ="PTASK T4" id="4" period="10" activationDate="0" WCET="2"  priority="10" deadline="10"> </TASK>	
+	</TASKS>
+	
+</SIMULATION>

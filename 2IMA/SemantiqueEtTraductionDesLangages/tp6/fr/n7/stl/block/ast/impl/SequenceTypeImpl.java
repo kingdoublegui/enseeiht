@@ -79,12 +79,21 @@ public class SequenceTypeImpl implements Type {
 					_result = _result && (i1.next().compatibleWith(i2.next()));
 				}
 				return _result;
-			} else {
-				return false;
 			}
-		} else {
-			return false;
-		}
+		} else if (_other instanceof RecordTypeImpl) {
+			RecordTypeImpl _local = (RecordTypeImpl) _other;
+			if (this.types.size() == _local.length()) {
+				Iterator<Type> i1 = this.types.iterator();
+				Iterator<Type> i2 = _local.erase().types.iterator();
+				boolean _result = true;
+				while (i1.hasNext() && i2.hasNext() && _result) {
+					_result = _result && (i1.next().compatibleWith(i2.next()));
+				}
+				return _result;
+			}
+        }
+
+		return false;
 	}
 
 	/* (non-Javadoc)

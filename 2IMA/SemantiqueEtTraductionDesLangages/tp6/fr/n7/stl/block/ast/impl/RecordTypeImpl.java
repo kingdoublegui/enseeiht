@@ -11,6 +11,7 @@ import java.util.Optional;
 import fr.n7.stl.block.ast.FieldDeclaration;
 import fr.n7.stl.block.ast.ForbiddenDeclarationException;
 import fr.n7.stl.block.ast.RecordType;
+import fr.n7.stl.block.ast.AtomicType;
 import fr.n7.stl.block.ast.Scope;
 import fr.n7.stl.block.ast.Type;
 import fr.n7.stl.block.ast.TypeDeclaration;
@@ -75,7 +76,8 @@ public class RecordTypeImpl implements RecordType, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in RecordTypeImpl.");
+        return (_other instanceof RecordTypeImpl)
+            && this.getName().equals(((RecordTypeImpl)_other).getName());
 	}
 
 	/* (non-Javadoc)
@@ -83,7 +85,8 @@ public class RecordTypeImpl implements RecordType, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in RecordTypeImpl.");
+        return (_other instanceof RecordTypeImpl)
+            && this.getName().equals(((RecordTypeImpl)_other).getName());
 	}
 
 	/* (non-Javadoc)
@@ -91,7 +94,10 @@ public class RecordTypeImpl implements RecordType, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public Type merge(Type _other) {
-		throw new SemanticsUndefinedException( "compatibleWith is undefined in RecordTypeImpl.");
+        if (!this.compatibleWith(_other)) {
+            return AtomicType.ErrorType;
+        }
+        return this.getType();
 	}
 
 	/* (non-Javadoc)

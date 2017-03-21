@@ -1,0 +1,25 @@
+<!-- EDF_P  Earlieast Deadline First Preemptive  -->
+
+
+<SIMULATION duration="120">
+
+    <!--	<SCHED className="storm.Schedulers.EDF_P_Scheduler"> </SCHED>   -->
+    <!--    <SCHED className="storm.Schedulers.RR_Scheduler"> </SCHED>  -->
+    <SCHED className="RM_Scheduler"> </SCHED>
+	
+	<CPUS>
+        <CPU className="storm.Processors.CT11MPCore" name ="CPU A" id="1"></CPU> 
+        <CPU className="storm.Processors.CT11MPCore" name ="CPU B" id="1"></CPU> 
+	</CPUS>
+	
+	<TASKS>
+		<TASK className="storm.Tasks.PTask_NAM" name ="NL" id="1" period="120" activationDate="10" WCET="40"  priority="1" deadline="120"> </TASK>
+		<TASK className="storm.Tasks.PTask_NAM" name ="NF" id="2" period="120" activationDate="0" WCET="20"  priority="2" deadline="120"> </TASK>
+		<TASK className="storm.Tasks.PTask_NAM" name ="PL" id="3" period="40" activationDate="0" WCET="10"  priority="3" deadline="40"> </TASK>	
+		<TASK className="storm.Tasks.PTask_NAM" name ="PF" id="4" period="40" activationDate="0" WCET="15"  priority="4" deadline="40"> </TASK>	
+		<TASK className="storm.Tasks.PTask_NAM" name ="FL" id="5" period="10" activationDate="0" WCET="2"  priority="5" deadline="10"> </TASK>	
+		<TASK className="storm.Tasks.PTask_NAM" name ="FF" id="6" period="10" activationDate="0" WCET="1"  priority="6" deadline="10"> </TASK>	
+		<TASK className="storm.Tasks.PTask_NAM" name ="AP" id="7" period="10" activationDate="0" WCET="1"  priority="7" deadline="10"> </TASK>	
+	</TASKS>
+	
+</SIMULATION>

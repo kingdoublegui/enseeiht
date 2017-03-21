@@ -10,18 +10,20 @@ option k=1;
 
 inh gauche	: Expression for SuiteCondition, SuiteTerme, SuiteFacteur;
 inh factory	: BlockFactory for Bloc, Instruction,
-    		  	       SuiteConditionnelle, Instructions, Expression, Condition, Champ, Champs, Expressions, SuiteExpressions,
+    		  	       SuiteConditionnelle, Instructions, Expression, Condition, Champ, Champs, Expressions, SuiteExpressions, Affectable, SuiteAffectable, Acces,
 			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type, Valeur ;  
 inh tds     : SymbolTable for  Bloc, Instruction,
-    		  	       SuiteConditionnelle, Instructions, Expression, Condition, Champ, Champs, Expressions, SuiteExpressions,
+    		  	       SuiteConditionnelle, Instructions, Expression, Condition, Champ, Champs, Expressions, SuiteExpressions, Affectable, SuiteAffectable,
 			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type, Valeur ;
+inh support : Assignable for SuiteAffectable, Acces;
 syn ast     : Block for Bloc, Programme;
 syn ast     : Value for Valeur;
-syn ast		: Expression for Expression, Condition, SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur ;
+syn ast		: Expression for Expression, Condition, SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Acces;
 syn ast		: Type for Type;
 syn ast		: Instruction for Instruction;
 syn ast     : List<Instruction> for Instructions;
 syn ast     : Block for SuiteConditionnelle;
+syn ast     : Assignable for Affectable, SuiteAffectable;
 syn bin_op	: BinaryOperator for Additif, Multiplicatif, Comparatif;
 syn champs  : LinkedList<FieldDeclaration> for Champs;
 syn champ   : FieldDeclaration for Champ;
@@ -205,36 +207,58 @@ do
 end
 }
 
-Instruction -> identificateur affectation #inh Expression point_virgule #ast;
+Instruction -> Affectable affectation Expression point_virgule #ast ;
+#ast {
+do
+      Instruction^ast := Instruction^factory.createAssignment( Affectable^ast, Expression^ast);  
+ end
+}
+
+Affectable -> identificateur #inh SuiteAffectable #ast ;
 #inh {
 local
-    opd: Optional<Declaration>;
-    d: Declaration;
+   o : Optional<Declaration>;
+   d : Declaration;
 do
-    if (!Instruction^tds.knows(identificateur^txt)) then
-        error(Bloc_unexpected_token, identificateur^txt);
-    else
-        opd := Instruction^tds.get(identificateur^txt);
-        d := opd.get();
-        match  d
-        with ConstantDeclaration then
-            error(Bloc_expected_token, "ConstanteDeclaration", "VariableDeclaration");
-        end
-    end
+   if (Affectable^tds.knows(identificateur^txt)) then
+      o := Affectable^tds.get(identificateur^txt);
+      d := o.get();
+      match d
+      with VariableDeclaration then SuiteAffectable^support := Affectable^factory.createVariableAssignment( d );
+      with ConstantDeclaration then error(BLOC_not_a_variable, identificateur^txt);
+      end
+   else
+      error(BLOC_undefined_ident, identificateur^txt);
+   end
 end
 }
+
 #ast {
-local
-    opd: Optional<Declaration>;
-    d: Declaration;
 do
-    opd := Instruction^tds.get(identificateur^txt);
-    d := opd.get();
-    match d
-    with VariableDeclaration then
-        Instruction^ast := Instruction^factory.createAssignment(d, Expression^ast);
-    end
+   Affectable^ast := SuiteAffectable^ast;
 end
+}
+
+SuiteAffectable -> #ast ;
+
+#ast { 
+do  
+   SuiteAffectable^ast := SuiteAffectable^support;  
+end  
+}
+ 
+SuiteAffectable -> point identificateur #inh SuiteAffectable #ast;
+
+#inh {
+do
+   SuiteAffectable1^support := SuiteAffectable^factory.createFieldAssignment(SuiteAffectable^support,identificateur^txt);
+end
+}
+
+#ast { 
+do  
+   SuiteAffectable^ast := SuiteAffectable1^ast;  
+end  
 }
 
 Instruction -> si parenthese_ouvrante Expression parenthese_fermante Bloc SuiteConditionnelle #ast;
@@ -417,22 +441,50 @@ do
 end  
 }
 
-Facteur -> identificateur #ast ;  
-#ast {
+Facteur -> identificateur #inh Acces #ast ;
+#inh {
 local
-    opd : Optional<Declaration>;
-    d : Declaration;
-do 
-    if (!Facteur^tds.knows(identificateur^txt)) then
-        error(Bloc_unexpected_token, identificateur^txt);
-    else
-        opd := Facteur^tds.get(identificateur^txt);
-        d := opd.get();
-        match d 
-            with VariableDeclaration then Facteur^ast := Facteur^factory.createVariableUse(d);
-            with ConstantDeclaration then Facteur^ast := d.getValue();
-        end
-    end
+   f : Optional<Declaration>;
+   d : Declaration;
+do
+   if (Facteur^tds.knows(identificateur^txt)) then
+      f := Facteur^tds.get(identificateur^txt);
+      d := f.get();
+      match d
+      with ConstantDeclaration then Acces^support := d.getValue();
+      with VariableDeclaration then Acces^support := Facteur^factory.createVariableUse(d);
+      end
+   else
+      error(BLOC_undefined_ident, identificateur^txt);
+   end
+end
+}
+
+#ast {
+do
+   Facteur^ast := Acces^ast;
+end
+}
+
+Acces -> #ast ;
+
+#ast { 
+do  
+   Acces^ast := Acces^support;  
+end  
+}
+ 
+Acces -> point identificateur #inh Acces #ast;
+
+#inh {
+do
+   Acces1^support := Acces^factory.createFieldAccess(Acces^support,identificateur^txt);
+end
+}
+
+#ast { 
+do  
+   Acces^ast := Acces1^ast;  
 end  
 }
 
