@@ -25,6 +25,8 @@ DeclareAlarm(alarm_affichage);
 /* Variables globales du système                                             */
 /* ------------------------------------------------------------------------- */
 
+void estimateur(float thetam, float dpsi, float pas, float theta_ancien, float psi_ancien); 
+float controleur() ;
 /* Gyro calibration */
 int  gyro_offset;                   /* gyroscope sensor offset value(deg)    */
 int  gyro_offset_sum;               /* sum of gyroscope sensor offset 
@@ -48,7 +50,6 @@ MODE_ENUM nxtSegway_mode= INIT_MODE;
 
 
 TASK(pendule) {
-  float dt;
   int initial_time= 0;
         
   switch(nxtSegway_mode){
@@ -68,7 +69,7 @@ TASK(pendule) {
     
     initial_time= ecrobot_get_systick_ms();
     init_time(initial_time);
-    
+   
     /* Gyro calibration */
     gyro_offset         = 0;
     gyro_offset_sum     = 0;
@@ -97,8 +98,8 @@ TASK(pendule) {
 
   case(CONTROL_MODE):
 
-    float* etat = estimateur(getMotorAngle(), getGyro(0), delta_t());
-    nxt_motors_set_command(controleur(etat));
+    estimateur(getMotorAngle(), getGyro(0), delta_t(), x[0], x[1]);
+    nxt_motors_set_command(controleur());
 
     break;
 
@@ -150,17 +151,20 @@ ISR(isr_button_right)
 
 }
 
-float[4] estimateur(float thetam, float dpsi, float pas, float theta_ancien, float psi_ancien) {
+void estimateur(float thetam, float dpsi, float pas, float theta_ancien, float psi_ancien) {
     float psi = dpsi*pas+psi_ancien;
     float theta = thetam + psi;
     float dtheta = (theta-theta_ancien)/pas;
-    return {theta, psi, dtheta, dpsi};
+    x[0] = theta;
+    x[1] = psi;
+    x[2] = dtheta;
+    x[3] = dpsi;
 }
 
-float controlleur(float[] etat) {
-    float theta  = etat[0];
-    float psi    = etat[1];
-    float dtheta = etat[2];
-    float dpsi   = etat[3];
+float controleur() {
+    float theta  = x[0];
+    float psi    = x[1];
+    float dtheta = x[2];
+    float dpsi   = x[3];
     return 0.67*theta + 19.9053*psi + 1.0747*dtheta + 1.9614*dpsi;
 }

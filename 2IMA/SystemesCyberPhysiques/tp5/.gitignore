@@ -1,0 +1,6 @@
+Makefile
+build/
+nxtSegway.map
+nxtSegway/
+nxtSegway_exe
+nxtSegway_exe.rxe
