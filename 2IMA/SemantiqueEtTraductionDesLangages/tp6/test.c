@@ -9,6 +9,7 @@ test {
    const int j = 2;
    struct T { int n; int m; } s = { 4, 5};
    i = s.n;
-   i = i + j * true + s.n * (s).m;
+   i = i + j * 3 + s.n * s.m ;
+// i = (s).m; ne peut pas marcher car Facteur -> identificateur ... avec identificateur match "[a-z][a-zA-Z0-9_]*"
    s.m = 6;
 }

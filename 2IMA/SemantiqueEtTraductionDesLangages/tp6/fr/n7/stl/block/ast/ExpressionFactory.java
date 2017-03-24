@@ -128,7 +128,7 @@ public interface ExpressionFactory {
 	 * @param _field Abstract Syntax Tree node for the field in the record.
 	 * @return Abstract Syntax Tree node for the access of the _field in the _record.
 	 */
-	public Expression createFieldAssignment(Assignable _record, FieldDeclaration _field);
+	public Assignable createFieldAssignment(Assignable _record, FieldDeclaration _field);
 
 	/**
 	 * Create a node for an access to a field in a record expression in the Abstract Syntax Tree.
@@ -146,7 +146,7 @@ public interface ExpressionFactory {
 	 * @param _name Name of the field in the record.
 	 * @return Abstract Syntax Tree node for the access of the _name in the _record.
 	 */
-	public Expression createFieldAssignment(Assignable _record, String _name);
+	public Assignable createFieldAssignment(Assignable _record, String _name);
 
 	/**
 	 * Create a node for an access to the pointed value in an expression in the Abstract Syntax Tree.

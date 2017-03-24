@@ -15,7 +15,8 @@ inh factory	: BlockFactory for Bloc, Instruction,
 inh tds     : SymbolTable for  Bloc, Instruction,
     		  	       SuiteConditionnelle, Instructions, Expression, Condition, Champ, Champs, Expressions, SuiteExpressions, Affectable, SuiteAffectable,
 			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type, Valeur ;
-inh support : Assignable for SuiteAffectable, Acces;
+inh support : Assignable for SuiteAffectable;
+inh support : Expression for Acces;
 syn ast     : Block for Bloc, Programme;
 syn ast     : Value for Valeur;
 syn ast		: Expression for Expression, Condition, SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Acces;
@@ -188,21 +189,17 @@ do
 end
 }
 
-Instruction -> constante Type identificateur affectation #inh Valeur point_virgule #ast;
-#inh {
+Instruction -> constante Type identificateur affectation Valeur point_virgule #ast;
+#ast {
 local
     d: Declaration;
 do
-    d := Instruction^factory.createConstantDeclaration(identificateur^txt, Type^ast, null);
+    d := Instruction^factory.createConstantDeclaration(identificateur^txt, Type^ast, Valeur^ast);
     if (Instruction^tds.contains(d.getName())) then
         error(Bloc_unexpected_token, identificateur^txt);
     else
         Instruction^tds.register(d);
     end
-end
-}
-#ast {
-do
     Instruction^ast := Instruction^factory.createConstantDeclaration(identificateur^txt, Type^ast, Valeur^ast);
 end
 }
@@ -210,7 +207,7 @@ end
 Instruction -> Affectable affectation Expression point_virgule #ast ;
 #ast {
 do
-      Instruction^ast := Instruction^factory.createAssignment( Affectable^ast, Expression^ast);  
+      Instruction^ast := Instruction^factory.createAssignment(Affectable^ast, Expression^ast);
  end
 }
 

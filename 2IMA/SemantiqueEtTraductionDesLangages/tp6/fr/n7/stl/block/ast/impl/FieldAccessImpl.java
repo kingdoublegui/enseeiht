@@ -9,6 +9,8 @@ import fr.n7.stl.block.ast.Type;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.TAMFactory;
 
+import java.util.Optional;
+
 /**
  * Implementation of the Abstract Syntax Tree node for accessing a field in a record.
  * @author Marc Pantel
@@ -43,10 +45,13 @@ public class FieldAccessImpl implements Expression {
 	 */
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException( "getType is undefined in FieldAccessImpl.");
-		// <REMOVE>
-		// return this.field.getType();
-		// </REMOVE>
+		if (field == null) {
+			Optional<FieldDeclaration> field = ((RecordTypeImpl)this.record.getType()).get(name);
+			if (field.isPresent()) {
+				return field.get().getType();
+			}
+		}
+		return this.field.getType();
 	}
 
 	/* (non-Javadoc)
