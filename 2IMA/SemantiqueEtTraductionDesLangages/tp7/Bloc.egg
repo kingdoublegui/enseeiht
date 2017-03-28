@@ -10,25 +10,32 @@ option k=1;
 
 inh gauche	: Expression for SuiteCondition, SuiteTerme, SuiteFacteur;
 inh factory	: BlockFactory for Bloc, Instruction,
-    		  	       SuiteConditionnelle, Instructions, Expression, Condition, Champ, Champs, Expressions, SuiteExpressions, Affectable, SuiteAffectable, Acces,
-			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type, Valeur ;  
-inh tds     : SymbolTable for  Bloc, Instruction,
-    		  	       SuiteConditionnelle, Instructions, Expression, Condition, Champ, Champs, Expressions, SuiteExpressions, Affectable, SuiteAffectable,
-			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type, Valeur ;
+    		  SuiteConditionnelle, Instructions, Expression, Condition, Champ, Champs,
+    		  Expressions, SuiteExpressions, Affectable, SuiteAffectable, Acces,
+    		  SuiteNouveau, NomEtendu, SuiteNomEtendu,
+	          SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type, Valeur ;
+inh tds     : SymbolTable for  Bloc, Instruction, Acces,
+    		  SuiteConditionnelle, Instructions, Expression, Condition, Champ, Champs,
+    		  Expressions, SuiteExpressions, Affectable, SuiteAffectable, SuiteNouveau,
+			  SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type, Valeur ;
 inh support : Assignable for SuiteAffectable;
 inh support : Expression for Acces;
+inh type    : Type for SuiteNouveau, NomEtendu, SuiteNomEtendu;
 syn ast     : Block for Bloc, Programme;
 syn ast     : Value for Valeur;
 syn ast		: Expression for Expression, Condition, SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Acces;
-syn ast		: Type for Type;
+syn ast		: Type for Type, NomEtendu;
 syn ast		: Instruction for Instruction;
 syn ast     : List<Instruction> for Instructions;
 syn ast     : Block for SuiteConditionnelle;
 syn ast     : Assignable for Affectable, SuiteAffectable;
+-- On ne sait pas quoi mettre donc Expression
+syn ast     : Expression for SuiteNouveau, SuiteNomEtendu;
 syn bin_op	: BinaryOperator for Additif, Multiplicatif, Comparatif;
 syn champs  : LinkedList<FieldDeclaration> for Champs;
 syn champ   : FieldDeclaration for Champ;
 syn expressions: LinkedList<Expression> for Expressions, SuiteExpressions;
+syn nom     : String for NomEtendu;
 
 space  separateur				is    "[\n\r\t ]+";
 space  commentaire		    	is    "\/\/.*\n";
@@ -69,6 +76,8 @@ sugar  type_bool				is    "bool";
 sugar  constante                is    "const";
 sugar  enregistrement			is    "struct";
 sugar  typedef      			is    "typedef";
+sugar  adresse                  is    "&";
+sugar  nouveau                  is    "new";
 term   entier					is    "[0-9]+";
 term   identificateur			is    "[a-z][a-zA-Z0-9_]*"; 
 term   identificateur_type		is    "[A-Z][a-zA-Z0-9_]*"; 
@@ -170,24 +179,24 @@ do
 end
 }
 
-Instruction -> Type identificateur affectation #inh Expression point_virgule #ast;
-#inh {
-local
-    d: Declaration;
-do
-    d := Instruction^factory.createVariableDeclaration(identificateur^txt, Type^ast, null);
-    if (Instruction^tds.contains(d.getName())) then
-        error(Bloc_unexpected_token, identificateur^txt);
-    else
-        Instruction^tds.register(d);
-    end
-end
-}
-#ast {
-do
-    Instruction^ast := Instruction^factory.createVariableDeclaration(identificateur^txt, Type^ast, Expression^ast);
-end
-}
+--Instruction -> Type identificateur affectation #inh Expression point_virgule #ast;
+--#inh {
+--local
+--    d: Declaration;
+--do
+--    d := Instruction^factory.createVariableDeclaration(identificateur^txt, Type^ast, null);
+--    if (Instruction^tds.contains(d.getName())) then
+--        error(Bloc_unexpected_token, identificateur^txt);
+--    else
+--        Instruction^tds.register(d);
+--    end
+--end
+--}
+--#ast {
+--do
+--    Instruction^ast := Instruction^factory.createVariableDeclaration(identificateur^txt, Type^ast, Expression^ast);
+--end
+--}
 
 Instruction -> constante Type identificateur affectation Valeur point_virgule #ast;
 #ast {
@@ -233,6 +242,33 @@ end
 #ast {
 do
    Affectable^ast := SuiteAffectable^ast;
+end
+}
+
+Affectable -> parenthese_ouvrante Affectable parenthese_fermante #ast ;
+#ast {
+do
+   Affectable^ast := Affectable1^ast;
+end
+}
+
+Affectable -> multiplication Affectable #ast ;
+#ast {
+do
+   Affectable^ast := Affectable^factory.createPointerAssignement(Affectable1^ast);
+end
+}
+
+SuiteAffectable -> crochet_ouvrant Expression crochet_fermant #inh SuiteAffectable #ast ;
+#inh {
+do
+   SuiteAffectable1^support := SuiteAffectable^factory.createArrayAssignment(SuiteAffectable^support,Expression^ast);
+end
+}
+
+#ast {
+do
+   SuiteAffectable^ast := SuiteAffectable1^ast;
 end
 }
 
@@ -306,6 +342,89 @@ do
       Instruction^ast := v; 
    end 
 end 
+}
+
+Instruction -> Type #inh NomEtendu affectation Expression point_virgule #ast ;
+#inh {
+do
+   NomEtendu^type := Type^ast;
+end
+}
+
+#ast {
+local
+   v : VariableDeclaration ;
+do
+   if Instruction^tds.contains(NomEtendu^nom) then
+      error(BLOC_already_defined, NomEtendu^nom);
+   else
+      v := Instruction^factory.createVariableDeclaration(NomEtendu^nom,NomEtendu^ast,Expression^ast);
+      Instruction^tds.register(v);
+      Instruction^ast := v;
+   end
+end
+}
+
+NomEtendu -> multiplication #inh NomEtendu #ast ;
+#inh {
+do
+   NomEtendu1^type := NomEtendu^factory.createPointerType(NomEtendu^type);
+end
+}
+
+#ast {
+do
+   NomEtendu^nom := NomEtendu1^nom;
+   NomEtendu^ast := NomEtendu1^ast;
+end
+}
+
+NomEtendu -> parenthese_ouvrante #inh NomEtendu parenthese_fermante #ast ;
+#inh {
+do
+   NomEtendu1^type := NomEtendu^type;
+end
+}
+
+#ast {
+do
+   NomEtendu^nom := NomEtendu1^nom;
+   NomEtendu^ast := NomEtendu1^ast;
+end
+}
+
+NomEtendu -> identificateur #inh SuiteNomEtendu #ast ;
+#inh {
+do
+   SuiteNomEtendu^type := NomEtendu^type;
+end
+}
+
+#ast {
+do
+   NomEtendu^nom := identificateur^txt;
+   NomEtendu^ast := SuiteNomEtendu^ast;
+end
+}
+
+SuiteNomEtendu -> crochet_ouvrant crochet_fermant #inh SuiteNomEtendu #ast ;
+#inh {
+do
+   SuiteNomEtendu1^type := SuiteNomEtendu^factory.createArrayType( SuiteNomEtendu^type );
+end
+}
+
+#ast {
+do
+   SuiteNomEtendu^ast := SuiteNomEtendu1^ast;
+end
+}
+
+SuiteNomEtendu -> #ast;
+#ast {
+do
+    SuiteNomEtendu^ast := SuiteNomEtendu^factory.createXX();
+end
 }
 
 Expression -> Condition #inh SuiteCondition #ast ;
@@ -460,6 +579,61 @@ end
 #ast {
 do
    Facteur^ast := Acces^ast;
+end
+}
+
+Facteur -> multiplication Facteur #ast ;
+#ast {
+do
+   Facteur^ast := Facteur ^factory.createPointerAccess(Facteur1^ast);
+end
+}
+
+Facteur -> adresse Affectable #ast ;
+#ast {
+do
+   Facteur^ast := Facteur ^factory.createAddressAccess(Affectable^ast);
+end
+}
+
+Facteur -> nouveau Type #inh SuiteNouveau #ast ;
+#inh {
+do
+   SuiteNouveau^type := Type^ast;
+end
+}
+
+#ast {
+do
+   Facteur^ast := SuiteNouveau^ast;
+end
+}
+
+SuiteNouveau -> crochet_ouvrant Expression crochet_fermant #ast ;
+#ast {
+do
+   SuiteNouveau^ast := SuiteNouveau^factory.createArrayAllocation(SuiteNouveau^type,Expression^ast);
+end
+}
+
+SuiteNouveau -> #ast ;
+#ast {
+do
+   SuiteNouveau^ast := SuiteNouveau^factory.createPointerAllocation(SuiteNouveau^type);
+end
+}
+
+Acces -> crochet_ouvrant Expression crochet_fermant #inh Acces #ast;
+
+#inh {
+do
+   Acces1^support := Acces^factory.createArrayAccess(Acces^support,Expression^ast);
+end
+}
+
+#ast {
+do
+   Acces^ast := Acces1^ast;
 end
 }
 

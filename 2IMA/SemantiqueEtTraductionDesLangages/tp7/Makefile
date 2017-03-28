@@ -26,7 +26,7 @@ compile :
 	$(JAVAC) -classpath $(EGGJAR):. Main.java
 
 exec :
-	$(JAVA) -classpath $(EGGJAR):. Main test.c
+	$(JAVA) -classpath $(EGGJAR):. Main testPointer.c
 
 clean :
 	-rm Main.class
