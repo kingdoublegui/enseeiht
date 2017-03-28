@@ -1,0 +1,15 @@
+test {
+   typedef int T1;
+   typedef int T2;
+   T1 v1 = true;
+   T2 v2 = v1;
+   T1 k = 1;
+   int l = k;
+   int i = - 1;
+   const int j = 2;
+   struct T { int n; int m; } s = { 4, 5};
+   i = s.n;
+   i = i + j * 3 + s.n * s.m ;
+// i = (s).m; ne peut pas marcher car Facteur -> identificateur ... avec identificateur match "[a-z][a-zA-Z0-9_]*"
+   s.m = 6;
+}

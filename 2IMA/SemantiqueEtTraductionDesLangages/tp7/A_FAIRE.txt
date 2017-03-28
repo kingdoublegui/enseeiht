@@ -1,0 +1,243 @@
+Grammaires Attribuées : Outil EGG.
+Vérification de type et Calcul des déplacements pour le langage Bloc.
+
+Objectif : Implanter la sémantique du typage et de l'allocation de la
+mémoire (calcul des déplacements) pour le langage Bloc par un parcours
+de l'arbre abstrait construit dans les séances précédentes.
+
+Il s'agit d'abord de compléter la sémantique du typage étudiée lors des
+séances précédentes en ajoutant d'abord les pointeurs et les tableaux
+tels qu'ils ont été étudiés en TD.
+
+Ensuite, il faut réaliser le calcul des déplacements tels qu'il a été
+étudié en cours pour les expressions et en TD pour le reste du
+langage.
+
+Rappel : La documentation est dans 'egg5.pdf'
+
+Nous mettons à votre disposition les classes représentant l'arbre
+abstrait, la table des symboles (interface Scope et HierarchicalScope,
+classe SymbolTable) et les types.
+
+La commande make produit également la documentation au format JavaDoc
+dans le répertoire doc. Celle-ci est incomplète. Seule les interfaces
+XxxFactory, Scope, HierarchicalScope sont détaillées.
+
+L'objectif est de compléter les travaux réalisés dans la séance
+précédente.
+
+============================================================
+
+
+I) Copier le fichier Bloc.egg de la séance précédente dans le 
+répertoire courant. Vous modifierez les classes existantes et
+ajouterez les classes et méthodes nécessaires dans la bibliothèque.
+
+
+============================================================
+
+II) Nous ajoutons dans la grammaire des expressions la création de
+tableaux et de pointeurs, la lecture d'éléments dans des tableaux et
+de valeurs pointées :
+
+Facteur -> multiplication Facteur #ast ;  
+#ast { 
+do  
+   Facteur^ast := Facteur ^factory.createPointerAccess(Facteur1^ast);  
+end  
+}
+
+Facteur -> adresse Affectable #ast ; 
+#ast {
+do  
+   Facteur^ast := Facteur ^factory.createAddressAccess(Affectable^ast);  
+end  
+}
+
+Facteur -> nouveau Type #inh SuiteNouveau #ast ; 
+#inh {
+do 
+   SuiteNouveau^type := Type^ast; 
+end 
+}
+
+#ast {
+do 
+   Facteur^ast := SuiteNouveau^ast; 
+end 
+}
+
+SuiteNouveau -> crochet_ouvrant Expression crochet_fermant #ast ; 
+#ast {
+do  
+   SuiteNouveau^ast := SuiteNouveau^factory.createArrayAllocation(SuiteNouveau^type,Expression^ast);  
+end  
+}
+
+SuiteNouveau -> #ast ; 
+#ast {
+do 
+   SuiteNouveau^ast := SuiteNouveau^factory.createPointerAllocation(SuiteNouveau^type); 
+end 
+}
+
+Acces -> crochet_ouvrant Expression crochet_fermant #inh Acces #ast;
+
+#inh {
+do
+   Acces1^support := Acces^factory.createArrayAccess(Acces^support,Expression^ast);
+end
+}
+
+#ast { 
+do  
+   Acces^ast := Acces1^ast;  
+end  
+}
+
+Implanter la sémantique de synthèse et vérification du typage. 
+Il s'agit d'implanter les actions sémantiques : 
+- equalsTo, compatibleWith et merge des différents noeuds Type de 
+   l'arbre abstrait; 
+- getType des différents noeuds Expression de l'arbre abstrait, 
+- checkType des différents Instruction et Bloc de l'arbre abstrait. 
+
+
+============================================================
+
+III) Nous ajoutons dans la grammaire des affectations la possibilité
+d'affecter la valeur d'un élément dans un tableau et
+d'une valeur désignée par un pointeur :
+
+ Affectable -> parenthese_ouvrante Affectable parenthese_fermante #ast ;
+#ast {
+do
+   Affectable^ast := Affectable1^ast;
+end
+}
+
+Affectable -> multiplication Affectable #ast ;
+#ast {
+do
+   Affectable^ast := Affectable^factory.createPointerAssignement(Affectable1^ast);
+end
+}
+
+SuiteAffectable -> crochet_ouvrant Expression crochet_fermant #inh SuiteAffectable #ast ;
+#inh {
+do
+   SuiteAffectable1^support := SuiteAffectable^factory.createArrayAssignment(SuiteAffectable^support,Expression^ast);  
+end
+}
+
+#ast {
+do
+   SuiteAffectable^ast := SuiteAffectable1^ast;   
+end
+}
+
+Implanter la sémantique de synthèse et vérification du typage. 
+Il s'agit d'implanter les actions sémantiques : 
+- equalsTo, compatibleWith et merge des différents noeuds Type de 
+   l'arbre abstrait; 
+- getType des différents noeuds Expression de l'arbre abstrait, 
+- checkType des différents Instruction et Bloc de l'arbre abstrait. 
+
+
+============================================================
+
+IV) Nous ajoutons dans la grammaire des déclarations la possibilité
+de déclarer des variables de type tableau et pointeur :
+
+Instruction -> Type #inh NomEtendu affectation Expression point_virgule #ast ;
+#inh {
+do
+   NomEtendu^type := Type^ast;
+end
+}
+
+#ast {
+local 
+   v : VariableDeclaration ; 
+do 
+   if Instruction^scope.contains(NomEtendu^nom) then 
+      error(BLOC_already_defined, NomEtendu^nom); 
+   else 
+      v := Instruction^factory.createVariableDeclaration(NomEtendu^nom,NomEtendu^ast,Expression^ast); 
+      Instruction^scope.register(v);
+      Instruction^ast := v; 
+   end 
+end 
+}
+
+NomEtendu -> multiplication #inh NomEtendu #ast ;
+#inh {
+do 
+   NomEtendu1^type := NomEtendu^factory.createPointerType(NomEtendu^type); 
+end 
+}
+
+#ast {
+do 
+   NomEtendu^nom := NomEtendu1^nom; 
+   NomEtendu^ast := NomEtendu1^ast; 
+end 
+}
+
+NomEtendu -> parenthese_ouvrante #inh NomEtendu parenthese_fermante #ast ;  
+#inh {
+do 
+   NomEtendu1^type := NomEtendu^type; 
+end 
+}
+
+#ast {
+do 
+   NomEtendu^nom := NomEtendu1^nom; 
+   NomEtendu^ast := NomEtendu1^ast; 
+end 
+}
+
+NomEtendu -> identificateur #inh SuiteNomEtendu #ast ;
+#inh {
+do 
+   SuiteNomEtendu^type := NomEtendu^type; 
+end 
+}
+
+#ast {
+do 
+   NomEtendu^nom := identificateur^txt; 
+   NomEtendu^ast := SuiteNomEtendu^ast; 
+end 
+}
+
+SuiteNomEtendu -> crochet_ouvrant crochet_fermant #inh SuiteNomEtendu #ast ;  
+#inh {
+do 
+   SuiteNomEtendu1^type := SuiteNomEtendu^factory.createArrayType( SuiteNomEtendu^type ); 
+end 
+}
+
+#ast {
+do 
+   SuiteNomEtendu^ast := SuiteNomEtendu1^ast; 
+end 
+}
+
+Implanter la sémantique de synthèse et vérification du typage.  
+Il s'agit d'implanter les actions sémantiques :  
+- equalsTo, compatibleWith et merge des différents noeuds Type de  
+   l'arbre abstrait;  
+- getType des différents noeuds Expression de l'arbre abstrait,  
+- checkType des différents Instruction et Bloc de l'arbre abstrait. 
+
+============================================================
+
+V) Implanter la sémantique de calcul des déplacements.  
+Il s'agit d'implanter les actions sémantiques allocateMemory des différents Instruction et Bloc de l'arbre abstrait. 
+
+ 
+============================================================
+
+

@@ -1,0 +1,697 @@
+----------------------------------------------- -*- text -*-
+-- Langage BLOC : Bloc, Instruction et Expression façon C/Java/...
+-- Sémantique : Construction de l'arbre abstrait et gestion de la
+--                      table des symboles. 
+-----------------------------------------------
+option auto= true;
+option version = 0.0.1 ;
+option k=1;
+
+
+inh gauche	: Expression for SuiteCondition, SuiteTerme, SuiteFacteur;
+inh factory	: BlockFactory for Bloc, Instruction,
+    		  	       SuiteConditionnelle, Instructions, Expression, Condition, Champ, Champs, Expressions, SuiteExpressions, Affectable, SuiteAffectable, Acces,
+			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type, Valeur ;  
+inh tds     : SymbolTable for  Bloc, Instruction,
+    		  	       SuiteConditionnelle, Instructions, Expression, Condition, Champ, Champs, Expressions, SuiteExpressions, Affectable, SuiteAffectable,
+			       SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Type, Valeur ;
+inh support : Assignable for SuiteAffectable;
+inh support : Expression for Acces;
+syn ast     : Block for Bloc, Programme;
+syn ast     : Value for Valeur;
+syn ast		: Expression for Expression, Condition, SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Acces;
+syn ast		: Type for Type;
+syn ast		: Instruction for Instruction;
+syn ast     : List<Instruction> for Instructions;
+syn ast     : Block for SuiteConditionnelle;
+syn ast     : Assignable for Affectable, SuiteAffectable;
+syn bin_op	: BinaryOperator for Additif, Multiplicatif, Comparatif;
+syn champs  : LinkedList<FieldDeclaration> for Champs;
+syn champ   : FieldDeclaration for Champ;
+syn expressions: LinkedList<Expression> for Expressions, SuiteExpressions;
+
+space  separateur				is    "[\n\r\t ]+";
+space  commentaire		    	is    "\/\/.*\n";
+sugar  accolade_ouvrante		is    "\{";  
+sugar  accolade_fermante		is    "\}";  
+sugar  crochet_ouvrant			is    "\[";  
+sugar  crochet_fermant			is    "\]";  
+sugar  parenthese_ouvrante		is    "\(";
+sugar  parenthese_fermante		is    "\)";
+sugar  inferieur				is    "\<";  
+sugar  superieur				is    "\>";  
+sugar  inferieur_egal			is    "\<=";  
+sugar  superieur_egal			is    "\>=";  
+sugar  point					is    "\.";  
+sugar  point_virgule			is    ";";  
+sugar  virgule					is    ",";
+sugar  affectation				is    "=";
+sugar  different				is    "\!=";
+sugar  egalite					is    "==";
+sugar  addition			    	is    "\+";
+sugar  soustraction				is    "\-";
+sugar  ou						is    "\|\|";  
+sugar  multiplication			is    "\*";
+sugar  division		    		is    "/";
+sugar  modulo					is    "%";
+sugar  negation			    	is    "\!";
+sugar  et						is    "&&";  
+sugar  vrai				    	is    "true";
+sugar  faux				    	is    "false";
+sugar  si						is    "if";
+sugar  sinon					is    "else";
+sugar  afficher					is    "print";
+sugar  tant_que			    	is    "while";
+sugar  premier					is    "fst";
+sugar  second					is    "snd";
+sugar  type_int			    	is    "int";
+sugar  type_bool				is    "bool";
+sugar  constante                is    "const";
+sugar  enregistrement			is    "struct";
+sugar  typedef      			is    "typedef";
+term   entier					is    "[0-9]+";
+term   identificateur			is    "[a-z][a-zA-Z0-9_]*"; 
+term   identificateur_type		is    "[A-Z][a-zA-Z0-9_]*"; 
+
+
+-- Remplacera la règle suivante pour pouvoir traiter les instructions
+-- Programme -> identificateur Bloc ;
+
+Programme -> identificateur #inh Bloc #ast ;
+#inh {
+do
+   Bloc^factory := new BlockFactoryImpl();
+   Bloc^tds := new SymbolTable();
+end
+}
+#ast {
+do
+   Programme^ast := Bloc^ast;
+end
+}
+
+Bloc -> accolade_ouvrante #inh Instructions accolade_fermante #ast ;
+#inh {
+do
+   Instructions^tds :=  new SymbolTable(Bloc^tds);
+end
+}
+#ast {
+do
+   Bloc^ast := Bloc^factory.createBlock(Instructions^ast);
+end
+}
+
+Type -> type_bool #ast ;
+#ast {
+do
+   Type^ast := Type^factory.createBooleanType();  
+end
+}
+
+Type -> type_int  #ast ;
+#ast {
+do
+   Type^ast := Type^factory.createIntegerType(); 
+end
+}
+
+Type -> inferieur Type virgule Type superieur  #ast;
+#ast {
+do
+    Type^ast := Type^factory.createCoupleType(Type1^ast, Type2^ast);
+end
+}
+
+Type -> identificateur_type #ast ;
+#ast {
+local
+   d : Optional<Declaration>;
+   t : Declaration;
+do
+   -- Si l'identificateur de type est connu
+   if Type^tds.knows(identificateur_type^txt) then
+      -- Lecture dans la table des symboles
+      d := Type^tds.get(identificateur_type^txt);
+      -- Si celle-ci a renvoyé un élément
+      if (d.isPresent()) then
+         -- Accès à cet élément
+         t := d.get();
+         match t
+     -- Si c'est un type, il est renvoyé
+         with TypeDeclaration then Type^ast := t.getType();
+         -- Sinon une erreur est signalée
+         else
+            error(Bloc_not_a_type,identificateur_type^txt);
+         end
+      -- Sinon une erreur est signalée
+      else
+         error(Bloc_undefined_ident,identificateur_type^txt);
+      end
+   -- Sinon une erreur est signalée
+   else
+      error(Bloc_undefined_ident,identificateur_type^txt);
+   end
+end
+}
+
+Instructions -> #ast;
+#ast {
+do
+    Instructions^ast := new ArrayList<Instruction>();
+end
+}
+
+Instructions -> Instruction Instructions #ast;
+#ast {
+do
+    Instructions1^ast.add(Instruction^ast);
+    Instructions^ast := Instructions1^ast;
+end
+}
+
+Instruction -> Type identificateur affectation #inh Expression point_virgule #ast;
+#inh {
+local
+    d: Declaration;
+do
+    d := Instruction^factory.createVariableDeclaration(identificateur^txt, Type^ast, null);
+    if (Instruction^tds.contains(d.getName())) then
+        error(Bloc_unexpected_token, identificateur^txt);
+    else
+        Instruction^tds.register(d);
+    end
+end
+}
+#ast {
+do
+    Instruction^ast := Instruction^factory.createVariableDeclaration(identificateur^txt, Type^ast, Expression^ast);
+end
+}
+
+Instruction -> constante Type identificateur affectation Valeur point_virgule #ast;
+#ast {
+local
+    d: Declaration;
+do
+    d := Instruction^factory.createConstantDeclaration(identificateur^txt, Type^ast, Valeur^ast);
+    if (Instruction^tds.contains(d.getName())) then
+        error(Bloc_unexpected_token, identificateur^txt);
+    else
+        Instruction^tds.register(d);
+    end
+    Instruction^ast := Instruction^factory.createConstantDeclaration(identificateur^txt, Type^ast, Valeur^ast);
+end
+}
+
+Instruction -> Affectable affectation Expression point_virgule #ast ;
+#ast {
+do
+      Instruction^ast := Instruction^factory.createAssignment(Affectable^ast, Expression^ast);
+ end
+}
+
+Affectable -> identificateur #inh SuiteAffectable #ast ;
+#inh {
+local
+   o : Optional<Declaration>;
+   d : Declaration;
+do
+   if (Affectable^tds.knows(identificateur^txt)) then
+      o := Affectable^tds.get(identificateur^txt);
+      d := o.get();
+      match d
+      with VariableDeclaration then SuiteAffectable^support := Affectable^factory.createVariableAssignment( d );
+      with ConstantDeclaration then error(BLOC_not_a_variable, identificateur^txt);
+      end
+   else
+      error(BLOC_undefined_ident, identificateur^txt);
+   end
+end
+}
+
+#ast {
+do
+   Affectable^ast := SuiteAffectable^ast;
+end
+}
+
+SuiteAffectable -> #ast ;
+
+#ast { 
+do  
+   SuiteAffectable^ast := SuiteAffectable^support;  
+end  
+}
+ 
+SuiteAffectable -> point identificateur #inh SuiteAffectable #ast;
+
+#inh {
+do
+   SuiteAffectable1^support := SuiteAffectable^factory.createFieldAssignment(SuiteAffectable^support,identificateur^txt);
+end
+}
+
+#ast { 
+do  
+   SuiteAffectable^ast := SuiteAffectable1^ast;  
+end  
+}
+
+Instruction -> si parenthese_ouvrante Expression parenthese_fermante Bloc SuiteConditionnelle #ast;
+#ast {
+do
+    Instruction^ast := Instruction^factory.createConditional(Expression^ast, Bloc^ast, SuiteConditionnelle^ast);
+end
+}
+
+SuiteConditionnelle -> #ast;
+#ast {
+do
+    SuiteConditionnelle^ast := SuiteConditionnelle^factory.createBlock();
+end
+}
+
+SuiteConditionnelle ->sinon Bloc #ast;
+#ast {
+do
+    SuiteConditionnelle^ast := Bloc^ast;
+end
+}
+
+Instruction -> tant_que parenthese_ouvrante Expression parenthese_fermante Bloc #ast;
+#ast {
+do
+    Instruction^ast := Instruction^factory.createRepetition(Expression^ast, Bloc^ast);
+end
+}
+
+Instruction -> afficher parenthese_ouvrante Expression parenthese_fermante point_virgule #ast;
+#ast {
+do
+    Instruction^ast := Instruction^factory.createPrinter(Expression^ast);
+end
+}
+
+Instruction -> typedef Type identificateur_type point_virgule #ast ;
+#ast {
+local 
+   v : TypeDeclaration ; 
+do 
+   if Instruction^tds.contains(identificateur_type^txt) then 
+      error(Bloc_unexecpected_token, identificateur_type^txt); 
+   else
+      v := Instruction^factory.createTypeDeclaration(identificateur_type^txt,Type^ast); 
+      Instruction^tds.register(v);
+      Instruction^ast := v; 
+   end 
+end 
+}
+
+Expression -> Condition #inh SuiteCondition #ast ;
+#inh {
+do
+   SuiteCondition^gauche := Condition^ast ;
+end 
+}
+#ast {
+do
+    Expression^ast := SuiteCondition^ast;
+end 
+}
+
+SuiteCondition -> Comparatif Condition #ast ;
+#ast {
+do
+	SuiteCondition^ast :=
+	SuiteCondition^factory.createBinaryExpression(
+	SuiteCondition^gauche,
+	Comparatif^bin_op,
+	Condition^ast);
+end 
+}
+
+SuiteCondition -> #ast ;
+#ast {
+do
+   SuiteCondition^ast := SuiteCondition^gauche;
+end 
+}
+
+Comparatif -> egalite #texte;
+#texte {
+do
+   Comparatif^bin_op := BinaryOperator.Equals;
+end
+}
+
+Condition -> Terme #ast_inh SuiteTerme #ast_syn ;
+#ast_inh {
+do 
+   SuiteTerme^gauche := Terme^ast; 
+end 
+}
+
+#ast_syn {
+do
+   Condition^ast := SuiteTerme^ast; 
+end
+}
+
+SuiteTerme -> Additif Terme #ast_inh SuiteTerme #ast_syn ;  
+#ast_inh {
+do
+   SuiteTerme1^gauche := SuiteTerme^factory.createBinaryExpression(
+      SuiteTerme^gauche,  
+      Additif^bin_op,  
+      Terme^ast);  
+end 
+}
+
+#ast_syn {
+do 
+   SuiteTerme^ast := SuiteTerme1^ast; 
+end 
+}
+
+SuiteTerme -> #ast ;
+#ast {
+do
+   SuiteTerme^ast := SuiteTerme^gauche;
+end
+}
+
+Additif -> addition #ast;  
+#ast { 
+do  
+   Additif^bin_op := BinaryOperator.Add;  
+end  
+}
+  
+Terme -> Facteur #ast_inh SuiteFacteur #ast_syn ;
+#ast_inh {
+do 
+   SuiteFacteur^gauche := Facteur^ast; 
+end 
+}
+
+#ast_syn {
+do
+   Terme^ast := SuiteFacteur^ast; 
+end
+}
+
+SuiteFacteur -> Multiplicatif Facteur #ast_inh SuiteFacteur #ast_syn ;  
+#ast_inh {
+do 
+   SuiteFacteur1^gauche := SuiteFacteur^factory.createBinaryExpression(
+      SuiteFacteur^gauche,  
+      Multiplicatif^bin_op,  
+      Facteur^ast);  
+end 
+}
+
+#ast_syn {
+do 
+   SuiteFacteur^ast := SuiteFacteur1^ast; 
+end 
+}
+ 
+SuiteFacteur -> #ast;  
+#ast {
+do
+   SuiteFacteur^ast := SuiteFacteur^gauche;
+end
+}
+
+Multiplicatif -> multiplication #ast; 
+#ast {
+do 
+   Multiplicatif^bin_op := BinaryOperator.Multiply; 
+end 
+}
+
+Facteur -> parenthese_ouvrante Expression parenthese_fermante #ast;  
+#ast { 
+do  
+   Facteur^ast := Expression^ast;  
+end  
+}
+
+Facteur -> identificateur #inh Acces #ast ;
+#inh {
+local
+   f : Optional<Declaration>;
+   d : Declaration;
+do
+   if (Facteur^tds.knows(identificateur^txt)) then
+      f := Facteur^tds.get(identificateur^txt);
+      d := f.get();
+      match d
+      with ConstantDeclaration then Acces^support := d.getValue();
+      with VariableDeclaration then Acces^support := Facteur^factory.createVariableUse(d);
+      end
+   else
+      error(BLOC_undefined_ident, identificateur^txt);
+   end
+end
+}
+
+#ast {
+do
+   Facteur^ast := Acces^ast;
+end
+}
+
+Acces -> #ast ;
+
+#ast { 
+do  
+   Acces^ast := Acces^support;  
+end  
+}
+ 
+Acces -> point identificateur #inh Acces #ast;
+
+#inh {
+do
+   Acces1^support := Acces^factory.createFieldAccess(Acces^support,identificateur^txt);
+end
+}
+
+#ast { 
+do  
+   Acces^ast := Acces1^ast;  
+end  
+}
+
+-- Facteur -> inferieur Expression virgule Expression superieur #ast ;
+-- #ast {
+-- do
+--    Facteur^ast := Facteur^factory.createCouple(Expression^ast, Expression1^ast);
+-- end
+-- }
+
+Comparatif -> different #texte;  
+#texte {  
+do  
+   Comparatif^bin_op := BinaryOperator.Different;   
+end  
+}
+  
+Comparatif -> inferieur #texte;  
+#texte {  
+do  
+   Comparatif^bin_op := BinaryOperator.Lesser;   
+end  
+}
+  
+Comparatif -> inferieur_egal #texte;  
+#texte {  
+do  
+   Comparatif^bin_op := BinaryOperator.LesserOrEqual;   
+end  
+}
+  
+Comparatif -> superieur #texte;  
+#texte {   
+do  
+   Comparatif^bin_op := BinaryOperator.Greater;    
+end  
+}
+   
+Comparatif -> superieur_egal #texte;  
+#texte {   
+do  
+   Comparatif^bin_op := BinaryOperator.GreaterOrEqual;    
+end  
+}
+
+Additif -> soustraction #ast;  
+#ast {  
+do  
+   Additif^bin_op := BinaryOperator.Substract;   
+end  
+}
+   
+Additif -> ou #ast;  
+#ast {  
+do  
+   Additif^bin_op := BinaryOperator.Or;   
+end  
+}
+
+Multiplicatif -> division #ast; 
+#ast { 
+do 
+   Multiplicatif^bin_op := BinaryOperator.Divide;  
+end 
+}
+ 
+Multiplicatif -> modulo #ast; 
+#ast {  
+do 
+   Multiplicatif^bin_op := BinaryOperator.Modulo;   
+end 
+}
+  
+Multiplicatif -> et #ast; 
+#ast {  
+do 
+   Multiplicatif^bin_op := BinaryOperator.And;   
+end 
+}
+
+Facteur -> soustraction Facteur #ast ;  
+#ast { 
+do  
+   Facteur^ast := Facteur ^factory.createUnaryExpression(UnaryOperator.Opposite,Facteur1^ast);  
+end  
+}
+ 
+Facteur -> negation Facteur #ast ;  
+#ast { 
+do  
+   Facteur^ast := Facteur ^factory. createUnaryExpression(UnaryOperator.Negate,Facteur1^ast);  
+end  
+}
+ 
+Facteur -> premier Facteur #ast ;
+#ast {
+do
+   Facteur^ast := Facteur^factory.createFirst(Facteur1^ast);
+end
+}
+ 
+Facteur -> second Facteur #ast ;
+#ast {
+do
+   Facteur^ast := Facteur^factory.createSecond(Facteur1^ast);
+end
+}
+  
+Facteur -> Valeur #ast;
+#ast {
+do
+   Facteur^ast := Valeur^ast;
+end
+}
+ 
+Valeur -> entier #ast;
+#ast {
+do
+    Valeur^ast := Valeur^factory.createIntegerValue(entier^txt); 
+end
+}
+
+Valeur -> vrai #ast;
+#ast {
+do
+    Valeur^ast := Valeur^factory.createBooleanValue(true);
+end
+}
+
+Valeur -> faux #ast;
+#ast {
+do
+    Valeur^ast := Valeur^factory.createBooleanValue(false);
+end
+}
+
+Type -> enregistrement identificateur_type accolade_ouvrante #inh Champs accolade_fermante #ast ;
+global
+t : RecordType;
+#inh {
+do
+   if (Type^tds.contains( identificateur_type^txt)) then
+      error(Bloc_already_defined,identificateur_type^txt);
+   else
+      t := Type^factory.createRecordType( identificateur_type^txt );
+      Type^tds.register( t );
+   end
+end
+}
+#ast {
+do
+   -- Création d'un noeud type Enregistrement initialisé avec les champs
+   t.addAll(Champs^champs);
+   Type^ast := t; 
+end 
+}
+
+Champs -> Champ Champs #champs;  
+#champs { 
+local  
+   champs : LinkedList<FieldDeclaration>;  
+do  
+   champs :=  Champs1^champs;  
+   champs.addFirst(Champ^champ);  
+   Champs^champs := champs;  
+end  
+}
+ 
+Champs -> #champs;  
+#champs { 
+do  
+   Champs^champs := new LinkedList<FieldDeclaration>();  
+end  
+}
+
+Champ -> Type identificateur point_virgule #ast;
+#ast { 
+do  
+   Champ^champ := Champ^factory.createFieldDeclaration(identificateur^txt, Type^ast); 
+end  
+}
+
+Facteur -> accolade_ouvrante Expressions accolade_fermante #ast ;
+#ast {
+do
+   Facteur^ast := Facteur^factory.createSequence( Expressions^expressions );
+end
+}
+
+Expressions -> Expression SuiteExpressions #ast ;
+#ast {
+do 
+   SuiteExpressions^expressions.addFirst(Expression^ast); 
+   Expressions^expressions := SuiteExpressions^expressions; 
+end 
+}
+
+SuiteExpressions -> virgule Expression SuiteExpressions #ast ;
+#ast {
+do 
+   SuiteExpressions1^expressions.addFirst(Expression^ast); 
+   SuiteExpressions^expressions := SuiteExpressions1^expressions; 
+end 
+}
+
+SuiteExpressions -> #ast ;
+#ast {
+do
+   SuiteExpressions^expressions := new LinkedList<Expression>();
+end
+}
+
+end
