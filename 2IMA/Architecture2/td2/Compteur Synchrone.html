@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compteur Synchrone</title>
+<link rel="stylesheet" href="Compteur%20Synchrone_files/base.css">
+<script type="text/javascript" src="Compteur%20Synchrone_files/MathJax.js"></script>
+</head>
+<body><div class="container"><h1 id="vhdl">VHDL</h1>
+
+
+
+<h2 id="td2-compteurs-synchrones">TD2 - Compteurs Synchrones</h2>
+
+<p></p><div class="toc">
+<ul>
+<li><a href="#vhdl">VHDL</a><ul>
+<li><a href="#td2-compteurs-synchrones">TD2 - Compteurs Synchrones</a><ul>
+<li><a href="#adaptation-du-compteur">Adaptation du Compteur</a></li>
+<li><a href="#un-compteur-synchrone">Un Compteur synchrone</a></li>
+<li><a href="#un-compteur-non-trivial-decrit-sous-forme-dun-automate-a-etats">Un compteur non trivial decrit sous forme d’un automate a etats</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p></p>
+
+
+
+<h3 id="adaptation-du-compteur">Adaptation du Compteur</h3>
+
+
+
+<pre class="prettyprint"><code class="language-vdhl hljs vhdl"><span class="hljs-keyword">library</span> IEEE;
+<span class="hljs-keyword">use</span> IEEE.std_logic_1164.<span class="hljs-keyword">all</span>, IEEE.std_logic_arith.<span class="hljs-keyword">all</span>, IEEE.std_logic_unsigned.<span class="hljs-keyword">all</span>;
+
+<span class="hljs-keyword">entity</span> compteur <span class="hljs-keyword">is</span>
+    <span class="hljs-keyword">port</span>(
+        clk, <span class="hljs-keyword">next</span> : <span class="hljs-keyword">in</span> <span class="hljs-typename">std_logic</span>;
+        cpt: <span class="hljs-keyword">out</span> <span class="hljs-typename">std_logic_vector</span>(<span class="hljs-number">3</span> <span class="hljs-keyword">downto</span> <span class="hljs-number">0</span>);
+        carry: <span class="hljs-keyword">out</span> <span class="hljs-typename">std_logic</span>
+    );
+<span class="hljs-keyword">end</span> compteur;
+
+<span class="hljs-keyword">architecture</span> behavioral <span class="hljs-keyword">of</span> compteur <span class="hljs-keyword">is</span>
+    <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">process</span>(clk, <span class="hljs-keyword">next</span>)
+            <span class="hljs-keyword">variable</span> cpt_aux : <span class="hljs-typename">std_logic_vector</span>(<span class="hljs-number">3</span> <span class="hljs-keyword">downto</span> <span class="hljs-number">0</span>) := (<span class="hljs-keyword">others</span> =&gt; <span class="hljs-literal">'0'</span>);
+        <span class="hljs-keyword">begin</span>
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">next</span> = <span class="hljs-literal">'0'</span>) <span class="hljs-keyword">then</span>
+                cpt_aux := (<span class="hljs-keyword">others</span> =&gt; <span class="hljs-literal">'0'</span>);
+                cpt &lt;= cpt_aux;
+                carry &lt;= <span class="hljs-literal">'0'</span>;
+            <span class="hljs-keyword">elsif</span> (rising_edge(clk)) <span class="hljs-keyword">then</span>
+                cpt_aux := cpt_aux + <span class="hljs-number">1</span>;
+                cpt &lt;= cpt_aux;
+            <span class="hljs-keyword">if</span> (cpt_aux = <span class="hljs-literal">'0'</span>) <span class="hljs-keyword">then</span>
+                carry &lt;= <span class="hljs-literal">'1'</span>;
+            <span class="hljs-keyword">else</span>
+                carry &lt;= <span class="hljs-literal">'0'</span>;
+            <span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;
+        <span class="hljs-keyword">end</span> <span class="hljs-keyword">process</span>;
+<span class="hljs-keyword">end</span> behavioral;</code></pre>
+
+
+
+<h3 id="un-compteur-synchrone">Un Compteur synchrone</h3>
+
+<ul>
+<li><em>pack_cpt.vdhl</em></li>
+</ul>
+
+
+
+<pre class="prettyprint"><code class="language-vdhl hljs haskell"><span class="hljs-title">package</span> pack_cpt is
+<span class="hljs-typedef"><span class="hljs-keyword">type</span> t_commande is <span class="hljs-container">(<span class="hljs-type">RAZ</span>, <span class="hljs-type">INC</span>, <span class="hljs-type">DEC</span>, <span class="hljs-type">LOAD</span>, <span class="hljs-type">STAY</span>)</span>;</span>
+<span class="hljs-title">end</span> pack_cpt;</code></pre>
+
+<ul>
+<li><em>compteur2.vdhl</em></li>
+</ul>
+
+
+
+<pre class="prettyprint"><code class="language-vdhl hljs vhdl"><span class="hljs-keyword">library</span> IEEE;
+<span class="hljs-keyword">use</span> IEEE.std_logic_1164.<span class="hljs-keyword">all</span>, IEEE.std_logic_arith.<span class="hljs-keyword">all</span>, IEEE.std_logic_unsigned.<span class="hljs-keyword">all</span>;
+<span class="hljs-keyword">use</span> work.pack_cpt.<span class="hljs-keyword">all</span>;
+
+<span class="hljs-keyword">entity</span> compteur2 <span class="hljs-keyword">is</span>
+    <span class="hljs-keyword">generic</span>(n : <span class="hljs-typename">natural</span> := <span class="hljs-number">4</span>);
+    <span class="hljs-keyword">port</span>(
+        clk : <span class="hljs-keyword">in</span> <span class="hljs-typename">std_logic</span>;
+        cmd : <span class="hljs-keyword">in</span> t_commande;
+        data : <span class="hljs-keyword">in</span> <span class="hljs-typename">std_logic_vector</span>(size-<span class="hljs-number">1</span> <span class="hljs-keyword">downto</span> <span class="hljs-number">0</span>);
+        cpt : <span class="hljs-keyword">out</span> <span class="hljs-typename">std_logic_vector</span>(size-<span class="hljs-number">1</span> <span class="hljs-keyword">downto</span> <span class="hljs-number">0</span>);
+        carry : <span class="hljs-keyword">out</span>
+    );
+<span class="hljs-keyword">end</span> compteur2;
+
+<span class="hljs-keyword">architecture</span> behavioral <span class="hljs-keyword">of</span> compteur <span class="hljs-keyword">is</span>
+    <span class="hljs-keyword">begin</span>
+    <span class="hljs-keyword">process</span>(clk)
+        <span class="hljs-keyword">signal</span> cpt_aux : <span class="hljs-typename">std_logic_vector</span>(<span class="hljs-number">3</span> <span class="hljs-keyword">downto</span> <span class="hljs-number">0</span>) := (<span class="hljs-keyword">others</span> =&gt; <span class="hljs-literal">'0'</span>);
+        <span class="hljs-keyword">begin</span>
+        <span class="hljs-keyword">if</span> (clk = <span class="hljs-literal">'1'</span>) <span class="hljs-keyword">then</span>
+            <span class="hljs-keyword">case</span> cmd <span class="hljs-keyword">is</span>
+            <span class="hljs-keyword">when</span> STAY =&gt; <span class="hljs-keyword">null</span>;
+            <span class="hljs-keyword">when</span> LOAD =&gt;
+                cpt_aux &lt;= data;
+            <span class="hljs-keyword">when</span> INC =&gt;
+                cpt_aux &lt;= cpt_aux + <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">when</span> DEC =&gt;
+                cpt_aux &lt;= cpt_aux - <span class="hljs-number">1</span>;
+            <span class="hljs-keyword">when</span> RAZ =&gt;
+                cpt_aux &lt;= (<span class="hljs-keyword">others</span> =&gt; <span class="hljs-literal">'0'</span>);
+            <span class="hljs-keyword">end</span> <span class="hljs-keyword">case</span>;
+        <span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;
+    <span class="hljs-keyword">end</span> <span class="hljs-keyword">process</span>;
+    cpt &lt;= cpt_aux;
+    <span class="hljs-comment">-- Il faudrait gerer la carry dans le process</span>
+    carry &lt;= <span class="hljs-literal">'1'</span> <span class="hljs-keyword">when</span> (cpt_aux = <span class="hljs-literal">'0'</span> <span class="hljs-keyword">and</span> (cmd = INC <span class="hljs-keyword">or</span> cmd = DEC))
+        <span class="hljs-keyword">else</span> <span class="hljs-literal">'0'</span>;
+<span class="hljs-keyword">end</span> behavioral;</code></pre>
+
+<ul>
+<li><em>test_compteur2.vdhl</em></li>
+</ul>
+
+
+
+<pre class="prettyprint"><code class="language-vdhl hljs vhdl"><span class="hljs-keyword">library</span> IEEE;
+<span class="hljs-keyword">use</span> IEEE.std_logic_1164.<span class="hljs-keyword">all</span>, IEEE.std_logic_arith.<span class="hljs-keyword">all</span>, IEEE.std_logic_unsigned.<span class="hljs-keyword">all</span>;
+<span class="hljs-keyword">use</span> work.pack_cpt.<span class="hljs-keyword">all</span>;
+
+<span class="hljs-keyword">entity</span> test_compteur2 <span class="hljs-keyword">is</span>
+<span class="hljs-keyword">end</span> test_compteur2;
+
+<span class="hljs-keyword">architecture</span> behavioral <span class="hljs-keyword">of</span> test_compteur2 <span class="hljs-keyword">is</span>
+    <span class="hljs-keyword">component</span> compteur2
+        <span class="hljs-keyword">generic</span>(n : <span class="hljs-typename">natural</span> := <span class="hljs-number">4</span>);
+        <span class="hljs-keyword">port</span>(
+            clk : <span class="hljs-keyword">in</span> <span class="hljs-typename">std_logic</span>;
+            cmd : <span class="hljs-keyword">in</span> t_commande;
+            data : <span class="hljs-keyword">in</span> <span class="hljs-typename">std_logic_vector</span>(size-<span class="hljs-number">1</span> <span class="hljs-keyword">downto</span> <span class="hljs-number">0</span>);
+            cpt : <span class="hljs-keyword">out</span> <span class="hljs-typename">std_logic_vector</span>(size-<span class="hljs-number">1</span> <span class="hljs-keyword">downto</span> <span class="hljs-number">0</span>);
+            carry : <span class="hljs-keyword">out</span>
+        );
+    <span class="hljs-keyword">end</span> <span class="hljs-keyword">component</span>;
+
+    <span class="hljs-keyword">signal</span> ...
+    <span class="hljs-keyword">signal</span> clk = <span class="hljs-typename">std_logic</span>;
+    <span class="hljs-keyword">constant</span> clk_period : <span class="hljs-typename">time</span> := <span class="hljs-number">5</span> ns;
+
+    <span class="hljs-keyword">begin</span>
+        I : compteur2
+            <span class="hljs-keyword">generic</span> <span class="hljs-keyword">map</span>(<span class="hljs-number">10</span>)
+            <span class="hljs-keyword">port</span> <span class="hljs-keyword">map</span>( command? );
+
+<span class="hljs-keyword">end</span> test_compteur2;</code></pre>
+
+
+
+<h3 id="un-compteur-non-trivial-decrit-sous-forme-dun-automate-a-etats">Un compteur non trivial decrit sous forme d’un automate a etats</h3>
+
+
+
+<pre class="prettyprint"><code class="language-vhdl hljs "><span class="hljs-keyword">entity</span> compteur_btn <span class="hljs-keyword">is</span>
+    <span class="hljs-keyword">port</span> (
+        clk, reset: <span class="hljs-keyword">in</span> <span class="hljs-typename">std_logic</span>;
+        btn: <span class="hljs-keyword">in</span> <span class="hljs-typename">std_logic</span>;
+        mode: <span class="hljs-keyword">in</span> <span class="hljs-typename">std_logic</span>;
+        data_in: <span class="hljs-keyword">in</span> <span class="hljs-typename">std_logic_vector</span>(<span class="hljs-number">3</span> <span class="hljs-keyword">downto</span> <span class="hljs-number">0</span>);
+        data_out: <span class="hljs-keyword">out</span> <span class="hljs-typename">std_logic_vector</span>(<span class="hljs-number">3</span> <span class="hljs-keyword">downto</span> <span class="hljs-number">0</span>)
+    );</code></pre>
+
+<p>Decoupage fonctionnel</p>
+
+
+
+<div class="flow-chart"><svg height="370.3999967575073" version="1.1" width="154.28334045410156" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; top: -0.266602px;"><desc>Created with Raphaël 2.1.2</desc><defs><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block"></path><marker id="raphael-marker-endblock33-obj8" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj9" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker><marker id="raphael-marker-endblock33-obj10" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5"><use xlink:href="#raphael-marker-block" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none"></use></marker></defs><rect x="0" y="0" width="65.1500015258789" height="39.35000038146973" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="btn" transform="matrix(1,0,0,1,45.5667,13)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="btnt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,45.5667,13)"><tspan dy="5.375">bouton</tspan></text><rect x="0" y="0" width="148.28334045410156" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="tb" transform="matrix(1,0,0,1,4,115.35)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="tbt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,4,115.35)"><tspan dy="5.375">traitement operation</tspan></text><rect x="0" y="0" width="120.33333587646484" height="39.35000038146973" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="na" transform="matrix(1,0,0,1,17.975,217.7)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="19.675000190734863" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="nat" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,17.975,217.7)"><tspan dy="5.375">nombre d'appui</tspan></text><rect x="0" y="0" width="99.55000305175781" height="57.349998474121094" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="" stroke-width="2" class="flowchart" id="cpt" transform="matrix(1,0,0,1,28.3667,311.05)"></rect><text style="text-anchor: start; font-family: sans-serif; font-size: 14px; font-weight: normal;" x="10" y="28.674999237060547" text-anchor="start" font-family="sans-serif" font-size="14px" stroke="none" fill="#000000" id="cptt" class="flowchartt" font-weight="normal" transform="matrix(1,0,0,1,28.3667,311.05)"><tspan dy="-3.625">compteur</tspan><tspan dy="18" x="10">      [avec mode]</tspan><tspan dy="18" x="10"></tspan></text><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M78.14167022705078,52.34999942779541C78.14167022705078,52.34999942779541,78.14167022705078,99.8336555922424,78.14167022705078,112.35376024497745" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj8)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M78.14167022705078,154.69999885559082C78.14167022705078,154.69999885559082,78.14167022705078,202.1836550200378,78.14167022705078,214.70375967277283" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj9)" font-family="sans-serif" font-weight="normal"></path><path style="font-family: sans-serif; font-weight: normal;" fill="none" stroke="#000000" d="M78.14167022705078,257.04999828338623C78.14167022705078,257.04999828338623,78.14167022705078,296.7040982246399,78.14167022705078,308.0504373679869" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj10)" font-family="sans-serif" font-weight="normal"></path></svg></div>
+
+
+
+<pre class="prettyprint"><code class="language-vhdl hljs "><span class="hljs-keyword">architecture</span> arch <span class="hljs-keyword">of</span> compteur_btn <span class="hljs-keyword">is</span>
+    <span class="hljs-keyword">signal</span> nb_appui: <span class="hljs-typename">std_logic_vector</span>(<span class="hljs-number">1</span> <span class="hljs-keyword">downto</span> <span class="hljs-number">0</span>)
+
+    <span class="hljs-keyword">begin</span>
+        compteur: <span class="hljs-keyword">process</span>(clk, reset)
+            <span class="hljs-keyword">type</span> t_etat <span class="hljs-keyword">is</span> (attente, ..., decrement);
+            <span class="hljs-keyword">variable</span> etat: t_etat;
+            <span class="hljs-keyword">variable</span> aux: <span class="hljs-typename">std_logic_vector</span>(<span class="hljs-number">3</span> <span class="hljs-keyword">downto</span> <span class="hljs-number">0</span>);
+            <span class="hljs-keyword">begin</span>
+                <span class="hljs-keyword">if</span> (reset = <span class="hljs-literal">'0'</span>) <span class="hljs-keyword">then</span>
+                    etat := attente;
+                    aux := (<span class="hljs-keyword">others</span> =&gt; <span class="hljs-literal">'0'</span>);
+                    data_out &lt;= aux;
+                <span class="hljs-keyword">elsif</span> (riging_edge(clk)) <span class="hljs-keyword">then</span>
+                    <span class="hljs-keyword">case</span> etat <span class="hljs-keyword">is</span>
+                    <span class="hljs-keyword">when</span> attente =&gt;
+                        <span class="hljs-keyword">if</span> (nb_appui = <span class="hljs-number">1</span>) <span class="hljs-keyword">then</span>
+                            <span class="hljs-keyword">if</span> (mode = <span class="hljs-literal">'0'</span>) <span class="hljs-keyword">then</span>
+                                etat := increment;
+                                aux := aux+<span class="hljs-number">1</span>
+                            <span class="hljs-keyword">else</span>
+                                etat := chargement;
+                                aux := data_in;
+                            <span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;
+                        <span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;
+                    <span class="hljs-keyword">when</span> increment =&gt;
+                        <span class="hljs-keyword">if</span> (nb_appui = <span class="hljs-number">2</span>) <span class="hljs-keyword">then</span>
+                            etat := stop;
+                        <span class="hljs-keyword">else</span>
+                            aux := aux-<span class="hljs-number">1</span>;
+                        <span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;
+                    <span class="hljs-keyword">when</span> stop =&gt;
+                        <span class="hljs-keyword">if</span> (nb_appui = <span class="hljs-number">3</span>) <span class="hljs-keyword">then</span>
+                            etat := attente;
+                            aux := (<span class="hljs-keyword">others</span> =&gt; <span class="hljs-literal">'0'</span>);
+                        <span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;
+                    <span class="hljs-keyword">end</span> <span class="hljs-keyword">case</span>;
+                    data_out &lt;= aux;
+                <span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;
+        <span class="hljs-keyword">end</span> <span class="hljs-keyword">process</span>;
+
+        <span class="hljs-comment">-- Premiere version (marche pas sur Nexys 2)</span>
+        traitement_bouton: <span class="hljs-keyword">process</span>(btn)
+            <span class="hljs-keyword">begin</span>
+                <span class="hljs-keyword">if</span> (btn = <span class="hljs-literal">'1'</span>) <span class="hljs-keyword">then</span>
+                    <span class="hljs-keyword">if</span> (nb_appui = <span class="hljs-string">"10"</span>) <span class="hljs-keyword">then</span>
+                        nb_appui &lt;= <span class="hljs-string">"00"</span>;
+                    <span class="hljs-keyword">else</span>
+                        nb_appui &lt;= nb_appui + <span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;
+                <span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;
+        <span class="hljs-keyword">end</span> <span class="hljs-keyword">process</span>;
+
+        <span class="hljs-comment">-- Seconde version</span>
+        traitement_bouton: <span class="hljs-keyword">process</span>(clk, reset)
+            <span class="hljs-keyword">type</span> t_etat <span class="hljs-keyword">is</span> (relache,appuye);
+            <span class="hljs-keyword">variable</span> etat: t_etat
+            <span class="hljs-keyword">begin</span>
+                <span class="hljs-keyword">if</span> (reset = <span class="hljs-literal">'0'</span>) <span class="hljs-keyword">then</span>
+                    nb_appui &lt;= (<span class="hljs-keyword">others</span> =&gt; <span class="hljs-literal">'0'</span>);
+                    etat := relache;
+                <span class="hljs-keyword">elsif</span> (rising_edge_clk) <span class="hljs-keyword">then</span>
+                    <span class="hljs-keyword">if</span> (btn-<span class="hljs-literal">'1'</span>) <span class="hljs-keyword">then</span>
+                        <span class="hljs-keyword">if</span> (etat = relache) <span class="hljs-keyword">then</span>
+                            etat := appuye;
+                            <span class="hljs-comment">-- Ici on reprend le code</span>
+                        <span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;
+                    <span class="hljs-keyword">else</span>
+                        etat := relache;
+                    <span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;
+                <span class="hljs-keyword">end</span> <span class="hljs-keyword">if</span>;
+        <span class="hljs-keyword">end</span> <span class="hljs-keyword">process</span>;
+
+<span class="hljs-keyword">end</span> compteur_btn;</code></pre>
+
+<p>Automate du fonctionnement du compteur</p></div>
+</body></html>
