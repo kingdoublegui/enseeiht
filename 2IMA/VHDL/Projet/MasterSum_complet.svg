@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="MasterSum_complet.svg">
+  <defs
+     id="defs4">
+    <marker
+       style="overflow:visible;"
+       id="Arrow2Lend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend">
+      <path
+         transform="scale(1.1) rotate(180) translate(1,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round;"
+         id="path3993" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lstart"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lstart">
+      <path
+         transform="scale(1.1) translate(1,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round"
+         id="path3990" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lstart-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lstart">
+      <path
+         transform="matrix(1.1,0,0,1.1,1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path3990-1"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend">
+      <path
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path3993-2"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path3993-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lstart-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lstart">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(1.1,0,0,1.1,1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path3990-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend-2-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path3993-9-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lstart-1-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lstart">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(1.1,0,0,1.1,1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path3990-2-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker3677"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lstart">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(1.1,0,0,1.1,1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path3679" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker3681"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path3683" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker3685"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lstart">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(1.1,0,0,1.1,1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         id="path3687" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="276.56023"
+     inkscape:cy="468.3903"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1-9"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1051"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow2Lstart)"
+       d="m 690.47833,542.8441 -60.54609,0"
+       id="path3784-15"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow2Lstart)"
+       d="m 690.47833,593.29092 -60.54609,0"
+       id="path3784-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow2Lend)"
+       d="m 690.47833,643.73773 -60.54609,0"
+       id="path3784-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       id="g3625"
+       transform="matrix(0.9314782,0,0,0.84078028,73.615161,113.7238)">
+      <g
+         id="g3613">
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 253.79946,765.3834 10,-10 10,10"
+           id="path3778"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 263.79946,765.3834 0,70"
+           id="path3780"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+           x="225.36404"
+           y="806.34802"
+           id="text4894"
+           sodipodi:linespacing="125%"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200"><tspan
+             sodipodi:role="line"
+             id="tspan4896"
+             x="225.36404"
+             y="806.34802">clk</tspan></text>
+      </g>
+      <g
+         id="g3619">
+        <circle
+           cy="770.38342"
+           cx="353.79947"
+           style="fill:none;stroke:#000000;stroke-opacity:1"
+           id="path3776"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+           r="0" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 353.79946,766.29203 0,60"
+           id="path3782"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+           x="363.79947"
+           y="796.29205"
+           id="text4898"
+           sodipodi:linespacing="125%"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200"><tspan
+             sodipodi:role="line"
+             id="tspan4900"
+             x="363.79947"
+             y="796.29205">reset</tspan></text>
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:12.38955307px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="667.71368"
+       y="573.59741"
+       id="text4902"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"
+       transform="scale(1.0525557,0.95006848)"><tspan
+         sodipodi:role="line"
+         id="tspan4904"
+         x="667.71368"
+         y="573.59741">sclk</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:12.38955307px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="667.25995"
+       y="624.01312"
+       id="text4906"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"
+       transform="scale(1.0525557,0.95006848)"><tspan
+         sodipodi:role="line"
+         id="tspan4908"
+         x="667.25995"
+         y="624.01312">mosi</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:12.38955307px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="667.25995"
+       y="677.56982"
+       id="text4910"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"
+       transform="scale(1.0525557,0.95006848)"><tspan
+         sodipodi:role="line"
+         id="tspan4912"
+         x="667.25995"
+         y="677.56982">miso</tspan></text>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:1.57188725;stroke-opacity:1"
+       id="rect2987"
+       width="521.88135"
+       height="234.34644"
+       x="107.76427"
+       y="522.63794"
+       inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow2Lstart)"
+       d="m 690.47833,694.18455 -60.54609,0"
+       id="path3784-8-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:12.38955307px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="668.71075"
+       y="731.73602"
+       id="text3047"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200"
+       transform="scale(1.0525557,0.95006848)"><tspan
+         sodipodi:role="line"
+         id="tspan3049"
+         x="668.71075"
+         y="731.73602">SS</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 704.4505,685.77675 c 13.97217,0 13.97217,0 13.97217,0"
+       id="path3051"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+       inkscape:export-xdpi="200"
+       inkscape:export-ydpi="200" />
+    <g
+       id="g3637"
+       transform="matrix(0.9314782,0,0,0.84078028,207.22794,113.7238)">
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+         inkscape:connector-curvature="0"
+         id="path3784"
+         d="m -108.4392,524.47477 -65,0"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow2Lstart)" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+         inkscape:connector-curvature="0"
+         id="path3784-6"
+         d="m -108.4392,724.47477 -65,0"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow2Lend)" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+         inkscape:connector-curvature="0"
+         id="path3784-1"
+         d="m -108.4392,649.47477 -65,0"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+         inkscape:connector-curvature="0"
+         id="path3784-2"
+         d="m -108.4392,664.47477 -65,0"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none" />
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+         sodipodi:linespacing="125%"
+         id="text4858"
+         y="524.47479"
+         x="-198.43921"
+         style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="524.47479"
+           x="-198.43921"
+           id="tspan4860"
+           sodipodi:role="line">en</tspan></text>
+      <g
+         transform="translate(-328.43921,347.11259)"
+         id="g3029">
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none"
+           d="m 220,207.36218 -65,0"
+           id="path3784-4"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none"
+           d="m 220,222.36218 -65,0"
+           id="path3784-0"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 190,202.36218 -10,25"
+           id="path4862"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+      </g>
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+         inkscape:connector-curvature="0"
+         id="path4862-5"
+         d="m -143.4392,644.47477 -10,25"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+         sodipodi:linespacing="125%"
+         id="text4882"
+         y="569.47479"
+         x="-198.43921"
+         style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="569.47479"
+           x="-198.43921"
+           id="tspan4884"
+           sodipodi:role="line">e1</tspan></text>
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+         sodipodi:linespacing="125%"
+         id="text4886"
+         y="659.47479"
+         x="-198.43921"
+         style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="659.47479"
+           x="-198.43921"
+           id="tspan4888"
+           sodipodi:role="line">s</tspan></text>
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+         sodipodi:linespacing="125%"
+         id="text4890"
+         y="726.91205"
+         x="-207.5338"
+         style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="726.91205"
+           x="-207.5338"
+           id="tspan4892"
+           sodipodi:role="line">busy</tspan></text>
+      <g
+         id="g3029-2"
+         transform="translate(-328.43921,377.11259)">
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none"
+           d="m 220,207.36218 -65,0"
+           id="path3784-4-2"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none"
+           d="m 220,222.36218 -65,0"
+           id="path3784-0-6"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 190,202.36218 -10,25"
+           id="path4862-53"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+      </g>
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+         sodipodi:linespacing="125%"
+         id="text4882-3"
+         y="599.47479"
+         x="-198.43921"
+         style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="599.47479"
+           x="-198.43921"
+           id="tspan4884-7"
+           sodipodi:role="line">e2</tspan></text>
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+         inkscape:connector-curvature="0"
+         id="path3784-6-5"
+         d="m -108.4392,694.47477 -65,0"
+         style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow2Lend)" />
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/MasterEcho.png"
+         sodipodi:linespacing="125%"
+         id="text4886-8"
+         y="699.47479"
+         x="-218.43921"
+         style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"><tspan
+           y="699.47479"
+           x="-218.43921"
+           id="tspan4888-8"
+           sodipodi:role="line">carry</tspan></text>
+    </g>
+    <g
+       transform="matrix(0.55286794,0,0,0.59873428,125.6332,427.30505)"
+       id="layer1-9"
+       inkscape:label="Calque 1">
+      <ellipse
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         id="path3776-3"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681;stroke-opacity:1"
+         cx="694.5849"
+         cy="418.81039"
+         rx="4.6573911"
+         ry="4.2039013" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:connector-curvature="0"
+         id="path3778-6"
+         d="m 601.43708,414.6065 9.31478,-8.4078 9.31478,8.4078"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:connector-curvature="0"
+         id="path3780-0"
+         d="m 610.75186,414.6065 0,58.85462"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:connector-curvature="0"
+         id="path3782-6"
+         d="m 694.5849,423.0143 0,50.44682"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:connector-curvature="0"
+         id="path3784-26"
+         d="m 564.17795,204.41143 -60.54608,0"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow2Lstart-1)" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:connector-curvature="0"
+         id="path3784-4-1"
+         d="m 564.17795,250.65435 -60.54608,0"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:connector-curvature="0"
+         id="path3784-0-8"
+         d="m 564.17795,263.26605 -60.54608,0"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:connector-curvature="0"
+         id="path3784-6-7"
+         d="m 564.17795,372.56749 -60.54608,0"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow2Lend-2)" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:connector-curvature="0"
+         id="path3784-1-9"
+         d="m 564.17795,309.50897 -60.54608,0"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:connector-curvature="0"
+         id="path3784-2-2"
+         d="m 564.17795,322.12067 -60.54608,0"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:connector-curvature="0"
+         id="path3784-15-0"
+         d="m 848.2788,200.20753 -60.54608,0"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow2Lstart-1)" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:connector-curvature="0"
+         id="path3784-8-2"
+         d="m 848.2788,250.65435 -60.54608,0"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow2Lstart-1)" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:connector-curvature="0"
+         id="path3784-3-3"
+         d="m 848.2788,301.10116 -60.54608,0"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow2Lend-2)" />
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         sodipodi:linespacing="125%"
+         id="text4858-7"
+         y="215.15442"
+         x="456.36057"
+         style="font-style:normal;font-weight:normal;font-size:12.38955307px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"
+         transform="scale(1.0525557,0.95006848)"><tspan
+           y="215.15442"
+           x="456.36057"
+           id="tspan4860-5"
+           sodipodi:role="line">1</tspan></text>
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:connector-curvature="0"
+         id="path4862-9"
+         d="m 536.23361,246.45045 -9.31478,21.0195"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         inkscape:connector-curvature="0"
+         id="path4862-5-2"
+         d="m 531.57622,305.30507 -9.31479,21.0195"
+         style="fill:none;stroke:#000000;stroke-width:0.8849681px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         sodipodi:linespacing="125%"
+         id="text4890-6"
+         y="394.30496"
+         x="448.31213"
+         style="font-style:normal;font-weight:normal;font-size:12.38955307px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"
+         transform="scale(1.0525557,0.95006848)"><tspan
+           y="394.30496"
+           x="448.31213"
+           id="tspan4892-1"
+           sodipodi:role="line">busy</tspan></text>
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         sodipodi:linespacing="125%"
+         id="text4894-2"
+         y="472.64883"
+         x="546.242"
+         style="font-style:normal;font-weight:normal;font-size:12.38955307px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"
+         transform="scale(1.0525557,0.95006848)"><tspan
+           y="472.64883"
+           x="546.242"
+           id="tspan4896-9"
+           sodipodi:role="line">clk</tspan></text>
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         sodipodi:linespacing="125%"
+         id="text4898-3"
+         y="471.79517"
+         x="668.75293"
+         style="font-style:normal;font-weight:normal;font-size:12.38955307px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"
+         transform="scale(1.0525557,0.95006848)"><tspan
+           y="471.79517"
+           x="668.75293"
+           id="tspan4900-1"
+           sodipodi:role="line">reset</tspan></text>
+      <rect
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         y="179.74266"
+         x="565.3175"
+         height="234.86385"
+         width="222.41518"
+         id="rect2987-0"
+         style="fill:none;stroke:#000000;stroke-width:1.02729845;stroke-opacity:1" />
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         sodipodi:linespacing="125%"
+         id="text6936-3"
+         y="315.84787"
+         x="613.2746"
+         style="font-style:normal;font-weight:normal;font-size:12.38955307px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"
+         transform="scale(1.0525557,0.95006848)"><tspan
+           y="315.84787"
+           x="613.2746"
+           id="tspan6938-6"
+           sodipodi:role="line">er_1octet</tspan></text>
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         sodipodi:linespacing="125%"
+         id="text4882-8"
+         y="254.97798"
+         x="505.03381"
+         style="font-style:normal;font-weight:normal;font-size:12.38955307px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"
+         transform="scale(1.0525557,0.95006848)"><tspan
+           y="254.97798"
+           x="505.03381"
+           id="tspan4884-8"
+           sodipodi:role="line">8</tspan></text>
+      <text
+         inkscape:export-ydpi="200"
+         inkscape:export-xdpi="200"
+         inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+         sodipodi:linespacing="125%"
+         id="text4882-8-9"
+         y="316.92575"
+         x="500.60898"
+         style="font-style:normal;font-weight:normal;font-size:12.38955307px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+         xml:space="preserve"
+         transform="scale(1.0525557,0.95006848)"><tspan
+           y="316.92575"
+           x="500.60898"
+           id="tspan4884-8-9"
+           sodipodi:role="line">8</tspan></text>
+      <g
+         id="g3937"
+         transform="matrix(0.9314782,0,0,0.84078028,100.51386,906.82946)">
+        <circle
+           cy="-529.38831"
+           cx="155.40974"
+           style="fill:none;stroke:#000000;stroke-width:0.99999994;stroke-opacity:1"
+           id="path3776-3-5"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           r="5" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 55.409751,-534.38832 10,-10 10.000001,10"
+           id="path3778-6-0"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 65.409751,-534.38832 0,70"
+           id="path3780-0-4"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.76643544px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 155.40976,-524.38833 0,35.24541"
+           id="path3782-6-8"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow2Lstart-1-4)"
+           d="m 15.409748,-784.38832 -65,0"
+           id="path3784-26-7"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none"
+           d="m 15.409748,-729.38832 -65,0"
+           id="path3784-4-1-1"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none"
+           d="m 15.409748,-714.38832 -65,0"
+           id="path3784-0-8-7"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow2Lend-2-6)"
+           d="m 15.409748,-584.38832 -65,0"
+           id="path3784-6-7-2"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none"
+           d="m 15.409748,-659.38832 -65,0"
+           id="path3784-1-9-7"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none"
+           d="m 15.409748,-644.38832 -65,0"
+           id="path3784-2-2-2"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow2Lstart-1-4)"
+           d="m 320.40976,-789.38832 -65.00001,0"
+           id="path3784-15-0-2"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow2Lstart-1-4)"
+           d="m 320.40976,-729.38832 -65.00001,0"
+           id="path3784-8-2-6"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow2Lend-2-6)"
+           d="m 320.40976,-669.38832 -65.00001,0"
+           id="path3784-3-3-1"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+           x="-74.590248"
+           y="-784.38837"
+           id="text4858-7-0"
+           sodipodi:linespacing="125%"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200"><tspan
+             sodipodi:role="line"
+             id="tspan4860-5-6"
+             x="-74.590248"
+             y="-784.38837">1</tspan></text>
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m -14.590252,-734.38832 -10,25"
+           id="path4862-9-1"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m -19.590252,-664.38832 -10,24.99999"
+           id="path4862-5-2-5"
+           inkscape:connector-curvature="0"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+           x="-83.684837"
+           y="-581.95105"
+           id="text4890-6-9"
+           sodipodi:linespacing="125%"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200"><tspan
+             sodipodi:role="line"
+             id="tspan4892-1-1"
+             x="-83.684837"
+             y="-581.95105">busy</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+           x="26.974335"
+           y="-493.42368"
+           id="text4894-2-7"
+           sodipodi:linespacing="125%"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200"><tspan
+             sodipodi:role="line"
+             id="tspan4896-9-7"
+             x="26.974335"
+             y="-493.42368">clk</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+           x="165.40976"
+           y="-494.38831"
+           id="text4898-3-1"
+           sodipodi:linespacing="125%"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200"><tspan
+             sodipodi:role="line"
+             id="tspan4900-1-1"
+             x="165.40976"
+             y="-494.38831">reset</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+           x="333.64413"
+           y="-786.87549"
+           id="text4902-9-5"
+           sodipodi:linespacing="125%"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200"><tspan
+             sodipodi:role="line"
+             id="tspan4904-4-9"
+             x="333.64413"
+             y="-786.87549">sclk</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+           x="333.13144"
+           y="-729.90649"
+           id="text4906-7-7"
+           sodipodi:linespacing="125%"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200"><tspan
+             sodipodi:role="line"
+             id="tspan4908-8-7"
+             x="333.13144"
+             y="-729.90649">mosi</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+           x="333.13144"
+           y="-669.38837"
+           id="text4910-4-6"
+           sodipodi:linespacing="125%"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200"><tspan
+             sodipodi:role="line"
+             id="tspan4912-5-7"
+             x="333.13144"
+             y="-669.38837">miso</tspan></text>
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:1.16083109;stroke-opacity:1"
+           id="rect2987-0-3"
+           width="238.77658"
+           height="279.34033"
+           x="16.633156"
+           y="-813.7287"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+           x="102.72018"
+           y="-670.60638"
+           id="text6936-3-6"
+           sodipodi:linespacing="125%"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200"><tspan
+             sodipodi:role="line"
+             id="tspan6938-6-5"
+             x="102.72018"
+             y="-670.60638">er_1octet</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+           x="-19.590248"
+           y="-739.38837"
+           id="text4882-8-6"
+           sodipodi:linespacing="125%"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200"><tspan
+             sodipodi:role="line"
+             id="tspan4884-8-3"
+             x="-19.590248"
+             y="-739.38837">8</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:14px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+           x="-24.590248"
+           y="-669.38837"
+           id="text4882-8-9-9"
+           sodipodi:linespacing="125%"
+           inkscape:export-filename="/home/guivarch/MesDocuments/Enseignements/13-14/VHDL/Joystick/sujet/images/er_1octet.png"
+           inkscape:export-xdpi="200"
+           inkscape:export-ydpi="200"><tspan
+             sodipodi:role="line"
+             id="tspan4884-8-9-4"
+             x="-24.590248"
+             y="-669.38837">8</tspan></text>
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.73808992px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m -142.68399,-775.59718 93.182793,45.13117"
+           id="path3981"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.73808992px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m -49.044419,-714.01632 -94.553131,-37.11724"
+           id="path3983"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.73808992px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m -47.656022,-659.03309 -96.897328,42.35125"
+           id="path3985"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.73808992px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m -47.010041,-643.52419 -94.959379,50.70221"
+           id="path3987"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.73808992px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m -144.96788,-539.39664 45.677837,0"
+           id="path4012"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.73808992px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m 546.59463,-515.7766 -277.72128,92.79307"
+           id="path4014"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.73808992px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 637.03675,-514.93302 428.7458,-423.82709"
+           id="path4016"
+           inkscape:connector-curvature="0" />
+      </g>
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.53815413px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m -29.320694,296.05541 43.32372,-92.28014 395.930684,-4.01217 95.07149,50.15223"
+         id="path3989"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.53815413px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m -31.727574,322.13456 57.76496,-106.32275 382.692874,-5.01522 98.68182,54.16442"
+         id="path3991"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.53815413px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m -30.524134,390.34162 135.988354,135.41105 297.24885,-9.0274 98.68182,-207.63029"
+         id="path3994"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.53815413px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M -32.931014,411.40556 89.819536,539.7953 412.34058,529.76486 506.20863,322.13456"
+         id="path3996"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.53815413px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 843.1709,201.76919 68.5959,-9.0274"
+         id="path3998"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.53815413px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 843.1709,248.9123 66.18904,27.08221"
+         id="path4000"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.53815413px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 843.1709,301.07062 67.39246,59.17966"
+         id="path4002"
+         inkscape:connector-curvature="0" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:69.52359772px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="515.36041"
+         y="465.65915"
+         id="text4004"
+         sodipodi:linespacing="125%"
+         transform="scale(1.040654,0.96093418)"><tspan
+           sodipodi:role="line"
+           id="tspan4006"
+           x="515.36041"
+           y="465.65915" /></text>
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.53815413px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 162.02574,515.72224 187.73612,34.10352"
+         id="path4008"
+         inkscape:connector-curvature="0" />
+      <path
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.53815413px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 247.46975,495.66133 247.90796,54.16443"
+         id="path4010"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
+</svg>

@@ -106,7 +106,7 @@ begin
 				end if;
 			when attente =>
 				if (cpt = 0) then
-						en1 <= '1';
+					en1 <= '1';
 					if (i_octet = 0) then
 						din1 <= e1;
 						etat <= envoi1;
