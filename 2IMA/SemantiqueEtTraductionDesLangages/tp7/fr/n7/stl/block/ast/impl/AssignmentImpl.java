@@ -81,7 +81,17 @@ public class AssignmentImpl implements Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "getCode is undefined in AssignmentImpl.");
+		Fragment fragment = _factory.createFragment();
+
+		fragment.append(value.getCode(_factory));
+		if (this.declaration == null) {
+			fragment.append(assignable.getCode(_factory));
+			fragment.add(_factory.createStoreI(this.value.getType().length()));
+		} else {
+			fragment.append(declaration.getCode(_factory));
+		}
+
+		return fragment;
 	}
 
 }

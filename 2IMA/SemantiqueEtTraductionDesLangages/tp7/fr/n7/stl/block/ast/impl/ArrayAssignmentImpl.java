@@ -6,6 +6,7 @@ package fr.n7.stl.block.ast.impl;
 import fr.n7.stl.block.ast.Assignable;
 import fr.n7.stl.block.ast.Expression;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.TAMFactory;
 
 /**
@@ -27,7 +28,15 @@ public class ArrayAssignmentImpl extends ArrayAccessImpl implements Assignable {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in ArrayAssignmentImpl.");
+		Fragment fragment = _factory.createFragment();
+
+		fragment.append(this.array.getCode(_factory));
+		fragment.append(this.index.getCode(_factory));
+		fragment.add(_factory.createLoadL(this.getType().length()));
+		fragment.add(Library.IMul);
+		fragment.add(Library.IAdd);
+
+		return fragment;
 	}
 	
 }

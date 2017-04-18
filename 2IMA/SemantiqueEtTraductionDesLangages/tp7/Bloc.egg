@@ -173,7 +173,7 @@ end
 Instructions -> Instruction Instructions #ast;
 #ast {
 do
-    Instructions1^ast.add(Instruction^ast);
+    Instructions1^ast.add(0, Instruction^ast);
     Instructions^ast := Instructions1^ast;
 end
 }

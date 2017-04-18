@@ -16,7 +16,7 @@ import fr.n7.stl.tam.ast.TAMFactory;
  */
 public class VariableUseImpl implements Expression {
 
-	private VariableDeclaration declaration;
+	protected VariableDeclaration declaration;
 	// <REMOVE>
 //	private String name;
 	// </REMOVE>

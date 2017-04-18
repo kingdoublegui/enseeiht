@@ -23,7 +23,13 @@ public class VariableAssignmentImpl extends VariableUseImpl implements Assignabl
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in VariableAssignmentImpl.");
+		Fragment fragment = _factory.createFragment();
+
+		fragment.add(_factory.createLoadA(
+				this.declaration.getRegister(),
+				this.declaration.getOffset()));
+
+		return fragment;
 	}
 
 }

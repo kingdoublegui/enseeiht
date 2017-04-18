@@ -16,7 +16,7 @@ import fr.n7.stl.tam.ast.TAMFactory;
  */
 public class PointerAccessImpl implements Expression {
 
-	private Expression pointer;
+	protected Expression pointer;
 
 	public PointerAccessImpl(Expression _pointer) {
 		this.pointer = _pointer;
@@ -48,7 +48,13 @@ public class PointerAccessImpl implements Expression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode is not implemented in PointerAccessImpl.");
+		Fragment fragment = _factory.createFragment();
+
+		fragment.append(this.pointer.getCode(_factory));
+		fragment.add(_factory.createLoadI(this.getType().length()));
+		fragment.add(_factory.createLoadI(this.getType().length()));
+
+		return fragment;
 	}
 
 }

@@ -3,3 +3,4 @@ doc/
 *.iml
 *.idea/
 out/
+tests/*.tam

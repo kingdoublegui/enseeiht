@@ -59,7 +59,13 @@ public class FieldAccessImpl implements Expression {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "getCode is undefined in FieldAccessImpl.");
+		Fragment fragment = _factory.createFragment();
+
+		fragment.append(this.record.getCode(_factory));
+		fragment.add(_factory.createPop(0, this.getType().length()));
+		fragment.add(_factory.createPop(this.getType().length(), 0));
+
+		return fragment;
 	}
 
 }

@@ -61,7 +61,6 @@ public class SequenceImpl implements Sequence {
 	 */
 	@Override
 	public Type getType() {
-		// throw new SemanticsUndefinedException("Semantics getType undefined in PointerTypeImpl.");
 		SequenceTypeImpl _result = new SequenceTypeImpl();
 		for (Expression _value : this.values) {
 			_result.add(_value.getType());
@@ -74,7 +73,13 @@ public class SequenceImpl implements Sequence {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in SequenceImpl.");
+		Fragment fragment = _factory.createFragment();
+
+		for (Expression e : this.values) {
+			fragment.append(e.getCode(_factory));
+		}
+		fragment.add(_factory.createPop(0, 0));
+		return fragment;
 	}
 
 }

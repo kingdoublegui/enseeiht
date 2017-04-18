@@ -9,3 +9,6 @@ configuration/org.eclipse.core.runtime/.table.2
 configuration/org.eclipse.osgi/.manager/.fileTable.3
 configuration/org.eclipse.osgi/71/0/.cp/icons/full/etool16/
 configuration/org.eclipse.osgi/framework.info.2
+configuration/org.eclipse.equinox.app/.manager/.tmp*
+configuration/org.eclipse.core.runtime/.manager/.tmp*
+workspace/.metadata/.log

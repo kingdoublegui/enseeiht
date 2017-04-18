@@ -18,12 +18,16 @@ import fr.n7.stl.tam.ast.TAMFactory;
  */
 public class RepetitionImpl implements Instruction {
 
+	public static int nid = 0;
+
 	private Expression condition;
 	private Block body;
+	private int id;
 
 	public RepetitionImpl(Expression _condition, Block _body) {
 		this.condition = _condition;
 		this.body = _body;
+		this.id = nid++;
 	}
 
 	/* (non-Javadoc)
@@ -49,7 +53,8 @@ public class RepetitionImpl implements Instruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException("Semantics allocateMemory undefined in RepetitionImpl.");
+		this.body.allocateMemory(_register, _offset);
+		return 0;
 	}
 
 	/* (non-Javadoc)
@@ -57,7 +62,16 @@ public class RepetitionImpl implements Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in RepetitionImpl.");
+		Fragment fragment = _factory.createFragment();
+
+		fragment.add(_factory.createJumpIf("fin_while" + this.id, 0));
+		fragment.addPrefix("while_cond" + this.id);
+		fragment.append(this.body.getCode(_factory));
+		fragment.add(_factory.createJump("debut_while" + this.id));
+
+		fragment.addPrefix("debut_while" + this.id);
+		fragment.addSuffix("fin_while" + this.id);
+		return fragment;
 	}
 
 }

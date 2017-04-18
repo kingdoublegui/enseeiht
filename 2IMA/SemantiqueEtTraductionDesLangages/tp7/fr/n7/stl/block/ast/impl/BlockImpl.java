@@ -16,6 +16,7 @@ import fr.n7.stl.block.ast.VariableDeclaration;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+import fr.n7.stl.tam.ast.impl.FragmentImpl;
 
 /**
  * Implementation of the Abstract Syntax Tree node for an instruction block.
@@ -50,6 +51,8 @@ public class BlockImpl implements Block {
 	 * Subset of instructions corresponding to type declarations in the same order.
 	 */
 	private List<TypeDeclaration> types;
+
+	private int offset;
 
 	/**
 	 * Constructor for a block contained in a _context block.
@@ -217,15 +220,24 @@ public class BlockImpl implements Block {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException("Semantics allocateMemory is undefined in BlockImpl.");
+		this.offset = _offset;
+		for (Instruction i : this.instructions) {
+			this.offset += i.allocateMemory(_register, this.offset);
+		}
+		return 0;
 	}
 
 	/* (non-Javadoc)
-	 * @see fr.n7.stl.block.ast.Block#generateCode(fr.n7.stl.tam.ast.TAMFactory)
+	 * @see fr.n7.stl.block.ast.Block#getCode(fr.n7.stl.tam.ast.TAMFactory)
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics generateCode is undefined in BlockImpl.");
+		Fragment fragment = _factory.createFragment();
+		for (Instruction i : this.instructions) {
+			fragment.append(i.getCode(_factory));
+		}
+		fragment.add(_factory.createPop(0, this.offset));
+		return fragment;
 	}
 
 }

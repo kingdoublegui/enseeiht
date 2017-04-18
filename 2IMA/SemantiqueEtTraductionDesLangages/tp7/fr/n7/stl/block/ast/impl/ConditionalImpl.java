@@ -20,14 +20,18 @@ import fr.n7.stl.tam.ast.TAMFactory;
  */
 public class ConditionalImpl implements Instruction {
 
+	public static int nid = 0;
+
 	private Expression condition;
 	private Block thenBranch;
 	private Optional<Block> elseBranch;
+	private int id;
 
 	public ConditionalImpl(Expression _condition, Block _then, Block _else) {
 		this.condition = _condition;
 		this.thenBranch = _then;
 		this.elseBranch = Optional.of(_else);
+		this.id = nid++;
 	}
 
 	public ConditionalImpl(Expression _condition, Block _then) {
@@ -71,7 +75,17 @@ public class ConditionalImpl implements Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "getCode is undefined in ConditionalImpl.");
+		Fragment fragment = _factory.createFragment();
+		fragment.append(condition.getCode(_factory));
+		fragment.add(_factory.createJumpIf("else" + id, 0));
+		fragment.append(this.thenBranch.getCode(_factory));
+		fragment.add(_factory.createJump("fin_cond" + id));
+		fragment.addSuffix("else" + id);
+		if (this.elseBranch.isPresent()) {
+			fragment.append(this.elseBranch.get().getCode(_factory));
+		}
+		fragment.addSuffix("fin_cond"+id);
+		return fragment;
 	}
 
 }

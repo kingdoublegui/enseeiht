@@ -71,7 +71,7 @@ public class ConstantDeclarationImpl implements ConstantDeclaration {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException( "getCode is undefined in ConstantDeclarationImpl.");
+		return _factory.createFragment();
 	}
 
 }

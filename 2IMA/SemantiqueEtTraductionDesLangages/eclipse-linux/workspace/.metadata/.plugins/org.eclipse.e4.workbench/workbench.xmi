@@ -2,7 +2,7 @@
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_FBuh4SQjEeeQ99_UhAoN7g" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_FBuh4iQjEeeQ99_UhAoN7g" bindingContexts="_FBuh6CQjEeeQ99_UhAoN7g">
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_FBuh4iQjEeeQ99_UhAoN7g" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_FKZVsCQjEeeQ99_UhAoN7g" x="456" y="178" width="996" height="711">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_FBuh4iQjEeeQ99_UhAoN7g" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_FKZVsCQjEeeQ99_UhAoN7g" x="287" y="63" width="1252" height="953">
     <persistedState key="coolBarVisible" value="true"/>
     <persistedState key="perspectiveBarVisible" value="false"/>
     <persistedState key="isRestored" value="true"/>
@@ -15,7 +15,7 @@
         <children xsi:type="advanced:Perspective" xmi:id="_FQYB4CQjEeeQ99_UhAoN7g" elementId="mg.itam.rcp.perspective" selectedElement="_FQYB4SQjEeeQ99_UhAoN7g" label="Itam Perspective" iconURI="platform:/plugin/org.eclipse.ui/icons/full/eview16/default_persp.png">
           <persistedState key="persp.hiddenItems" value="persp.hideToolbarSC:org.eclipse.ui.edit.text.toggleShowSelectedElementOnly,"/>
           <children xsi:type="basic:PartSashContainer" xmi:id="_FQYB4SQjEeeQ99_UhAoN7g" selectedElement="_FQYB4iQjEeeQ99_UhAoN7g">
-            <children xsi:type="basic:PartSashContainer" xmi:id="_FQYB4iQjEeeQ99_UhAoN7g" containerData="8000" selectedElement="_FQYB4yQjEeeQ99_UhAoN7g" horizontal="true">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_FQYB4iQjEeeQ99_UhAoN7g" containerData="6633" selectedElement="_FQYB4yQjEeeQ99_UhAoN7g" horizontal="true">
               <children xsi:type="basic:PartStack" xmi:id="_FQYB4yQjEeeQ99_UhAoN7g" elementId="Asm" containerData="4500" selectedElement="_FQYB5SQjEeeQ99_UhAoN7g">
                 <tags>active</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_FQYB5CQjEeeQ99_UhAoN7g" elementId="mg.itam.rcp.asmView:*" toBeRendered="false" ref="_FQVloCQjEeeQ99_UhAoN7g"/>
@@ -29,7 +29,7 @@
                 </children>
               </children>
             </children>
-            <children xsi:type="basic:PartStack" xmi:id="_FQYB6yQjEeeQ99_UhAoN7g" elementId="I/O Console" containerData="2000" selectedElement="_FQYB7CQjEeeQ99_UhAoN7g">
+            <children xsi:type="basic:PartStack" xmi:id="_FQYB6yQjEeeQ99_UhAoN7g" elementId="I/O Console" containerData="3367" selectedElement="_FQYB7CQjEeeQ99_UhAoN7g">
               <children xsi:type="advanced:Placeholder" xmi:id="_FQYB7CQjEeeQ99_UhAoN7g" elementId="org.eclipse.ui.console.ConsoleView" ref="_FQUXgCQjEeeQ99_UhAoN7g"/>
             </children>
           </children>

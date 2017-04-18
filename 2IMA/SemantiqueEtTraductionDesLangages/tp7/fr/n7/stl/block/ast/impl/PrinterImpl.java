@@ -6,6 +6,7 @@ package fr.n7.stl.block.ast.impl;
 import fr.n7.stl.block.ast.Expression;
 import fr.n7.stl.block.ast.Instruction;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 
@@ -27,7 +28,7 @@ public class PrinterImpl implements Instruction {
 	 */
 	@Override
 	public String toString() {
-		return "print" + this.parameter + ";";
+		return "print(" + this.parameter + ");";
 	}
 
 	/* (non-Javadoc)
@@ -51,7 +52,12 @@ public class PrinterImpl implements Instruction {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in PrinterImpl.");
+		Fragment fragment = _factory.createFragment();
+
+		fragment.append(this.parameter.getCode(_factory));
+		fragment.add(Library.IOut);
+
+		return fragment;
 	}
 
 }

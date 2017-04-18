@@ -1,4 +1,4 @@
-essai
+essai:
     PUSH 10
     LOADL 42 ; tjrs
     LOADL 12 
@@ -9,7 +9,7 @@ essai
     CALL(LB) _main
     HALT
 
-_main              ;main
+_main:              ;main
 	LOADL       88
 	LOADL       12
 	LOAD   (1) 3[LB]
@@ -22,7 +22,7 @@ _main              ;main
 	SUBR IOUT
 	RETURN(0) 0 
 	; yyy
-_foo
+_foo:
 	LOADL 10
 	SUBR MALLOC
 	SUBR Iout

@@ -878,6 +878,53 @@ $T_D\left[\right] \leq T_G\left[\right] \Leftrightarrow T_D=T_G$
 >
 > **Attention**: Cela ne veut pas dire qu'il est interdit de manipuler des adresses. Le probleme est lie a la lecture et ecriture dans une zone memoire a travers deux adresses de type different. Il n'y a aucun probleme a faire des acces en lecture seule.
 
+### Traitement des fonctions
+```c
+int f(int x) {
+    return x+1;
+}
+```
+
+```tam
+print f(1);
+LOADL 1		;empiler parametre reel
+CALL -f		;appeler la fonction qui depile 1 et empile le resultat 2
+SUBR Iout	;afficher l'entier en sommet de pile
+```
+
+```tam
+-f
+    ;lire la valeur de x
+    LOAD (1) -4[LB]
+    ;valeur 1
+    LOADL 1
+    SUBR IADD
+    ;enlever parametre
+    ;mettre le resultat a la place
+    return (1) 1 ;meme principe que push
+```
+
+Sur le meme principe, comment faire la fonction suivante
+```c
+int f(int x) {
+    if (x == 0) {
+        return 0;
+    } else {
+        return (1+f(x-1));
+    }
+}
+```
+```tam
+-f
+    ;lire la valeur de x
+    LOAD (1) -4[LB]
+    ;valeur 1
+    LOADL 1
+    SUBR IADD
+    ;enlever parametre
+    ;mettre le resultat a la place
+    return (1) 1 ;meme principe que push
+```
 
 ### Travaux pratiques
 L'ensemble des travaux pratiques est disponible sur Github a l'adresse suivante: [TP Semantique des traducitons des langages](https://github.com/thibmeu/enseeiht/tree/master/2IMA/SemantiqueEtTraductionDesLangages). Les fichiers de corrections sont donnes a titre indicatif et peuvent ne pas s'averer complets.

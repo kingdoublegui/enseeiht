@@ -26,7 +26,7 @@ compile :
 	$(JAVAC) -classpath $(EGGJAR):. Main.java
 
 exec :
-	$(JAVA) -classpath $(EGGJAR):. Main tests/test00.bloc
+	$(JAVA) -classpath $(EGGJAR):. Main tests/test_entier.bloc
 
 clean :
 	-rm Main.class
