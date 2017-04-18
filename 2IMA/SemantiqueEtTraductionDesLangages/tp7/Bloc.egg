@@ -23,14 +23,13 @@ inh support : Expression for Acces;
 inh type    : Type for SuiteNouveau, NomEtendu, SuiteNomEtendu;
 syn ast     : Block for Bloc, Programme;
 syn ast     : Value for Valeur;
-syn ast		: Expression for Expression, Condition, SuiteCondition, Terme, SuiteTerme, Facteur, SuiteFacteur, Acces;
-syn ast		: Type for Type, NomEtendu;
+syn ast		: Expression for Expression, Condition, SuiteCondition,
+              Terme, SuiteTerme, Facteur, SuiteFacteur, Acces, SuiteNouveau;
+syn ast		: Type for Type, NomEtendu, SuiteNomEtendu;
 syn ast		: Instruction for Instruction;
 syn ast     : List<Instruction> for Instructions;
 syn ast     : Block for SuiteConditionnelle;
 syn ast     : Assignable for Affectable, SuiteAffectable;
--- On ne sait pas quoi mettre donc Expression
-syn ast     : Expression for SuiteNouveau, SuiteNomEtendu;
 syn bin_op	: BinaryOperator for Additif, Multiplicatif, Comparatif;
 syn champs  : LinkedList<FieldDeclaration> for Champs;
 syn champ   : FieldDeclaration for Champ;
@@ -255,7 +254,7 @@ end
 Affectable -> multiplication Affectable #ast ;
 #ast {
 do
-   Affectable^ast := Affectable^factory.createPointerAssignement(Affectable1^ast);
+   Affectable^ast := Affectable^factory.createPointerAssignment(Affectable1^ast);
 end
 }
 
@@ -423,7 +422,7 @@ end
 SuiteNomEtendu -> #ast;
 #ast {
 do
-    SuiteNomEtendu^ast := SuiteNomEtendu^factory.createXX();
+    SuiteNomEtendu^ast := SuiteNomEtendu^type;
 end
 }
 

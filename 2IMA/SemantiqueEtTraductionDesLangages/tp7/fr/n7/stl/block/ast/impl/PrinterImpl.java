@@ -35,7 +35,7 @@ public class PrinterImpl implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException("Semantics checkType undefined in PrinterImpl.");
+		return true;
 	}
 
 	/* (non-Javadoc)

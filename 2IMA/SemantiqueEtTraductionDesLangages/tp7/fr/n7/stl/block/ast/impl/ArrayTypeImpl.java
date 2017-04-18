@@ -3,19 +3,26 @@
  */
 package fr.n7.stl.block.ast.impl;
 
+import fr.n7.stl.block.ast.ArrayType;
 import fr.n7.stl.block.ast.AtomicType;
+import fr.n7.stl.block.ast.Expression;
 import fr.n7.stl.block.ast.Type;
 
 /**
  * @author Marc Pantel
  *
  */
-public class ArrayTypeImpl implements Type {
+public class ArrayTypeImpl implements Type, ArrayType {
 
 	private Type element;
+	private Expression size;
 
 	public ArrayTypeImpl(Type _element) {
 		this.element = _element;
+	}
+
+	public Type getType() {
+		return this;
 	}
 
 	/* (non-Javadoc)
@@ -25,9 +32,8 @@ public class ArrayTypeImpl implements Type {
 	public boolean equalsTo(Type _other) {
 		if (_other instanceof ArrayTypeImpl) {
 			return this.element.equalsTo(((ArrayTypeImpl)_other).element);
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/* (non-Javadoc)
@@ -37,9 +43,8 @@ public class ArrayTypeImpl implements Type {
 	public boolean compatibleWith(Type _other) {
 		if (_other instanceof ArrayTypeImpl) {
 			return this.element.compatibleWith(((ArrayTypeImpl)_other).element);
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/* (non-Javadoc)
@@ -49,9 +54,8 @@ public class ArrayTypeImpl implements Type {
 	public Type merge(Type _other) {
 		if (_other instanceof ArrayTypeImpl) {
 			return new ArrayTypeImpl(this.element.merge(((ArrayTypeImpl)_other).element));
-		} else {
-			return AtomicType.ErrorType;
 		}
+		return AtomicType.ErrorType;
 	}
 
 	/* (non-Javadoc)
@@ -59,7 +63,7 @@ public class ArrayTypeImpl implements Type {
 	 */
 	@Override
 	public int length() {
-		throw new SemanticsUndefinedException("Semantics length is not implemented in ArrayTypeImpl.");
+		return this.element.length();
 	}
 
 	/* (non-Javadoc)
@@ -71,10 +75,12 @@ public class ArrayTypeImpl implements Type {
 	}
 
 	/**
-	 * @return Type of the elements in the array.
+	 * Provide the type of the element pointed.
+	 *
+	 * @return Type of the element pointed.
 	 */
-	public Type getType() {
+	@Override
+	public Type getPointedType() {
 		return this.element;
 	}
-
 }

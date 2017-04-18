@@ -35,9 +35,8 @@ public class CoupleTypeImpl implements CoupleType {
 		if (_other instanceof CoupleType) {
 			return this.first.equalsTo(((CoupleTypeImpl) _other).first)
 					&& this.second.equalsTo(((CoupleTypeImpl) _other).second);
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/* (non-Javadoc)
@@ -48,9 +47,8 @@ public class CoupleTypeImpl implements CoupleType {
 		if (_other instanceof CoupleType) {
 			return this.first.compatibleWith(((CoupleTypeImpl) _other).first)
 					&& this.second.compatibleWith(((CoupleTypeImpl) _other).second);
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/* (non-Javadoc)

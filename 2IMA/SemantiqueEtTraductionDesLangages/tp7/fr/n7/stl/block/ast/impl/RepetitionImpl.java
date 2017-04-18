@@ -39,11 +39,8 @@ public class RepetitionImpl implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		throw new SemanticsUndefinedException("Semantics checkType undefined in RepetitionImpl.");
-		// <REMOVE>
-		// return this.condition.getType().compatibleWith(AtomicType.BooleanType) 
-		//		&& this.body.checkType();
-		// </REMOVE>
+		return this.condition.getType().compatibleWith(AtomicType.BooleanType)
+				&& this.body.checkType();
 	}
 
 

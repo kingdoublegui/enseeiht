@@ -3,9 +3,6 @@
  */
 package fr.n7.stl.block.ast.impl;
 
-import fr.n7.stl.block.ast.AtomicType;
-import fr.n7.stl.block.ast.IntegerValue;
-import fr.n7.stl.block.ast.PointerType;
 import fr.n7.stl.block.ast.Type;
 
 /**
@@ -13,20 +10,14 @@ import fr.n7.stl.block.ast.Type;
  * @author Marc Pantel
  *
  */
-public class PointerTypeImpl implements Type, PointerType {
+public class AddressTypeImpl implements Type {
 
 	private Type element;
 
-	public PointerTypeImpl(Type _element) {
+	public AddressTypeImpl(Type _element) {
 		this.element = _element;
 	}
-
-	/**
-	 * Provide the type of the element pointed.
-	 *
-	 * @return Type of the element pointed.
-	 */
-	@Override
+	
 	public Type getPointedType() {
 		return this.element;
 	}
@@ -36,10 +27,7 @@ public class PointerTypeImpl implements Type, PointerType {
 	 */
 	@Override
 	public boolean equalsTo(Type _other) {
-		if (_other instanceof PointerType) {
-			return this.element.equalsTo(((PointerTypeImpl) _other).element);
-		}
-		return false;
+		throw new SemanticsUndefinedException("Semantics equalsTo undefined in PointerTypeImpl.");
 	}
 
 	/* (non-Javadoc)
@@ -47,10 +35,7 @@ public class PointerTypeImpl implements Type, PointerType {
 	 */
 	@Override
 	public boolean compatibleWith(Type _other) {
-		if (_other instanceof PointerType) {
-			return this.element.equalsTo(((PointerTypeImpl) _other).element);
-		}
-		return false;
+		throw new SemanticsUndefinedException("Semantics compatibleWith undefined in PointerTypeImpl.");
 	}
 
 	/* (non-Javadoc)
@@ -58,10 +43,7 @@ public class PointerTypeImpl implements Type, PointerType {
 	 */
 	@Override
 	public Type merge(Type _other) {
-		if (_other instanceof PointerTypeImpl) {
-			return new PointerTypeImpl(this.element.merge(((PointerTypeImpl)_other).element));
-		}
-		return AtomicType.ErrorType;
+		throw new SemanticsUndefinedException("Semantics merge undefined in PointerTypeImpl.");
 	}
 
 	/* (non-Javadoc)
@@ -69,7 +51,7 @@ public class PointerTypeImpl implements Type, PointerType {
 	 */
 	@Override
 	public int length() {
-		return this.element.length();
+		throw new SemanticsUndefinedException("Semantics length undefined in PointerTypeImpl.");
 	}
 
 	/* (non-Javadoc)
@@ -77,11 +59,6 @@ public class PointerTypeImpl implements Type, PointerType {
 	 */
 	@Override
 	public String toString() {
-		return "(" + this.element + " *)";
+		return "(" + this.element + " &)";
 	}
-
-	public Type getType() {
-		return this;
-	}
-
 }

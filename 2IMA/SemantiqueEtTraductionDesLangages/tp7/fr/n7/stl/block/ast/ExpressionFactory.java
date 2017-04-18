@@ -111,7 +111,14 @@ public interface ExpressionFactory {
 	 * @return Abstract Syntax Tree node for the access of the _index cell in the _array.
 	 */
 	public Assignable createArrayAssignment(Assignable _array, Expression _index);
-	
+
+	/**
+	 * Create a node for an access to the pointed value in an expression in the Abstract Syntax Tree.
+	 * @param _type Abstract Syntax Tree node for the pointer.
+	 * @return Abstract Syntax Tree node for the access of the content of the _pointer.
+	 */
+	public Expression createArrayAllocation(Type _type, Expression _size);
+
 	/**
 	 * Create a node for an access to a field in a record expression in the Abstract Syntax Tree.
 	 * with resolving the reference to the Field Declaration with the Symbol Table.
@@ -160,7 +167,21 @@ public interface ExpressionFactory {
 	 * @param _pointer Abstract Syntax Tree node for the pointer.
 	 * @return Abstract Syntax Tree node for the access of the content of the _pointer.
 	 */
-	public Expression createPointerAssignment(Assignable _pointer);
+	public Assignable createPointerAssignment(Assignable _pointer);
+
+	/**
+	 * Create a node for an access to the pointed value in an expression in the Abstract Syntax Tree.
+	 * @param _type Abstract Syntax Tree node for the pointer.
+	 * @return Abstract Syntax Tree node for the access of the content of the _pointer.
+	 */
+	public Expression createPointerAllocation(Type _type);
+
+	/**
+	 * Create a node for an access to the pointed value in an expression in the Abstract Syntax Tree.
+	 * @param _variable Abstract Syntax Tree node for the pointer.
+	 * @return Abstract Syntax Tree node for the access of the content of the _pointer.
+	 */
+	public Expression createAddressAccess(Expression _variable);
 		
 	/**
 	 * Create a node for a type conversion of an expression in the Abstract Syntax Tree.

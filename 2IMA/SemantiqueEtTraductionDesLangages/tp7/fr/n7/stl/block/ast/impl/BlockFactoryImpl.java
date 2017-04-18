@@ -225,6 +225,13 @@ public class BlockFactoryImpl implements BlockFactory {
 		return new ArrayAssignmentImpl(_array,_index);
 	}
 
+	/* (non-Javadoc)
+         * @see fr.n7.stl.block.ast.ExpressionFactory#createPointerAssignment(fr.n7.stl.block.ast.Assignable)
+         */
+	@Override
+	public Expression createArrayAllocation(Type _type, Expression _size) {
+		return new ArrayAllocationImpl(_type, _size);
+	}
 
 	/* (non-Javadoc)
 	 * @see fr.n7.stl.block.ast.ExpressionFactory#createFieldAccess(fr.n7.stl.block.ast.Expression, fr.n7.stl.block.ast.FieldDeclaration)
@@ -411,6 +418,18 @@ public class BlockFactoryImpl implements BlockFactory {
 	@Override
 	public Assignable createPointerAssignment(Assignable _pointer) {
 		return new PointerAssignmentImpl(_pointer);
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.n7.stl.block.ast.ExpressionFactory#createPointerAssignment(fr.n7.stl.block.ast.Assignable)
+	 */
+	@Override
+	public Expression createPointerAllocation(Type _type) {
+		return new PointerAllocationImpl(_type);
+	}
+
+	public Expression createAddressAccess(Expression _assignable)  {
+		return new AddressAccessImpl(_assignable);
 	}
 
 	/* (non-Javadoc)

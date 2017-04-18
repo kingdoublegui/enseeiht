@@ -3,6 +3,8 @@
  */
 package fr.n7.stl.block.ast.impl;
 
+import fr.n7.stl.block.ast.ArrayType;
+import fr.n7.stl.block.ast.AtomicType;
 import fr.n7.stl.block.ast.Expression;
 import fr.n7.stl.block.ast.Type;
 import fr.n7.stl.tam.ast.Fragment;
@@ -33,10 +35,10 @@ public class ArrayAccessImpl implements Expression {
 	 */
 	@Override
 	public Type getType() {
-		throw new SemanticsUndefinedException( "getType is undefined in ArrayAccessImpl.");
-		// <REMOVE>
-		// return this.array.getType();
-		// </REMOVE>
+		if (this.array.getType() instanceof ArrayType) {
+			return ((ArrayTypeImpl)this.array.getType()).getPointedType();
+		}
+		return AtomicType.ErrorType;
 	}
 
 	/* (non-Javadoc)
