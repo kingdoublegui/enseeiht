@@ -73,7 +73,7 @@ public class AssignmentImpl implements Instruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException( "allocateMemory is undefined in AssignmentImpl.");
+		return 0;
 	}
 
 	/* (non-Javadoc)

@@ -63,7 +63,7 @@ public class ArrayTypeImpl implements Type, ArrayType {
 	 */
 	@Override
 	public int length() {
-		return this.element.length();
+		return 1;
 	}
 
 	/* (non-Javadoc)

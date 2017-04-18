@@ -59,7 +59,11 @@ public class ConditionalImpl implements Instruction {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException( "allocateMemory is undefined in ConditionalImpl.");
+		this.thenBranch.allocateMemory(_register, _offset);
+		if (this.elseBranch.isPresent()) {
+			this.elseBranch.get().allocateMemory(_register, _offset);
+		}
+		return 0;
 	}
 
 	/* (non-Javadoc)

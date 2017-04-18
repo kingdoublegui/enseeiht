@@ -69,7 +69,7 @@ public class PointerTypeImpl implements Type, PointerType {
 	 */
 	@Override
 	public int length() {
-		return this.element.length();
+		return 1;
 	}
 
 	/* (non-Javadoc)

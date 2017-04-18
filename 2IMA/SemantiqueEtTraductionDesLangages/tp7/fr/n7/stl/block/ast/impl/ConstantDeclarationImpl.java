@@ -63,7 +63,7 @@ public class ConstantDeclarationImpl implements ConstantDeclaration {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		throw new SemanticsUndefinedException( "allocateMemory is undefined in ConstantDeclarationImpl.");
+		return 0;
 	}
 
 	/* (non-Javadoc)

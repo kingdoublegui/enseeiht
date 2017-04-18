@@ -13,10 +13,10 @@ test {
     }
   } else {
     if ( i + j > 10 ) {
-      const boolean p = false;
-      print p;
+      const bool p = false;
+      print(p);
     }
-    print p;
+    print(p);
   }
-  print j;
+  print(j);
 }
