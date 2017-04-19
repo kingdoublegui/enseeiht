@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.tam.ast.impl;
 
 import java.util.LinkedList;
@@ -70,7 +67,7 @@ class TAMInstructionImpl implements TAMInstruction {
 	 * Construction for a full TAM instruction with kind, label, location and size.
 	 * @param _kind Kind for the TAM instruction.
 	 * @param _label Optional Label for the TAM instruction.
-	 * @param _location Optional Register for the TAM instruction.
+	 * @param _register Optional Register for the TAM instruction.
 	 * @param _offset Optional Integer offset for the TAM instruction.
 	 * @param _target Optional Label target for the TAM instruction.
 	 * @param _size Optional Integer size for the TAM instruction.
@@ -79,12 +76,10 @@ class TAMInstructionImpl implements TAMInstruction {
 			Optional<Register> _register, Optional<Integer> _offset, 
 			Optional<String> _target, Optional<Integer> _size) {
 		this.kind = _kind;
-		this.comments = new LinkedList<String>();
-		this.prefixes = new LinkedList<String>();
-		this.suffixes = new LinkedList<String>();
-		if (_label.isPresent()) {
-			this.prefixes.add(_label.get());
-		}
+		this.comments = new LinkedList<>();
+		this.prefixes = new LinkedList<>();
+		this.suffixes = new LinkedList<>();
+        _label.ifPresent(s -> this.prefixes.add(s));
 		this.register = _register;
 		this.offset = _offset;
 		this.target = _target;
@@ -116,23 +111,23 @@ class TAMInstructionImpl implements TAMInstruction {
 	}
 	
 	public String toString() {
-		String _result = "";
+		StringBuilder _result = new StringBuilder();
 		for (String _comment : this.comments) {
-			_result += ";" + _comment + "\n";
+			_result.append(";").append(_comment).append("\n");
 		}
 		for (String _label : this.prefixes) {
-			_result += _label + ":\n";
+			_result.append(_label).append(":\n");
 		}
-		_result += this.kind;
-		_result += ((this.size.isPresent())?(" (" + this.size.get() + ")"):"");
-		_result += ((this.offset.isPresent())?(" " + this.offset.get()):"");
-		_result += ((this.register.isPresent())?("[" + this.register.get() + "]"):"");
+		_result.append(this.kind);
+		_result.append(size.map(integer1 -> (" (" + integer1 + ")")).orElse(""));
+		_result.append(offset.map(integer -> (" " + integer)).orElse(""));
+		_result.append(register.map(register -> ("[" + register + "]")).orElse(""));
 		//_result += ((this.target.isPresent())?(" (" + this.target.get() + ")"):"");
-		_result += ((this.target.isPresent())?(" " + this.target.get()):"");
+		_result.append(target.map(s -> (" " + s)).orElse(""));
 		for (String _label : this.suffixes) {
-			_result += "\n" + _label + ":";
+			_result.append("\n").append(_label).append(":");
 		}
-		return _result;
+		return _result.toString();
 	}
 
 }

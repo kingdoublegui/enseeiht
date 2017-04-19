@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast.impl;
 
 import fr.n7.stl.block.ast.Assignable;
@@ -31,6 +28,7 @@ public class ArrayAssignmentImpl extends ArrayAccessImpl implements Assignable {
 		Fragment fragment = _factory.createFragment();
 
 		fragment.append(this.array.getCode(_factory));
+		fragment.add(_factory.createLoadI(1));
 		fragment.append(this.index.getCode(_factory));
 		fragment.add(_factory.createLoadL(this.getType().length()));
 		fragment.add(Library.IMul);

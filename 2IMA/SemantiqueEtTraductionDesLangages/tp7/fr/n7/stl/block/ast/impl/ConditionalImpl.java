@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast.impl;
 
 import java.util.Optional;
@@ -20,18 +17,14 @@ import fr.n7.stl.tam.ast.TAMFactory;
  */
 public class ConditionalImpl implements Instruction {
 
-	public static int nid = 0;
-
 	private Expression condition;
 	private Block thenBranch;
 	private Optional<Block> elseBranch;
-	private int id;
 
 	public ConditionalImpl(Expression _condition, Block _then, Block _else) {
 		this.condition = _condition;
 		this.thenBranch = _then;
 		this.elseBranch = Optional.of(_else);
-		this.id = nid++;
 	}
 
 	public ConditionalImpl(Expression _condition, Block _then) {
@@ -45,7 +38,7 @@ public class ConditionalImpl implements Instruction {
 	 */
 	@Override
 	public String toString() {
-		return "if (" + this.condition + " )" + this.thenBranch + ((this.elseBranch.isPresent())?(" else " + this.elseBranch.get()):"");
+		return "if (" + this.condition + " )" + this.thenBranch + (elseBranch.map(block -> (" else " + block)).orElse(""));
 	}
 
 	/* (non-Javadoc)
@@ -55,7 +48,7 @@ public class ConditionalImpl implements Instruction {
 	public boolean checkType() {
 		return this.condition.getType().compatibleWith(AtomicType.BooleanType) 
 				&& this.thenBranch.checkType() 
-				&& (this.elseBranch.isPresent()?this.elseBranch.get().checkType():true);
+				&& (elseBranch.map(Block::checkType).orElse(true));
 	}
 
 	/* (non-Javadoc)
@@ -64,9 +57,7 @@ public class ConditionalImpl implements Instruction {
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
 		this.thenBranch.allocateMemory(_register, _offset);
-		if (this.elseBranch.isPresent()) {
-			this.elseBranch.get().allocateMemory(_register, _offset);
-		}
+        elseBranch.ifPresent(block -> block.allocateMemory(_register, _offset));
 		return 0;
 	}
 
@@ -76,15 +67,16 @@ public class ConditionalImpl implements Instruction {
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
 		Fragment fragment = _factory.createFragment();
+		int id = _factory.createLabelNumber();
+
 		fragment.append(condition.getCode(_factory));
 		fragment.add(_factory.createJumpIf("else" + id, 0));
 		fragment.append(this.thenBranch.getCode(_factory));
 		fragment.add(_factory.createJump("fin_cond" + id));
 		fragment.addSuffix("else" + id);
-		if (this.elseBranch.isPresent()) {
-			fragment.append(this.elseBranch.get().getCode(_factory));
-		}
+        elseBranch.ifPresent(block -> fragment.append(block.getCode(_factory)));
 		fragment.addSuffix("fin_cond"+id);
+
 		return fragment;
 	}
 

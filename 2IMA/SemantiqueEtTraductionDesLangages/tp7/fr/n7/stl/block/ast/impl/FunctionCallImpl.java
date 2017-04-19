@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast.impl;
 
 import java.util.Iterator;
@@ -28,13 +25,13 @@ public class FunctionCallImpl implements FunctionCall {
 
 	@Override
 	public String toString() {
-		String _result = function + "( ";
+		StringBuilder _result = new StringBuilder(function + "( ");
 		Iterator<Expression> _iter = this.parameters.iterator();
 		if (_iter.hasNext()) {
-			_result += _iter.next();
+			_result.append(_iter.next());
 		}
 		while (_iter.hasNext()) {
-			_result += " ," + _iter.next();
+			_result.append(" ,").append(_iter.next());
 		}
 		return  _result + ")";
 	}

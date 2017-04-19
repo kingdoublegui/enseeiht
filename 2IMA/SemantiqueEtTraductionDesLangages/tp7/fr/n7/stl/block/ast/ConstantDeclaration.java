@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast;
 
 /**
@@ -14,6 +11,6 @@ public interface ConstantDeclaration extends Instruction, Declaration {
 	 * Provide the value associated to a name in a type declaration.
 	 * @return Value from the declaration.
 	 */
-	public Expression getValue();
+    Expression getValue();
 
 }

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.tam.ast;
 
 /**
@@ -42,6 +39,6 @@ public enum Register {
 	/**
 	 * Code Pointer register.
 	 */
-	CP;
+	CP
 
 }

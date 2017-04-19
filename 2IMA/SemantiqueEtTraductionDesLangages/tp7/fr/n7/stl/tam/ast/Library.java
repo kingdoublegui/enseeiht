@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.tam.ast;
 
 import java.util.LinkedList;
@@ -229,28 +226,28 @@ public enum Library implements TAMInstruction {
 	/**
 	 * Constructor that assigns an empty label for each enum value object.
 	 */
-	private Library() {
-		this.comments = new LinkedList<String>();
-		this.prefixes = new LinkedList<String>();
-		this.suffixes = new LinkedList<String>();
+    Library() {
+		this.comments = new LinkedList<>();
+		this.prefixes = new LinkedList<>();
+		this.suffixes = new LinkedList<>();
 	}
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Enum#toString()
 	 */
 	public String toString() {
-		String _result = "";
+		StringBuilder _result = new StringBuilder();
 		for (String _comment : this.comments) {
-			_result += ";" + _comment + "\n";
+			_result.append(";").append(_comment).append("\n");
 		}
 		for (String _label : this.prefixes) {
-			_result += _label + ":\n";
+			_result.append(_label).append(":\n");
 		}
-		_result += " SUBR " + this.name();
+		_result.append(" SUBR ").append(this.name());
 		for (String _label : this.suffixes) {
-			_result += _label + ":\n";
+			_result.append(_label).append(":\n");
 		}
-		return _result;
+		return _result.toString();
 	}
 	
 	/* (non-Javadoc)

@@ -4,6 +4,7 @@ import fr.n7.stl.block.ast.ArrayAllocation;
 import fr.n7.stl.block.ast.Expression;
 import fr.n7.stl.block.ast.Type;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.TAMFactory;
 
 /**
@@ -38,6 +39,13 @@ public class ArrayAllocationImpl implements ArrayAllocation {
      */
     @Override
     public Fragment getCode(TAMFactory _factory) {
-        throw new SemanticsUndefinedException("getCode is undefined in ArrayAllocationImpl.");
+        Fragment fragment = _factory.createFragment();
+
+        fragment.append(size.getCode(_factory));
+        fragment.add(_factory.createLoadL(this.type.length()));
+        fragment.add(Library.IMul);
+        fragment.add(Library.MAlloc);
+
+        return fragment;
     }
 }

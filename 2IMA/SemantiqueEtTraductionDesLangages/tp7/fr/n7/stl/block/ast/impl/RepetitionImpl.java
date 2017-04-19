@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast.impl;
 
 import fr.n7.stl.block.ast.AtomicType;
@@ -18,16 +15,12 @@ import fr.n7.stl.tam.ast.TAMFactory;
  */
 public class RepetitionImpl implements Instruction {
 
-	public static int nid = 0;
-
 	private Expression condition;
 	private Block body;
-	private int id;
 
 	public RepetitionImpl(Expression _condition, Block _body) {
 		this.condition = _condition;
 		this.body = _body;
-		this.id = nid++;
 	}
 
 	/* (non-Javadoc)
@@ -63,15 +56,17 @@ public class RepetitionImpl implements Instruction {
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
 		Fragment fragment = _factory.createFragment();
+		int id = _factory.createLabelNumber();
 
 		fragment.append(condition.getCode(_factory));
-		fragment.addPrefix("while_cond" + this.id);
-		fragment.add(_factory.createJumpIf("fin_while" + this.id, 0));
+		fragment.addPrefix("while_cond" + id);
+		fragment.add(_factory.createJumpIf("fin_while" + id, 0));
 		fragment.append(this.body.getCode(_factory));
-		fragment.add(_factory.createJump("debut_while" + this.id));
+		fragment.add(_factory.createJump("debut_while" + id));
 
-		fragment.addPrefix("debut_while" + this.id);
-		fragment.addSuffix("fin_while" + this.id);
+		fragment.addPrefix("debut_while" + id);
+		fragment.addSuffix("fin_while" + id);
+
 		return fragment;
 	}
 

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast.impl;
 
 import java.util.Iterator;
@@ -19,17 +16,16 @@ import fr.n7.stl.tam.ast.TAMFactory;
  */
 public class SequenceImpl implements Sequence {
 
-	private LinkedList<Expression> values;
+	private LinkedList<Expression> values = new LinkedList<>();
+
+	public SequenceImpl() {
+		;
+	}
 
 	public SequenceImpl(Iterable<Expression> _values) {
-		this();
 		for (Expression _value : _values) {
 			this.values.add(_value);
 		}
-	}
-
-	public SequenceImpl() {
-		this.values = new LinkedList<Expression>();
 	}
 	
 	/* (non-Javadoc)
@@ -45,12 +41,12 @@ public class SequenceImpl implements Sequence {
 	 */
 	@Override
 	public String toString() {
-		String _result = "{ ";
+		StringBuilder _result = new StringBuilder("{ ");
 		Iterator<Expression> _iter = this.values.iterator();
 		if (_iter.hasNext()) {
-			_result += _iter.next();
+			_result.append(_iter.next());
 			while (_iter.hasNext()) {
-				_result += " ," + _iter.next();
+				_result.append(" ,").append(_iter.next());
 			}
 		}
 		return _result + " }";

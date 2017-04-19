@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.tam.ast.impl;
 
 import java.util.LinkedList;
@@ -25,7 +22,7 @@ public class FragmentImpl implements Fragment {
 	 * Create an empty fragment.
 	 */
 	public FragmentImpl() {
-		this.instructions = new LinkedList<TAMInstruction>();
+		this.instructions = new LinkedList<>();
 	}
 
 	/* (non-Javadoc)
@@ -46,11 +43,11 @@ public class FragmentImpl implements Fragment {
 	
 	@Override
 	public String toString() {
-		String _result = "";
+		StringBuilder _result = new StringBuilder();
 		for (TAMInstruction _instruction : this.instructions) {
-			_result += _instruction + "\n";
+			_result.append(_instruction).append("\n");
 		}
-		return _result;
+		return _result.toString();
 	}
 	
 	public void addComment(String _comment) {

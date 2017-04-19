@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast;
 
 import fr.n7.stl.tam.ast.Fragment;
@@ -19,7 +16,7 @@ public interface Instruction {
 	 * Synthesized Semantics attribute to check that an instruction if well typed.
 	 * @return Synthesized True if the instruction is well typed, False if not.
 	 */
-	public boolean checkType();
+    boolean checkType();
 	
 	/**
 	 * Inherited Semantics attribute to allocate memory for the variables declared in the instruction.
@@ -28,7 +25,7 @@ public interface Instruction {
 	 * @param _offset Inherited Current offset for the address of the variables.
 	 * @return Synthesized Size of the memory allocated to the variables.
 	 */
-	public int allocateMemory(Register _register, int _offset);
+    int allocateMemory(Register _register, int _offset);
 	
 	/**
 	 * Inherited Semantics attribute to build the nodes of the abstract syntax tree for the generated TAM code.
@@ -36,6 +33,6 @@ public interface Instruction {
 	 * @param _factory Inherited Factory to build AST nodes for TAM code.
 	 * @return Synthesized AST for the generated TAM code.
 	 */
-	public Fragment getCode(TAMFactory _factory);
+    Fragment getCode(TAMFactory _factory);
 
 }

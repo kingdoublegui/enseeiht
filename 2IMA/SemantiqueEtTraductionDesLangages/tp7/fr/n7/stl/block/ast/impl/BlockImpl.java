@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast.impl;
 
 import java.util.LinkedList;
@@ -60,10 +57,10 @@ public class BlockImpl implements Block {
 	 */
 	public BlockImpl(Block _context) {
 		assert( _context != null);
-		this.instructions = new LinkedList<Instruction>();
-		this.variables = new LinkedList<VariableDeclaration>();
-		this.constants = new LinkedList<ConstantDeclaration>();
-		this.types = new LinkedList<TypeDeclaration>();
+		this.instructions = new LinkedList<>();
+		this.variables = new LinkedList<>();
+		this.constants = new LinkedList<>();
+		this.types = new LinkedList<>();
 		if (_context == null) {
 			this.context = Optional.empty();
 		} else {
@@ -75,10 +72,10 @@ public class BlockImpl implements Block {
 	 * Constructor for a block root of the block hierarchy.
 	 */
 	public BlockImpl() {
-		this.instructions = new LinkedList<Instruction>();
-		this.variables = new LinkedList<VariableDeclaration>();
-		this.constants = new LinkedList<ConstantDeclaration>();
-		this.types = new LinkedList<TypeDeclaration>();
+		this.instructions = new LinkedList<>();
+		this.variables = new LinkedList<>();
+		this.constants = new LinkedList<>();
+		this.types = new LinkedList<>();
 		this.context = Optional.empty();
 	}
 
@@ -196,9 +193,9 @@ public class BlockImpl implements Block {
 	 */
 	@Override
 	public String toString() {
-		String _local = "";
+		StringBuilder _local = new StringBuilder();
 		for (Instruction _instruction : this.instructions) {
-			_local += _instruction;
+			_local.append(_instruction);
 		}
 		return "{\n" + _local + "}\n" ;
 	}

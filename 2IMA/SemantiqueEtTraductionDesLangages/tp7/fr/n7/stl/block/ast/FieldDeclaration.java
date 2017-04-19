@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast;
 
 /**
@@ -13,6 +10,6 @@ public interface FieldDeclaration extends Declaration {
 	 * Provide the type of the field in a record.
 	 * @return Type of the field.
 	 */
-	public Type getType();
+    Type getType();
 
 }

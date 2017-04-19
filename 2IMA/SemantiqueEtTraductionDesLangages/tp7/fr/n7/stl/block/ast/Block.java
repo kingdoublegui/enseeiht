@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast;
 
 import java.util.Iterator;
@@ -27,19 +24,19 @@ public interface Block {
 	 * Add an instruction at then end of a block.
 	 * @param _instruction Instruction node in the AST added to the block node.
 	 */
-	public void add(Instruction _instruction);
+    void add(Instruction _instruction);
 	
 	/**
 	 * Add a sequence of instruction in a block.
 	 * @param _instructions Sequence of instruction nodes in the AST added to the block node.
 	 */
-	public void addAll(Iterable<Instruction> _instructions);
+    void addAll(Iterable<Instruction> _instructions);
 	
 	/**
 	 * Synthesized Semantics attribute to check that an instruction if well typed.
 	 * @return Synthesized True if the instruction is well typed, False if not.
-	 */	
-	public boolean checkType();
+	 */
+    boolean checkType();
 	
 	/**
 	 * Inherited Semantics attribute to allocate memory for the variables declared in the instruction.
@@ -47,8 +44,8 @@ public interface Block {
 	 * @param _register Inherited Register associated to the address of the variables.
 	 * @param _offset Inherited Current offset for the address of the variables.
 	 * @return Synthesized Size of the memory allocated to the variables.
-	 */	
-	public int allocateMemory(Register _register, int _offset);
+	 */
+    int allocateMemory(Register _register, int _offset);
 	
 	/**
 	 * Inherited Semantics attribute to build the nodes of the abstract syntax tree for the generated TAM code.
@@ -56,6 +53,6 @@ public interface Block {
 	 * @param _factory Inherited Factory to build AST nodes for TAM code.
 	 * @return Synthesized AST for the generated TAM code.
 	 */
-	public Fragment getCode(TAMFactory _factory);
+    Fragment getCode(TAMFactory _factory);
 
 }

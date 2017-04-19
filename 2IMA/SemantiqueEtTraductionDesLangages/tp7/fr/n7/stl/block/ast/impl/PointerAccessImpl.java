@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast.impl;
 
 import fr.n7.stl.block.ast.AtomicType;
@@ -51,7 +48,6 @@ public class PointerAccessImpl implements Expression {
 		Fragment fragment = _factory.createFragment();
 
 		fragment.append(this.pointer.getCode(_factory));
-		fragment.add(_factory.createLoadI(this.getType().length()));
 		fragment.add(_factory.createLoadI(this.getType().length()));
 
 		return fragment;

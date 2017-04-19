@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast.impl;
 
 import fr.n7.stl.block.ast.Expression;
@@ -30,6 +27,7 @@ public class FieldAccessImpl implements Expression {
 	public FieldAccessImpl(Expression _record, FieldDeclaration _field) {
 		this.record = _record;
 		this.field = _field;
+		this.name = this.field.getName();
 	}
 
 	/* (non-Javadoc)

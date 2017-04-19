@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.tam.ast;
 
 /**
@@ -15,17 +12,17 @@ public interface TAMInstruction {
 	 * Adds a prefix comment for the instruction.
 	 * @param _comment Comment to be added as an instruction prefix.
 	 */
-	public void addComment(String _comment);
+    void addComment(String _comment);
 	
 	/**
 	 * Adds a prefix label for the instruction.
 	 * @param _label Label to be added to the instruction prefixes.
 	 */
-	public void addPrefix(String _label);
+    void addPrefix(String _label);
 
 	/**
 	 * Adds a suffix label to the instruction.
 	 * @param _label Label to be added to the instruction suffixes.
 	 */
-	public void addSuffix(String _label);
+    void addSuffix(String _label);
 }

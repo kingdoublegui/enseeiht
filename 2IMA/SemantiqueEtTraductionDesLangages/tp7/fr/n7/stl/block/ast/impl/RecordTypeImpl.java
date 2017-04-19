@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast.impl;
 
 import java.util.Iterator;
@@ -38,7 +35,7 @@ public class RecordTypeImpl implements RecordType, Scope<FieldDeclaration> {
 	 */
 	public RecordTypeImpl(String _name, Iterable<FieldDeclaration> _fields) {
 		this.name = _name;
-		this.fields = new LinkedList<FieldDeclaration>();
+		this.fields = new LinkedList<>();
 		for (FieldDeclaration _field : _fields) {
 			this.fields.add(_field);
 		}
@@ -50,7 +47,7 @@ public class RecordTypeImpl implements RecordType, Scope<FieldDeclaration> {
 	 */
 	public RecordTypeImpl(String _name) {
 		this.name = _name;
-		this.fields = new LinkedList<FieldDeclaration>();
+		this.fields = new LinkedList<>();
 	}
 
 	/* (non-Javadoc)
@@ -148,7 +145,6 @@ public class RecordTypeImpl implements RecordType, Scope<FieldDeclaration> {
 		if (this.accepts(_declaration)) {
 			this.fields.add(_declaration);
 		}
-		
 	}
 	
 	/**
@@ -180,12 +176,12 @@ public class RecordTypeImpl implements RecordType, Scope<FieldDeclaration> {
 	 */
 	@Override
 	public String toString() {
-		String _result = "struct " + this.name + " { ";
+		StringBuilder _result = new StringBuilder("struct " + this.name + " { ");
 		Iterator<FieldDeclaration> _iter = this.fields.iterator();
 		if (_iter.hasNext()) {
-			_result += _iter.next();
+			_result.append(_iter.next());
 			while (_iter.hasNext()) {
-				_result += " " + _iter.next();
+				_result.append(" ").append(_iter.next());
 			}
 		}
 		return _result + "}";
@@ -203,7 +199,10 @@ public class RecordTypeImpl implements RecordType, Scope<FieldDeclaration> {
 
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		Fragment _result = new FragmentImpl();
+		Fragment _result = _factory.createFragment();
+
+
+
 		return _result;
 	}
 

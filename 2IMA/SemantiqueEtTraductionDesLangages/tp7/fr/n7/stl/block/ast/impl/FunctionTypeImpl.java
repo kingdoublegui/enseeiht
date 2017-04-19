@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast.impl;
 
 import java.util.Iterator;
@@ -21,7 +18,7 @@ public class FunctionTypeImpl implements Type {
 
 	public FunctionTypeImpl(Type _result, Iterable<Type> _parameters) {
 		this.result = _result;
-		this.parameters = new LinkedList<Type>();
+		this.parameters = new LinkedList<>();
 		for (Type _type : _parameters) {
 			this.parameters.add(_type);
 		}
@@ -64,12 +61,12 @@ public class FunctionTypeImpl implements Type {
 	 */
 	@Override
 	public String toString() {
-		String _result = "(";
+		StringBuilder _result = new StringBuilder("(");
 		Iterator<Type> _iter = this.parameters.iterator();
 		if (_iter.hasNext()) {
-			_result += _iter.next();
+			_result.append(_iter.next());
 			while (_iter.hasNext()) {
-				_result += " ," + _iter.next();
+				_result.append(" ,").append(_iter.next());
 			}
 		}
 		return ") -> " + this.result;

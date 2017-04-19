@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.util;
 
 import java.util.HashMap;
@@ -22,7 +19,7 @@ public class SymbolTable implements HierarchicalScope<Declaration> {
 	private Optional<SymbolTable> context;
 
 	public SymbolTable() {
-		this.declarations = new HashMap<String,Declaration>();
+		this.declarations = new HashMap<>();
 		this.context = Optional.empty();
 	}
 	
@@ -38,11 +35,7 @@ public class SymbolTable implements HierarchicalScope<Declaration> {
 		if (this.declarations.containsKey(_name)) {
 			return Optional.of(this.declarations.get(_name));
 		} else {
-			if (this.context.isPresent()) {
-				return this.context.get().get(_name);
-			} else {
-				return Optional.empty();
-			}
+            return context.flatMap(symbolTable -> symbolTable.get(_name));
 		}
 	}
 
@@ -74,25 +67,21 @@ public class SymbolTable implements HierarchicalScope<Declaration> {
 		if (this.contains(_name)) {
 			return true;
 		} else {
-			if (this.context.isPresent()) {
-				return this.context.get().knows(_name);
-			} else {
-				return false;
-			}
+            return context.map(symbolTable -> symbolTable.knows(_name)).orElse(false);
 		}
 	}
 	
 	@Override
 	public String toString() {
-		String _local = "";
+		StringBuilder _local = new StringBuilder();
 		if (this.context.isPresent()) {
-			_local += "Hierarchical definitions :\n" + this.context.get().toString();
+			_local.append("Hierarchical definitions :\n").append(this.context.get().toString());
 		}
-		_local += "Local definitions : ";
+		_local.append("Local definitions : ");
 		for (Entry<String,Declaration> _entry : this.declarations.entrySet()) {
-			_local += _entry.getKey() + " -> " + _entry.getValue().toString() + "\n";
+			_local.append(_entry.getKey()).append(" -> ").append(_entry.getValue().toString()).append("\n");
 		}
-		return _local;
+		return _local.toString();
 	}
 
 }

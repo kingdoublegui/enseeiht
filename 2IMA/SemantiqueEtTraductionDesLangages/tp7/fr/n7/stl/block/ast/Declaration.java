@@ -10,6 +10,6 @@ public interface Declaration {
 	 * Provide the identifier (i.e. name) given to the declaration.
 	 * @return Name of the declaration.
 	 */
-	public String getName();
+    String getName();
 
 }

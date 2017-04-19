@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast;
 
 /**
@@ -15,6 +12,6 @@ public interface HierarchicalScope <D extends Declaration> extends Scope<D> {
 	 * @param _name : Name of the element looked for in the whole hierarchical scope.
 	 * @return : True if the whole hierarchical scope knows an element named _name, false if not.
 	 */
-	public boolean knows(String _name);
+    boolean knows(String _name);
 
 }

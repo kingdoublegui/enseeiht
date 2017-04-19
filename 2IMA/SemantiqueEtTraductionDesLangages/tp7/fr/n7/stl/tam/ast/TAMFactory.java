@@ -1,6 +1,3 @@
-/**
- *
- */
 package fr.n7.stl.tam.ast;
 
 import java.util.List;
@@ -20,7 +17,7 @@ public interface TAMFactory {
 	 * @param _size Size of the memory chunk that is added on top of the stack.
 	 * @return A TAM Push instruction AST node.
 	 */
-	public TAMInstruction createPush(int _size);
+    TAMInstruction createPush(int _size);
 
 	/**
 	 * Build a TAM Pop instruction AST node.
@@ -28,7 +25,7 @@ public interface TAMFactory {
 	 * @param _remove Size of the memory chunk that is removed from the top of the stack.
 	 * @return A TAM Pop instruction AST node.
 	 */
-	public TAMInstruction createPop(int _keep, int _remove);
+    TAMInstruction createPop(int _keep, int _remove);
 
 	/**
 	 * Build a TAM Load instruction AST node.
@@ -37,14 +34,14 @@ public interface TAMFactory {
 	 * @param _size Size of the memory chunk that is copied on the stack.
 	 * @return A TAM Load instruction AST node.
 	 */
-	public TAMInstruction createLoad(Register _register, int _offset, int _size);
+    TAMInstruction createLoad(Register _register, int _offset, int _size);
 
 	/**
 	 * Build a TAM integer constant Load instruction AST node.
 	 * @param _value Value of the integer constant that is copied on the stack.
 	 * @return A TAM integer constant Load instruction AST node.
 	 */
-	public TAMInstruction createLoadL(int _value);
+    TAMInstruction createLoadL(int _value);
 
 	/**
 	 * Build a TAM address Load instruction AST node whose execution 
@@ -53,7 +50,7 @@ public interface TAMFactory {
 	 * @param _offset Offset for the address whose value is loaded on the stack.
 	 * @return A TAM address Load instruction AST node.
 	 */
-	public TAMInstruction createLoadA(Register _register, int _offset);
+    TAMInstruction createLoadA(Register _register, int _offset);
 
 	/**
 	 * Build a TAM address Load address instruction AST node whose execution 
@@ -62,7 +59,7 @@ public interface TAMFactory {
 	 * value is loaded on the stack.
 	 * @return A TAM address Load instruction AST node.
 	 */
-	public TAMInstruction createLoadA(String _label);
+    TAMInstruction createLoadA(String _label);
 
 	/**
 	 * Build a TAM Load Immediate instruction AST node whose execution will pop 
@@ -71,7 +68,7 @@ public interface TAMFactory {
 	 * @param _size Size of the memory chunk copied on the stack after popping the address.
 	 * @return A TAM Load Immediate instruction AST node.
 	 */
-	public TAMInstruction createLoadI(int _size);
+    TAMInstruction createLoadI(int _size);
 
 	/**
 	 * Build a TAM Store instruction AST node whose execution will copy from the stack
@@ -81,7 +78,7 @@ public interface TAMFactory {
 	 * @param _size : Size of the memory chunk that is copied.
 	 * @return A TAM Store instruction AST node.
 	 */
-	public TAMInstruction createStore(Register _register, int _offset, int _size);
+    TAMInstruction createStore(Register _register, int _offset, int _size);
 
 	/**
 	 * Build a TAM Store Immediate instruction AST node whose execution will pop a memory
@@ -90,7 +87,7 @@ public interface TAMFactory {
 	 * @param _size : Size of the memory chunk that is copied.
 	 * @return A TAM Store Immediate instruction AST node.
 	 */
-	public TAMInstruction createStoreI(int _size);
+    TAMInstruction createStoreI(int _size);
 
 	/**
 	 * Build a TAM Jump instruction AST node whose execution will transfer the control 
@@ -99,7 +96,7 @@ public interface TAMFactory {
 	 * @param _offset Offset for the address where the control is transfered to.
 	 * @return A TAM Jump instruction AST node.
 	 */
-	public TAMInstruction createJump(Register _register, int _offset);
+    TAMInstruction createJump(Register _register, int _offset);
 
 	/**
 	 * Build a TAM Jump instruction AST node whose execution will transfer the control 
@@ -107,7 +104,7 @@ public interface TAMFactory {
 	 * @param _label Label that will be resolved to an address.
 	 * @return A TAM Jump instruction AST node.
 	 */
-	public TAMInstruction createJump(String _label);
+    TAMInstruction createJump(String _label);
 
 	/**
 	 * Build a TAM conditional Jump instruction AST node whose execution will transfer 
@@ -118,7 +115,7 @@ public interface TAMFactory {
 	 * @param _value : Integer whose value is compared with the top of the stack.
 	 * @return A TAM conditional Jump instruction AST node.
 	 */
-	public TAMInstruction createJumpIf(Register _register, int _offset, int _value);
+    TAMInstruction createJumpIf(Register _register, int _offset, int _value);
 
 	/**
 	 * Build a TAM conditional Jump instruction AST node whose execution will transfer 
@@ -128,13 +125,13 @@ public interface TAMFactory {
 	 * @param _value : Integer whose value is compared with the top of the stack.
 	 * @return A TAM conditional Jump instruction AST node.
 	 */
-	public TAMInstruction createJumpIf(String _label, int _value);
+    TAMInstruction createJumpIf(String _label, int _value);
 
 	/**
 	 * Build a TAM Halt instruction AST node whose execution will halt the program.
 	 *  @return A TAM Halt instruction AST node.
 	 */
-	public TAMInstruction createHalt();
+    TAMInstruction createHalt();
 
 	/**
 	 * Build a TAM Call instruction AST node whose execution will build a call frame 
@@ -146,7 +143,7 @@ public interface TAMFactory {
 	 * @param _size TODO
 	 * @return A TAM Call instruction AST node.
 	 */
-	public TAMInstruction createCall(Register _register, int _offset, int _size);
+    TAMInstruction createCall(Register _register, int _offset, int _size);
 
 	/**
 	 * Build a TAM Call instruction AST node whose execution will build a call frame 
@@ -157,7 +154,7 @@ public interface TAMFactory {
 	 * @param _size TODO
 	 * @return A TAM Call instruction AST node.
 	 */
-	public TAMInstruction createCall(String _label, int _size);
+    TAMInstruction createCall(String _label, int _size);
 
 	/**
 	 * Build a TAM Call Immediate instruction AST node whose execution will pop an address
@@ -167,7 +164,7 @@ public interface TAMFactory {
 	 * @param _size TODO
 	 * @return A TAM Call Immediate instruction AST node.
 	 */
-	public TAMInstruction createCallI(int _size);
+    TAMInstruction createCallI(int _size);
 
 	/**
 	 * Build a TAM Return instruction AST node whose execution will pop a memory chunk of the
@@ -180,20 +177,20 @@ public interface TAMFactory {
 	 * @param _remove : The size of the memory chunk that is removed with the execution frame.
 	 * @return A TAM Return instruction AST node.
 	 */
-	public TAMInstruction createReturn(int _keep, int _remove);
+    TAMInstruction createReturn(int _keep, int _remove);
 
 	/**
 	 * Build an empty TAM fragment AST node.
 	 * @return An empty TAM fragment AST node.
 	 */
-	public Fragment createFragment();
+    Fragment createFragment();
 
 	/**
 	 * Build a TAM fragment AST node that executes a sequence of TAMInstruction.
 	 * @param _instructions The sequence of TAMInstruction that makes the fragment.
 	 * @return A TAM fragment AST node containing a sequence of TAMInstruction.
 	 */
-	public Fragment createFragment(List<TAMInstruction> _instructions);
+    Fragment createFragment(List<TAMInstruction> _instructions);
 
 	/**
 	 * Build a TAM binary operator instruction AST node whose execution will pop two
@@ -202,7 +199,7 @@ public interface TAMFactory {
 	 * @param _operator The binary operator from the Bloc language.
 	 * @return A TAM instruction AST node corresponding to a binary operator.
 	 */
-	public static TAMInstruction createBinaryOperator(BinaryOperator _operator) {
+	static TAMInstruction createBinaryOperator(BinaryOperator _operator) {
 		switch (_operator) {
 			case Add : return Library.IAdd;
 			case And: return Library.BAnd;
@@ -228,7 +225,7 @@ public interface TAMFactory {
 	 * @param _operator The unary operator from the Bloc language.
 	 * @return A TAM instruction AST node corresponding to an unary operator.
 	 */
-	public static TAMInstruction createUnaryOperator(UnaryOperator _operator) {
+	static TAMInstruction createUnaryOperator(UnaryOperator _operator) {
 		switch (_operator) {
 			case Negate : return Library.BNeg;
 			case Opposite : return Library.INeg;
@@ -236,6 +233,6 @@ public interface TAMFactory {
 		}
 	}
 
-	public int createLabelNumber();
+	int createLabelNumber();
 
 }

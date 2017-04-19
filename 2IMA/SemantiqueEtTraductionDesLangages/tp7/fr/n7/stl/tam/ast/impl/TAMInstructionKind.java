@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.tam.ast.impl;
 
 /**
@@ -17,5 +14,5 @@ enum TAMInstructionKind {
 	CALL, CALLI,
 	RETURN,
 	SUBR,
-	HALT;
+	HALT
 }

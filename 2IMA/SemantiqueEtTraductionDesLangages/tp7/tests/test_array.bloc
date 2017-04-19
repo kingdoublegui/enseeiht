@@ -1,4 +1,10 @@
 test_array {
     int t[] = new int[5];
     t[3] = 4;
+    print(t[3]);
+
+// There is no rule for the following case
+//    int ta[] = {1, 2, 3, 4};
+//    t[0] = t[1];
+//    print(t[0]);
 }

@@ -5,6 +5,7 @@ import fr.n7.stl.block.ast.Expression;
 import fr.n7.stl.block.ast.PointerAllocation;
 import fr.n7.stl.block.ast.Type;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.TAMFactory;
 
 /**
@@ -37,6 +38,11 @@ public class PointerAllocationImpl implements PointerAllocation {
      */
     @Override
     public Fragment getCode(TAMFactory _factory) {
-        return null;
+        Fragment fragment = _factory.createFragment();
+
+        fragment.add(_factory.createLoadL(this.type.length()));
+        fragment.add(Library.MAlloc);
+
+        return fragment;
     }
 }

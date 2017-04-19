@@ -15,7 +15,7 @@ public interface Expression {
 	 * Synthesized Semantics attribute to compute the type of an expression.
 	 * @return Synthesized Type of the expression.
 	 */
-	public Type getType();
+    Type getType();
 	
 	/**
 	 * Inherited Semantics attribute to build the nodes of the abstract syntax tree for the generated TAM code.
@@ -23,6 +23,6 @@ public interface Expression {
 	 * @param _factory Inherited Factory to build AST nodes for TAM code.
 	 * @return Synthesized AST for the generated TAM code.
 	 */
-	public Fragment getCode(TAMFactory _factory);
+    Fragment getCode(TAMFactory _factory);
 
 }

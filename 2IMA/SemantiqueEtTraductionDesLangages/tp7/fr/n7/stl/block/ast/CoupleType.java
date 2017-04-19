@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast;
 
 /**
@@ -14,12 +11,12 @@ public interface CoupleType extends Type {
 	 * Provide the type of the first element in the couple.
 	 * @return Type of the first element.
 	 */
-	public Type getFirst();
+    Type getFirst();
 	
 	/**
 	 * Provide the type of the second element in the couple.
 	 * @return Type of the second element.
 	 */
-	public Type getSecond();
+    Type getSecond();
 
 }

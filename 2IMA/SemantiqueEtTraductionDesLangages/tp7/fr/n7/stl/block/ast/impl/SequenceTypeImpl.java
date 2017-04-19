@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast.impl;
 
 import java.util.Iterator;
@@ -20,7 +17,7 @@ public class SequenceTypeImpl implements Type {
 	private List<Type> types;
 
 	public SequenceTypeImpl() {
-		this.types = new LinkedList<Type>();
+		this.types = new LinkedList<>();
 	}
 	
 	public void add(Type _type) {

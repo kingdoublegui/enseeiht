@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast;
 
 /**
@@ -17,7 +14,7 @@ public interface Type {
 	 * @param _other The other type (with respect to self).
 	 * @return True if the type is equals with the type _other, False otherwise.
 	 */
-	public boolean equalsTo(Type _other);
+    boolean equalsTo(Type _other);
 	
 	/**
 	 * Check if two types are compatibles. A subtype is compatibleWith a supertype, 
@@ -28,7 +25,7 @@ public interface Type {
 	 * @param _other The other type
 	 * @return True if the types are compatibles, False otherwise.
 	 */
-	public boolean compatibleWith(Type _other);
+    boolean compatibleWith(Type _other);
 	
 	/**
 	 * Builds a new type that results from the merging of self and _other according to the compatibleWith relation.
@@ -37,12 +34,12 @@ public interface Type {
 	 * @param _other The other type.
 	 * @return A type that is the least upper bound of self and _other according to compatibleWith.
 	 */
-	public Type merge(Type _other);
+    Type merge(Type _other);
 	
 	/**
 	 * Compute the size in TAM words needed to store a value of the _self type.
 	 * @return Number of TAM words needed to store a value of the _self type.
 	 */
-	public int length();
+    int length();
 
 }

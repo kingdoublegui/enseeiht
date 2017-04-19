@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.n7.stl.block.ast;
 
 /**
@@ -13,6 +10,6 @@ public interface TypeDeclaration extends Instruction, Declaration {
 	 * Provide the type associated to a name in a type declaration.
 	 * @return Type from the declaration.
 	 */
-	public Type getType();
+    Type getType();
 
 }
