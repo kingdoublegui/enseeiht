@@ -64,8 +64,9 @@ public class RepetitionImpl implements Instruction {
 	public Fragment getCode(TAMFactory _factory) {
 		Fragment fragment = _factory.createFragment();
 
-		fragment.add(_factory.createJumpIf("fin_while" + this.id, 0));
+		fragment.append(condition.getCode(_factory));
 		fragment.addPrefix("while_cond" + this.id);
+		fragment.add(_factory.createJumpIf("fin_while" + this.id, 0));
 		fragment.append(this.body.getCode(_factory));
 		fragment.add(_factory.createJump("debut_while" + this.id));
 

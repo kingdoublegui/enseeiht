@@ -127,7 +127,8 @@ class TAMInstructionImpl implements TAMInstruction {
 		_result += ((this.size.isPresent())?(" (" + this.size.get() + ")"):"");
 		_result += ((this.offset.isPresent())?(" " + this.offset.get()):"");
 		_result += ((this.register.isPresent())?("[" + this.register.get() + "]"):"");
-		_result += ((this.target.isPresent())?(" (" + this.target.get() + ")"):"");
+		//_result += ((this.target.isPresent())?(" (" + this.target.get() + ")"):"");
+		_result += ((this.target.isPresent())?(" " + this.target.get()):"");
 		for (String _label : this.suffixes) {
 			_result += "\n" + _label + ":";
 		}

@@ -1,0 +1,14 @@
+test_conditionnelle {
+    int i = 42;
+    if (i == 42) {
+        print(1);
+    } else {
+        print(2);
+    }
+    i = 3;
+    if (i == 42) {
+        print(1);
+    } else {
+        print(2);
+    }
+}

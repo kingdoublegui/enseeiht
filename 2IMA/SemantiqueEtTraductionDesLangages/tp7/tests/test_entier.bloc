@@ -2,5 +2,7 @@ test_entier {
     int i = 42;
     int j = i;
     i = 3;
+    print(i);
     print(j);
+    print(&j);
 }

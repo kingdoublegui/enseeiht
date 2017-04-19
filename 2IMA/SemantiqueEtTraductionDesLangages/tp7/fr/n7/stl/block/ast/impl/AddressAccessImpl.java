@@ -45,7 +45,7 @@ public class AddressAccessImpl implements AddressAccess {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode is not implemented in PointerAccessImpl.");
+		return variable.getCode(_factory);
 	}
 
 }
