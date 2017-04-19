@@ -1,0 +1,4 @@
+test_array {
+    int t[] = new int[5];
+    t[3] = 4;
+}

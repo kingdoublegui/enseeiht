@@ -1,0 +1,7 @@
+test_pointer {
+   int v = 42;
+   int *ptr = &v;
+   print(ptr);
+   *ptr = 2;
+   print(v);
+}

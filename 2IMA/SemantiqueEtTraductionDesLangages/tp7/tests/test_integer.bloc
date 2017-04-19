@@ -4,5 +4,4 @@ test_entier {
     i = 3;
     print(i);
     print(j);
-    print(&j);
 }

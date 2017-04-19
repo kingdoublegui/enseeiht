@@ -1,4 +1,4 @@
-test_conditionnelle {
+test_conditionnal {
     int i = 42;
     if (i == 42) {
         print(1);

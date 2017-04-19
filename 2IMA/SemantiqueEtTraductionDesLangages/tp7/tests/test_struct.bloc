@@ -1,4 +1,4 @@
-test {
+test_struct {
    int i = - 1;
    const int j = 2;
    struct T { int n; int m; } s = { 4, 5};

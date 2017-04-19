@@ -2,7 +2,7 @@
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_sLGZwCTWEeeEbvuhANRpqg" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_sLGZwSTWEeeEbvuhANRpqg" bindingContexts="_sLHBISTWEeeEbvuhANRpqg">
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <tags>ModelMigrationProcessor.001</tags>
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_sLGZwSTWEeeEbvuhANRpqg" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_sLGZwiTWEeeEbvuhANRpqg" x="580" y="75" width="1242" height="943">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_sLGZwSTWEeeEbvuhANRpqg" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.ui.workbench" selectedElement="_sLGZwiTWEeeEbvuhANRpqg" x="416" y="68" width="1242" height="943">
     <persistedState key="coolBarVisible" value="true"/>
     <persistedState key="perspectiveBarVisible" value="false"/>
     <persistedState key="isRestored" value="true"/>
@@ -18,7 +18,6 @@
             <children xsi:type="basic:PartSashContainer" xmi:id="_sLGZxiTWEeeEbvuhANRpqg" containerData="6633" selectedElement="_sLGZxyTWEeeEbvuhANRpqg" horizontal="true">
               <children xsi:type="basic:PartStack" xmi:id="_sLGZxyTWEeeEbvuhANRpqg" elementId="Asm" containerData="4500" selectedElement="_sLGZySTWEeeEbvuhANRpqg">
                 <tags>active</tags>
-                <tags>noFocus</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_sLGZyCTWEeeEbvuhANRpqg" elementId="mg.itam.rcp.asmView:*" toBeRendered="false" ref="_sLGZ7STWEeeEbvuhANRpqg"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_sLGZySTWEeeEbvuhANRpqg" elementId="mg.itam.rcp.asmView" ref="_sLGZ7iTWEeeEbvuhANRpqg"/>
               </children>
@@ -73,6 +72,7 @@
       <tags>View</tags>
       <tags>categoryTag:Other</tags>
       <tags>active</tags>
+      <tags>activeOnClose</tags>
       <menus xmi:id="_sLGZ7yTWEeeEbvuhANRpqg" elementId="mg.itam.rcp.asmView">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -96,15 +96,6 @@
     <trimBars xmi:id="_sLGZ_STWEeeEbvuhANRpqg" elementId="org.eclipse.ui.main.toolbar" contributorURI="platform:/plugin/org.eclipse.ui.workbench" visible="false">
       <children xsi:type="menu:ToolBar" xmi:id="_sLGZ_iTWEeeEbvuhANRpqg" elementId="main">
         <tags>Draggable</tags>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_sLGZ_yTWEeeEbvuhANRpqg" elementId="mg.itam.rcp.open">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_sLGaACTWEeeEbvuhANRpqg" elementId="mg.itam.rcp.open">
-          <tags>Opaque</tags>
-        </children>
-        <children xsi:type="menu:DirectToolItem" xmi:id="_sLGaASTWEeeEbvuhANRpqg" elementId="mg.itam.rcp.open">
-          <tags>Opaque</tags>
-        </children>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_sLGaAiTWEeeEbvuhANRpqg" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>

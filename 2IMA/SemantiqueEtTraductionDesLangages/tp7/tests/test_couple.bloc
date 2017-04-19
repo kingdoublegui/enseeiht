@@ -1,0 +1,10 @@
+test_couple {
+    < int, int > c = {2, 3};
+    print(fst c);
+    print(snd c);
+// Should this instruction work?
+//    print(c);
+    int i = 42;
+    <int, int> cm = {41, i};
+    <int, <int, int>> cp = {40, cm};
+}

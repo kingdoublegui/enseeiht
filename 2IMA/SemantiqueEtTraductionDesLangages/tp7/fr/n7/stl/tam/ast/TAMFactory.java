@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package fr.n7.stl.tam.ast;
 
@@ -21,7 +21,7 @@ public interface TAMFactory {
 	 * @return A TAM Push instruction AST node.
 	 */
 	public TAMInstruction createPush(int _size);
-	
+
 	/**
 	 * Build a TAM Pop instruction AST node.
 	 * @param _keep Size of the memory chunk that is preserved on top of the stack.
@@ -29,7 +29,7 @@ public interface TAMFactory {
 	 * @return A TAM Pop instruction AST node.
 	 */
 	public TAMInstruction createPop(int _keep, int _remove);
-	
+
 	/**
 	 * Build a TAM Load instruction AST node.
 	 * @param _register Register for the memory chunk that is copied on the stack.
@@ -45,7 +45,7 @@ public interface TAMFactory {
 	 * @return A TAM integer constant Load instruction AST node.
 	 */
 	public TAMInstruction createLoadL(int _value);
-	
+
 	/**
 	 * Build a TAM address Load instruction AST node whose execution 
 	 * loads an address on the stack.
@@ -54,7 +54,7 @@ public interface TAMFactory {
 	 * @return A TAM address Load instruction AST node.
 	 */
 	public TAMInstruction createLoadA(Register _register, int _offset);
-	
+
 	/**
 	 * Build a TAM address Load address instruction AST node whose execution 
 	 * loads an address on the stack.
@@ -63,7 +63,7 @@ public interface TAMFactory {
 	 * @return A TAM address Load instruction AST node.
 	 */
 	public TAMInstruction createLoadA(String _label);
-	
+
 	/**
 	 * Build a TAM Load Immediate instruction AST node whose execution will pop 
 	 * an address from the stack and copy on the stack a memory chunk located at
@@ -72,7 +72,7 @@ public interface TAMFactory {
 	 * @return A TAM Load Immediate instruction AST node.
 	 */
 	public TAMInstruction createLoadI(int _size);
-	
+
 	/**
 	 * Build a TAM Store instruction AST node whose execution will copy from the stack
 	 * a memory chunk of the provided size to the provided location.
@@ -82,7 +82,7 @@ public interface TAMFactory {
 	 * @return A TAM Store instruction AST node.
 	 */
 	public TAMInstruction createStore(Register _register, int _offset, int _size);
-	
+
 	/**
 	 * Build a TAM Store Immediate instruction AST node whose execution will pop a memory
 	 * address from the stack and then copy a memory chunk of the provided size to that
@@ -100,7 +100,7 @@ public interface TAMFactory {
 	 * @return A TAM Jump instruction AST node.
 	 */
 	public TAMInstruction createJump(Register _register, int _offset);
-	
+
 	/**
 	 * Build a TAM Jump instruction AST node whose execution will transfer the control 
 	 * (register CP - Code Pointer) to the address resolved from the provided label.
@@ -129,7 +129,7 @@ public interface TAMFactory {
 	 * @return A TAM conditional Jump instruction AST node.
 	 */
 	public TAMInstruction createJumpIf(String _label, int _value);
-	
+
 	/**
 	 * Build a TAM Halt instruction AST node whose execution will halt the program.
 	 *  @return A TAM Halt instruction AST node.
@@ -204,23 +204,23 @@ public interface TAMFactory {
 	 */
 	public static TAMInstruction createBinaryOperator(BinaryOperator _operator) {
 		switch (_operator) {
-		case Add : return Library.IAdd;
-		case And: return Library.BAnd;
-		case Different: return Library.INeq;
-		case Divide: return Library.IDiv;
-		case Equals: return Library.IEq;
-		case Greater: return Library.IGtr;
-		case GreaterOrEqual: return Library.IGeq;
-		case Lesser: return Library.ILss;
-		case LesserOrEqual: return Library.ILeq;
-		case Modulo: return Library.IMod;
-		case Multiply: return Library.IMul;
-		case Or: return Library.BOr;
-		case Substract: return Library.ISub;
-		default: return null;
+			case Add : return Library.IAdd;
+			case And: return Library.BAnd;
+			case Different: return Library.INeq;
+			case Divide: return Library.IDiv;
+			case Equals: return Library.IEq;
+			case Greater: return Library.IGtr;
+			case GreaterOrEqual: return Library.IGeq;
+			case Lesser: return Library.ILss;
+			case LesserOrEqual: return Library.ILeq;
+			case Modulo: return Library.IMod;
+			case Multiply: return Library.IMul;
+			case Or: return Library.BOr;
+			case Substract: return Library.ISub;
+			default: return null;
 		}
 	}
-	
+
 	/**
 	 * Build a TAM unary operator instruction AST node whose execution will pop one
 	 * value from the stack, compute the result of the unary operator applied to
@@ -230,12 +230,12 @@ public interface TAMFactory {
 	 */
 	public static TAMInstruction createUnaryOperator(UnaryOperator _operator) {
 		switch (_operator) {
-		case Negate : return Library.BNeg;
-		case Opposite : return Library.INeg;
-		default: return null;
+			case Negate : return Library.BNeg;
+			case Opposite : return Library.INeg;
+			default: return null;
 		}
 	}
-	
+
 	public int createLabelNumber();
 
 }

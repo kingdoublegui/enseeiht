@@ -1,0 +1,6 @@
+test_typedef {
+   typedef int Entier;
+   Entier i = 42;
+   Entier j = i;
+   print(j);
+}

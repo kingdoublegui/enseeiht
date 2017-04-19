@@ -38,6 +38,6 @@ public class ArrayAllocationImpl implements ArrayAllocation {
      */
     @Override
     public Fragment getCode(TAMFactory _factory) {
-        return null;
+        throw new SemanticsUndefinedException("getCode is undefined in ArrayAllocationImpl.");
     }
 }
