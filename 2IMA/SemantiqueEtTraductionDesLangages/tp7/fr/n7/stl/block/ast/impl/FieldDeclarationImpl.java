@@ -1,7 +1,9 @@
 package fr.n7.stl.block.ast.impl;
 
 import fr.n7.stl.block.ast.FieldDeclaration;
+import fr.n7.stl.block.ast.RecordType;
 import fr.n7.stl.block.ast.Type;
+import fr.n7.stl.tam.ast.Register;
 
 /**
  * Implementation of the Abstract Syntax Tree node for a field in a record.

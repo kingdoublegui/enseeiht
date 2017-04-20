@@ -40,7 +40,7 @@ public class AddressTypeImpl implements Type {
 	 */
 	@Override
 	public Type merge(Type _other) {
-		throw new SemanticsUndefinedException("Semantics merge undefined in PointerTypeImpl.");
+		throw new SemanticsUndefinedException("Semantics merge undefined in AddressTypeImpl.");
 	}
 
 	/* (non-Javadoc)

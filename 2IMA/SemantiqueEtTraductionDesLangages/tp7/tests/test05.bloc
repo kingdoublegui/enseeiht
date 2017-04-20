@@ -1,5 +1,5 @@
 pgcd { 
-  <int,int> c = {47,53}; 
+  <int,int> c = {30, 40};
   const int test = 0; 
   int a = fst c; 
   int b = snd c; 

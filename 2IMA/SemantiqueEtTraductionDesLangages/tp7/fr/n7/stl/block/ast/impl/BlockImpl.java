@@ -217,11 +217,11 @@ public class BlockImpl implements Block {
 	 */
 	@Override
 	public int allocateMemory(Register _register, int _offset) {
-		int _length = 0;
+		int _length = _offset;
 		for (Instruction i : this.instructions) {
 			_length += i.allocateMemory(_register, _length);
 		}
-		this.offset = _length;
+		this.offset = _length - _offset;
 		return 0;
 	}
 

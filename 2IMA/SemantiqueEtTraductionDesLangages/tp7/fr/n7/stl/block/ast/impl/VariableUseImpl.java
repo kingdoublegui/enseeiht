@@ -58,9 +58,11 @@ public class VariableUseImpl implements Expression {
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
 		Fragment _code = _factory.createFragment();
+
 		_code.add(_factory.createLoad(this.declaration.getRegister(),
 				this.declaration.getOffset(),
 				this.declaration.getType().length()));
+
 		return _code;
 	}
 

@@ -1,10 +1,12 @@
 package fr.n7.stl.block.ast.impl;
 
-import fr.n7.stl.block.ast.Assignable;
-import fr.n7.stl.block.ast.Expression;
-import fr.n7.stl.block.ast.FieldDeclaration;
+import fr.n7.stl.block.ast.*;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Library;
+import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
+
+import java.lang.reflect.Field;
 
 /**
  * @author Marc Pantel
@@ -33,7 +35,22 @@ public class FieldAssignmentImpl extends FieldAccessImpl implements Assignable {
 	 */
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		throw new SemanticsUndefinedException("Semantics getCode undefined in FieldAssignmentImpl.");
+		Fragment fragment = _factory.createFragment();
+
+		Expression r = this;
+		int off = 0;
+
+		while (r instanceof FieldAssignmentImpl) {
+			off += ((FieldAssignmentImpl) r).record.getType().length()- r.getType().length() - ((FieldAssignmentImpl) r).inOffset();
+			r = ((FieldAssignmentImpl) r).record;
+		}
+		VariableDeclaration recGlobal = ((VariableAssignmentImpl)r).declaration;
+		Register reg = recGlobal.getRegister();
+		off += recGlobal.getOffset();
+
+		fragment.add(_factory.createLoadA(reg, off));
+
+		return fragment;
 	}
 	
 }

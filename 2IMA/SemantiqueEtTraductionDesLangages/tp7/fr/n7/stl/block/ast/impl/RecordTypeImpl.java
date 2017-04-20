@@ -1,9 +1,6 @@
 package fr.n7.stl.block.ast.impl;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import fr.n7.stl.block.ast.FieldDeclaration;
 import fr.n7.stl.block.ast.ForbiddenDeclarationException;
@@ -95,6 +92,14 @@ public class RecordTypeImpl implements RecordType, Scope<FieldDeclaration> {
             return AtomicType.ErrorType;
         }
         return this.getType();
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.n7.stl.block.ast.Scope#get(java.lang.String)
+	 */
+	@Override
+	public List<FieldDeclaration> getFields() {
+		return new ArrayList<>(this.fields);
 	}
 
 	/* (non-Javadoc)
@@ -199,11 +204,7 @@ public class RecordTypeImpl implements RecordType, Scope<FieldDeclaration> {
 
 	@Override
 	public Fragment getCode(TAMFactory _factory) {
-		Fragment _result = _factory.createFragment();
-
-
-
-		return _result;
+		throw new SemanticsUndefinedException("Semantics merge undefined in RecordTypeImpl.");
 	}
 
 	@Override
