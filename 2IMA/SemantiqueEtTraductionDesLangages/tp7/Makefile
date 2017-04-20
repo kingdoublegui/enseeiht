@@ -44,4 +44,4 @@ clean :
 	-rm -rf tests/*.tam
 
 debug : clean legg compile
-	$(JAVA) -classpath $(EGGJAR):. Main tests/test06.bloc;
+	$(JAVA) -classpath $(EGGJAR):. Main tests/test_print.bloc;
