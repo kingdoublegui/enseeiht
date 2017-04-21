@@ -13,7 +13,6 @@ import fr.n7.stl.tam.ast.TAMFactory;
 public class CoupleImpl implements Expression {
 
 	private Expression first;
-	
 	private Expression second;
 
 	/**

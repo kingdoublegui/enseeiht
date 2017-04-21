@@ -91,7 +91,7 @@ public class SequenceTypeImpl implements Type {
 		} else {
 			if (_other instanceof ArrayTypeImpl) {
 				boolean _result = true;
-				Type _element = ((ArrayTypeImpl)_other).getType();
+				Type _element = ((ArrayTypeImpl)_other).getPointedType();
 				Iterator<Type> _iter = this.types.iterator();
 				while (_iter.hasNext() && _result) {
 					_result = _result && _iter.next().equalsTo(_element);

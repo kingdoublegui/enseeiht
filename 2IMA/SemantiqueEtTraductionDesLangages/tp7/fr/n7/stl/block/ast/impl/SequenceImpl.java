@@ -18,9 +18,7 @@ public class SequenceImpl implements Sequence {
 
 	private LinkedList<Expression> values = new LinkedList<>();
 
-	public SequenceImpl() {
-		;
-	}
+	public SequenceImpl() {}
 
 	public SequenceImpl(Iterable<Expression> _values) {
 		for (Expression _value : _values) {
@@ -74,7 +72,7 @@ public class SequenceImpl implements Sequence {
 		for (Expression e : this.values) {
 			fragment.append(e.getCode(_factory));
 		}
-		fragment.add(_factory.createPop(0, 0));
+
 		return fragment;
 	}
 

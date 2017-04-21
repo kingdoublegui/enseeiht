@@ -2,6 +2,7 @@ package fr.n7.stl.block.ast.impl;
 
 import fr.n7.stl.block.ast.*;
 import fr.n7.stl.tam.ast.Fragment;
+import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.Register;
 import fr.n7.stl.tam.ast.TAMFactory;
 
@@ -89,9 +90,17 @@ public class VariableDeclarationImpl implements VariableDeclaration {
 	public Fragment getCode(TAMFactory _factory) {
 		Fragment fragment = _factory.createFragment();
 
-		fragment.add(_factory.createPush(this.getType().length()));
+		// Temporary fix --> with java compiler sequences are all stored in the heap
+		if (this.type instanceof ArrayTypeImpl && this.value instanceof SequenceImpl) {
+			fragment.add(_factory.createLoadL(this.value.getType().length()));
+			fragment.add(Library.MAlloc);
+		}
+
 		fragment.append(this.value.getCode(_factory));
-		fragment.add(_factory.createStore(this.getRegister(), this.getOffset(), this.getType().length()));
+		if (this.type instanceof ArrayTypeImpl && this.value instanceof SequenceImpl) {
+			fragment.add(_factory.createLoad(this.getRegister(), this.getOffset(), 1));
+			fragment.add(_factory.createStoreI(this.value.getType().length()));
+		}
 
 		return fragment;
 	}
