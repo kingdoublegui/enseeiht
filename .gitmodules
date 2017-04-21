@@ -7,3 +7,6 @@
 [submodule "2IMA/Graphes/Projet"]
     path = 2IMA/Graphes/Projet
 	url = git@github.com:thibmeu/enseeiht-Projet-Graphe.git
+[submodule "2IMA/SemantiqueEtTraductionDesLangages/Projet"]
+	path = 2IMA/SemantiqueEtTraductionDesLangages/Projet
+	url = git@github.com:thibmeu/enseeiht-java-compiler.git
