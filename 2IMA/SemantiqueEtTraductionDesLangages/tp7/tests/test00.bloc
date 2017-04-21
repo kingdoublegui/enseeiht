@@ -16,7 +16,8 @@ test {
       const bool p = false;
       print(p);
     }
-    print(p);
+    print(fst p);
+    print(snd p);
   }
   print(j);
 }

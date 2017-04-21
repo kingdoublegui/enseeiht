@@ -1,9 +1,6 @@
 package fr.n7.stl.block.ast.impl;
 
-import fr.n7.stl.block.ast.AtomicType;
-import fr.n7.stl.block.ast.Expression;
-import fr.n7.stl.block.ast.Instruction;
-import fr.n7.stl.block.ast.IntegerValue;
+import fr.n7.stl.block.ast.*;
 import fr.n7.stl.tam.ast.Fragment;
 import fr.n7.stl.tam.ast.Library;
 import fr.n7.stl.tam.ast.Register;
@@ -35,7 +32,8 @@ public class PrinterImpl implements Instruction {
 	 */
 	@Override
 	public boolean checkType() {
-		return this.parameter.getType() instanceof AtomicType;
+		return this.parameter.getType() instanceof AtomicType
+			|| this.parameter.getType() instanceof PointerType;
 	}
 
 	/* (non-Javadoc)
