@@ -1,0 +1,5 @@
+/bin/
+*.class
+*.old
+.project
+META-INF/

@@ -1,0 +1,8 @@
+digraph question2b {
+    size="10"
+    node [shape = circle];
+    
+    C_1 -> B_R;
+    B_R -> C_2;
+    G_G -> B_R;
+}

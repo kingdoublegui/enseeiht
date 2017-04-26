@@ -1,0 +1,10 @@
+digraph question1a {
+    size="10"
+    node [shape = circle];
+    B00 -> N00 [ label = "coup noir" ];
+    B00 -> N01 [ label = "coup noir" ];
+    N00 -> B10 [ label = "coup blanc" ];
+    N00 -> B11 [ label = "coup blanc" ];
+    N01 -> B12 [ label = "coup blanc" ];
+    N01 -> B13 [ label = "coup blanc" ];
+}

@@ -1,0 +1,75 @@
+digraph G {
+  a [label="a:r1
+ 2.", ];
+  b [label="b:r2
+ 2.", ];
+  c [label="c:r1
+ 2.", ];
+  d [label="d:r2
+ 2.", ];
+  e [label="e:r1
+ 2.", ];
+  f [label="f:r2
+ 2.", ];
+  o [label="o:r1
+ 2.", ];
+  p [label="p:r2
+ 2.", ];
+  q [label="q:r1
+ 2.", ];
+  r [label="r:r2
+ 2.", ];
+  g [label="g:r1
+ 2.", ];
+  h [label="h:r2
+ 1.", ];
+  i [label="i:r1
+ 1.", ];
+  j [label="j:r2
+ 1.", ];
+  k [label="k:r1
+ 1.", ];
+  l [label="l:r2
+ 1.", ];
+  m [label="m:r1
+ 1.", ];
+  s [label="s:r2
+ 1.", ];
+  t [label="t:r1
+ 1.", ];
+  u [label="u:r2
+ 1.", ];
+  n [label="n:r1
+ 3.", ];
+  
+  
+  a -> b;
+  b -> c;
+  c -> d;
+  d -> e;
+  e -> f;
+  f -> o;
+  o -> p;
+  p -> q;
+  q -> r;
+  r -> n;
+  g -> h;
+  g -> i;
+  g -> j;
+  g -> k;
+  g -> l;
+  g -> m;
+  g -> s;
+  g -> t;
+  g -> u;
+  h -> n;
+  i -> n;
+  j -> n;
+  k -> n;
+  l -> n;
+  m -> n;
+  s -> n;
+  t -> n;
+  u -> n;
+  
+  }

@@ -1,0 +1,19 @@
+digraph quesiton3c {
+    size="10"
+    
+    R1 [shape = square]
+    R2 [shape = square]
+
+    node [shape = circle];
+    x_N_2 [label = "x_(N/2)"]
+    x_N_2_1 [label = "x_(N/2+1)"]
+
+    a_1 -> R1;
+    a_N -> a_1;
+    x_N_2_1 -> a_N;
+    x_N -> x_N_2_1;
+    x_1 -> R2;
+    x_N_2 -> x_1;
+    b_1 -> x_N_2;
+    b_N -> b_1;
+}

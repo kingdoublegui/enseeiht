@@ -1,0 +1,5 @@
+// Be careful, some operations are parsed quicker than what linda is providing.
+// It can lead to inconsistency between Linda and the interpretor.
+create p1 p2 p3
+p1 eventRegister take immediate [ 0 ]
+p3 write [ 0 ]
