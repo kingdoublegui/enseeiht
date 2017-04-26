@@ -6,6 +6,7 @@
 #define N_LIGNE 64		/* Nombre de lignes (ensembles) */
 #define N_BLOC_LIGNE 8	        /* Nombre d'emplacements (blocs) par ligne    */
 #define TAILLE_BLOC 64		/* Nombre d'octets par bloc     */
+#define TAILLE_CACHE N_LIGNE*N_BLOC_LIGNE*TAILLE_BLOC		/* Nombre d'octets par bloc     */
 
 /* Declaration du cache */
 
@@ -47,7 +48,7 @@ int cache(unsigned int adresse,
           void (*init)(unsigned int, unsigned int), 
           void (*maj)(unsigned int, unsigned int));
 
-/**********************************************************************/
+/****************************2IMA/ArchitecturesAvancees/tp1 ******************************************/
 /* prototypes des procedures de politique de cache                    */
 /**********************************************************************/
 
@@ -82,12 +83,12 @@ void init_lfu(unsigned int num_ligne, unsigned int num_bloc);
 int main(int argc, char* argv[]) {
 
 /**********************/
-unsigned int TM = 512;  		/* matrice TMxTM           */
-unsigned int TELEM = 4;  		/* Nb octets par element   */
-unsigned int ADRA = 0;		/* Adresse de base de matA */
-unsigned int ADRB;			/* Adresse de base de MatB */
+  unsigned int TM = 512;  		/* matrice TMxTM           */
+  unsigned int TELEM = 4;  		/* Nb octets par element   */
+  unsigned int ADRA = 0;		/* Adresse de base de matA */
+  unsigned int ADRB;			/* Adresse de base de MatB */
 /*********************/
-  int i, j, k, hit;
+  int hit;
   unsigned int adrc, NhitA, NhitB;
   float p;
 
@@ -108,7 +109,20 @@ unsigned int ADRB;			/* Adresse de base de MatB */
      La lecture des elements des matrices est simulee
      par un appel a la fonction cache */
 
-  ....
+  int largeur = TAILLE_CACHE/(TM*TELEM);
+
+  for (int i = 0; i < TM; i++) {
+     for (int j = 0; j < TM; j += 16) {
+        for (int k = 0; k < TM; k += largeur) {
+           for (int ji = j; ji < j+16; ji++) {
+             for (int ki = k; ki < k+largeur; ki++) {
+               NhitA += cache(ADRA + i*TM*TELEM + ki*TELEM, init_lru, maj_lru);
+               NhitB += cache(ADRB + ki*TM*TELEM + ji*TELEM, init_lru, maj_lru);
+             }
+           }
+        }
+     }
+  }
 
   /* Afficher les nombres de hit pour A et B,
      ainsi que les pourcentages respectifs */
