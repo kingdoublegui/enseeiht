@@ -11,7 +11,7 @@
  
 int main(int argc, char** argv)
 {
-   int i, j, k, TM, msec;
+   register int i, j, k, ji, TM, msec;
    float cc;
    clock_t start, temps;
    float *MA, *MB, *MC;
@@ -44,17 +44,11 @@ int main(int argc, char** argv)
    start = clock();
   
    // multiplication C = A * B
-   for (i = 0; i < TM; i++) {
- 	for (j = 0; j < TM; j++) {
-
-   		cc = 0.0;
+   for (i = 0; i < TM; i++)
+ 	for (j = 0; j < TM; j += 8)
    		for (k = 0; k < TM; k++)
-   			{
-          		cc  += MA[i * TM + k] * MB[k * TM + j];
-   		}
-        MC[i * TM + j] = cc;
- 	}
-   }
+            for (ji = j; ji < j+8; ji++)
+          		MC[i*TM + ji]  += MA[i * TM + k] * MB[k * TM + ji];
    temps = clock() - start;
    msec = temps * 1000 / CLOCKS_PER_SEC;
    printf("Temps multiplication %d secondes %d millisecondes\n", msec/1000, msec%1000);
