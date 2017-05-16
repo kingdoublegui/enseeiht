@@ -1,0 +1,40 @@
+set Observables = { irecu, percu };
+agent AbstractSystem = irecu.precu.AbstractSystem;
+
+set Internals1 = { i, p, ack };
+agent Sender = SenderI;
+agent SenderI = i.('ack.SenderP);
+agent SenderP = p.('ack.SenderI);
+
+agent Receiver = 'i.irecu.ack.Receiver + 'p.precu.ack.Receiver;
+
+agent System1 = (Sender | Receiver) \ Internals1;
+
+
+set Internals2 = { sendi, deliveri, sendp, deliverp, sendack, deliverack };
+
+agent Sender = SenderI;
+agent SenderI = sendi.('deliverack.SenderP);
+agent SenderP = sendp.('deliverack.SenderI);
+
+agent Receiver = 'deliveri.irecu.sendack.Receiver + 'deliverp.precu.sendack.Receiver;
+
+agent Network = 'sendi.deliveri.Network + 'sendp.'deliverp.Network + 'sendack.deliverack.Network;
+
+agent System2 = (Sender | Receiver | Network) \ Internals2;
+
+
+set Internals3 = { sendi, deliveri, sendp, deliverp, sendack, deliverack, timeout };
+
+agent Sender = SenderI;
+agent SenderI = sendi.('deliverack.SenderP + 'timeout.SenderI);
+agent SenderP = sendp.('deliverack.SenderI + 'timeout.SenderP);
+
+agent Receiver = 'deliveri.irecu.sendack.Receiver + 'deliverp.precu.sendack.Receiver;
+
+agent Network = 'sendi.TransmissionI + 'sendp.TransmissionP + 'sendack.TransmissionAck;
+agent TransmissionI = deliveri.Network + timeout.Network;
+agent TransmissionP = deliverp.Network + timeout.Network;
+agent TransmissionAck = deliverack.Network + timeout.Network;
+
+agent System3 = (Sender | Receiver | Network) \ Internals3;
