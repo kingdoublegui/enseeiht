@@ -1,0 +1,74 @@
+                               TP Raffinement
+
+Exercices à faire :
+
+0) Lancer la toolbox depuis le répertoire racine du tp.
+
+1) Répertoire Ensemble : ensemble.tla est un ensemble (!), ensemble2 est un
+   ensemble où on stocke en plus la taille de l'ensemble dans un champ de
+   l'état. L'ensemble2 raffine ensemble. Cet exemple est complet et peut
+   servir de référence. Il montre aussi l'utilisation des enregistrements
+   (record) en TLA. Il ne présente guère d'intérêt sinon.
+
+2) Répertoire Tas : Exercices 3 et suivants de la feuille de TD.
+   Cf Tas/README
+
+3) Répertoire Visiteur
+   Cf Visiteur/README
+
+================================================================
+
+Mise en œuvre avec TLA Toolbox
+------------------------------
+
+Pour lancer TLA toolbox :
+
+    /mnt/n7fs/tla/toolbox/toolbox
+
+* `File` > `Open spec` pour éditer une spécification TLA+ (run_xxx).
+* `File` > `Open Module` pour éditer les modules associés à la spécification (ensemble, ensemble2, tas, pile, anneau,...)
+* `TLC Model Checker` pour exécuter le vérificateur de modèle.
+  - Temporal Formula doit être la formule complète de la spécification à étudier;
+  - Ajouter dans `Invariants` des prédicats d'états P pour lesquels on veut vérifier []P ;
+  - Ajouter dans `Properties` des formules en logique temporelle.
+
+
+================================================================
+
+Utilisation du model-checker:
+          java -classpath /mnt/n7fs/tla tlc2.TLC run_machin
+
+[ Pour se simplifier la vie, taper dans un terminal :
+     alias tlc 'java -classpath /mnt/n7fs/tla tlc2.TLC'
+ puis, dans ce terminal, on pourra faire :
+     tlc run_machin
+]
+
+
+Pour obtenir une jolie version imprimable :
+     java -classpath /mnt/n7fs/tla tla2tex.TLA -shade toto.tla
+qui engendre un fichier toto.ps
+
+================================================================
+
+ATTENTION : bug de TLC : tlc a parfois du mal avec \in introduisant une
+quantification existentielle implicite. [ c'est le cas avec les fonctions
+paramétrées où l'un des paramètres est en fait une variable primée, la
+fonction étant donc une action reliant un état de départ et un état
+d'arrivée. ]
+
+Au lieu d'écrire :
+
+foo(b,...) ==
+  /\ b \in MonEnsemble
+  /\ ...
+
+Écrire :
+
+foo(b,...) ==
+  \E c \in MonEnsemble :
+     /\ b = c
+     /\ ...
+
+(noter que les deux formules sont strictement équivalentes d'un point de vue
+logique)
