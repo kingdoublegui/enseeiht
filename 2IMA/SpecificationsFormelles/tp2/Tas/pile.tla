@@ -35,7 +35,7 @@ Inv(pile) ==
 
 \* version paramétrée
 Init(pile) ==
-  TRUE
+  pile = << >>
 
 ----------------------------------------------------------------
 
@@ -43,10 +43,11 @@ Init(pile) ==
 \* PROCEDURE PUT : version paramétrée
 
 Pre_put(param, pile) ==
-  /\ TRUE
+  /\ param \in D
 
 Act_put(param, pile, pile_p, result) ==
-  /\ TRUE
+  /\ pile_p = pile \o << param >>
+  /\ result = NO_DATA
 
 ----------------------------------------------------------------
 
@@ -54,10 +55,12 @@ Act_put(param, pile, pile_p, result) ==
 \* PROCEDURE GET : version paramétrée
 
 Pre_get(param, pile) ==
-  /\ TRUE
+  /\ param = NO_DATA
+  /\ pile # << >>
 
 Act_get(param, pile, pile_p, result) ==
-  /\ TRUE
+  /\ pile_p = Tail(pile)
+  /\ result = Head(pile)
 
 ----------------------------------------------------------------
 
@@ -65,10 +68,11 @@ Act_get(param, pile, pile_p, result) ==
 \* PROCEDURE ESTVIDE : version paramétrée
 
 Pre_estVide(param, pile) ==
-  /\ TRUE
+  /\ param = NO_DATA
 
 Act_estVide(param, pile, pile_p, result) ==
-  /\ TRUE
+  /\ pile_p = pile
+  /\ result = (pile = << >>)
 
 ----------------------------------------------------------------
 

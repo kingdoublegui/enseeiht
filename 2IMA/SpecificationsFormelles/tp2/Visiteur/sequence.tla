@@ -40,7 +40,7 @@ Image(seq) == { seq[i] : i \in 1..Len(seq) }
 
 \* version paramétrée
 Init(etat) ==
- /\ TRUE
+ /\ etat = << >>
 
 ----------------------------------------------------------------
 
@@ -48,10 +48,14 @@ Init(etat) ==
 \* PROCEDURE move : version paramétrée
 
 Pre_move(param, etat) ==
- /\ TRUE
+ /\ param = NO_DATA
+ /\ Len(etat) < NbSites
 
 Act_move(param, etat, etat_p, result) ==
- /\ TRUE
+ /\ \E s \in Sites : 
+    /\ s \notin Image(etat)
+    /\ etat_p = etat \o << s >>
+    /\ result = s
 
 ----------------------------------------------------------------
 
@@ -59,10 +63,11 @@ Act_move(param, etat, etat_p, result) ==
 \* PROCEDURE has_visited : version paramétrée
 
 Pre_has_visited(param, etat) ==
- /\ TRUE
+ /\ param \in Sites
 
 Act_has_visited(param, etat, etat_p, result) ==
- /\ TRUE
+ /\ result = (param \in Image(etat))
+ /\ etat_p = etat
 
 ----------------------------------------------------------------
 
@@ -70,10 +75,11 @@ Act_has_visited(param, etat, etat_p, result) ==
 \* PROCEDURE has_finished : version paramétrée
 
 Pre_has_finished(param, etat) ==
- /\ TRUE
+ /\ param = NO_DATA
 
 Act_has_finished(param, etat, etat_p, result) ==
- /\ TRUE
+ /\ result = (Image(etat) = Sites)
+ /\ etat_p = etat
 
 ----------------------------------------------------------------
 
@@ -81,10 +87,11 @@ Act_has_finished(param, etat, etat_p, result) ==
 \* PROCEDURE reset : version paramétrée
 
 Pre_reset(param, etat) ==
- /\ TRUE
+ /\ param = NO_DATA
 
 Act_reset(param, etat, etat_p, result) ==
- /\ TRUE
+ /\ result = NO_DATA
+ /\ etat_p = << >>
 
 ----------------------------------------------------------------
 
